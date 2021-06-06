@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace TimeControl
 {
     public partial class ControlPanel : Form
     {
+        
         public ControlPanel()
         {
             InitializeComponent();
@@ -22,6 +24,7 @@ namespace TimeControl
         {
             Lock @lock = new Lock(Convert.ToInt32( timeChooser.Value*60),true);
             @lock.ShowDialog();
+           
         }
     }
 }

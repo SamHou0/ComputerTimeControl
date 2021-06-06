@@ -56,6 +56,7 @@ namespace TimeControl
             else
             {
                 timer.Stop();
+                MessageBox.Show("你已经专注了" + time);
                 close = true;
                 Close();
             }
@@ -68,5 +69,6 @@ namespace TimeControl
                 e.Cancel=true;
             }
         }
+        
     }
 }
