@@ -30,37 +30,28 @@ namespace TimeControl
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // progressBar
-            // 
-            this.progressBar.Location = new System.Drawing.Point(94, 371);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(600, 40);
-            this.progressBar.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(370, 353);
+            this.label1.Location = new System.Drawing.Point(364, 204);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "已进行";
+            this.label1.Size = new System.Drawing.Size(69, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "已锁定！";
+            this.label1.UseWaitCursor = true;
             // 
-            // label2
+            // progressBar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 40F);
-            this.label2.Location = new System.Drawing.Point(268, 164);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(297, 67);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "已锁定！";
+            this.progressBar.Location = new System.Drawing.Point(85, 305);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(630, 61);
+            this.progressBar.TabIndex = 1;
+            this.progressBar.UseWaitCursor = true;
             // 
             // timer
             // 
@@ -70,20 +61,20 @@ namespace TimeControl
             // 
             // Lock
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(782, 403);
             this.Controls.Add(this.progressBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(800, 450);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(800, 450);
             this.Name = "Lock";
-            this.ShowInTaskbar = false;
             this.Text = "Lock";
-            this.TopMost = true;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.UseWaitCursor = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Lock_FormClosing);
-            this.Load += new System.EventHandler(this.Lock_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,9 +82,8 @@ namespace TimeControl
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Timer timer;
     }
 }
