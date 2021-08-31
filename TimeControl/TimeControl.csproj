@@ -5,8 +5,9 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>SamHou</Authors>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <StartupObject>TimeControl.Program</StartupObject>
+    <AssemblyVersion>2.0.1.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

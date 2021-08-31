@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TimeControl": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

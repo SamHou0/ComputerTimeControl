@@ -116,7 +116,6 @@ namespace TimeControl
 
         private void startButton_Click(object sender, EventArgs e)
         {
-            
             IntPtr nowDesktop = GetThreadDesktop(GetCurrentThreadId());
             IntPtr newDesktop = CreateDesktop("Lock", null, null, 0, ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
             SwitchDesktop(newDesktop);
