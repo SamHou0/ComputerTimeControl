@@ -27,7 +27,7 @@ namespace TimeControl
             if (progressBar.Value==progressBar.Maximum)
             {
                 timer.Stop();
-                Close();
+                unlockLabel.Visible = true;
             }
             Process[] processes= Process.GetProcessesByName("Taskmgr");
             foreach (Process process in processes)

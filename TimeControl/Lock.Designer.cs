@@ -33,6 +33,7 @@ namespace TimeControl
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.unlockLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -59,11 +60,22 @@ namespace TimeControl
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // unlockLabel
+            // 
+            this.unlockLabel.AutoSize = true;
+            this.unlockLabel.Location = new System.Drawing.Point(292, 282);
+            this.unlockLabel.Name = "unlockLabel";
+            this.unlockLabel.Size = new System.Drawing.Size(204, 20);
+            this.unlockLabel.TabIndex = 2;
+            this.unlockLabel.Text = "时间到！关闭窗口退出屏保。";
+            this.unlockLabel.Visible = false;
+            // 
             // Lock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 403);
+            this.Controls.Add(this.unlockLabel);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -85,5 +97,6 @@ namespace TimeControl
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Label unlockLabel;
     }
 }
