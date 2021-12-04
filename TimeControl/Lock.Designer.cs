@@ -34,6 +34,8 @@ namespace TimeControl
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.unlockLabel = new System.Windows.Forms.Label();
+            this.unlockPasswordBox = new System.Windows.Forms.TextBox();
+            this.unlockButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -58,7 +60,7 @@ namespace TimeControl
             // 
             this.timer.Enabled = true;
             this.timer.Interval = 1000;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // unlockLabel
             // 
@@ -68,13 +70,36 @@ namespace TimeControl
             this.unlockLabel.Size = new System.Drawing.Size(204, 20);
             this.unlockLabel.TabIndex = 2;
             this.unlockLabel.Text = "时间到！关闭窗口退出屏保。";
+            this.unlockLabel.UseWaitCursor = true;
             this.unlockLabel.Visible = false;
+            // 
+            // unlockPasswordBox
+            // 
+            this.unlockPasswordBox.Location = new System.Drawing.Point(12, 12);
+            this.unlockPasswordBox.Name = "unlockPasswordBox";
+            this.unlockPasswordBox.Size = new System.Drawing.Size(125, 27);
+            this.unlockPasswordBox.TabIndex = 3;
+            this.unlockPasswordBox.UseSystemPasswordChar = true;
+            this.unlockPasswordBox.UseWaitCursor = true;
+            // 
+            // unlockButton
+            // 
+            this.unlockButton.Location = new System.Drawing.Point(144, 13);
+            this.unlockButton.Name = "unlockButton";
+            this.unlockButton.Size = new System.Drawing.Size(140, 29);
+            this.unlockButton.TabIndex = 4;
+            this.unlockButton.Text = "使用该管理码解锁";
+            this.unlockButton.UseVisualStyleBackColor = true;
+            this.unlockButton.UseWaitCursor = true;
+            this.unlockButton.Click += new System.EventHandler(this.UnlockButton_Click);
             // 
             // Lock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 403);
+            this.Controls.Add(this.unlockButton);
+            this.Controls.Add(this.unlockPasswordBox);
             this.Controls.Add(this.unlockLabel);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.label1);
@@ -98,5 +123,7 @@ namespace TimeControl
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label unlockLabel;
+        private System.Windows.Forms.TextBox unlockPasswordBox;
+        private System.Windows.Forms.Button unlockButton;
     }
 }

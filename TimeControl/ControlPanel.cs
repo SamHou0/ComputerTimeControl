@@ -116,13 +116,17 @@ namespace TimeControl
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            if (unlockPasswordBox.Text=="")
+            {
+                
+            }
             IntPtr nowDesktop = GetThreadDesktop(GetCurrentThreadId());
             IntPtr newDesktop = CreateDesktop("Lock", null, null, 0, ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
             SwitchDesktop(newDesktop);
             System.Threading.Tasks.Task.Factory.StartNew(() =>
             {
                 SetThreadDesktop(newDesktop);
-                Lock _lock = new Lock(Convert.ToInt32(timeBox.Value));
+                Lock _lock = new Lock(Convert.ToInt32(timeBox.Value),unlockPasswordBox.Text);
                 Application.Run(_lock);
             }).Wait();
             SwitchDesktop(nowDesktop);

@@ -13,15 +13,18 @@ namespace TimeControl
 {
     public partial class Lock : Form
     {
-        private int minutes;
-        public Lock(int minutes)
+        private bool usePassword = true;
+        private string unlockPassword;
+        public Lock(int minutes,string unlockPassword)
         {
             InitializeComponent();
-            this.minutes = minutes;
             progressBar.Maximum = minutes * 60;
+            if(unlockPassword=="")
+            { usePassword = false; }
+            this.unlockPassword = unlockPassword;
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             progressBar.Value++;
             if (progressBar.Value==progressBar.Maximum)
@@ -44,6 +47,22 @@ namespace TimeControl
                 e.Cancel = true;
                 MessageBox.Show("时间还没到呢！再等等吧。（点击继续）", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
             }
+        }
+
+        private void UnlockButton_Click(object sender, EventArgs e)
+        {
+            if (usePassword == true)
+            {
+                if (unlockPasswordBox.Text == unlockPassword)
+                {
+                    progressBar.Value = progressBar.Maximum;
+                    Close();
+                }
+                else
+                    MessageBox.Show("管理码错误！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+                MessageBox.Show("你没有设置管理码！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
