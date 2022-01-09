@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Threading;
 
 namespace TimeControl
 {
     public partial class ControlPanel : Form
     {
+        private bool closable = false;
+        List<App> appList = new();
         #region Dllimport
 
         [Flags]
@@ -114,7 +118,7 @@ namespace TimeControl
             InitializeComponent();
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void StartButton_Click(object sender, EventArgs e)
         {
             IntPtr nowDesktop = GetThreadDesktop(GetCurrentThreadId());
             IntPtr newDesktop = CreateDesktop("Lock", null, null, 0, ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
@@ -122,11 +126,89 @@ namespace TimeControl
             System.Threading.Tasks.Task.Factory.StartNew(() =>
             {
                 SetThreadDesktop(newDesktop);
-                Lock _lock = new Lock(Convert.ToInt32(timeBox.Value));
+                Lock _lock = new Lock(Convert.ToInt32(timeBox.Value), unlockPasswordBox.Text);
                 Application.Run(_lock);
             }).Wait();
             SwitchDesktop(nowDesktop);
             CloseDesktop(newDesktop);
+        }
+
+        private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+        }
+
+        private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!closable)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            closable = true;
+            Close();
+        }
+
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("explorer.exe", "https://icons8.com/icon/19614/icon");
+        }
+
+        private void ControlPanel_Load(object sender, EventArgs e)
+        {
+            processMonitorTimer.Start();
+        }
+
+        private void AppAddButton_Click(object sender, EventArgs e)//添加打开的窗口
+        {
+            processMonitorTimer.Stop();
+            appList.Clear();
+            Process[] processes = Process.GetProcesses();
+            foreach (Process process in processes)
+            {
+                if (!string.IsNullOrEmpty(process.MainWindowTitle))
+                {
+                    try
+                    {
+                        appList.Add(new App(process.ProcessName, process.MainModule.FileName));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message,"错误",MessageBoxButtons.OK,MessageBoxIcon.Error);//防止无法访问错误
+                    }
+                }
+            }
+            CalculateTime();
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
+        {
+            appList.Clear();
+            CalculateTime();
+        }
+
+        private void RefreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间
+        {
+            CalculateTime();
+        }
+
+        private void ProcessMonitorTimer_Tick(object sender, EventArgs e)
+        {
+            foreach (App app in appList)//计算进程时间
+            {
+                if (Process.GetProcessesByName(app.Name).Length != 0)
+                { app.Run(); }
+            }
+        }
+        private void CalculateTime()//将进程时间推送到ListBox控件
+        {
+            processMonitorTimer.Stop();
+            ListBoxController.Refresh(usageBox, appList);
+            processMonitorTimer.Start();
         }
     }
 }
