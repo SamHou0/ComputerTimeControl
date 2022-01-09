@@ -15,8 +15,8 @@ namespace TimeControl
 {
     public partial class ControlPanel : Form
     {
-        bool closable = false;
-        List<App> appList = new List<App>();
+        private bool closable = false;
+        List<App> appList = new();
         #region Dllimport
 
         [Flags]
@@ -118,7 +118,7 @@ namespace TimeControl
             InitializeComponent();
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void StartButton_Click(object sender, EventArgs e)
         {
             IntPtr nowDesktop = GetThreadDesktop(GetCurrentThreadId());
             IntPtr newDesktop = CreateDesktop("Lock", null, null, 0, ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
@@ -133,7 +133,7 @@ namespace TimeControl
             CloseDesktop(newDesktop);
         }
 
-        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Show();
         }
@@ -153,52 +153,62 @@ namespace TimeControl
             Close();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("explorer.exe", "https://icons8.com/icon/19614/icon");
         }
 
-        private void backgroundProcessMonitor_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while (true)
-            {
-                foreach (App app in appList)//计算进程时间
-                {
-                    if (Process.GetProcessesByName(app.Name).Length != 0)
-                    { app.Run(); }
-                }
-                Thread.Sleep(1000);
-            }
-        }
-
         private void ControlPanel_Load(object sender, EventArgs e)
         {
-            backgroundProcessMonitor.RunWorkerAsync();
+            processMonitorTimer.Start();
         }
-        
-        private void appAddButton_Click(object sender, EventArgs e)//添加打开的窗口
+
+        private void AppAddButton_Click(object sender, EventArgs e)//添加打开的窗口
         {
+            processMonitorTimer.Stop();
             appList.Clear();
             Process[] processes = Process.GetProcesses();
             foreach (Process process in processes)
             {
                 if (!string.IsNullOrEmpty(process.MainWindowTitle))
                 {
-                    appList.Add(new App(process.ProcessName, process.MainModule.FileName));
+                    try
+                    {
+                        appList.Add(new App(process.ProcessName, process.MainModule.FileName));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message,"错误",MessageBoxButtons.OK,MessageBoxIcon.Error);//防止无法访问错误
+                    }
                 }
             }
-            ListBoxController.Refresh(usageBox, appList);
+            CalculateTime();
         }
 
-        private void removeButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
+        private void RemoveButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
         {
             appList.Clear();
-            ListBoxController.Refresh(usageBox, appList);
+            CalculateTime();
         }
 
-        private void refreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间
+        private void RefreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间
         {
+            CalculateTime();
+        }
+
+        private void ProcessMonitorTimer_Tick(object sender, EventArgs e)
+        {
+            foreach (App app in appList)//计算进程时间
+            {
+                if (Process.GetProcessesByName(app.Name).Length != 0)
+                { app.Run(); }
+            }
+        }
+        private void CalculateTime()//将进程时间推送到ListBox控件
+        {
+            processMonitorTimer.Stop();
             ListBoxController.Refresh(usageBox, appList);
+            processMonitorTimer.Start();
         }
     }
 }

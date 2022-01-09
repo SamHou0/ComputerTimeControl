@@ -49,7 +49,7 @@ namespace TimeControl
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundProcessMonitor = new System.ComponentModel.BackgroundWorker();
+            this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -66,7 +66,7 @@ namespace TimeControl
             this.startButton.TabIndex = 0;
             this.startButton.Text = "启动屏保（分）";
             this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // timeBox
             // 
@@ -165,7 +165,7 @@ namespace TimeControl
             this.refreshButton.TabIndex = 3;
             this.refreshButton.Text = "刷新";
             this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // removeButton
             // 
@@ -175,7 +175,7 @@ namespace TimeControl
             this.removeButton.TabIndex = 2;
             this.removeButton.Text = "删除所有监控";
             this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
+            this.removeButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
             // appAddButton
             // 
@@ -185,7 +185,7 @@ namespace TimeControl
             this.appAddButton.TabIndex = 1;
             this.appAddButton.Text = "添加打开的窗口";
             this.appAddButton.UseVisualStyleBackColor = true;
-            this.appAddButton.Click += new System.EventHandler(this.appAddButton_Click);
+            this.appAddButton.Click += new System.EventHandler(this.AppAddButton_Click);
             // 
             // usageBox
             // 
@@ -217,7 +217,7 @@ namespace TimeControl
             this.linkLabel1.TabIndex = 1;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "链接";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // label3
             // 
@@ -234,7 +234,7 @@ namespace TimeControl
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Computer Time Control";
             this.notifyIcon.Visible = true;
-            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
             // 
             // contextMenuStrip
             // 
@@ -251,9 +251,10 @@ namespace TimeControl
             this.ExitToolStripMenuItem.Text = "退出";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
-            // backgroundProcessMonitor
+            // processMonitorTimer
             // 
-            this.backgroundProcessMonitor.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundProcessMonitor_DoWork);
+            this.processMonitorTimer.Interval = 1000;
+            this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
             // 
             // ControlPanel
             // 
@@ -297,10 +298,10 @@ namespace TimeControl
         private System.Windows.Forms.TabPage about;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
-        private System.ComponentModel.BackgroundWorker backgroundProcessMonitor;
         private System.Windows.Forms.ListBox usageBox;
         private System.Windows.Forms.Button appAddButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.Timer processMonitorTimer;
     }
 }
