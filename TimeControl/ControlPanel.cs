@@ -10,157 +10,78 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
 
 namespace TimeControl
 {
     public partial class ControlPanel : Form
     {
-        private bool closable = false;
-        List<App> appList = new();
-        #region Dllimport
-
-        [Flags]
-        public enum ACCESS_MASK : uint
-        {
-            DELETE = 0x00010000,
-            READ_CONTROL = 0x00020000,
-            WRITE_DAC = 0x00040000,
-            WRITE_OWNER = 0x00080000,
-            SYNCHRONIZE = 0x00100000,
-
-            STANDARD_RIGHTS_REQUIRED = 0x000F0000,
-
-            STANDARD_RIGHTS_READ = 0x00020000,
-            STANDARD_RIGHTS_WRITE = 0x00020000,
-            STANDARD_RIGHTS_EXECUTE = 0x00020000,
-
-            STANDARD_RIGHTS_ALL = 0x001F0000,
-
-            SPECIFIC_RIGHTS_ALL = 0x0000FFFF,
-
-            ACCESS_SYSTEM_SECURITY = 0x01000000,
-
-            MAXIMUM_ALLOWED = 0x02000000,
-
-            GENERIC_READ = 0x80000000,
-            GENERIC_WRITE = 0x40000000,
-            GENERIC_EXECUTE = 0x20000000,
-            GENERIC_ALL = 0x10000000,
-
-            DESKTOP_READOBJECTS = 0x00000001,
-            DESKTOP_CREATEWINDOW = 0x00000002,
-            DESKTOP_CREATEMENU = 0x00000004,
-            DESKTOP_HOOKCONTROL = 0x00000008,
-            DESKTOP_JOURNALRECORD = 0x00000010,
-            DESKTOP_JOURNALPLAYBACK = 0x00000020,
-            DESKTOP_ENUMERATE = 0x00000040,
-            DESKTOP_WRITEOBJECTS = 0x00000080,
-            DESKTOP_SWITCHDESKTOP = 0x00000100,
-
-            WINSTA_ENUMDESKTOPS = 0x00000001,
-            WINSTA_READATTRIBUTES = 0x00000002,
-            WINSTA_ACCESSCLIPBOARD = 0x00000004,
-            WINSTA_CREATEDESKTOP = 0x00000008,
-            WINSTA_WRITEATTRIBUTES = 0x00000010,
-            WINSTA_ACCESSGLOBALATOMS = 0x00000020,
-            WINSTA_EXITWINDOWS = 0x00000040,
-            WINSTA_ENUMERATE = 0x00000100,
-            WINSTA_READSCREEN = 0x00000200,
-
-            WINSTA_ALL_ACCESS = 0x0000037F
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SECURITY_ATTRIBUTES
-        {
-            public int nLength;
-            public IntPtr lpSecurityDescriptor;
-            public int bInheritHandle;
-        }
-
-        [DllImport("kernel32.dll")]
-        private static extern uint GetCurrentThreadId();
-
-        [DllImport("user32.dll", EntryPoint = "CreateDesktop", CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern IntPtr CreateDesktop(
-            [MarshalAs(UnmanagedType.LPWStr)] string desktopName,
-            [MarshalAs(UnmanagedType.LPWStr)] string device, // must be null.
-            [MarshalAs(UnmanagedType.LPWStr)] string deviceMode, // must be null,
-            [MarshalAs(UnmanagedType.U4)] int flags, // use 0
-            [MarshalAs(UnmanagedType.U4)] ACCESS_MASK accessMask,
-            [MarshalAs(UnmanagedType.LPStruct)] SECURITY_ATTRIBUTES attributes);
-
-        [DllImport("user32.dll", EntryPoint = "CreateDesktop", CharSet = CharSet.Unicode, SetLastError = true)]
-        public static extern IntPtr CreateDesktop(
-            [MarshalAs(UnmanagedType.LPWStr)] string desktopName,
-            [MarshalAs(UnmanagedType.LPWStr)] string device, // must be null.
-            [MarshalAs(UnmanagedType.LPWStr)] string deviceMode, // must be null,
-            [MarshalAs(UnmanagedType.U4)] int flags, // use 0
-            [MarshalAs(UnmanagedType.U4)] ACCESS_MASK accessMask,
-            IntPtr attributes);
-
-        [DllImport("user32.dll", EntryPoint = "CloseDesktop", CharSet = CharSet.Unicode, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool CloseDesktop(IntPtr handle);
-
-        [DllImport("user32.dll")]
-        public static extern bool SwitchDesktop(IntPtr hDesktop);
-
-
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern bool SetThreadDesktop(IntPtr hDesktop);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern IntPtr GetThreadDesktop(uint dwThreadId);
-        #endregion
-        public ControlPanel()
+        private bool hide = false;//指示启动后是否需要隐藏
+        private bool closable = false;//指示当前是否可以关闭
+        List<App> appList = new();//所有监控软件列表
+        private int unlockPasswordHash=0;//密码哈希值，用作比对
+        public ControlPanel(bool hide)
         {
             InitializeComponent();
+            this.hide = hide;
+            if (File.Exists(PasswordFile.tcPassLocation))//加载密码哈希值
+            {
+                unlockPasswordHash = Convert.ToInt32(File.ReadAllText(PasswordFile.tcPassLocation));
+            }
         }
 
-        private void StartButton_Click(object sender, EventArgs e)
+        private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
         {
-            IntPtr nowDesktop = GetThreadDesktop(GetCurrentThreadId());
-            IntPtr newDesktop = CreateDesktop("Lock", null, null, 0, ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
-            SwitchDesktop(newDesktop);
-            System.Threading.Tasks.Task.Factory.StartNew(() =>
+            IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
+            IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
+            Dllimport.SwitchDesktop(newDesktop);
+            Task.Factory.StartNew(() =>
             {
-                SetThreadDesktop(newDesktop);
-                Lock _lock = new Lock(Convert.ToInt32(timeBox.Value), unlockPasswordBox.Text);
+                Dllimport.SetThreadDesktop(newDesktop);
+                Lock _lock = new(Convert.ToInt32(timeBox.Value), unlockPasswordHash);
                 Application.Run(_lock);
             }).Wait();
-            SwitchDesktop(nowDesktop);
-            CloseDesktop(newDesktop);
+            Dllimport.SwitchDesktop(nowDesktop);
+            Dllimport.CloseDesktop(newDesktop);
         }
 
-        private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)//打开界面
         {
             Show();
         }
 
-        private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)
+        private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)//处理关闭逻辑
         {
-            if (!closable)
+            if (!closable)//隐藏窗口
             {
                 e.Cancel = true;
                 Hide();
             }
+            else//退出前关闭保护进程
+            {
+                    Process[] processes = Process.GetProcessesByName("TimeControlConsole");
+                    foreach (Process process in processes)
+                    {
+                        process.Kill();
+                    }
+            }
         }
 
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)//正常退出程序
         {
-            closable = true;
-            Close();
+            PasswordInput passwordInput = new(unlockPasswordHash);
+            if (unlockPasswordHash != 0)//检测是否设置了管理码
+            {
+                if (passwordInput.ShowDialog() == DialogResult.OK)
+                    ForceClose();
+            }
+            else
+                ForceClose();
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)//添加链接
         {
             Process.Start("explorer.exe", "https://icons8.com/icon/19614/icon");
-        }
-
-        private void ControlPanel_Load(object sender, EventArgs e)
-        {
-            processMonitorTimer.Start();
         }
 
         private void AppAddButton_Click(object sender, EventArgs e)//添加打开的窗口
@@ -178,7 +99,7 @@ namespace TimeControl
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message,"错误",MessageBoxButtons.OK,MessageBoxIcon.Error);//防止无法访问错误
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);//防止无法访问错误
                     }
                 }
             }
@@ -203,12 +124,40 @@ namespace TimeControl
                 if (Process.GetProcessesByName(app.Name).Length != 0)
                 { app.Run(); }
             }
+            if (Process.GetProcessesByName("TimeControlConsole").Length == 0)//检查保护程序状态
+            {
+                ProcessStartInfo process = new();
+                process.FileName = "TimeControlConsole.exe";
+                Process.Start(process);
+            }
         }
         private void CalculateTime()//将进程时间推送到ListBox控件
         {
             processMonitorTimer.Stop();
             ListBoxController.Refresh(usageBox, appList);
             processMonitorTimer.Start();
+        }
+        private void ForceClose()
+        {
+            closable = true;
+            Close();
+        }
+        private void ControlPanel_Shown(object sender, EventArgs e)//启动隐藏参数支持
+        {
+            if (hide)
+            {
+                Hide();
+            }
+
+            processMonitorTimer.Start();
+        }
+        private void unloackPassWordSetButton_Click(object sender, EventArgs e)//保存密码
+        {
+            unlockPasswordHash =unlockPasswordBox.Text.GetHashCode();//保存哈希值
+            unlockPasswordBox.Text = "";
+            unlockPasswordBox.Enabled = false;
+            unloackPassWordSetButton.Enabled = false;
+            File.WriteAllText(PasswordFile.tcPassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
         }
     }
 }

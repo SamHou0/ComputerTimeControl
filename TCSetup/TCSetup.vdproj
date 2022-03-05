@@ -78,10 +78,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.6.0.x86"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    "Name" = "8:.NET 桌面运行时 6.0.1 (x86)"
+                    "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.6.0.x86"
                     }
                 }
             }
@@ -172,15 +172,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TimeControl"
-        "ProductCode" = "8:{0E4B2419-C67F-4087-B60D-68E342D1166C}"
-        "PackageCode" = "8:{C0B174F2-8D69-408C-BE9C-66606508CB47}"
+        "ProductCode" = "8:{83B48587-9D44-4C89-9590-77141BFF815C}"
+        "PackageCode" = "8:{355DEC98-EEF3-4134-8348-DEBB45140E46}"
         "UpgradeCode" = "8:{A7DC5BC4-7E3E-4B58-A0AD-3C9AC9F873C1}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.0.1"
+        "ProductVersion" = "8:3.0.2"
         "Manufacturer" = "8:SamHou"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -722,7 +722,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B7C31D1C4E42443D89CA87F9596A43B7"
             {
-            "SourcePath" = "8:..\\TimeControl\\obj\\Debug\\net6.0-windows10.0.22000.0\\apphost.exe"
+            "SourcePath" = "8:..\\TimeControl\\obj\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"

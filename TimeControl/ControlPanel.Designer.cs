@@ -35,9 +35,6 @@ namespace TimeControl
             this.timeBox = new System.Windows.Forms.NumericUpDown();
             this.controlTab = new System.Windows.Forms.TabControl();
             this.startNow = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.unlockPasswordBox = new System.Windows.Forms.TextBox();
             this.processMonitor = new System.Windows.Forms.TabPage();
             this.refreshButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
@@ -46,15 +43,21 @@ namespace TimeControl
             this.about = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.unlockPasswordBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.unloackPassWordSetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
             this.processMonitor.SuspendLayout();
             this.about.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,6 +98,7 @@ namespace TimeControl
             this.controlTab.Controls.Add(this.startNow);
             this.controlTab.Controls.Add(this.processMonitor);
             this.controlTab.Controls.Add(this.about);
+            this.controlTab.Controls.Add(this.tabPage1);
             this.controlTab.Location = new System.Drawing.Point(2, 1);
             this.controlTab.Name = "controlTab";
             this.controlTab.SelectedIndex = 0;
@@ -103,9 +107,6 @@ namespace TimeControl
             // 
             // startNow
             // 
-            this.startNow.Controls.Add(this.label2);
-            this.startNow.Controls.Add(this.label1);
-            this.startNow.Controls.Add(this.unlockPasswordBox);
             this.startNow.Controls.Add(this.startButton);
             this.startNow.Controls.Add(this.timeBox);
             this.startNow.Location = new System.Drawing.Point(4, 29);
@@ -115,33 +116,6 @@ namespace TimeControl
             this.startNow.TabIndex = 0;
             this.startNow.Text = "立即启动";
             this.startNow.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(198, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(309, 20);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "设置管理码后，在屏保时可以凭管理码解锁。";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "管理码";
-            // 
-            // unlockPasswordBox
-            // 
-            this.unlockPasswordBox.Location = new System.Drawing.Point(66, 6);
-            this.unlockPasswordBox.Name = "unlockPasswordBox";
-            this.unlockPasswordBox.Size = new System.Drawing.Size(125, 27);
-            this.unlockPasswordBox.TabIndex = 2;
-            this.unlockPasswordBox.UseSystemPasswordChar = true;
             // 
             // processMonitor
             // 
@@ -228,6 +202,20 @@ namespace TimeControl
             this.label3.TabIndex = 0;
             this.label3.Text = "图标来自icon8!";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.unloackPassWordSetButton);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.unlockPasswordBox);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(794, 416);
+            this.tabPage1.TabIndex = 3;
+            this.tabPage1.Text = "程序保护";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
@@ -256,6 +244,43 @@ namespace TimeControl
             this.processMonitorTimer.Interval = 1000;
             this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "管理码";
+            // 
+            // unlockPasswordBox
+            // 
+            this.unlockPasswordBox.Location = new System.Drawing.Point(66, 6);
+            this.unlockPasswordBox.Name = "unlockPasswordBox";
+            this.unlockPasswordBox.Size = new System.Drawing.Size(125, 27);
+            this.unlockPasswordBox.TabIndex = 5;
+            this.unlockPasswordBox.UseSystemPasswordChar = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(197, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(504, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "设置管理码后，在屏保时可以凭管理码解锁。且退出程序需要输入管理码。";
+            // 
+            // unloackPassWordSetButton
+            // 
+            this.unloackPassWordSetButton.Location = new System.Drawing.Point(6, 39);
+            this.unloackPassWordSetButton.Name = "unloackPassWordSetButton";
+            this.unloackPassWordSetButton.Size = new System.Drawing.Size(120, 44);
+            this.unloackPassWordSetButton.TabIndex = 7;
+            this.unloackPassWordSetButton.Text = "设置";
+            this.unloackPassWordSetButton.UseVisualStyleBackColor = true;
+            this.unloackPassWordSetButton.Click += new System.EventHandler(this.unloackPassWordSetButton_Click);
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -269,14 +294,15 @@ namespace TimeControl
             this.Name = "ControlPanel";
             this.Text = "ControlPanel";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControlPanel_FormClosing);
-            this.Load += new System.EventHandler(this.ControlPanel_Load);
+            this.Shown += new System.EventHandler(this.ControlPanel_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).EndInit();
             this.controlTab.ResumeLayout(false);
             this.startNow.ResumeLayout(false);
-            this.startNow.PerformLayout();
             this.processMonitor.ResumeLayout(false);
             this.about.ResumeLayout(false);
             this.about.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -289,9 +315,6 @@ namespace TimeControl
         private System.Windows.Forms.TabControl controlTab;
         private System.Windows.Forms.TabPage startNow;
         private System.Windows.Forms.TabPage processMonitor;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox unlockPasswordBox;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
@@ -303,5 +326,10 @@ namespace TimeControl
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.Timer processMonitorTimer;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button unloackPassWordSetButton;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox unlockPasswordBox;
+        private System.Windows.Forms.Label label1;
     }
 }
