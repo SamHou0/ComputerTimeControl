@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>SamHou</Authors>
-    <Version>3.0.2</Version>
+    <Version>3.1.0</Version>
     <StartupObject>TimeControl.Program</StartupObject>
     <AssemblyVersion></AssemblyVersion>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <ApplicationIcon>icons8_sand_watch.ico</ApplicationIcon>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
