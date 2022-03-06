@@ -36,6 +36,7 @@ namespace TimeControl
             this.controlTab = new System.Windows.Forms.TabControl();
             this.startNow = new System.Windows.Forms.TabPage();
             this.processMonitor = new System.Windows.Forms.TabPage();
+            this.processNameBox = new System.Windows.Forms.TextBox();
             this.refreshButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.appAddButton = new System.Windows.Forms.Button();
@@ -44,14 +45,14 @@ namespace TimeControl
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.unloackPassWordSetButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.unlockPasswordBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.unlockPasswordBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.unloackPassWordSetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -114,11 +115,12 @@ namespace TimeControl
             this.startNow.Padding = new System.Windows.Forms.Padding(3);
             this.startNow.Size = new System.Drawing.Size(794, 416);
             this.startNow.TabIndex = 0;
-            this.startNow.Text = "立即启动";
+            this.startNow.Text = "专注屏保";
             this.startNow.UseVisualStyleBackColor = true;
             // 
             // processMonitor
             // 
+            this.processMonitor.Controls.Add(this.processNameBox);
             this.processMonitor.Controls.Add(this.refreshButton);
             this.processMonitor.Controls.Add(this.removeButton);
             this.processMonitor.Controls.Add(this.appAddButton);
@@ -128,8 +130,15 @@ namespace TimeControl
             this.processMonitor.Padding = new System.Windows.Forms.Padding(3);
             this.processMonitor.Size = new System.Drawing.Size(794, 416);
             this.processMonitor.TabIndex = 1;
-            this.processMonitor.Text = "进程监测";
+            this.processMonitor.Text = "进程计时";
             this.processMonitor.UseVisualStyleBackColor = true;
+            // 
+            // processNameBox
+            // 
+            this.processNameBox.Location = new System.Drawing.Point(528, 274);
+            this.processNameBox.Name = "processNameBox";
+            this.processNameBox.Size = new System.Drawing.Size(143, 27);
+            this.processNameBox.TabIndex = 4;
             // 
             // refreshButton
             // 
@@ -147,17 +156,17 @@ namespace TimeControl
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(143, 42);
             this.removeButton.TabIndex = 2;
-            this.removeButton.Text = "删除所有监控";
+            this.removeButton.Text = "删除所选监控";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
             // appAddButton
             // 
-            this.appAddButton.Location = new System.Drawing.Point(528, 331);
+            this.appAddButton.Location = new System.Drawing.Point(528, 307);
             this.appAddButton.Name = "appAddButton";
-            this.appAddButton.Size = new System.Drawing.Size(143, 57);
+            this.appAddButton.Size = new System.Drawing.Size(143, 66);
             this.appAddButton.TabIndex = 1;
-            this.appAddButton.Text = "添加打开的窗口";
+            this.appAddButton.Text = "搜索以上进程并添加";
             this.appAddButton.UseVisualStyleBackColor = true;
             this.appAddButton.Click += new System.EventHandler(this.AppAddButton_Click);
             // 
@@ -216,6 +225,43 @@ namespace TimeControl
             this.tabPage1.Text = "程序保护";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // unloackPassWordSetButton
+            // 
+            this.unloackPassWordSetButton.Location = new System.Drawing.Point(6, 39);
+            this.unloackPassWordSetButton.Name = "unloackPassWordSetButton";
+            this.unloackPassWordSetButton.Size = new System.Drawing.Size(120, 44);
+            this.unloackPassWordSetButton.TabIndex = 7;
+            this.unloackPassWordSetButton.Text = "设置";
+            this.unloackPassWordSetButton.UseVisualStyleBackColor = true;
+            this.unloackPassWordSetButton.Click += new System.EventHandler(this.unloackPassWordSetButton_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(197, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(504, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "设置管理码后，在屏保时可以凭管理码解锁。且退出程序需要输入管理码。";
+            // 
+            // unlockPasswordBox
+            // 
+            this.unlockPasswordBox.Location = new System.Drawing.Point(66, 6);
+            this.unlockPasswordBox.Name = "unlockPasswordBox";
+            this.unlockPasswordBox.Size = new System.Drawing.Size(125, 27);
+            this.unlockPasswordBox.TabIndex = 5;
+            this.unlockPasswordBox.UseSystemPasswordChar = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "管理码";
+            // 
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
@@ -244,43 +290,6 @@ namespace TimeControl
             this.processMonitorTimer.Interval = 1000;
             this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 20);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "管理码";
-            // 
-            // unlockPasswordBox
-            // 
-            this.unlockPasswordBox.Location = new System.Drawing.Point(66, 6);
-            this.unlockPasswordBox.Name = "unlockPasswordBox";
-            this.unlockPasswordBox.Size = new System.Drawing.Size(125, 27);
-            this.unlockPasswordBox.TabIndex = 5;
-            this.unlockPasswordBox.UseSystemPasswordChar = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(197, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(504, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "设置管理码后，在屏保时可以凭管理码解锁。且退出程序需要输入管理码。";
-            // 
-            // unloackPassWordSetButton
-            // 
-            this.unloackPassWordSetButton.Location = new System.Drawing.Point(6, 39);
-            this.unloackPassWordSetButton.Name = "unloackPassWordSetButton";
-            this.unloackPassWordSetButton.Size = new System.Drawing.Size(120, 44);
-            this.unloackPassWordSetButton.TabIndex = 7;
-            this.unloackPassWordSetButton.Text = "设置";
-            this.unloackPassWordSetButton.UseVisualStyleBackColor = true;
-            this.unloackPassWordSetButton.Click += new System.EventHandler(this.unloackPassWordSetButton_Click);
-            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -299,6 +308,7 @@ namespace TimeControl
             this.controlTab.ResumeLayout(false);
             this.startNow.ResumeLayout(false);
             this.processMonitor.ResumeLayout(false);
+            this.processMonitor.PerformLayout();
             this.about.ResumeLayout(false);
             this.about.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -331,5 +341,6 @@ namespace TimeControl
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox unlockPasswordBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox processNameBox;
     }
 }

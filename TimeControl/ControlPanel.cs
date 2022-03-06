@@ -17,9 +17,9 @@ namespace TimeControl
     public partial class ControlPanel : Form
     {
         private bool hide = false;//指示启动后是否需要隐藏
-        private bool closable = false;//指示当前是否可以关闭
+        private bool isClosable = false;//指示当前是否可以关闭
         List<App> appList = new();//所有监控软件列表
-        private int unlockPasswordHash=0;//密码哈希值，用作比对
+        private int unlockPasswordHash = 0;//密码哈希值，用作比对
         public ControlPanel(bool hide)
         {
             InitializeComponent();
@@ -52,18 +52,18 @@ namespace TimeControl
 
         private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)//处理关闭逻辑
         {
-            if (!closable)//隐藏窗口
+            if (!isClosable)//隐藏窗口
             {
                 e.Cancel = true;
                 Hide();
             }
             else//退出前关闭保护进程
             {
-                    Process[] processes = Process.GetProcessesByName("TimeControlConsole");
-                    foreach (Process process in processes)
-                    {
-                        process.Kill();
-                    }
+                Process[] processes = Process.GetProcessesByName("TimeControlConsole");
+                foreach (Process process in processes)
+                {
+                    process.Kill();
+                }
             }
         }
 
@@ -87,28 +87,25 @@ namespace TimeControl
         private void AppAddButton_Click(object sender, EventArgs e)//添加打开的窗口
         {
             processMonitorTimer.Stop();
-            appList.Clear();
-            Process[] processes = Process.GetProcesses();
-            foreach (Process process in processes)
+            Process[] processes=Process.GetProcessesByName(processNameBox.Text);
+            try
             {
-                if (!string.IsNullOrEmpty(process.MainWindowTitle))
+                foreach (Process process in processes)
                 {
-                    try
-                    {
-                        appList.Add(new App(process.ProcessName, process.MainModule.FileName));
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);//防止无法访问错误
-                    }
+                    appList.Add(new App(process.ProcessName, process.MainModule.FileName));
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误",ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             CalculateTime();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
         {
-            appList.Clear();
+            if (usageBox.SelectedIndex >=0)
+                appList.RemoveAt(usageBox.SelectedIndex);
             CalculateTime();
         }
 
@@ -137,9 +134,9 @@ namespace TimeControl
             ListBoxController.Refresh(usageBox, appList);
             processMonitorTimer.Start();
         }
-        private void ForceClose()
+        private void ForceClose()//可以正常关闭
         {
-            closable = true;
+            isClosable = true;
             Close();
         }
         private void ControlPanel_Shown(object sender, EventArgs e)//启动隐藏参数支持
@@ -153,7 +150,7 @@ namespace TimeControl
         }
         private void unloackPassWordSetButton_Click(object sender, EventArgs e)//保存密码
         {
-            unlockPasswordHash =unlockPasswordBox.Text.GetHashCode();//保存哈希值
+            unlockPasswordHash = unlockPasswordBox.Text.GetHashCode();//保存哈希值
             unlockPasswordBox.Text = "";
             unlockPasswordBox.Enabled = false;
             unloackPassWordSetButton.Enabled = false;
