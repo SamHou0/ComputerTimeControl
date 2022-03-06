@@ -19,7 +19,7 @@ namespace TimeControl
         private bool hide = false;//指示启动后是否需要隐藏
         private bool isClosable = false;//指示当前是否可以关闭
         private int unlockPasswordHash = 0;//密码哈希值，用作比对
-        ListController controller;//列表、计时控制器
+        private ListController controller;//列表、计时控制器
         public ControlPanel(bool hide)
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace TimeControl
                 unlockPasswordHash = Convert.ToInt32(File.ReadAllText(PasswordFile.tcPassLocation));
                 PasswordSet();
             }
-            controller=new(usageBox,processMonitorTimer);
+            controller = new(usageBox, processMonitorTimer);
         }
 
         private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
@@ -88,12 +88,26 @@ namespace TimeControl
 
         private void AppAddButton_Click(object sender, EventArgs e)//添加打开的窗口
         {
-            controller.AddByName(processNameBox.Text);
+            if (processNameBox.Text.ToLower() == "timecontrol" ||
+                processNameBox.Text.ToLower() == "timecontrolconsole")
+            {
+                return;
+            }
+            TimeInput timeInput = new(controller, processNameBox.Text);
+            timeInput.ShowDialog();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
         {
-            controller.Remove();
+            //检测密码设置
+            if (unlockPasswordHash != 0)
+            {
+                PasswordInput passwordInput = new(unlockPasswordHash);
+                if (passwordInput.ShowDialog() == DialogResult.OK)
+                    controller.Remove();
+            }
+            else
+                controller.Remove();
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间

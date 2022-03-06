@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace TimeControl
 {
-     internal class ListController
+     public class ListController
     {
         private ListBox listBox;
         private List<App> apps;
@@ -49,14 +49,38 @@ namespace TimeControl
             }
             this.Refresh();
         }
+        public void AddByName(string name,int limitTime)
+        {
+            timer.Stop();
+            Process[] processes = Process.GetProcessesByName(name);
+            try
+            {
+                foreach (Process process in processes)
+                {
+                    apps.Add(new LimitedApp(process.ProcessName, process.MainModule.FileName,limitTime));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("错误", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            this.Refresh();
+        }
         public void Run()
         {
             foreach (App app in apps)//计算进程时间
             {
                 if (Process.GetProcessesByName(app.Name).Length != 0)
-                { app.Run(); }
+                {
+                    if (app is LimitedApp)
+                    {
+                        LimitedApp limitedApp=app as LimitedApp;
+                        limitedApp.Run();
+                    }
+                    else
+                        app.Run();
+                }
             }
-            Refresh();
         }
         public void Remove()
         {

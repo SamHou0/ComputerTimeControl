@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TimeControl
 {
-    internal class App
+    public class App
     {
         private string name;
         private string location;
         public string Name { get { return name; }}
-        private int time;
+        internal int time;
         
         public string ReportApp()
         {
@@ -21,11 +21,15 @@ namespace TimeControl
         {
             this.name = name;
             this.location = location;
-            time = 0;
+            Reset();
         }
-        public void Run()
+        public virtual void Run()//运行一次（一秒）
         {
             time++;
+        }
+        public void Reset()//重设时间
+        {
+            time = 0;
         }
     }
 }

@@ -52,6 +52,7 @@ namespace TimeControl
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
+            this.refreshButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -119,6 +120,7 @@ namespace TimeControl
             // 
             // processMonitor
             // 
+            this.processMonitor.Controls.Add(this.refreshButton);
             this.processMonitor.Controls.Add(this.processNameBox);
             this.processMonitor.Controls.Add(this.removeButton);
             this.processMonitor.Controls.Add(this.appAddButton);
@@ -278,6 +280,16 @@ namespace TimeControl
             this.processMonitorTimer.Interval = 1000;
             this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
             // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(528, 156);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(143, 51);
+            this.refreshButton.TabIndex = 5;
+            this.refreshButton.Text = "刷新";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -329,5 +341,6 @@ namespace TimeControl
         private System.Windows.Forms.TextBox unlockPasswordBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox processNameBox;
+        private System.Windows.Forms.Button refreshButton;
     }
 }
