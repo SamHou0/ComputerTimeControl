@@ -21,17 +21,23 @@ namespace TimeControl
             this.timer = timer;
         }
 
-
+        /// <summary>
+        /// 刷新列表显示
+        /// </summary>
         public void Refresh()
         {
             timer.Stop();
             listBox.Items.Clear();
             foreach (App app in apps)
             {
-                listBox.Items.Add(app.ReportApp());
+                listBox.Items.Add(app.ToString());
             }
             timer.Start();
         }
+        /// <summary>
+        /// 根据名称添加进程
+        /// </summary>
+        /// <param name="name">要添加的进程名称</param>
         public void AddByName(string name)
         {
             timer.Stop();
@@ -49,6 +55,11 @@ namespace TimeControl
             }
             this.Refresh();
         }
+        /// <summary>
+        /// 根据名称添加时间受限的进程
+        /// </summary>
+        /// <param name="name">进程名称</param>
+        /// <param name="limitTime">限制时长（秒）</param>
         public void AddByName(string name,int limitTime)
         {
             timer.Stop();
@@ -66,6 +77,9 @@ namespace TimeControl
             }
             this.Refresh();
         }
+        /// <summary>
+        /// 跟踪所有进程，增加一秒
+        /// </summary>
         public void Run()
         {
             foreach (App app in apps)//计算进程时间
@@ -82,6 +96,9 @@ namespace TimeControl
                 }
             }
         }
+        /// <summary>
+        /// 移除所列表所选的进程
+        /// </summary>
         public void Remove()
         {
             timer.Stop();

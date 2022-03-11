@@ -118,6 +118,8 @@ namespace TimeControl
         private void ProcessMonitorTimer_Tick(object sender, EventArgs e)
         {
             controller.Run();
+            if (autoRefreshBox.Checked)
+                controller.Refresh();
             if (Process.GetProcessesByName("TimeControlConsole").Length == 0)//检查保护程序状态
             {
                 ProcessStartInfo process = new();

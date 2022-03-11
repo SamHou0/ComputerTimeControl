@@ -12,8 +12,11 @@ namespace TimeControl
         private string location;
         public string Name { get { return name; }}
         internal int time;
-        
-        public string ReportApp()
+        /// <summary>
+        /// 返回进程的简要概述
+        /// </summary>
+        /// <returns>进程的简要概述</returns>
+        public override string ToString()
         {
             return Name + " 已使用 " + time+" 秒！";
         }
@@ -23,11 +26,17 @@ namespace TimeControl
             this.location = location;
             Reset();
         }
-        public virtual void Run()//运行一次（一秒）
+        /// <summary>
+        /// 运行一次（一秒）
+        /// </summary>
+        public virtual void Run()
         {
             time++;
         }
-        public void Reset()//重设时间
+        /// <summary>
+        /// 重设时间
+        /// </summary>
+        public void Reset()
         {
             time = 0;
         }

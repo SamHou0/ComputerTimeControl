@@ -15,7 +15,10 @@ namespace TimeControl
         {
             this.timeLimit = timeLimit;
         }
-        public override void Run()//运行一次（一秒）
+        /// <summary>
+        /// 运行一次（一秒），并根据情况显示警告或关闭进程
+        /// </summary>
+        public override void Run()
         {
             base.Run();
             if (time == timeLimit - 30)
@@ -28,7 +31,18 @@ namespace TimeControl
                 Ban();
             }
         }
-        public void Ban()//禁用掉该程序
+        /// <summary>
+        /// 返回时间受限进程的简要概述
+        /// </summary>
+        /// <returns>时间受限进程的简要概述</returns>
+        public override string ToString()
+        {
+            return base.ToString() + "进程时间限制为：" + timeLimit + "秒";
+        }
+        /// <summary>
+        /// 禁用掉该程序
+        /// </summary>
+        public void Ban()
         {
             Process[] processes = Process.GetProcessesByName(Name);
             foreach (Process process in processes)
