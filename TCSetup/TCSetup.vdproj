@@ -146,7 +146,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_57FF55C0487B4507A7ADC64F8E5966A5"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -183,15 +183,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TimeControl"
-        "ProductCode" = "8:{232A368F-8E6F-4FBB-B176-718FE5FE9F46}"
-        "PackageCode" = "8:{9FEA6838-90F7-4F96-9D10-00374CF5ABA5}"
+        "ProductCode" = "8:{BB3E5E5C-6F52-48B4-893C-57EB236F23D6}"
+        "PackageCode" = "8:{65B804AE-9561-4656-8793-2FB8B8BEBCDF}"
         "UpgradeCode" = "8:{A7DC5BC4-7E3E-4B58-A0AD-3C9AC9F873C1}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.1.0"
+        "ProductVersion" = "8:3.1.1"
         "Manufacturer" = "8:SamHou"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -199,13 +199,13 @@
         "Subject" = "8:"
         "ARPCONTACT" = "8:SamHou"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
+        "ARPCOMMENTS" = "8:TimeControl安装程序"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -797,7 +797,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5003B007B32D429B83CC5372AB9FC0AF"
             {
-            "SourcePath" = "8:..\\TimeControlConsole\\obj\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
+            "SourcePath" = "8:..\\TimeControlConsole\\obj\\x64\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"
@@ -825,7 +825,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B7C31D1C4E42443D89CA87F9596A43B7"
             {
-            "SourcePath" = "8:..\\TimeControl\\obj\\Release\\net6.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\TimeControl\\obj\\x64\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"

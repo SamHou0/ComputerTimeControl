@@ -8,6 +8,7 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <BaseOutputPath>..\TimeControl\bin</BaseOutputPath>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
 </Project>

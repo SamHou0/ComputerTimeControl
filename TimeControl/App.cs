@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace TimeControl
 {
-    internal class App
+    public class App
     {
         private string name;
         private string location;
         public string Name { get { return name; }}
-        private int time;
-        
-        public string ReportApp()
+        internal int time;
+        /// <summary>
+        /// 返回进程的简要概述
+        /// </summary>
+        /// <returns>进程的简要概述</returns>
+        public override string ToString()
         {
             return Name + " 已使用 " + time+" 秒！";
         }
@@ -21,11 +24,21 @@ namespace TimeControl
         {
             this.name = name;
             this.location = location;
-            time = 0;
+            Reset();
         }
-        public void Run()
+        /// <summary>
+        /// 运行一次（一秒）
+        /// </summary>
+        public virtual void Run()
         {
             time++;
+        }
+        /// <summary>
+        /// 重设时间
+        /// </summary>
+        public void Reset()
+        {
+            time = 0;
         }
     }
 }
