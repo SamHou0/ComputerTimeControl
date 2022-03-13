@@ -5,22 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.IO;
 
 namespace TimeControl
 {
     public class LimitedApp : App
     {
-        private int timeLimit;
-        public LimitedApp(string name, string location,int timeLimit) : base(name, location)
+        private readonly int timeLimit;
+        public LimitedApp(string name,int time,int timeLimit) : base(name,time)
         {
             this.timeLimit = timeLimit;
         }
         /// <summary>
         /// 运行一次（一秒），并根据情况显示警告或关闭进程
         /// </summary>
-        public override void Run()
+        public override void Run(StreamWriter streamWriter)
         {
-            base.Run();
+            time++;
             if (time == timeLimit - 30)
             {
                 LimitWarningWindow warningWindow = new(this);
@@ -30,6 +31,10 @@ namespace TimeControl
             {
                 Ban();
             }
+            streamWriter.WriteLine(Name);
+            streamWriter.WriteLine(time);
+            streamWriter.WriteLine(timeLimit);
+            streamWriter.WriteLine("//");
         }
         /// <summary>
         /// 返回时间受限进程的简要概述

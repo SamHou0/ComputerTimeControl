@@ -21,11 +21,11 @@ namespace TimeControl
             DialogResult = DialogResult.No;
         }
 
-        private void okButton_Click(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
             if (passwordTextBox.Text.GetHashCode()==passwordHash)
             {
-                File.Delete(PasswordFile.tcPassLocation);
+                File.Delete(TimeControlFile.tcPassLocation);
                 DialogResult = DialogResult.OK;
                 Close();
             }

@@ -24,9 +24,9 @@ namespace TimeControl
         {
             InitializeComponent();
             this.hide = hide;
-            if (File.Exists(PasswordFile.tcPassLocation))//加载密码哈希值
+            if (File.Exists(TimeControlFile.tcPassLocation))//加载密码哈希值
             {
-                unlockPasswordHash = Convert.ToInt32(File.ReadAllText(PasswordFile.tcPassLocation));
+                unlockPasswordHash = Convert.ToInt32(File.ReadAllText(TimeControlFile.tcPassLocation));
                 PasswordSet();
             }
             controller = new(usageBox, processMonitorTimer);
@@ -86,28 +86,24 @@ namespace TimeControl
             Process.Start("explorer.exe", "https://icons8.com/icon/19614/icon");
         }
 
-        private void AppAddButton_Click(object sender, EventArgs e)//添加打开的窗口
+        private void AppAddButton_Click(object sender, EventArgs e)//添加进程
         {
             if (processNameBox.Text.ToLower() == "timecontrol" ||
                 processNameBox.Text.ToLower() == "timecontrolconsole")
             {
                 return;
             }
-            TimeInput timeInput = new(controller, processNameBox.Text);
+            TimeInput timeInput = new(controller, processNameBox.Text);//打开进程限时控制窗口
             timeInput.ShowDialog();
         }
 
-        private void RemoveButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
+        private void RemoveButton_Click(object sender, EventArgs e)//移除窗口
         {
             //检测密码设置
-            if (unlockPasswordHash != 0)
+            if (PasswordCheck())
             {
-                PasswordInput passwordInput = new(unlockPasswordHash);
-                if (passwordInput.ShowDialog() == DialogResult.OK)
-                    controller.Remove();
-            }
-            else
                 controller.Remove();
+            }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间
@@ -145,13 +141,34 @@ namespace TimeControl
         {
             unlockPasswordHash = unlockPasswordBox.Text.GetHashCode();//保存哈希值
             PasswordSet();
-            File.WriteAllText(PasswordFile.tcPassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
+            File.WriteAllText(TimeControlFile.tcPassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
         }
         private void PasswordSet()//密码设置后调用
         {
             unlockPasswordBox.Text = "";
             unlockPasswordBox.Enabled = false;
             unloackPasswordSetButton.Enabled = false;
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
+        {
+            if (PasswordCheck())
+            {
+                controller.RemoveAll();
+            }
+        }
+        private bool PasswordCheck()
+        {
+            if (unlockPasswordHash != 0)
+            {
+                PasswordInput passwordInput = new(unlockPasswordHash);
+                if (passwordInput.ShowDialog() == DialogResult.OK)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return true;
         }
     }
 }
