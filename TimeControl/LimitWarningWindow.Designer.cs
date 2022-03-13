@@ -49,7 +49,7 @@
             this.closeButton.TabIndex = 1;
             this.closeButton.Text = "立即强制关闭（请确保已保存任何文件）";
             this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // LimitWarningWindow
             // 

@@ -19,14 +19,14 @@ namespace TimeControl
         private bool hide = false;//指示启动后是否需要隐藏
         private bool isClosable = false;//指示当前是否可以关闭
         private int unlockPasswordHash = 0;//密码哈希值，用作比对
-        private ListController controller;//列表、计时控制器
+        private AppController controller;//列表、计时控制器
         public ControlPanel(bool hide)
         {
             InitializeComponent();
             this.hide = hide;
-            if (File.Exists(TimeControlFile.tcPassLocation))//加载密码哈希值
+            if (File.Exists(TimeControlFile.PassLocation))//加载密码哈希值
             {
-                unlockPasswordHash = Convert.ToInt32(File.ReadAllText(TimeControlFile.tcPassLocation));
+                unlockPasswordHash = Convert.ToInt32(File.ReadAllText(TimeControlFile.PassLocation));
                 PasswordSet();
             }
             controller = new(usageBox, processMonitorTimer);
@@ -140,8 +140,8 @@ namespace TimeControl
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
         {
             unlockPasswordHash = unlockPasswordBox.Text.GetHashCode();//保存哈希值
+            File.WriteAllText(TimeControlFile.PassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
             PasswordSet();
-            File.WriteAllText(TimeControlFile.tcPassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
         }
         private void PasswordSet()//密码设置后调用
         {
@@ -150,7 +150,7 @@ namespace TimeControl
             unloackPasswordSetButton.Enabled = false;
         }
 
-        private void clearButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
+        private void ClearButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
         {
             if (PasswordCheck())
             {

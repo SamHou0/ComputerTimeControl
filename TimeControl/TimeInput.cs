@@ -12,17 +12,17 @@ namespace TimeControl
 {
     public partial class TimeInput : Form
     {
-        private ListController listController;
+        private AppController appController;
         private readonly string appName;
         /// <summary>
         /// 创建一个新的输入窗口，并添加进程
         /// </summary>
-        /// <param name="listController">进程列表控制器，用于添加进程</param>
+        /// <param name="appController">进程列表控制器，用于添加进程</param>
         /// <param name="appName">需要添加进程的名称</param>
-        public TimeInput(ListController listController, string appName)
+        public TimeInput(AppController appController, string appName)
         {
             InitializeComponent();
-            this.listController = listController;
+            this.appController = appController;
             this.appName = appName;
         }
 
@@ -30,11 +30,11 @@ namespace TimeControl
         {
             if (timeBox.Value == 0)
             {
-                listController.AddByName(appName);
+                appController.AddByName(appName);
             }
             else
             {
-                listController.AddByName(appName, Convert.ToInt32(timeBox.Value));
+                appController.AddByName(appName, Convert.ToInt32(timeBox.Value));
             }
             Close();
         }
