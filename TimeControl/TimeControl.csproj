@@ -5,7 +5,7 @@
     <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Authors>SamHou</Authors>
-    <Version>3.1.1</Version>
+    <Version>3.1.2</Version>
     <StartupObject>TimeControl.Program</StartupObject>
     <AssemblyVersion></AssemblyVersion>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>

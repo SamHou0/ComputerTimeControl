@@ -9,9 +9,9 @@ using System.IO;
 
 namespace TimeControl
 {
-    public class ListController
+    public class AppController
     {
-        private FileStream fileStream = new(TimeControlFile.tcTimeFileLocation,
+        private FileStream fileStream = new(TimeControlFile.TimeFileLocation,
             FileMode.OpenOrCreate,
             FileAccess.ReadWrite, FileShare.None);
         private StreamWriter streamWriter;
@@ -19,7 +19,7 @@ namespace TimeControl
         private List<App> apps;
         private Timer timer;
 
-        public ListController(ListBox listBox, Timer timer)
+        public AppController(ListBox listBox, Timer timer)
         {
             streamWriter = new(fileStream);
             this.listBox = listBox;

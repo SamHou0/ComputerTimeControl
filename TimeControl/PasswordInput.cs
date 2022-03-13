@@ -25,7 +25,7 @@ namespace TimeControl
         {
             if (passwordTextBox.Text.GetHashCode()==passwordHash)
             {
-                File.Delete(TimeControlFile.tcPassLocation);
+                File.Delete(TimeControlFile.PassLocation);
                 DialogResult = DialogResult.OK;
                 Close();
             }

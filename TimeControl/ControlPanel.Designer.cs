@@ -312,7 +312,7 @@ namespace TimeControl
             this.clearButton.TabIndex = 7;
             this.clearButton.Text = "删除所有监控";
             this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // ControlPanel
             // 

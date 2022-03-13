@@ -20,7 +20,7 @@ namespace TimeControl
             this.warningApp = warningApp;
         }
 
-        private void closeButton_Click(object sender, EventArgs e)
+        private void CloseButton_Click(object sender, EventArgs e)
         {
             warningApp.Ban();//禁用掉app
             Close();

@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_9BF8F60AD5F2474D82994CD2D95F44A1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B7C31D1C4E42443D89CA87F9596A43B7"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -127,6 +133,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9BF8F60AD5F2474D82994CD2D95F44A1"
+            {
+            "SourcePath" = "8:..\\TimeControl\\icons8_sand_watch.ico"
+            "TargetName" = "8:icons8_sand_watch.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -183,15 +209,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TimeControl"
-        "ProductCode" = "8:{BB3E5E5C-6F52-48B4-893C-57EB236F23D6}"
-        "PackageCode" = "8:{65B804AE-9561-4656-8793-2FB8B8BEBCDF}"
+        "ProductCode" = "8:{9EE926BC-8A8C-4684-A53E-1EF64E1537E1}"
+        "PackageCode" = "8:{1E6EC692-5BBF-4CB3-B4B3-5DE3068A184B}"
         "UpgradeCode" = "8:{A7DC5BC4-7E3E-4B58-A0AD-3C9AC9F873C1}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.1.1"
+        "ProductVersion" = "8:3.1.2"
         "Manufacturer" = "8:SamHou"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -201,7 +227,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:TimeControl安装程序"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_9BF8F60AD5F2474D82994CD2D95F44A1"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -379,7 +405,7 @@
             "Target" = "8:_B7C31D1C4E42443D89CA87F9596A43B7"
             "Folder" = "8:_EF355E43AD4E49F3B0AE27E1F063797B"
             "WorkingFolder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"
-            "Icon" = "8:"
+            "Icon" = "8:_9BF8F60AD5F2474D82994CD2D95F44A1"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5426797F4F7D48478759844D9558460B"
@@ -393,7 +419,7 @@
             "Target" = "8:_B7C31D1C4E42443D89CA87F9596A43B7"
             "Folder" = "8:_24D444A51FBD4D6AB659A544BB198230"
             "WorkingFolder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"
-            "Icon" = "8:"
+            "Icon" = "8:_9BF8F60AD5F2474D82994CD2D95F44A1"
             "Feature" = "8:"
             }
         }
@@ -797,7 +823,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5003B007B32D429B83CC5372AB9FC0AF"
             {
-            "SourcePath" = "8:..\\TimeControlConsole\\obj\\x64\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
+            "SourcePath" = "8:..\\TimeControlConsole\\obj\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"
@@ -825,7 +851,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B7C31D1C4E42443D89CA87F9596A43B7"
             {
-            "SourcePath" = "8:..\\TimeControl\\obj\\x64\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
+            "SourcePath" = "8:..\\TimeControl\\obj\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"
