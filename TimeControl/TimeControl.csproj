@@ -58,4 +58,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="cmd /c killtc.bat" />
+  </Target>
+
 </Project>

@@ -14,12 +14,12 @@ namespace TimeControl
     public partial class Lock : Form
     {
         private bool usePassword = true;
-        private int unlockPasswordHash;
-        public Lock(int minutes,int unlockPasswordHash)
+        private string unlockPasswordHash;
+        public Lock(int minutes,string unlockPasswordHash)
         {
             InitializeComponent();
             progressBar.Maximum = minutes * 60;
-            if(unlockPasswordHash==0)
+            if (!string.IsNullOrEmpty(unlockPasswordHash))
             { usePassword = false; }
             this.unlockPasswordHash = unlockPasswordHash;
         }
@@ -53,7 +53,7 @@ namespace TimeControl
         {
             if (usePassword == true)
             {
-                if (unlockPasswordBox.Text.GetHashCode() == unlockPasswordHash)
+                if (Password.ComputeHash(unlockPasswordBox.Text) == unlockPasswordHash)
                 {
                     progressBar.Value = progressBar.Maximum;
                     Close();

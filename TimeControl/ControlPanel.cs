@@ -18,7 +18,7 @@ namespace TimeControl
     {
         private bool hide = false;//指示启动后是否需要隐藏
         private bool isClosable = false;//指示当前是否可以关闭
-        private int unlockPasswordHash = 0;//密码哈希值，用作比对
+        private string unlockPasswordHash = "";//密码哈希值，用作比对
         private AppController controller;//列表、计时控制器
         public ControlPanel(bool hide)
         {
@@ -26,7 +26,7 @@ namespace TimeControl
             this.hide = hide;
             if (File.Exists(TimeControlFile.PassLocation))//加载密码哈希值
             {
-                unlockPasswordHash = Convert.ToInt32(File.ReadAllText(TimeControlFile.PassLocation));
+                unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
                 PasswordSet();
             }
             controller = new(usageBox, processMonitorTimer);
@@ -72,7 +72,7 @@ namespace TimeControl
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)//正常退出程序
         {
             PasswordInput passwordInput = new(unlockPasswordHash);
-            if (unlockPasswordHash != 0)//检测是否设置了管理码
+            if (!string.IsNullOrEmpty( unlockPasswordHash))//检测是否设置了管理码
             {
                 if (passwordInput.ShowDialog() == DialogResult.OK)
                     ForceClose();
@@ -139,7 +139,8 @@ namespace TimeControl
         }
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
         {
-            unlockPasswordHash = unlockPasswordBox.Text.GetHashCode();//保存哈希值
+
+            unlockPasswordHash = Password.ComputeHash( unlockPasswordBox.Text);//保存哈希值
             File.WriteAllText(TimeControlFile.PassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
             PasswordSet();
         }
@@ -157,9 +158,9 @@ namespace TimeControl
                 controller.RemoveAll();
             }
         }
-        private bool PasswordCheck()
+        private bool PasswordCheck()//检测密码是否正确
         {
-            if (unlockPasswordHash != 0)
+            if (!string.IsNullOrEmpty( unlockPasswordHash))
             {
                 PasswordInput passwordInput = new(unlockPasswordHash);
                 if (passwordInput.ShowDialog() == DialogResult.OK)
