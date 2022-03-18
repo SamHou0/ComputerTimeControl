@@ -19,7 +19,7 @@ namespace TimeControl
         {
             InitializeComponent();
             progressBar.Maximum = minutes * 60;
-            if (!string.IsNullOrEmpty(unlockPasswordHash))
+            if (string.IsNullOrEmpty(unlockPasswordHash))
             { usePassword = false; }
             this.unlockPasswordHash = unlockPasswordHash;
         }
