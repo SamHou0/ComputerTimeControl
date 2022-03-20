@@ -18,15 +18,15 @@ namespace TimeControl
     {
         private bool hide = false;//指示启动后是否需要隐藏
         private bool isClosable = false;//指示当前是否可以关闭
-        private int unlockPasswordHash = 0;//密码哈希值，用作比对
-        private ListController controller;//列表、计时控制器
+        private string unlockPasswordHash = "";//密码哈希值，用作比对
+        private AppController controller;//列表、计时控制器
         public ControlPanel(bool hide)
         {
             InitializeComponent();
             this.hide = hide;
-            if (File.Exists(PasswordFile.tcPassLocation))//加载密码哈希值
+            if (File.Exists(TimeControlFile.PassLocation))//加载密码哈希值
             {
-                unlockPasswordHash = Convert.ToInt32(File.ReadAllText(PasswordFile.tcPassLocation));
+                unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
                 PasswordSet();
             }
             controller = new(usageBox, processMonitorTimer);
@@ -72,7 +72,7 @@ namespace TimeControl
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)//正常退出程序
         {
             PasswordInput passwordInput = new(unlockPasswordHash);
-            if (unlockPasswordHash != 0)//检测是否设置了管理码
+            if (!string.IsNullOrEmpty( unlockPasswordHash))//检测是否设置了管理码
             {
                 if (passwordInput.ShowDialog() == DialogResult.OK)
                     ForceClose();
@@ -86,28 +86,24 @@ namespace TimeControl
             Process.Start("explorer.exe", "https://icons8.com/icon/19614/icon");
         }
 
-        private void AppAddButton_Click(object sender, EventArgs e)//添加打开的窗口
+        private void AppAddButton_Click(object sender, EventArgs e)//添加进程
         {
             if (processNameBox.Text.ToLower() == "timecontrol" ||
                 processNameBox.Text.ToLower() == "timecontrolconsole")
             {
                 return;
             }
-            TimeInput timeInput = new(controller, processNameBox.Text);
+            TimeInput timeInput = new(controller, processNameBox.Text);//打开进程限时控制窗口
             timeInput.ShowDialog();
         }
 
-        private void RemoveButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
+        private void RemoveButton_Click(object sender, EventArgs e)//移除窗口
         {
             //检测密码设置
-            if (unlockPasswordHash != 0)
+            if (PasswordCheck())
             {
-                PasswordInput passwordInput = new(unlockPasswordHash);
-                if (passwordInput.ShowDialog() == DialogResult.OK)
-                    controller.Remove();
-            }
-            else
                 controller.Remove();
+            }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间
@@ -143,15 +139,37 @@ namespace TimeControl
         }
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
         {
-            unlockPasswordHash = unlockPasswordBox.Text.GetHashCode();//保存哈希值
+
+            unlockPasswordHash = Password.ComputeHash( unlockPasswordBox.Text);//保存哈希值
+            File.WriteAllText(TimeControlFile.PassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
             PasswordSet();
-            File.WriteAllText(PasswordFile.tcPassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
         }
         private void PasswordSet()//密码设置后调用
         {
             unlockPasswordBox.Text = "";
             unlockPasswordBox.Enabled = false;
             unloackPasswordSetButton.Enabled = false;
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
+        {
+            if (PasswordCheck())
+            {
+                controller.RemoveAll();
+            }
+        }
+        private bool PasswordCheck()//检测密码是否正确
+        {
+            if (!string.IsNullOrEmpty( unlockPasswordHash))
+            {
+                PasswordInput passwordInput = new(unlockPasswordHash);
+                if (passwordInput.ShowDialog() == DialogResult.OK)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return true;
         }
     }
 }

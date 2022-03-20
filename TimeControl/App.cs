@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TimeControl
 {
     public class App
     {
-        private string name;
-        private string location;
+        private readonly string name;
         public string Name { get { return name; }}
         internal int time;
         /// <summary>
@@ -20,18 +20,20 @@ namespace TimeControl
         {
             return Name + " 已使用 " + time+" 秒！";
         }
-        public App(string name, string location)
+        public App(string name,int time)
         {
+            this.time = time;
             this.name = name;
-            this.location = location;
-            Reset();
         }
         /// <summary>
         /// 运行一次（一秒）
         /// </summary>
-        public virtual void Run()
+        public virtual void Run(StreamWriter streamWriter)
         {
             time++;
+            streamWriter.WriteLine(Name);
+            streamWriter.WriteLine(time);
+            streamWriter.WriteLine("//");
         }
         /// <summary>
         /// 重设时间

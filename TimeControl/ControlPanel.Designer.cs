@@ -36,6 +36,7 @@ namespace TimeControl
             this.controlTab = new System.Windows.Forms.TabControl();
             this.startNow = new System.Windows.Forms.TabPage();
             this.processMonitor = new System.Windows.Forms.TabPage();
+            this.autoRefreshBox = new System.Windows.Forms.CheckBox();
             this.refreshButton = new System.Windows.Forms.Button();
             this.processNameBox = new System.Windows.Forms.TextBox();
             this.removeButton = new System.Windows.Forms.Button();
@@ -53,7 +54,7 @@ namespace TimeControl
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
-            this.autoRefreshBox = new System.Windows.Forms.CheckBox();
+            this.clearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -121,6 +122,7 @@ namespace TimeControl
             // 
             // processMonitor
             // 
+            this.processMonitor.Controls.Add(this.clearButton);
             this.processMonitor.Controls.Add(this.autoRefreshBox);
             this.processMonitor.Controls.Add(this.refreshButton);
             this.processMonitor.Controls.Add(this.processNameBox);
@@ -134,6 +136,16 @@ namespace TimeControl
             this.processMonitor.TabIndex = 1;
             this.processMonitor.Text = "进程计时";
             this.processMonitor.UseVisualStyleBackColor = true;
+            // 
+            // autoRefreshBox
+            // 
+            this.autoRefreshBox.AutoSize = true;
+            this.autoRefreshBox.Location = new System.Drawing.Point(557, 78);
+            this.autoRefreshBox.Name = "autoRefreshBox";
+            this.autoRefreshBox.Size = new System.Drawing.Size(91, 24);
+            this.autoRefreshBox.TabIndex = 6;
+            this.autoRefreshBox.Text = "自动刷新";
+            this.autoRefreshBox.UseVisualStyleBackColor = true;
             // 
             // refreshButton
             // 
@@ -292,15 +304,15 @@ namespace TimeControl
             this.processMonitorTimer.Interval = 1000;
             this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
             // 
-            // autoRefreshBox
+            // clearButton
             // 
-            this.autoRefreshBox.AutoSize = true;
-            this.autoRefreshBox.Location = new System.Drawing.Point(557, 78);
-            this.autoRefreshBox.Name = "autoRefreshBox";
-            this.autoRefreshBox.Size = new System.Drawing.Size(91, 24);
-            this.autoRefreshBox.TabIndex = 6;
-            this.autoRefreshBox.Text = "自动刷新";
-            this.autoRefreshBox.UseVisualStyleBackColor = true;
+            this.clearButton.Location = new System.Drawing.Point(528, 318);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(143, 45);
+            this.clearButton.TabIndex = 7;
+            this.clearButton.Text = "删除所有监控";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
             // ControlPanel
             // 
@@ -355,5 +367,6 @@ namespace TimeControl
         private System.Windows.Forms.TextBox processNameBox;
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.CheckBox autoRefreshBox;
+        private System.Windows.Forms.Button clearButton;
     }
 }

@@ -8,24 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace TimeControl
 {
     public partial class PasswordInput : Form
     {
-        private int passwordHash;
-        public PasswordInput(int passwordHash)
+        private string passwordHash;
+        public PasswordInput(string passwordHash)
         {
             InitializeComponent();
             this.passwordHash = passwordHash;
             DialogResult = DialogResult.No;
         }
 
-        private void okButton_Click(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
         {
-            if (passwordTextBox.Text.GetHashCode()==passwordHash)
+            
+            if (Password.ComputeHash(passwordTextBox.Text)==passwordHash )
             {
-                File.Delete(PasswordFile.tcPassLocation);
+                File.Delete(TimeControlFile.PassLocation);
                 DialogResult = DialogResult.OK;
                 Close();
             }
