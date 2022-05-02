@@ -160,6 +160,7 @@ namespace TimeControl
             }
 
             processMonitorTimer.Start();
+            UpdateForm();
         }
 
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
@@ -196,6 +197,11 @@ namespace TimeControl
             }
             else
                 return true;
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            controller.ResetAll(processMonitorTimer, usageBox);
         }
     }
 }

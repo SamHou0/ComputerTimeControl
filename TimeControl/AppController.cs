@@ -119,5 +119,12 @@ namespace TimeControl
             apps.Clear();
             Refresh(timer, listBox);
         }
+
+        public void ResetAll(Timer timer, ListBox listBox)
+        {
+            foreach (App app in apps)
+                app.Reset();
+            Refresh(timer, listBox);
+        }
     }
 }

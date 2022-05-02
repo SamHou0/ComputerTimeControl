@@ -46,7 +46,7 @@ namespace TimeControl
         }
 
         /// <summary>
-        /// 禁用掉该程序
+        /// 关闭掉该程序，并提前设置为完全禁用
         /// </summary>
         public void Ban()
         {

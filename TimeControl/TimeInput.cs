@@ -34,13 +34,11 @@ namespace TimeControl
         private void OkButton_Click(object sender, EventArgs e)
         {
             if (timeBox.Value == 0)
-            {
+                appController.AddByName(appName, 0, timer, listBox);
+            else if (timeBox.Value == 1)
                 appController.AddByName(appName, timer, listBox);
-            }
             else
-            {
                 appController.AddByName(appName, Convert.ToInt32(timeBox.Value), timer, listBox);
-            }
             Close();
         }
     }
