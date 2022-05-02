@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Threading;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 namespace TimeControl
@@ -20,6 +21,7 @@ namespace TimeControl
         private bool isClosable = false;//指示当前是否可以关闭
         private string unlockPasswordHash = "";//密码哈希值，用作比对
         private AppController controller;//列表、计时控制器
+
         public ControlPanel(bool hide)
         {
             InitializeComponent();
@@ -29,7 +31,17 @@ namespace TimeControl
                 unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
                 PasswordSet();
             }
-            controller = new(usageBox, processMonitorTimer);
+            BinaryFormatter formatter = new BinaryFormatter();
+            if (File.Exists(TimeControlFile.TimeFileLocation))
+            {
+                using (Stream stream = File.OpenRead
+                    (TimeControlFile.TimeFileLocation))
+                {
+                    controller = (AppController)formatter.Deserialize(stream);
+                }
+            }
+            else
+                controller = new(usageBox, processMonitorTimer);
         }
 
         private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
@@ -72,7 +84,7 @@ namespace TimeControl
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)//正常退出程序
         {
             PasswordInput passwordInput = new(unlockPasswordHash);
-            if (!string.IsNullOrEmpty( unlockPasswordHash))//检测是否设置了管理码
+            if (!string.IsNullOrEmpty(unlockPasswordHash))//检测是否设置了管理码
             {
                 if (passwordInput.ShowDialog() == DialogResult.OK)
                     ForceClose();
@@ -93,7 +105,7 @@ namespace TimeControl
             {
                 return;
             }
-            TimeInput timeInput = new(controller, processNameBox.Text);//打开进程限时控制窗口
+            TimeInput timeInput = new(controller, processNameBox.Text, processMonitorTimer, usageBox);//打开进程限时控制窗口
             timeInput.ShowDialog();
         }
 
@@ -102,32 +114,44 @@ namespace TimeControl
             //检测密码设置
             if (PasswordCheck())
             {
-                controller.Remove();
+                controller.Remove(processMonitorTimer, usageBox);
             }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间
         {
-            controller.Refresh();
+            UpdateForm();
+        }
+
+        private void UpdateForm()
+        {
+            controller.Refresh(processMonitorTimer, usageBox);
         }
 
         private void ProcessMonitorTimer_Tick(object sender, EventArgs e)
         {
             controller.Run();
             if (autoRefreshBox.Checked)
-                controller.Refresh();
+                UpdateForm();
             if (Process.GetProcessesByName("TimeControlConsole").Length == 0)//检查保护程序状态
             {
                 ProcessStartInfo process = new();
                 process.FileName = "TimeControlConsole.exe";
                 Process.Start(process);
             }
+            using (Stream stream = File.Create(TimeControlFile.TimeFileLocation))
+            {
+                BinaryFormatter formatter = new();
+                formatter.Serialize(stream, controller);
+            }
         }
+
         private void ForceClose()//可以正常关闭
         {
             isClosable = true;
             Close();
         }
+
         private void ControlPanel_Shown(object sender, EventArgs e)//启动隐藏参数支持
         {
             if (hide)
@@ -136,14 +160,16 @@ namespace TimeControl
             }
 
             processMonitorTimer.Start();
+            UpdateForm();
         }
+
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
         {
-
-            unlockPasswordHash = Password.ComputeHash( unlockPasswordBox.Text);//保存哈希值
+            unlockPasswordHash = Password.ComputeHash(unlockPasswordBox.Text);//保存哈希值
             File.WriteAllText(TimeControlFile.PassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
             PasswordSet();
         }
+
         private void PasswordSet()//密码设置后调用
         {
             unlockPasswordBox.Text = "";
@@ -155,12 +181,13 @@ namespace TimeControl
         {
             if (PasswordCheck())
             {
-                controller.RemoveAll();
+                controller.RemoveAll(processMonitorTimer, usageBox);
             }
         }
+
         private bool PasswordCheck()//检测密码是否正确
         {
-            if (!string.IsNullOrEmpty( unlockPasswordHash))
+            if (!string.IsNullOrEmpty(unlockPasswordHash))
             {
                 PasswordInput passwordInput = new(unlockPasswordHash);
                 if (passwordInput.ShowDialog() == DialogResult.OK)
@@ -170,6 +197,11 @@ namespace TimeControl
             }
             else
                 return true;
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            controller.ResetAll(processMonitorTimer, usageBox);
         }
     }
 }

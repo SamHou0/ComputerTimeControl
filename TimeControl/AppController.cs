@@ -9,63 +9,21 @@ using System.IO;
 
 namespace TimeControl
 {
+    [Serializable]
     public class AppController
     {
-        private FileStream fileStream = new(TimeControlFile.TimeFileLocation,
-            FileMode.OpenOrCreate,
-            FileAccess.ReadWrite, FileShare.None);
-        private StreamWriter streamWriter;
-        private ListBox listBox;
         private List<App> apps;
-        private Timer timer;
 
         public AppController(ListBox listBox, Timer timer)
         {
-            streamWriter = new(fileStream);
-            this.listBox = listBox;
             apps = new List<App>();
-            this.timer = timer;
-            StreamReader streamReader = new(fileStream);
-            int lineNumber = 1;
-            string name = null;
-            int time = 0;
-            int timeLimit = 0;
-            while (!streamReader.EndOfStream)//读取文件，添加进程
-            {
-                string line = streamReader.ReadLine();
-                if (line == "//")
-                {
-                    if (timeLimit == 0)
-                        apps.Add(new App(name, time));
-                    else
-                        apps.Add(new LimitedApp(name, time, timeLimit));
-
-                    lineNumber = 1;
-                    name = null;
-                    time = 0;
-                    timeLimit = 0;
-
-                    continue;
-                }
-                else
-                {
-                    if (lineNumber == 1)
-                        name = line;
-                    else if (lineNumber == 2)
-                        time = Convert.ToInt32(line);
-                    else if (lineNumber == 3)
-                        timeLimit = Convert.ToInt32(line);
-
-                    lineNumber++;
-                }
-            }
-            Refresh();
+            Refresh(timer, listBox);
         }
 
         /// <summary>
         /// 刷新列表显示
         /// </summary>
-        public void Refresh()
+        public void Refresh(Timer timer, ListBox listBox)
         {
             timer.Stop();
             listBox.Items.Clear();
@@ -75,11 +33,12 @@ namespace TimeControl
             }
             timer.Start();
         }
+
         /// <summary>
         /// 根据名称添加进程
         /// </summary>
         /// <param name="name">要添加的进程名称</param>
-        public void AddByName(string name)
+        public void AddByName(string name, Timer timer, ListBox listBox)
         {
             timer.Stop();
             Process[] processes = Process.GetProcessesByName(name);
@@ -94,14 +53,15 @@ namespace TimeControl
             {
                 MessageBox.Show("错误", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Refresh();
+            Refresh(timer, listBox);
         }
+
         /// <summary>
         /// 根据名称添加时间受限的进程
         /// </summary>
         /// <param name="name">进程名称</param>
         /// <param name="limitTime">限制时长（秒）</param>
-        public void AddByName(string name, int limitTime)
+        public void AddByName(string name, int limitTime, Timer timer, ListBox listBox)
         {
             timer.Stop();
             Process[] processes = Process.GetProcessesByName(name);
@@ -116,14 +76,14 @@ namespace TimeControl
             {
                 MessageBox.Show("错误", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Refresh();
+            Refresh(timer, listBox);
         }
+
         /// <summary>
         /// 跟踪所有进程，增加一秒
         /// </summary>
         public void Run()
         {
-            fileStream.SetLength(0);
             foreach (App app in apps)//计算进程时间
             {
                 if (Process.GetProcessesByName(app.Name).Length != 0)
@@ -131,32 +91,40 @@ namespace TimeControl
                     if (app is LimitedApp)
                     {
                         LimitedApp limitedApp = app as LimitedApp;
-                        limitedApp.Run(streamWriter);
+                        limitedApp.Run();
                     }
                     else
-                        app.Run(streamWriter);
+                        app.Run();
                 }
             }
-            streamWriter.Flush();
         }
+
         /// <summary>
         /// 移除所列表所选的进程
         /// </summary>
-        public void Remove()
+        public void Remove(Timer timer, ListBox listBox)
         {
             timer.Stop();
             if (listBox.SelectedIndex >= 0)
                 apps.RemoveAt(listBox.SelectedIndex);
-            Refresh();
+            Refresh(timer, listBox);
         }
+
         /// <summary>
         /// 删除所有监控
         /// </summary>
-        public void RemoveAll()
+        public void RemoveAll(Timer timer, ListBox listBox)
         {
             timer.Stop();
             apps.Clear();
-            Refresh();
+            Refresh(timer, listBox);
+        }
+
+        public void ResetAll(Timer timer, ListBox listBox)
+        {
+            foreach (App app in apps)
+                app.Reset();
+            Refresh(timer, listBox);
         }
     }
 }

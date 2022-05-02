@@ -36,6 +36,7 @@ namespace TimeControl
             this.controlTab = new System.Windows.Forms.TabControl();
             this.startNow = new System.Windows.Forms.TabPage();
             this.processMonitor = new System.Windows.Forms.TabPage();
+            this.clearButton = new System.Windows.Forms.Button();
             this.autoRefreshBox = new System.Windows.Forms.CheckBox();
             this.refreshButton = new System.Windows.Forms.Button();
             this.processNameBox = new System.Windows.Forms.TextBox();
@@ -54,7 +55,7 @@ namespace TimeControl
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
-            this.clearButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -122,6 +123,7 @@ namespace TimeControl
             // 
             // processMonitor
             // 
+            this.processMonitor.Controls.Add(this.resetButton);
             this.processMonitor.Controls.Add(this.clearButton);
             this.processMonitor.Controls.Add(this.autoRefreshBox);
             this.processMonitor.Controls.Add(this.refreshButton);
@@ -137,10 +139,20 @@ namespace TimeControl
             this.processMonitor.Text = "进程计时";
             this.processMonitor.UseVisualStyleBackColor = true;
             // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(529, 287);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(143, 45);
+            this.clearButton.TabIndex = 7;
+            this.clearButton.Text = "删除所有监控";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            // 
             // autoRefreshBox
             // 
             this.autoRefreshBox.AutoSize = true;
-            this.autoRefreshBox.Location = new System.Drawing.Point(557, 78);
+            this.autoRefreshBox.Location = new System.Drawing.Point(554, 47);
             this.autoRefreshBox.Name = "autoRefreshBox";
             this.autoRefreshBox.Size = new System.Drawing.Size(91, 24);
             this.autoRefreshBox.TabIndex = 6;
@@ -149,7 +161,7 @@ namespace TimeControl
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(528, 156);
+            this.refreshButton.Location = new System.Drawing.Point(528, 125);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(143, 51);
             this.refreshButton.TabIndex = 5;
@@ -159,14 +171,14 @@ namespace TimeControl
             // 
             // processNameBox
             // 
-            this.processNameBox.Location = new System.Drawing.Point(528, 213);
+            this.processNameBox.Location = new System.Drawing.Point(529, 182);
             this.processNameBox.Name = "processNameBox";
             this.processNameBox.Size = new System.Drawing.Size(143, 27);
             this.processNameBox.TabIndex = 4;
             // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(528, 108);
+            this.removeButton.Location = new System.Drawing.Point(528, 77);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(143, 42);
             this.removeButton.TabIndex = 2;
@@ -176,7 +188,7 @@ namespace TimeControl
             // 
             // appAddButton
             // 
-            this.appAddButton.Location = new System.Drawing.Point(528, 246);
+            this.appAddButton.Location = new System.Drawing.Point(528, 215);
             this.appAddButton.Name = "appAddButton";
             this.appAddButton.Size = new System.Drawing.Size(143, 66);
             this.appAddButton.TabIndex = 1;
@@ -304,15 +316,15 @@ namespace TimeControl
             this.processMonitorTimer.Interval = 1000;
             this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
             // 
-            // clearButton
+            // resetButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(528, 318);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(143, 45);
-            this.clearButton.TabIndex = 7;
-            this.clearButton.Text = "删除所有监控";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            this.resetButton.Location = new System.Drawing.Point(529, 338);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(142, 40);
+            this.resetButton.TabIndex = 8;
+            this.resetButton.Text = "重置所有进程时间";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // ControlPanel
             // 
@@ -368,5 +380,6 @@ namespace TimeControl
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.CheckBox autoRefreshBox;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button resetButton;
     }
 }
