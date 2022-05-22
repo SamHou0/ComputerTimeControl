@@ -11,7 +11,7 @@ namespace TimeControl
 {
     public class AppController
     {
-        private FileStream fileStream = new(TimeControlFile.TimeFileLocation,
+        private FileStream fileStream = new(TimeControlFile.TimeFile,
             FileMode.OpenOrCreate,
             FileAccess.ReadWrite, FileShare.None);
         private StreamWriter streamWriter;
@@ -93,19 +93,8 @@ namespace TimeControl
         public void AddByName(string name, int limitTime)
         {
             timer.Stop();
-            Process[] processes = Process.GetProcessesByName(name);
-            try
-            {
-                foreach (Process process in processes)
-                {
-                    apps.Add(new LimitedApp(process.ProcessName, 0, limitTime));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("错误", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            this.Refresh();
+            apps.Add(new LimitedApp(name, 0, limitTime));
+            Refresh();
         }
         /// <summary>
         /// 跟踪所有进程，增加一秒

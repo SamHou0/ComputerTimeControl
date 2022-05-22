@@ -45,6 +45,8 @@ namespace TimeControl
             this.appAddButton = new System.Windows.Forms.Button();
             this.usageBox = new System.Windows.Forms.ListBox();
             this.about = new System.Windows.Forms.TabPage();
+            this.coinLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -56,6 +58,7 @@ namespace TimeControl
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
+            this.authorButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -217,6 +220,9 @@ namespace TimeControl
             // 
             // about
             // 
+            this.about.Controls.Add(this.authorButton);
+            this.about.Controls.Add(this.coinLabel);
+            this.about.Controls.Add(this.label4);
             this.about.Controls.Add(this.linkLabel1);
             this.about.Controls.Add(this.label3);
             this.about.Location = new System.Drawing.Point(4, 29);
@@ -227,10 +233,28 @@ namespace TimeControl
             this.about.Text = "关于";
             this.about.UseVisualStyleBackColor = true;
             // 
+            // coinLabel
+            // 
+            this.coinLabel.AutoSize = true;
+            this.coinLabel.Location = new System.Drawing.Point(51, 3);
+            this.coinLabel.Name = "coinLabel";
+            this.coinLabel.Size = new System.Drawing.Size(18, 20);
+            this.coinLabel.TabIndex = 3;
+            this.coinLabel.Text = "0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 20);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "金币";
+            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(355, 86);
+            this.linkLabel1.Location = new System.Drawing.Point(743, 3);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(39, 20);
             this.linkLabel1.TabIndex = 1;
@@ -241,7 +265,7 @@ namespace TimeControl
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(233, 85);
+            this.label3.Location = new System.Drawing.Point(623, 3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 20);
             this.label3.TabIndex = 0;
@@ -326,6 +350,16 @@ namespace TimeControl
             this.processMonitorTimer.Interval = 1000;
             this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
             // 
+            // authorButton
+            // 
+            this.authorButton.Location = new System.Drawing.Point(6, 359);
+            this.authorButton.Name = "authorButton";
+            this.authorButton.Size = new System.Drawing.Size(118, 54);
+            this.authorButton.TabIndex = 4;
+            this.authorButton.Text = "作者的话";
+            this.authorButton.UseVisualStyleBackColor = true;
+            this.authorButton.Click += new System.EventHandler(this.authorButton_Click);
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -381,5 +415,8 @@ namespace TimeControl
         private System.Windows.Forms.CheckBox autoRefreshBox;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label coinLabel;
+        private System.Windows.Forms.Button authorButton;
     }
 }

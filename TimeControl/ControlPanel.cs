@@ -19,17 +19,23 @@ namespace TimeControl
         private bool hide = false;//指示启动后是否需要隐藏
         private bool isClosable = false;//指示当前是否可以关闭
         private string unlockPasswordHash = "";//密码哈希值，用作比对
-        private AppController controller;//列表、计时控制器
+        private AppController appController;//列表、计时控制器
+        private GameController gameController;
         public ControlPanel(bool hide)
         {
             InitializeComponent();
             this.hide = hide;
+            if (!Directory.Exists(TimeControlFile.BaseLocation))
+            {
+                Directory.CreateDirectory(TimeControlFile.BaseLocation);
+            }
             if (File.Exists(TimeControlFile.PassLocation))//加载密码哈希值
             {
                 unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
                 PasswordSet();
             }
-            controller = new(usageBox, processMonitorTimer);
+            appController = new(usageBox, processMonitorTimer);
+            gameController = new(coinLabel);
         }
 
         private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
@@ -45,6 +51,7 @@ namespace TimeControl
             }).Wait();
             Dllimport.SwitchDesktop(nowDesktop);
             Dllimport.CloseDesktop(newDesktop);
+            gameController.AddCoin(Convert.ToInt32(timeBox.Value) / 60);
         }
 
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)//打开界面
@@ -93,7 +100,7 @@ namespace TimeControl
             {
                 return;
             }
-            TimeInput timeInput = new(controller, processNameBox.Text);//打开进程限时控制窗口
+            TimeInput timeInput = new(appController, processNameBox.Text);//打开进程限时控制窗口
             timeInput.ShowDialog();
         }
 
@@ -102,20 +109,20 @@ namespace TimeControl
             //检测密码设置
             if (PasswordCheck())
             {
-                controller.Remove();
+                appController.Remove();
             }
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间
         {
-            controller.Refresh();
+            appController.Refresh();
         }
 
         private void ProcessMonitorTimer_Tick(object sender, EventArgs e)
         {
-            controller.Run();
+            appController.Run();
             if (autoRefreshBox.Checked)
-                controller.Refresh();
+                appController.Refresh();
             if (Process.GetProcessesByName("TimeControlConsole").Length == 0)//检查保护程序状态
             {
                 ProcessStartInfo process = new();
@@ -155,7 +162,7 @@ namespace TimeControl
         {
             if (PasswordCheck())
             {
-                controller.RemoveAll();
+                appController.RemoveAll();
             }
         }
         private bool PasswordCheck()//检测密码是否正确
@@ -174,7 +181,12 @@ namespace TimeControl
 
         private void resetButton_Click(object sender, EventArgs e)
         {
-            controller.Reset();
+            appController.Reset();
+        }
+
+        private void authorButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Properties.Resources.words);
         }
     }
 }

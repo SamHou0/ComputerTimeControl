@@ -8,10 +8,11 @@ namespace TimeControl
 {
     internal class TimeControlFile
     {
-        public static readonly string PassLocation = Environment.GetFolderPath
-            (Environment.SpecialFolder.ApplicationData) + "\\TCPass.txt";//获取密码位置
-
-        public static readonly string TimeFileLocation = Environment.GetFolderPath
-            (Environment.SpecialFolder.ApplicationData) + "\\TCTimeData.dat";
+        public static readonly string BaseLocation = Environment.GetFolderPath
+            (Environment.SpecialFolder.ApplicationData) + "\\TimeControl";
+        public static readonly string PassLocation =BaseLocation + "\\TCPass.txt";//获取密码位置
+        public static readonly string TimeFile = BaseLocation
+            + "\\TCTimeData.txt";
+        public static readonly string GameData = BaseLocation + "GameData.txt";
     }
 }

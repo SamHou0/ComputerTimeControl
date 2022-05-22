@@ -59,5 +59,14 @@ namespace TimeControl.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 这个软件是由SamHou开发的。我不想为它引入更加强大的管理措施，所以你可以自由决定是否开机启动，如果真的控制不住自己玩电脑，那么不如关闭一会，休息一段时间后再继续控制自己！同时，我引入了游戏化的设计理念，希望可以帮你养成良好的电脑使用习惯~ 的本地化字符串。
+        /// </summary>
+        internal static string words {
+            get {
+                return ResourceManager.GetString("words", resourceCulture);
+            }
+        }
     }
 }
