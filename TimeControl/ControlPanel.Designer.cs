@@ -141,7 +141,7 @@ namespace TimeControl
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(529, 287);
+            this.clearButton.Location = new System.Drawing.Point(528, 318);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(143, 45);
             this.clearButton.TabIndex = 7;
@@ -152,7 +152,7 @@ namespace TimeControl
             // autoRefreshBox
             // 
             this.autoRefreshBox.AutoSize = true;
-            this.autoRefreshBox.Location = new System.Drawing.Point(554, 47);
+            this.autoRefreshBox.Location = new System.Drawing.Point(557, 78);
             this.autoRefreshBox.Name = "autoRefreshBox";
             this.autoRefreshBox.Size = new System.Drawing.Size(91, 24);
             this.autoRefreshBox.TabIndex = 6;
@@ -161,7 +161,7 @@ namespace TimeControl
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(528, 125);
+            this.refreshButton.Location = new System.Drawing.Point(528, 156);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(143, 51);
             this.refreshButton.TabIndex = 5;
@@ -171,14 +171,14 @@ namespace TimeControl
             // 
             // processNameBox
             // 
-            this.processNameBox.Location = new System.Drawing.Point(529, 182);
+            this.processNameBox.Location = new System.Drawing.Point(528, 213);
             this.processNameBox.Name = "processNameBox";
             this.processNameBox.Size = new System.Drawing.Size(143, 27);
             this.processNameBox.TabIndex = 4;
             // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(528, 77);
+            this.removeButton.Location = new System.Drawing.Point(528, 108);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(143, 42);
             this.removeButton.TabIndex = 2;
@@ -188,7 +188,7 @@ namespace TimeControl
             // 
             // appAddButton
             // 
-            this.appAddButton.Location = new System.Drawing.Point(528, 215);
+            this.appAddButton.Location = new System.Drawing.Point(528, 246);
             this.appAddButton.Name = "appAddButton";
             this.appAddButton.Size = new System.Drawing.Size(143, 66);
             this.appAddButton.TabIndex = 1;
@@ -318,11 +318,11 @@ namespace TimeControl
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(529, 338);
+            this.resetButton.Location = new System.Drawing.Point(528, 26);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(142, 40);
+            this.resetButton.Size = new System.Drawing.Size(143, 46);
             this.resetButton.TabIndex = 8;
-            this.resetButton.Text = "重置所有进程时间";
+            this.resetButton.Text = "重置进程时间";
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
