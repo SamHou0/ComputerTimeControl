@@ -37,15 +37,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(58, 41);
+            this.label1.Location = new System.Drawing.Point(21, 43);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(402, 20);
+            this.label1.Size = new System.Drawing.Size(361, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "输入进程限时，1则表示不限制时间（秒），0表示完全禁用";
+            this.label1.Text = "输入进程限时，1则表示不限制时间（秒）,0表示禁用";
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(212, 128);
+            this.okButton.Location = new System.Drawing.Point(139, 140);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(110, 53);
             this.okButton.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             // timeBox
             // 
-            this.timeBox.Location = new System.Drawing.Point(196, 85);
+            this.timeBox.Location = new System.Drawing.Point(120, 87);
             this.timeBox.Maximum = new decimal(new int[] {
             200000,
             0,
@@ -69,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 218);
+            this.ClientSize = new System.Drawing.Size(394, 218);
             this.Controls.Add(this.timeBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.label1);

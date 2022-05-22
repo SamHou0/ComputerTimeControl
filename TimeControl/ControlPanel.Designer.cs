@@ -36,6 +36,7 @@ namespace TimeControl
             this.controlTab = new System.Windows.Forms.TabControl();
             this.startNow = new System.Windows.Forms.TabPage();
             this.processMonitor = new System.Windows.Forms.TabPage();
+            this.resetButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.autoRefreshBox = new System.Windows.Forms.CheckBox();
             this.refreshButton = new System.Windows.Forms.Button();
@@ -55,7 +56,6 @@ namespace TimeControl
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
-            this.resetButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -139,6 +139,16 @@ namespace TimeControl
             this.processMonitor.Text = "进程计时";
             this.processMonitor.UseVisualStyleBackColor = true;
             // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(528, 26);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(143, 46);
+            this.resetButton.TabIndex = 8;
+            this.resetButton.Text = "重置进程时间";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
             // clearButton
             // 
             this.clearButton.Location = new System.Drawing.Point(528, 318);
@@ -192,7 +202,7 @@ namespace TimeControl
             this.appAddButton.Name = "appAddButton";
             this.appAddButton.Size = new System.Drawing.Size(143, 66);
             this.appAddButton.TabIndex = 1;
-            this.appAddButton.Text = "搜索以上进程并添加";
+            this.appAddButton.Text = "根据名称添加";
             this.appAddButton.UseVisualStyleBackColor = true;
             this.appAddButton.Click += new System.EventHandler(this.AppAddButton_Click);
             // 
@@ -315,16 +325,6 @@ namespace TimeControl
             // 
             this.processMonitorTimer.Interval = 1000;
             this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
-            // 
-            // resetButton
-            // 
-            this.resetButton.Location = new System.Drawing.Point(528, 26);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(143, 46);
-            this.resetButton.TabIndex = 8;
-            this.resetButton.Text = "重置进程时间";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // ControlPanel
             // 

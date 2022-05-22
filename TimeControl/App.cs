@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 
 namespace TimeControl
 {
@@ -46,6 +47,13 @@ namespace TimeControl
         public void Reset()
         {
             time = 0;
+        }
+        public bool IsRunning()
+        {
+            Process[] processes=Process.GetProcessesByName(name);
+            if (processes.Length>0)
+                return true;
+            return false;
         }
     }
 }
