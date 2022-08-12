@@ -136,6 +136,9 @@ namespace TimeControl
             apps.Clear();
             Refresh();
         }
+        /// <summary>
+        /// 重设全部累计时间
+        /// </summary>
         public void Reset()
         {
             timer.Stop();
@@ -145,6 +148,9 @@ namespace TimeControl
             }
             timer.Start();
         }
+        /// <summary>
+        /// 删除不在运行的项目
+        /// </summary>
         public void RemoveStopped()
         {
             timer.Stop();
