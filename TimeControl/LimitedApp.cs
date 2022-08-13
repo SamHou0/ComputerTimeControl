@@ -9,20 +9,17 @@ using System.IO;
 
 namespace TimeControl
 {
-    [Serializable]
     public class LimitedApp : App
     {
         private readonly int timeLimit;
-
-        public LimitedApp(string name, int time, int timeLimit) : base(name, time)
+        public LimitedApp(string name,int time,int timeLimit) : base(name,time)
         {
             this.timeLimit = timeLimit;
         }
-
         /// <summary>
         /// 运行一次（一秒），并根据情况显示警告或关闭进程
         /// </summary>
-        public override void Run()
+        public override void Run(StreamWriter streamWriter)
         {
             time++;
             if (time == timeLimit - 30)
@@ -30,12 +27,15 @@ namespace TimeControl
                 LimitWarningWindow warningWindow = new(this);
                 warningWindow.Show();
             }
-            if (time >= timeLimit)
+            if (time>=timeLimit)
             {
                 Ban();
             }
+            streamWriter.WriteLine(Name);
+            streamWriter.WriteLine(time);
+            streamWriter.WriteLine(timeLimit);
+            streamWriter.WriteLine("//");
         }
-
         /// <summary>
         /// 返回时间受限进程的简要概述
         /// </summary>
@@ -44,9 +44,8 @@ namespace TimeControl
         {
             return base.ToString() + "进程时间限制为：" + timeLimit + "秒";
         }
-
         /// <summary>
-        /// 关闭掉该程序，并提前设置为完全禁用
+        /// 禁用掉该程序
         /// </summary>
         public void Ban()
         {
