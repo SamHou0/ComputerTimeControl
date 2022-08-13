@@ -36,9 +36,18 @@ namespace TimeControl
                 if (line == "//")
                 {
                     if (timeLimit == 0)
-                        apps.Add(new App(name, time));
+                    {
+                        App app = new(name, time, streamWriter);
+                        app.SaveToFile();
+                        apps.Add(app);
+
+                    }
                     else
-                        apps.Add(new LimitedApp(name, time, timeLimit));
+                    {
+                        LimitedApp limitedApp = new LimitedApp(name, time, timeLimit, streamWriter);
+                        limitedApp.SaveToFile();
+                        apps.Add(limitedApp);
+                    }
 
                     lineNumber = 1;
                     name = null;
@@ -82,18 +91,18 @@ namespace TimeControl
         public void AddByName(string name)
         {
             timer.Stop();
-            apps.Add(new App(name, 0));
+            apps.Add(new App(name, 0, streamWriter));
             Refresh();
         }
         /// <summary>
         /// 根据名称添加时间受限的进程
         /// </summary>
         /// <param name="name">进程名称</param>
-        /// <param name="limitTime">限制时长（秒）</param>
-        public void AddByName(string name, int limitTime)
+        /// <param name="timeLimit">限制时长（秒）</param>
+        public void AddByName(string name, int timeLimit)
         {
             timer.Stop();
-            apps.Add(new LimitedApp(name, 0, limitTime));
+            apps.Add(new LimitedApp(name, 0, timeLimit,streamWriter));
             Refresh();
         }
         /// <summary>
@@ -109,13 +118,12 @@ namespace TimeControl
                     if (app is LimitedApp)
                     {
                         LimitedApp limitedApp = app as LimitedApp;
-                        limitedApp.Run(streamWriter);
+                        limitedApp.Run();
                     }
                     else
-                        app.Run(streamWriter);
+                        app.Run();
                 }
             }
-            streamWriter.Flush();
         }
         /// <summary>
         /// 移除所列表所选的进程

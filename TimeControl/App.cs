@@ -13,6 +13,8 @@ namespace TimeControl
         private readonly string name;
         public string Name { get { return name; }}
         internal int time;
+        internal StreamWriter streamWriter;
+
         /// <summary>
         /// 返回进程的简要概述
         /// </summary>
@@ -21,20 +23,34 @@ namespace TimeControl
         {
             return Name + " 已使用 " + TimeConvert.DescribeTime(time);
         }
-        public App(string name,int time)
+        public App(string name,int time,StreamWriter streamWriter)
+        {
+            this.time = time;
+            this.streamWriter = streamWriter;
+            this.name = name;
+        }
+        /// <summary>
+        /// 仅供子类使用的构造函数
+        /// </summary>
+        internal App(string name,int time)
         {
             this.time = time;
             this.name = name;
         }
         /// <summary>
-        /// 运行一次（一秒）
+        /// 运行一次（一秒），并保存
         /// </summary>
-        public virtual void Run(StreamWriter streamWriter)
+        public virtual void Run()
         {
             time++;
+            SaveToFile();
+        }
+        public virtual void SaveToFile()
+        {
             streamWriter.WriteLine(Name);
             streamWriter.WriteLine(time);
             streamWriter.WriteLine("//");
+            streamWriter.Flush();
         }
         /// <summary>
         /// 重设时间

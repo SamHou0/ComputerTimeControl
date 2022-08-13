@@ -28,11 +28,11 @@ namespace TimeControl
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (timeSecondBox.Value == 0)
+            if (timeSecondBox.Value == 0&&timeMinuteBox.Value==0)
             {
                 appController.AddByName(appName,0);
             }
-            else if (timeSecondBox.Value == 1)
+            else if (timeSecondBox.Value == 1&&timeMinuteBox.Value==0)
                 appController.AddByName(appName);
             else
             {
