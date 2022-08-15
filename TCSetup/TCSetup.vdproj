@@ -209,18 +209,18 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TimeControl"
-        "ProductCode" = "8:{363F9324-4EDC-45ED-8286-322CA5109544}"
-        "PackageCode" = "8:{07EBB234-3576-4FAD-8A56-24A64982FEB6}"
+        "ProductCode" = "8:{3CCE9D52-60CC-44ED-8832-E3DE7D5BC0E0}"
+        "PackageCode" = "8:{BE543D44-6974-41BB-8E66-F95870D51C11}"
         "UpgradeCode" = "8:{A7DC5BC4-7E3E-4B58-A0AD-3C9AC9F873C1}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.2.0"
+        "ProductVersion" = "8:3.3.0"
         "Manufacturer" = "8:SamHou"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:https://github.com/SamHou2007/ComputerTimeControl"
+        "ARPHELPLINK" = "8:https://gitee.com/Sam-Hou/ComputerTimeControl"
         "Title" = "8:TCSetup"
         "Subject" = "8:"
         "ARPCONTACT" = "8:SamHou"
@@ -823,7 +823,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5003B007B32D429B83CC5372AB9FC0AF"
             {
-            "SourcePath" = "8:..\\TimeControlConsole\\obj\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
+            "SourcePath" = "8:..\\TimeControlConsole\\obj\\Debug\\net6.0-windows10.0.22000.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"
@@ -851,7 +851,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B7C31D1C4E42443D89CA87F9596A43B7"
             {
-            "SourcePath" = "8:..\\TimeControl\\obj\\Release\\net6.0-windows10.0.22000.0\\apphost.exe"
+            "SourcePath" = "8:..\\TimeControl\\obj\\Debug\\net6.0-windows10.0.22000.0\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_57FF55C0487B4507A7ADC64F8E5966A5"
