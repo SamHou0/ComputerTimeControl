@@ -11,63 +11,24 @@ namespace TimeControl
 {
     public class AppController
     {
-        private FileStream fileStream = new(TimeControlFile.TimeFile,
-            FileMode.OpenOrCreate,
-            FileAccess.ReadWrite, FileShare.None);
-        private StreamWriter streamWriter;
+        public StreamWriter streamWriter;
         private ListBox listBox;
         private List<App> apps;
         private Timer timer;
 
         public AppController(ListBox listBox, Timer timer)
         {
-            streamWriter = new(fileStream);
             this.listBox = listBox;
             apps = new List<App>();
             this.timer = timer;
-            StreamReader streamReader = new(fileStream);
-            int lineNumber = 1;
-            string name = null;
-            int time = 0;
-            int timeLimit = 0;
-            while (!streamReader.EndOfStream)//读取文件，添加进程
+            if (File.Exists(TimeControlFile.TimeFile))
             {
-                string line = streamReader.ReadLine();
-                if (line == "//")
-                {
-                    if (timeLimit == 0)
-                    {
-                        App app = new(name, time, streamWriter);
-                        app.SaveToFile();
-                        apps.Add(app);
-
-                    }
-                    else
-                    {
-                        LimitedApp limitedApp = new LimitedApp(name, time, timeLimit, streamWriter);
-                        limitedApp.SaveToFile();
-                        apps.Add(limitedApp);
-                    }
-
-                    lineNumber = 1;
-                    name = null;
-                    time = 0;
-                    timeLimit = 0;
-
-                    continue;
-                }
-                else
-                {
-                    if (lineNumber == 1)
-                        name = line;
-                    else if (lineNumber == 2)
-                        time = Convert.ToInt32(line);
-                    else if (lineNumber == 3)
-                        timeLimit = Convert.ToInt32(line);
-
-                    lineNumber++;
-                }
+                TimeControlFile.init();
+                apps = TimeControlFile.ReadFromXML();
             }
+            else
+                TimeControlFile.init();
+            streamWriter = new(TimeControlFile.FileStream);
             Refresh();
         }
 
@@ -88,10 +49,10 @@ namespace TimeControl
         /// 根据名称添加进程
         /// </summary>
         /// <param name="name">要添加的进程名称</param>
-        public void AddByName(string name)
+        public void AddByName(string name, int restInterval)
         {
             timer.Stop();
-            apps.Add(new App(name, 0, streamWriter));
+            apps.Add(new App(name, 0, restInterval));
             Refresh();
         }
         /// <summary>
@@ -99,10 +60,10 @@ namespace TimeControl
         /// </summary>
         /// <param name="name">进程名称</param>
         /// <param name="timeLimit">限制时长（秒）</param>
-        public void AddByName(string name, int timeLimit)
+        public void AddByName(string name, int timeLimit, int restInterval)
         {
             timer.Stop();
-            apps.Add(new LimitedApp(name, 0, timeLimit,streamWriter));
+            apps.Add(new LimitedApp(name, 0, timeLimit, restInterval));
             Refresh();
         }
         /// <summary>
@@ -110,10 +71,10 @@ namespace TimeControl
         /// </summary>
         public void Run()
         {
-            fileStream.SetLength(0);
+            TimeControlFile.FileStream.SetLength(0);
             foreach (App app in apps)//计算进程时间
             {
-                if (Process.GetProcessesByName(app.Name).Length != 0)
+                if (Process.GetProcessesByName(app.appInformation.name).Length != 0)
                 {
                     if (app is LimitedApp)
                     {
@@ -124,6 +85,7 @@ namespace TimeControl
                         app.Run();
                 }
             }
+            TimeControlFile.SaveToXML(apps);
         }
         /// <summary>
         /// 移除所列表所选的进程
@@ -164,7 +126,7 @@ namespace TimeControl
             timer.Stop();
             for (int i = 0; i < apps.Count; i++)
             {
-                if (apps[i].IsRunning()==false)
+                if (apps[i].IsRunning() == false)
                     apps.RemoveAt(i);
             }
         }

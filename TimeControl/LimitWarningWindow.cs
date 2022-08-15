@@ -16,7 +16,7 @@ namespace TimeControl
         public LimitWarningWindow(LimitedApp warningApp)
         {
             InitializeComponent();
-            displayLabel.Text = $"应用{warningApp.Name}即将达到时间限制，请保存所有工作，然后提前关闭进程";
+            displayLabel.Text = $"应用{warningApp.appInformation.name}即将达到时间限制，请保存所有工作，然后提前关闭进程";
             this.warningApp = warningApp;
         }
 

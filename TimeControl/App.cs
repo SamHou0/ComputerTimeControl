@@ -5,63 +5,61 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace TimeControl
 {
     public class App
     {
-        private readonly string name;
-        public string Name { get { return name; }}
-        internal int time;
-        internal StreamWriter streamWriter;
-
+        public AppInformation appInformation=new();
+        internal int tempTime=0;
         /// <summary>
         /// 返回进程的简要概述
         /// </summary>
         /// <returns>进程的简要概述</returns>
         public override string ToString()
         {
-            return Name + " 已使用 " + TimeConvert.DescribeTime(time);
+            return appInformation.name + " 已使用：" + TimeConvert.DescribeTime(appInformation.time);
         }
-        public App(string name,int time,StreamWriter streamWriter)
+        public App(string name,int time, int restInterval)
         {
-            this.time = time;
-            this.streamWriter = streamWriter;
-            this.name = name;
+            appInformation.time = time;
+            appInformation.name = name;
+            appInformation.restInterval = restInterval;
         }
-        /// <summary>
-        /// 仅供子类使用的构造函数
-        /// </summary>
-        internal App(string name,int time)
+        public App(AppInformation appInformation)
         {
-            this.time = time;
-            this.name = name;
+            this.appInformation = appInformation;
         }
+
         /// <summary>
         /// 运行一次（一秒），并保存
         /// </summary>
         public virtual void Run()
         {
-            time++;
-            SaveToFile();
+            appInformation.time++;
+            CheckRest();
         }
-        public virtual void SaveToFile()
+        internal void CheckRest()
         {
-            streamWriter.WriteLine(Name);
-            streamWriter.WriteLine(time);
-            streamWriter.WriteLine("//");
-            streamWriter.Flush();
+            tempTime++;
+            if (tempTime >= appInformation.restInterval &&appInformation.restInterval !=0)
+            {
+                tempTime = 0;
+                MessageBox.Show(appInformation.name + "休息时间已到，暂停休息一下吧。", "提示", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
         /// <summary>
         /// 重设时间
         /// </summary>
         public void Reset()
         {
-            time = 0;
+            appInformation.time = 0;
         }
         public bool IsRunning()
         {
-            Process[] processes=Process.GetProcessesByName(name);
+            Process[] processes=Process.GetProcessesByName(appInformation.name);
             if (processes.Length>0)
                 return true;
             return false;

@@ -133,6 +133,7 @@ namespace TimeControl
         private void ForceClose()//可以正常关闭
         {
             isClosable = true;
+            processMonitorTimer.Stop();
             Close();
         }
         private void ControlPanel_Shown(object sender, EventArgs e)//启动隐藏参数支持

@@ -28,16 +28,17 @@ namespace TimeControl
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            int restInterval= TimeConvert.ToIntSeconds(Convert.ToInt32(restMinuteBox.Value))+Convert.ToInt32(restSecondBox.Value);
             if (timeSecondBox.Value == 0&&timeMinuteBox.Value==0)
             {
-                appController.AddByName(appName,0);
+                appController.AddByName(appName,0,restInterval);
             }
             else if (timeSecondBox.Value == 1&&timeMinuteBox.Value==0)
-                appController.AddByName(appName);
+                appController.AddByName(appName,restInterval);
             else
             {
                 appController.AddByName(appName,TimeConvert.ToIntSeconds(Convert.ToInt32(timeMinuteBox.Value))+
-                    Convert.ToInt32(timeSecondBox.Value));
+                    Convert.ToInt32(timeSecondBox.Value),restInterval);
             }
             Close();
         }

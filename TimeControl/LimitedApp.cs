@@ -11,37 +11,30 @@ namespace TimeControl
 {
     public class LimitedApp : App
     {
-        private readonly int timeLimit;
         
-        public LimitedApp(string name,int time,int timeLimit,StreamWriter streamWriter) : base(name,time)
+        public LimitedApp(string name,int time,int timeLimit,int restInterval) :
+            base(name,time,restInterval)
         {
-            this.timeLimit = timeLimit;
-            this.streamWriter = streamWriter;
+            appInformation.timeLimit = timeLimit;
         }
+        public LimitedApp(AppInformation appInformation):base(appInformation)
+        { }
         /// <summary>
         /// 运行一次（一秒），并根据情况显示警告或关闭进程，然后保存到文件
         /// </summary>
         public override void Run()
         {
-            time++;
-            if (time == timeLimit - 30)
+            appInformation.time++;
+            if (appInformation.time ==appInformation.timeLimit - 30)
             {
                 LimitWarningWindow warningWindow = new(this);
                 warningWindow.Show();
             }
-            if (time>=timeLimit)
+            if (appInformation.time >=appInformation.timeLimit)
             {
                 Ban();
             }
-            SaveToFile();
-        }
-        public override void SaveToFile()
-        {
-            streamWriter.WriteLine(Name);
-            streamWriter.WriteLine(time);
-            streamWriter.WriteLine(timeLimit);
-            streamWriter.WriteLine("//");
-            streamWriter.Flush();
+            CheckRest();
         }
         /// <summary>
         /// 返回时间受限进程的简要概述
@@ -49,19 +42,19 @@ namespace TimeControl
         /// <returns>时间受限进程的简要概述</returns>
         public override string ToString()
         {
-            return base.ToString() + "进程时间限制为：" +TimeConvert.DescribeTime(timeLimit);
+            return base.ToString() + " 进程时间限制为：" +TimeConvert.DescribeTime(appInformation.timeLimit);
         }
         /// <summary>
         /// 禁用掉该程序
         /// </summary>
         public void Ban()
         {
-            Process[] processes = Process.GetProcessesByName(Name);
+            Process[] processes = Process.GetProcessesByName(appInformation.name);
             foreach (Process process in processes)
             {
                 process.Kill();
             }
-            time = timeLimit;
+            appInformation.time = appInformation.timeLimit;
         }
     }
 }
