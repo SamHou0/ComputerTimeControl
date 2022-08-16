@@ -15,8 +15,9 @@ namespace TimeControl
         public static readonly string PassLocation = BaseLocation + "\\TCPass.txt";//获取密码位置
         public static readonly string TimeFile = BaseLocation
             + "\\TCTimeData.xml";
+        public static readonly string GameData = BaseLocation + "\\GameData.txt";
+        public static readonly string LogFile = BaseLocation + "\\Log.txt";
         public static FileStream FileStream;//使用前请先init
-        public static readonly string GameData = BaseLocation + "GameData.txt";
         public static void SaveToXML(List<App> apps)
         {
             StreamWriter sw = new StreamWriter(FileStream);
