@@ -51,18 +51,21 @@ namespace TimeControl
             }
             catch(Exception ex)
             {
-                if(ex is InvalidOperationException)
+                File.AppendAllText(TimeControlFile.LogFile, DateTime.Now.ToString() + Environment.NewLine + "===Error==="
+                    + Environment.NewLine);
+                File.AppendAllText(TimeControlFile.LogFile, ex.ToString() + Environment.NewLine);
+                if (ex is InvalidOperationException)
                 {
-                    MessageBox.Show("可能发生了文件错误，请检查保存的文件是否有效或删除配置文件，然后再试。","错误",
+                    MessageBox.Show("可能发生了文件错误，请检查保存的文件是否有效或删除配置文件。","错误",
                         MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
                 MessageBox.Show(ex.Message+Environment.NewLine+"以上为错误消息，已保存到"+TimeControlFile.LogFile
-                    + "，请反馈此问题到项目主页Issues", "TimeControl发生错误",
+                    + "，请反馈此问题到项目主页Issues。保护程序已暂时关闭。", "TimeControl发生错误",
                     MessageBoxButtons.OK,MessageBoxIcon.Error);
-                File.AppendAllText(TimeControlFile.LogFile, DateTime.Now.ToString()+Environment.NewLine+"===Error==="
-                    +Environment.NewLine);
-                File.AppendAllText(TimeControlFile.LogFile, ex.ToString()+Environment.NewLine);
-
+                //关闭保护进程
+                Process[] processes = Process.GetProcessesByName("TimeControlConsole");
+                foreach (Process process in processes)
+                    process.Kill();
             }
         }
     }

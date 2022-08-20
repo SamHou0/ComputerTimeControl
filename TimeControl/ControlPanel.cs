@@ -35,6 +35,7 @@ namespace TimeControl
                 PasswordSet();
             }
             appController = new(usageBox, processMonitorTimer);
+            fileSaveTimer.Start();
             gameController = new(coinLabel);
         }
 
@@ -61,6 +62,7 @@ namespace TimeControl
 
         private void ControlPanel_FormClosing(object sender, FormClosingEventArgs e)//处理关闭逻辑
         {
+            appController.Save();
             if (!isClosable)//隐藏窗口
             {
                 e.Cancel = true;
@@ -188,6 +190,13 @@ namespace TimeControl
         private void authorButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Properties.Resources.words);
+        }
+
+        private void fileSaveTimer_Tick(object sender, EventArgs e)
+        {
+            processMonitorTimer.Stop();
+            appController.Save();
+            processMonitorTimer.Start();
         }
     }
 }

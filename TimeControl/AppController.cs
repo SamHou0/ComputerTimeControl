@@ -11,24 +11,21 @@ namespace TimeControl
 {
     public class AppController
     {
-        public StreamWriter streamWriter;
         private ListBox listBox;
         private List<App> apps;
-        private Timer timer;
+        private Timer processMonitorTimer;
 
         public AppController(ListBox listBox, Timer timer)
         {
             this.listBox = listBox;
             apps = new List<App>();
-            this.timer = timer;
-            if (File.Exists(TimeControlFile.TimeFile))
+            processMonitorTimer = timer;
+            if (Directory.Exists(TimeControlFile.TimeFileDirectory))
             {
-                TimeControlFile.init();
                 apps = TimeControlFile.ReadFromXML();
             }
             else
-                TimeControlFile.init();
-            streamWriter = new(TimeControlFile.FileStream);
+                Directory.CreateDirectory(TimeControlFile.TimeFileDirectory);
             Refresh();
         }
 
@@ -37,13 +34,13 @@ namespace TimeControl
         /// </summary>
         public void Refresh()
         {
-            timer.Stop();
+            processMonitorTimer.Stop();
             listBox.Items.Clear();
             foreach (App app in apps)
             {
                 listBox.Items.Add(app.ToString());
             }
-            timer.Start();
+            processMonitorTimer.Start();
         }
         /// <summary>
         /// 根据名称添加进程
@@ -51,8 +48,9 @@ namespace TimeControl
         /// <param name="name">要添加的进程名称</param>
         public void AddByName(string name, int restInterval)
         {
-            timer.Stop();
+            processMonitorTimer.Stop();
             apps.Add(new App(name, 0, restInterval));
+            Save();
             Refresh();
         }
         /// <summary>
@@ -62,8 +60,9 @@ namespace TimeControl
         /// <param name="timeLimit">限制时长（秒）</param>
         public void AddByName(string name, int timeLimit, int restInterval)
         {
-            timer.Stop();
+            processMonitorTimer.Stop();
             apps.Add(new LimitedApp(name, 0, timeLimit, restInterval));
+            Save();
             Refresh();
         }
         /// <summary>
@@ -71,7 +70,6 @@ namespace TimeControl
         /// </summary>
         public void Run()
         {
-            TimeControlFile.FileStream.SetLength(0);
             foreach (App app in apps)//计算进程时间
             {
                 if (Process.GetProcessesByName(app.appInformation.name).Length != 0)
@@ -85,16 +83,16 @@ namespace TimeControl
                         app.Run();
                 }
             }
-            TimeControlFile.SaveToXML(apps);
         }
         /// <summary>
         /// 移除所列表所选的进程
         /// </summary>
         public void Remove()
         {
-            timer.Stop();
+            processMonitorTimer.Stop();
             if (listBox.SelectedIndex >= 0)
                 apps.RemoveAt(listBox.SelectedIndex);
+            Save();
             Refresh();
         }
         /// <summary>
@@ -102,8 +100,9 @@ namespace TimeControl
         /// </summary>
         public void RemoveAll()
         {
-            timer.Stop();
+            processMonitorTimer.Stop();
             apps.Clear();
+            TimeControlFile.SaveToXML(apps);
             Refresh();
         }
         /// <summary>
@@ -111,24 +110,18 @@ namespace TimeControl
         /// </summary>
         public void Reset()
         {
-            timer.Stop();
+            processMonitorTimer.Stop();
             foreach (App app in apps)
             {
                 app.Reset();
             }
-            timer.Start();
+            Refresh();
+            Save();
+            processMonitorTimer.Start();
         }
-        /// <summary>
-        /// 删除不在运行的项目
-        /// </summary>
-        public void RemoveStopped()
+        public void Save()
         {
-            timer.Stop();
-            for (int i = 0; i < apps.Count; i++)
-            {
-                if (apps[i].IsRunning() == false)
-                    apps.RemoveAt(i);
-            }
+            TimeControlFile.SaveToXML(apps);
         }
     }
 }

@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="words" xml:space="preserve">
-    <value>这个软件是由SamHou开发的。我不想为它引入更加强大的管理措施，所以你可以自由决定是否开机启动（这需要你自己努力控制自己），希望可以帮你养成良好的电脑使用习惯~</value>
+    <value>这个软件是由SamHou开发的。我不想为它引入更加强大的管理措施，所以你可以自由决定是否开机启动，希望可以帮你养成良好的电脑使用习惯~</value>
   </data>
 </root>
