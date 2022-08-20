@@ -61,7 +61,7 @@ namespace TimeControl.Properties {
         }
         
         /// <summary>
-        ///   查找类似 这个软件是由SamHou开发的。我不想为它引入更加强大的管理措施，所以你可以自由决定是否开机启动，希望可以帮你养成良好的电脑使用习惯~ 的本地化字符串。
+        ///   查找类似 这个软件是由SamHou开发的。希望可以帮你养成良好的电脑使用习惯~如果觉得好用的话，请去github和gitee点个star~ 的本地化字符串。
         /// </summary>
         internal static string words {
             get {

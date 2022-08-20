@@ -60,8 +60,9 @@ namespace TimeControl
                         MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
                 MessageBox.Show(ex.Message+Environment.NewLine+"以上为错误消息，已保存到"+TimeControlFile.LogFile
-                    + "，请反馈此问题到项目主页Issues。保护程序已暂时关闭。", "TimeControl发生错误",
+                    + "，请反馈此问题到项目主页Issue。保护程序已暂时关闭。", "TimeControl发生错误",
                     MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Process.Start("explorer.exe", "https://gitee.com/Sam-Hou/ComputerTimeControl/issues");
                 //关闭保护进程
                 Process[] processes = Process.GetProcessesByName("TimeControlConsole");
                 foreach (Process process in processes)

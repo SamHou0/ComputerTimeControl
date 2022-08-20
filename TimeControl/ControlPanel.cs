@@ -198,5 +198,15 @@ namespace TimeControl
             appController.Save();
             processMonitorTimer.Start();
         }
+
+        private void githubLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("explorer.exe", "https://github.com/SamHou0/ComputerTimeControl");
+        }
+
+        private void giteeLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("explorer.exe", "https://gitee.com/Sam-Hou/ComputerTimeControl");
+        }
     }
 }

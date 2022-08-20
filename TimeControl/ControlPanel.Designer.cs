@@ -45,6 +45,8 @@ namespace TimeControl
             this.appAddButton = new System.Windows.Forms.Button();
             this.usageBox = new System.Windows.Forms.ListBox();
             this.about = new System.Windows.Forms.TabPage();
+            this.giteeLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.githubLinkLabel = new System.Windows.Forms.LinkLabel();
             this.authorButton = new System.Windows.Forms.Button();
             this.coinLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -144,7 +146,7 @@ namespace TimeControl
             this.processMonitor.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.processMonitor.Name = "processMonitor";
             this.processMonitor.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.processMonitor.Size = new System.Drawing.Size(616, 352);
+            this.processMonitor.Size = new System.Drawing.Size(614, 352);
             this.processMonitor.TabIndex = 1;
             this.processMonitor.Text = "进程计时";
             this.processMonitor.UseVisualStyleBackColor = true;
@@ -235,6 +237,8 @@ namespace TimeControl
             // 
             // about
             // 
+            this.about.Controls.Add(this.giteeLinkLabel);
+            this.about.Controls.Add(this.githubLinkLabel);
             this.about.Controls.Add(this.authorButton);
             this.about.Controls.Add(this.coinLabel);
             this.about.Controls.Add(this.label4);
@@ -244,10 +248,32 @@ namespace TimeControl
             this.about.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.about.Name = "about";
             this.about.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.about.Size = new System.Drawing.Size(616, 352);
+            this.about.Size = new System.Drawing.Size(614, 352);
             this.about.TabIndex = 2;
             this.about.Text = "关于";
             this.about.UseVisualStyleBackColor = true;
+            // 
+            // giteeLinkLabel
+            // 
+            this.giteeLinkLabel.AutoSize = true;
+            this.giteeLinkLabel.Location = new System.Drawing.Point(102, 330);
+            this.giteeLinkLabel.Name = "giteeLinkLabel";
+            this.giteeLinkLabel.Size = new System.Drawing.Size(37, 17);
+            this.giteeLinkLabel.TabIndex = 6;
+            this.giteeLinkLabel.TabStop = true;
+            this.giteeLinkLabel.Text = "gitee";
+            this.giteeLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.giteeLinkLabel_LinkClicked);
+            // 
+            // githubLinkLabel
+            // 
+            this.githubLinkLabel.AutoSize = true;
+            this.githubLinkLabel.Location = new System.Drawing.Point(102, 305);
+            this.githubLinkLabel.Name = "githubLinkLabel";
+            this.githubLinkLabel.Size = new System.Drawing.Size(45, 17);
+            this.githubLinkLabel.TabIndex = 5;
+            this.githubLinkLabel.TabStop = true;
+            this.githubLinkLabel.Text = "github";
+            this.githubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.githubLinkLabel_LinkClicked);
             // 
             // authorButton
             // 
@@ -312,7 +338,7 @@ namespace TimeControl
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage1.Size = new System.Drawing.Size(616, 352);
+            this.tabPage1.Size = new System.Drawing.Size(614, 352);
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "程序保护";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -451,5 +477,7 @@ namespace TimeControl
         private System.Windows.Forms.Label coinLabel;
         private System.Windows.Forms.Button authorButton;
         private System.Windows.Forms.Timer fileSaveTimer;
+        private System.Windows.Forms.LinkLabel giteeLinkLabel;
+        private System.Windows.Forms.LinkLabel githubLinkLabel;
     }
 }
