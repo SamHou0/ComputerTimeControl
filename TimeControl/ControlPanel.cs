@@ -47,7 +47,7 @@ namespace TimeControl
             Task.Factory.StartNew(() =>
             {
                 Dllimport.SetThreadDesktop(newDesktop);
-                Lock _lock = new(Convert.ToInt32(timeBox.Value), unlockPasswordHash);
+                Lock _lock = new(Convert.ToInt32(timeBox.Value), unlockPasswordHash,whiteProcessBox.Text);
                 Application.Run(_lock);
             }).Wait();
             Dllimport.SwitchDesktop(nowDesktop);

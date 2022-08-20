@@ -15,13 +15,16 @@ namespace TimeControl
     {
         private bool usePassword = true;
         private string unlockPasswordHash;
-        public Lock(int minutes,string unlockPasswordHash)
+        private readonly string processLocation;
+
+        public Lock(int minutes,string unlockPasswordHash,string processLocation)
         {
             InitializeComponent();
             progressBar.Maximum = minutes * 60;
             if (string.IsNullOrEmpty(unlockPasswordHash))
             { usePassword = false; }
             this.unlockPasswordHash = unlockPasswordHash;
+            this.processLocation = processLocation;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -63,6 +66,15 @@ namespace TimeControl
             }
             else
                 MessageBox.Show("你没有设置管理码！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void startProcessButton_Click(object sender, EventArgs e)
+        {
+            Dllimport.STARTUPINFO sTARTUPINFO = new();
+            sTARTUPINFO.lpDesktop = "Lock";
+            Dllimport.PROCESS_INFORMATION pROCESS_INFORMATION = new();
+            Dllimport.CreateProcess(processLocation, null, IntPtr.Zero, IntPtr.Zero, true, 0, IntPtr.Zero, null, ref sTARTUPINFO,
+                ref pROCESS_INFORMATION);
         }
     }
 }

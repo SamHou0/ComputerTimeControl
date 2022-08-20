@@ -62,6 +62,8 @@ namespace TimeControl
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
+            this.whiteProcessBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -121,6 +123,8 @@ namespace TimeControl
             // 
             // startNow
             // 
+            this.startNow.Controls.Add(this.label5);
+            this.startNow.Controls.Add(this.whiteProcessBox);
             this.startNow.Controls.Add(this.startButton);
             this.startNow.Controls.Add(this.timeBox);
             this.startNow.Location = new System.Drawing.Point(4, 26);
@@ -417,6 +421,22 @@ namespace TimeControl
             this.fileSaveTimer.Interval = 300000;
             this.fileSaveTimer.Tick += new System.EventHandler(this.fileSaveTimer_Tick);
             // 
+            // whiteProcessBox
+            // 
+            this.whiteProcessBox.Location = new System.Drawing.Point(161, 110);
+            this.whiteProcessBox.Name = "whiteProcessBox";
+            this.whiteProcessBox.Size = new System.Drawing.Size(304, 23);
+            this.whiteProcessBox.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(266, 90);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 17);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "白名单应用路径";
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -435,6 +455,7 @@ namespace TimeControl
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).EndInit();
             this.controlTab.ResumeLayout(false);
             this.startNow.ResumeLayout(false);
+            this.startNow.PerformLayout();
             this.processMonitor.ResumeLayout(false);
             this.processMonitor.PerformLayout();
             this.about.ResumeLayout(false);
@@ -479,5 +500,7 @@ namespace TimeControl
         private System.Windows.Forms.Timer fileSaveTimer;
         private System.Windows.Forms.LinkLabel giteeLinkLabel;
         private System.Windows.Forms.LinkLabel githubLinkLabel;
+        private System.Windows.Forms.TextBox whiteProcessBox;
+        private System.Windows.Forms.Label label5;
     }
 }
