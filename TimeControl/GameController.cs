@@ -18,6 +18,7 @@ namespace TimeControl
             if (File.Exists(TimeControlFile.GameData))
                 coinNumber = Convert.ToInt32
                     (File.ReadAllText(TimeControlFile.GameData));
+            UpdateGame();
         }
         public void AddCoin(int number)
         {

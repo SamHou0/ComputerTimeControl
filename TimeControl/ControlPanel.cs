@@ -34,6 +34,9 @@ namespace TimeControl
                 unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
                 PasswordSet();
             }
+            if (File.Exists(TimeControlFile.WhiteAppLocation))
+                whiteProcessBox.Text = File.ReadAllText(TimeControlFile.WhiteAppLocation);
+
             appController = new(usageBox, processMonitorTimer);
             fileSaveTimer.Start();
             gameController = new(coinLabel);
@@ -47,7 +50,7 @@ namespace TimeControl
             Task.Factory.StartNew(() =>
             {
                 Dllimport.SetThreadDesktop(newDesktop);
-                Lock _lock = new(Convert.ToInt32(timeBox.Value), unlockPasswordHash,whiteProcessBox.Text);
+                Lock _lock = new(Convert.ToInt32(timeBox.Value), unlockPasswordHash, whiteProcessBox.Text);
                 Application.Run(_lock);
             }).Wait();
             Dllimport.SwitchDesktop(nowDesktop);
@@ -81,7 +84,7 @@ namespace TimeControl
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)//正常退出程序
         {
             PasswordInput passwordInput = new(unlockPasswordHash);
-            if (!string.IsNullOrEmpty( unlockPasswordHash))//检测是否设置了管理码
+            if (!string.IsNullOrEmpty(unlockPasswordHash))//检测是否设置了管理码
             {
                 if (passwordInput.ShowDialog() == DialogResult.OK)
                     ForceClose();
@@ -145,7 +148,7 @@ namespace TimeControl
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
         {
 
-            unlockPasswordHash = Password.ComputeHash( unlockPasswordBox.Text);//保存哈希值
+            unlockPasswordHash = Password.ComputeHash(unlockPasswordBox.Text);//保存哈希值
             File.WriteAllText(TimeControlFile.PassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
             PasswordSet();
         }
@@ -153,7 +156,8 @@ namespace TimeControl
         {
             unlockPasswordBox.Text = "";
             unlockPasswordBox.Enabled = false;
-            unloackPasswordSetButton.Enabled = false;
+            unlockPasswordSetButton.Enabled = false;
+            removeBootButton.Enabled = false;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
@@ -165,7 +169,7 @@ namespace TimeControl
         }
         private bool PasswordCheck()//检测密码是否正确
         {
-            if (!string.IsNullOrEmpty( unlockPasswordHash))
+            if (!string.IsNullOrEmpty(unlockPasswordHash))
             {
                 PasswordInput passwordInput = new(unlockPasswordHash);
                 if (passwordInput.ShowDialog() == DialogResult.OK)

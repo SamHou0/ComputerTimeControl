@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace TimeControl
 {
@@ -20,6 +21,7 @@ namespace TimeControl
         public Lock(int minutes,string unlockPasswordHash,string processLocation)
         {
             InitializeComponent();
+            File.WriteAllText(TimeControlFile.WhiteAppLocation,processLocation);
             progressBar.Maximum = minutes * 60;
             if (string.IsNullOrEmpty(unlockPasswordHash))
             { usePassword = false; }

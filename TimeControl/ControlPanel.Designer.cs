@@ -56,7 +56,7 @@ namespace TimeControl
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.removeBootButton = new System.Windows.Forms.Button();
             this.addBootButton = new System.Windows.Forms.Button();
-            this.unloackPasswordSetButton = new System.Windows.Forms.Button();
+            this.unlockPasswordSetButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.unlockPasswordBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -344,7 +344,7 @@ namespace TimeControl
             // 
             this.tabPage1.Controls.Add(this.removeBootButton);
             this.tabPage1.Controls.Add(this.addBootButton);
-            this.tabPage1.Controls.Add(this.unloackPasswordSetButton);
+            this.tabPage1.Controls.Add(this.unlockPasswordSetButton);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.unlockPasswordBox);
             this.tabPage1.Controls.Add(this.label1);
@@ -379,14 +379,14 @@ namespace TimeControl
             // 
             // unloackPasswordSetButton
             // 
-            this.unloackPasswordSetButton.Location = new System.Drawing.Point(5, 33);
-            this.unloackPasswordSetButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.unloackPasswordSetButton.Name = "unloackPasswordSetButton";
-            this.unloackPasswordSetButton.Size = new System.Drawing.Size(93, 37);
-            this.unloackPasswordSetButton.TabIndex = 7;
-            this.unloackPasswordSetButton.Text = "设置";
-            this.unloackPasswordSetButton.UseVisualStyleBackColor = true;
-            this.unloackPasswordSetButton.Click += new System.EventHandler(this.UnloackPasswordSetButton_Click);
+            this.unlockPasswordSetButton.Location = new System.Drawing.Point(5, 33);
+            this.unlockPasswordSetButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.unlockPasswordSetButton.Name = "unloackPasswordSetButton";
+            this.unlockPasswordSetButton.Size = new System.Drawing.Size(93, 37);
+            this.unlockPasswordSetButton.TabIndex = 7;
+            this.unlockPasswordSetButton.Text = "设置";
+            this.unlockPasswordSetButton.UseVisualStyleBackColor = true;
+            this.unlockPasswordSetButton.Click += new System.EventHandler(this.UnloackPasswordSetButton_Click);
             // 
             // label2
             // 
@@ -499,7 +499,7 @@ namespace TimeControl
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Timer processMonitorTimer;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Button unloackPasswordSetButton;
+        private System.Windows.Forms.Button unlockPasswordSetButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox unlockPasswordBox;
         private System.Windows.Forms.Label label1;
