@@ -42,7 +42,6 @@ namespace TimeControl
             this.clearButton = new System.Windows.Forms.Button();
             this.autoRefreshBox = new System.Windows.Forms.CheckBox();
             this.refreshButton = new System.Windows.Forms.Button();
-            this.processNameBox = new System.Windows.Forms.TextBox();
             this.removeButton = new System.Windows.Forms.Button();
             this.appAddButton = new System.Windows.Forms.Button();
             this.usageBox = new System.Windows.Forms.ListBox();
@@ -160,7 +159,6 @@ namespace TimeControl
             this.processMonitor.Controls.Add(this.clearButton);
             this.processMonitor.Controls.Add(this.autoRefreshBox);
             this.processMonitor.Controls.Add(this.refreshButton);
-            this.processMonitor.Controls.Add(this.processNameBox);
             this.processMonitor.Controls.Add(this.removeButton);
             this.processMonitor.Controls.Add(this.appAddButton);
             this.processMonitor.Controls.Add(this.usageBox);
@@ -175,7 +173,7 @@ namespace TimeControl
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(411, 22);
+            this.resetButton.Location = new System.Drawing.Point(411, 134);
             this.resetButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(111, 39);
@@ -198,7 +196,7 @@ namespace TimeControl
             // autoRefreshBox
             // 
             this.autoRefreshBox.AutoSize = true;
-            this.autoRefreshBox.Location = new System.Drawing.Point(433, 66);
+            this.autoRefreshBox.Location = new System.Drawing.Point(433, 50);
             this.autoRefreshBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.autoRefreshBox.Name = "autoRefreshBox";
             this.autoRefreshBox.Size = new System.Drawing.Size(75, 21);
@@ -208,7 +206,7 @@ namespace TimeControl
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(411, 133);
+            this.refreshButton.Location = new System.Drawing.Point(411, 179);
             this.refreshButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.refreshButton.Name = "refreshButton";
             this.refreshButton.Size = new System.Drawing.Size(111, 43);
@@ -217,17 +215,9 @@ namespace TimeControl
             this.refreshButton.UseVisualStyleBackColor = true;
             this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
-            // processNameBox
-            // 
-            this.processNameBox.Location = new System.Drawing.Point(411, 181);
-            this.processNameBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.processNameBox.Name = "processNameBox";
-            this.processNameBox.Size = new System.Drawing.Size(112, 23);
-            this.processNameBox.TabIndex = 4;
-            // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(411, 92);
+            this.removeButton.Location = new System.Drawing.Point(411, 228);
             this.removeButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(111, 36);
@@ -238,12 +228,12 @@ namespace TimeControl
             // 
             // appAddButton
             // 
-            this.appAddButton.Location = new System.Drawing.Point(411, 209);
+            this.appAddButton.Location = new System.Drawing.Point(411, 77);
             this.appAddButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.appAddButton.Name = "appAddButton";
-            this.appAddButton.Size = new System.Drawing.Size(111, 56);
+            this.appAddButton.Size = new System.Drawing.Size(111, 51);
             this.appAddButton.TabIndex = 1;
-            this.appAddButton.Text = "根据名称添加";
+            this.appAddButton.Text = "添加监控";
             this.appAddButton.UseVisualStyleBackColor = true;
             this.appAddButton.Click += new System.EventHandler(this.AppAddButton_Click);
             // 
@@ -513,7 +503,6 @@ namespace TimeControl
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox unlockPasswordBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox processNameBox;
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.CheckBox autoRefreshBox;
         private System.Windows.Forms.Button clearButton;

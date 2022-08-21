@@ -97,12 +97,7 @@ namespace TimeControl
 
         private void AppAddButton_Click(object sender, EventArgs e)//添加进程
         {
-            if (processNameBox.Text.ToLower() == "timecontrol" ||
-                processNameBox.Text.ToLower() == "timecontrolconsole")
-            {
-                return;
-            }
-            TimeInput timeInput = new(appController, processNameBox.Text);//打开进程限时控制窗口
+            TimeInput timeInput = new(appController);//打开进程限时控制窗口
             timeInput.ShowDialog();
         }
 
