@@ -208,5 +208,17 @@ namespace TimeControl
         {
             Process.Start("explorer.exe", "https://gitee.com/Sam-Hou/ComputerTimeControl");
         }
+
+        private void addBootButton_Click(object sender, EventArgs e)
+        {
+            Command.RunCommand(
+            Directory.GetCurrentDirectory() + "\\BootHelper.exe");
+        }
+
+        private void removeBootButton_Click(object sender, EventArgs e)
+        {
+            Command.RunCommand(Directory.GetCurrentDirectory() + "\\BootHelper.exe remove");
+
+        }
     }
 }

@@ -35,6 +35,8 @@ namespace TimeControl
             this.timeBox = new System.Windows.Forms.NumericUpDown();
             this.controlTab = new System.Windows.Forms.TabControl();
             this.startNow = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.whiteProcessBox = new System.Windows.Forms.TextBox();
             this.processMonitor = new System.Windows.Forms.TabPage();
             this.resetButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
@@ -53,6 +55,8 @@ namespace TimeControl
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.removeBootButton = new System.Windows.Forms.Button();
+            this.addBootButton = new System.Windows.Forms.Button();
             this.unloackPasswordSetButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.unlockPasswordBox = new System.Windows.Forms.TextBox();
@@ -62,8 +66,6 @@ namespace TimeControl
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
-            this.whiteProcessBox = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -135,6 +137,22 @@ namespace TimeControl
             this.startNow.TabIndex = 0;
             this.startNow.Text = "专注屏保";
             this.startNow.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(266, 90);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 17);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "白名单应用路径";
+            // 
+            // whiteProcessBox
+            // 
+            this.whiteProcessBox.Location = new System.Drawing.Point(161, 110);
+            this.whiteProcessBox.Name = "whiteProcessBox";
+            this.whiteProcessBox.Size = new System.Drawing.Size(304, 23);
+            this.whiteProcessBox.TabIndex = 2;
             // 
             // processMonitor
             // 
@@ -334,6 +352,8 @@ namespace TimeControl
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.removeBootButton);
+            this.tabPage1.Controls.Add(this.addBootButton);
             this.tabPage1.Controls.Add(this.unloackPasswordSetButton);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.unlockPasswordBox);
@@ -346,6 +366,26 @@ namespace TimeControl
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "程序保护";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // removeBootButton
+            // 
+            this.removeBootButton.Location = new System.Drawing.Point(177, 283);
+            this.removeBootButton.Name = "removeBootButton";
+            this.removeBootButton.Size = new System.Drawing.Size(163, 61);
+            this.removeBootButton.TabIndex = 9;
+            this.removeBootButton.Text = "移除开机启动";
+            this.removeBootButton.UseVisualStyleBackColor = true;
+            this.removeBootButton.Click += new System.EventHandler(this.removeBootButton_Click);
+            // 
+            // addBootButton
+            // 
+            this.addBootButton.Location = new System.Drawing.Point(8, 283);
+            this.addBootButton.Name = "addBootButton";
+            this.addBootButton.Size = new System.Drawing.Size(163, 61);
+            this.addBootButton.TabIndex = 8;
+            this.addBootButton.Text = "添加开机启动";
+            this.addBootButton.UseVisualStyleBackColor = true;
+            this.addBootButton.Click += new System.EventHandler(this.addBootButton_Click);
             // 
             // unloackPasswordSetButton
             // 
@@ -421,22 +461,6 @@ namespace TimeControl
             this.fileSaveTimer.Interval = 300000;
             this.fileSaveTimer.Tick += new System.EventHandler(this.fileSaveTimer_Tick);
             // 
-            // whiteProcessBox
-            // 
-            this.whiteProcessBox.Location = new System.Drawing.Point(161, 110);
-            this.whiteProcessBox.Name = "whiteProcessBox";
-            this.whiteProcessBox.Size = new System.Drawing.Size(304, 23);
-            this.whiteProcessBox.TabIndex = 2;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(266, 90);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 17);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "白名单应用路径";
-            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -502,5 +526,7 @@ namespace TimeControl
         private System.Windows.Forms.LinkLabel githubLinkLabel;
         private System.Windows.Forms.TextBox whiteProcessBox;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button addBootButton;
+        private System.Windows.Forms.Button removeBootButton;
     }
 }
