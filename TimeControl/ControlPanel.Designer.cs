@@ -65,6 +65,7 @@ namespace TimeControl
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
+            this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -249,6 +250,7 @@ namespace TimeControl
             // 
             // about
             // 
+            this.about.Controls.Add(this.helpLinkLabel);
             this.about.Controls.Add(this.giteeLinkLabel);
             this.about.Controls.Add(this.githubLinkLabel);
             this.about.Controls.Add(this.authorButton);
@@ -377,11 +379,11 @@ namespace TimeControl
             this.addBootButton.UseVisualStyleBackColor = true;
             this.addBootButton.Click += new System.EventHandler(this.addBootButton_Click);
             // 
-            // unloackPasswordSetButton
+            // unlockPasswordSetButton
             // 
             this.unlockPasswordSetButton.Location = new System.Drawing.Point(5, 33);
             this.unlockPasswordSetButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.unlockPasswordSetButton.Name = "unloackPasswordSetButton";
+            this.unlockPasswordSetButton.Name = "unlockPasswordSetButton";
             this.unlockPasswordSetButton.Size = new System.Drawing.Size(93, 37);
             this.unlockPasswordSetButton.TabIndex = 7;
             this.unlockPasswordSetButton.Text = "设置";
@@ -451,6 +453,17 @@ namespace TimeControl
             this.fileSaveTimer.Interval = 300000;
             this.fileSaveTimer.Tick += new System.EventHandler(this.fileSaveTimer_Tick);
             // 
+            // helpLinkLabel
+            // 
+            this.helpLinkLabel.AutoSize = true;
+            this.helpLinkLabel.Location = new System.Drawing.Point(577, 332);
+            this.helpLinkLabel.Name = "helpLinkLabel";
+            this.helpLinkLabel.Size = new System.Drawing.Size(32, 17);
+            this.helpLinkLabel.TabIndex = 7;
+            this.helpLinkLabel.TabStop = true;
+            this.helpLinkLabel.Text = "帮助";
+            this.helpLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.helpLinkLabel_LinkClicked);
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -517,5 +530,6 @@ namespace TimeControl
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button addBootButton;
         private System.Windows.Forms.Button removeBootButton;
+        private System.Windows.Forms.LinkLabel helpLinkLabel;
     }
 }

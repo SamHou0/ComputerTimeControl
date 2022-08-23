@@ -217,7 +217,12 @@ namespace TimeControl
         private void removeBootButton_Click(object sender, EventArgs e)
         {
             Command.RunCommand(Directory.GetCurrentDirectory() + "\\BootHelper.exe remove");
+        }
 
+        private void helpLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("explorer.exe",
+                "https://gitee.com/Sam-Hou/ComputerTimeControl/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E");
         }
     }
 }
