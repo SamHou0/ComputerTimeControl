@@ -51,6 +51,7 @@ namespace TimeControl
             }
             catch(Exception ex)
             {
+                File.Delete(TimeControlFile.TempTimeFile);
                 File.AppendAllText(TimeControlFile.LogFile, DateTime.Now.ToString() + Environment.NewLine + "===Error==="
                     + Environment.NewLine);
                 File.AppendAllText(TimeControlFile.LogFile, ex.ToString() + Environment.NewLine);

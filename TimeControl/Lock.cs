@@ -16,28 +16,56 @@ namespace TimeControl
     {
         private bool usePassword = true;
         private string unlockPasswordHash;
-        private readonly string processLocation;
+        private string processLocation;
+        private readonly DateTime startTime;
+        private readonly TimeSpan targetTimeSpan;
 
-        public Lock(int minutes,string unlockPasswordHash,string processLocation)
+        public Lock(int minutes, string unlockPasswordHash, string processLocation)
         {
             InitializeComponent();
-            File.WriteAllText(TimeControlFile.WhiteAppLocation,processLocation);
-            progressBar.Maximum = minutes * 60;
+
+            targetTimeSpan = new TimeSpan(0, 0, minutes, 0);
+            startTime = DateTime.Now;
+
+            File.WriteAllText(TimeControlFile.WhiteAppLocation, processLocation);
+            File.AppendAllText(TimeControlFile.TempTimeFile, startTime.ToString() + Environment.NewLine);
+            File.AppendAllText(TimeControlFile.TempTimeFile, targetTimeSpan.ToString());
+
+            Init(unlockPasswordHash, processLocation);
+        }
+        public Lock(string unlockPasswordHash, string processLocation)
+        {
+            InitializeComponent();
+
+            string[] strings = File.ReadAllLines(TimeControlFile.TempTimeFile);
+            startTime = DateTime.Parse(strings[0]);
+            targetTimeSpan = TimeSpan.Parse(strings[1]);
+
+            Init(unlockPasswordHash, processLocation);
+        }
+        private void Init(string unlockPasswordHash,string processLocation)
+        {
             if (string.IsNullOrEmpty(unlockPasswordHash))
             { usePassword = false; }
             this.unlockPasswordHash = unlockPasswordHash;
             this.processLocation = processLocation;
+            progressBar.Maximum = (int)targetTimeSpan.TotalSeconds;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            progressBar.Value++;
-            if (progressBar.Value==progressBar.Maximum)
+            TimeSpan timeSpan = DateTime.Now - startTime;
+            timeLabel.Text = 
+                @$"{timeSpan.Hours}:{timeSpan.Minutes}:{timeSpan.Seconds}/{targetTimeSpan.Hours}:{targetTimeSpan.Minutes}:{targetTimeSpan.Seconds}";
+            if(timeSpan>=targetTimeSpan)
             {
                 timer.Stop();
                 unlockLabel.Visible = true;
+                progressBar.Value = progressBar.Maximum;
+                return;
             }
-            Process[] processes= Process.GetProcessesByName("Taskmgr");
+            progressBar.Value = (int)timeSpan.TotalSeconds;
+            Process[] processes = Process.GetProcessesByName("Taskmgr");
             foreach (Process process in processes)
             {
                 process.Kill();
@@ -47,11 +75,12 @@ namespace TimeControl
 
         private void Lock_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (progressBar.Value!=progressBar.Maximum)
+            if (progressBar.Value != progressBar.Maximum)
             {
                 e.Cancel = true;
                 MessageBox.Show("时间还没到呢！再等等吧。（点击继续）", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
             }
+            File.Delete(TimeControlFile.TempTimeFile);
         }
 
         private void UnlockButton_Click(object sender, EventArgs e)

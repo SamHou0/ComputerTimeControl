@@ -34,15 +34,23 @@ namespace TimeControl
                 unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
                 PasswordSet();
             }
-            if (File.Exists(TimeControlFile.WhiteAppLocation))
-                whiteProcessBox.Text = File.ReadAllText(TimeControlFile.WhiteAppLocation);
 
             appController = new(usageBox, processMonitorTimer);
             fileSaveTimer.Start();
             gameController = new(coinLabel);
+
+            if (File.Exists(TimeControlFile.WhiteAppLocation))
+                whiteProcessBox.Text = File.ReadAllText(TimeControlFile.WhiteAppLocation);
+            if (File.Exists(TimeControlFile.TempTimeFile))
+                StartLock(unlockPasswordHash, whiteProcessBox.Text);
+
         }
 
         private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
+        {
+            StartLock(unlockPasswordHash, whiteProcessBox.Text, (int)timeBox.Value);
+        }
+        private void StartLock(string unlockPasswordHash, string processLocation, int minutes = 0)
         {
             IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
             IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
@@ -50,14 +58,17 @@ namespace TimeControl
             Task.Factory.StartNew(() =>
             {
                 Dllimport.SetThreadDesktop(newDesktop);
-                Lock _lock = new(Convert.ToInt32(timeBox.Value), unlockPasswordHash, whiteProcessBox.Text);
+                Lock _lock;
+                if (minutes != 0)
+                    _lock = new(minutes, unlockPasswordHash, processLocation);
+                else
+                    _lock = new(unlockPasswordHash, processLocation);
                 Application.Run(_lock);
             }).Wait();
             Dllimport.SwitchDesktop(nowDesktop);
             Dllimport.CloseDesktop(newDesktop);
             gameController.AddCoin(Convert.ToInt32(timeBox.Value) / 60);
         }
-
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)//打开界面
         {
             Show();

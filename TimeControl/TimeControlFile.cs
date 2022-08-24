@@ -18,6 +18,7 @@ namespace TimeControl
             + "\\TCTimeData";
         public static readonly string GameData = BaseLocation + "\\GameData.txt";
         public static readonly string LogFile = BaseLocation + "\\Log.txt";
+        public static readonly string TempTimeFile = BaseLocation + "\\Temp.txt";
         public static void SaveToXML(List<App> apps)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(TimeFileDirectory);

@@ -37,6 +37,7 @@ namespace TimeControl
             this.unlockPasswordBox = new System.Windows.Forms.TextBox();
             this.unlockButton = new System.Windows.Forms.Button();
             this.startProcessButton = new System.Windows.Forms.Button();
+            this.timeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -107,13 +108,25 @@ namespace TimeControl
             this.startProcessButton.TabIndex = 5;
             this.startProcessButton.Text = "打开白名单";
             this.startProcessButton.UseVisualStyleBackColor = true;
+            this.startProcessButton.UseWaitCursor = true;
             this.startProcessButton.Click += new System.EventHandler(this.startProcessButton_Click);
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.Location = new System.Drawing.Point(242, 190);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(124, 50);
+            this.timeLabel.TabIndex = 6;
+            this.timeLabel.Text = "00:00:00/00:00:00";
+            this.timeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.timeLabel.UseWaitCursor = true;
             // 
             // Lock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 349);
+            this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.startProcessButton);
             this.Controls.Add(this.unlockButton);
             this.Controls.Add(this.unlockPasswordBox);
@@ -144,5 +157,6 @@ namespace TimeControl
         private System.Windows.Forms.TextBox unlockPasswordBox;
         private System.Windows.Forms.Button unlockButton;
         private System.Windows.Forms.Button startProcessButton;
+        private System.Windows.Forms.Label timeLabel;
     }
 }
