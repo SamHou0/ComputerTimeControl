@@ -14,3 +14,6 @@
 ## 仓库镜像
 - gitee:https://gitee.com/Sam-Hou/ComputerTimeControl
 - github:https://github.com/SamHou0/ComputerTimeControl
+
+## 致谢
+- 测试人员：SamHou的好朋友
