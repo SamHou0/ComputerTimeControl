@@ -46,11 +46,10 @@ namespace TimeControl
             this.appAddButton = new System.Windows.Forms.Button();
             this.usageBox = new System.Windows.Forms.ListBox();
             this.about = new System.Windows.Forms.TabPage();
+            this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
             this.giteeLinkLabel = new System.Windows.Forms.LinkLabel();
             this.githubLinkLabel = new System.Windows.Forms.LinkLabel();
             this.authorButton = new System.Windows.Forms.Button();
-            this.coinLabel = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -65,7 +64,6 @@ namespace TimeControl
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
-            this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -254,8 +252,6 @@ namespace TimeControl
             this.about.Controls.Add(this.giteeLinkLabel);
             this.about.Controls.Add(this.githubLinkLabel);
             this.about.Controls.Add(this.authorButton);
-            this.about.Controls.Add(this.coinLabel);
-            this.about.Controls.Add(this.label4);
             this.about.Controls.Add(this.linkLabel1);
             this.about.Controls.Add(this.label3);
             this.about.Location = new System.Drawing.Point(4, 26);
@@ -266,6 +262,17 @@ namespace TimeControl
             this.about.TabIndex = 2;
             this.about.Text = "关于";
             this.about.UseVisualStyleBackColor = true;
+            // 
+            // helpLinkLabel
+            // 
+            this.helpLinkLabel.AutoSize = true;
+            this.helpLinkLabel.Location = new System.Drawing.Point(577, 332);
+            this.helpLinkLabel.Name = "helpLinkLabel";
+            this.helpLinkLabel.Size = new System.Drawing.Size(32, 17);
+            this.helpLinkLabel.TabIndex = 7;
+            this.helpLinkLabel.TabStop = true;
+            this.helpLinkLabel.Text = "帮助";
+            this.helpLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.helpLinkLabel_LinkClicked);
             // 
             // giteeLinkLabel
             // 
@@ -299,26 +306,6 @@ namespace TimeControl
             this.authorButton.Text = "作者的话";
             this.authorButton.UseVisualStyleBackColor = true;
             this.authorButton.Click += new System.EventHandler(this.authorButton_Click);
-            // 
-            // coinLabel
-            // 
-            this.coinLabel.AutoSize = true;
-            this.coinLabel.Location = new System.Drawing.Point(40, 3);
-            this.coinLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.coinLabel.Name = "coinLabel";
-            this.coinLabel.Size = new System.Drawing.Size(15, 17);
-            this.coinLabel.TabIndex = 3;
-            this.coinLabel.Text = "0";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 3);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(32, 17);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "金币";
             // 
             // linkLabel1
             // 
@@ -453,17 +440,6 @@ namespace TimeControl
             this.fileSaveTimer.Interval = 300000;
             this.fileSaveTimer.Tick += new System.EventHandler(this.fileSaveTimer_Tick);
             // 
-            // helpLinkLabel
-            // 
-            this.helpLinkLabel.AutoSize = true;
-            this.helpLinkLabel.Location = new System.Drawing.Point(577, 332);
-            this.helpLinkLabel.Name = "helpLinkLabel";
-            this.helpLinkLabel.Size = new System.Drawing.Size(32, 17);
-            this.helpLinkLabel.TabIndex = 7;
-            this.helpLinkLabel.TabStop = true;
-            this.helpLinkLabel.Text = "帮助";
-            this.helpLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.helpLinkLabel_LinkClicked);
-            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -520,8 +496,6 @@ namespace TimeControl
         private System.Windows.Forms.CheckBox autoRefreshBox;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label coinLabel;
         private System.Windows.Forms.Button authorButton;
         private System.Windows.Forms.Timer fileSaveTimer;
         private System.Windows.Forms.LinkLabel giteeLinkLabel;

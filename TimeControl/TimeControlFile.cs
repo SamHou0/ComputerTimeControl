@@ -16,7 +16,6 @@ namespace TimeControl
         public static readonly string WhiteAppLocation = BaseLocation + "\\WhiteApp.txt";//应用白名单保存
         public static readonly string TimeFileDirectory = BaseLocation
             + "\\TCTimeData";
-        public static readonly string GameData = BaseLocation + "\\GameData.txt";
         public static readonly string LogFile = BaseLocation + "\\Log.txt";
         public static readonly string TempTimeFile = BaseLocation + "\\Temp.txt";
         public static void SaveToXML(List<App> apps)

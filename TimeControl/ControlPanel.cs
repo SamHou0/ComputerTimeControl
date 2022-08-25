@@ -20,7 +20,6 @@ namespace TimeControl
         private bool isClosable = false;//指示当前是否可以关闭
         private string unlockPasswordHash = "";//密码哈希值，用作比对
         private AppController appController;//列表、计时控制器
-        private GameController gameController;
         public ControlPanel(bool hide)
         {
             InitializeComponent();
@@ -37,7 +36,6 @@ namespace TimeControl
 
             appController = new(usageBox, processMonitorTimer);
             fileSaveTimer.Start();
-            gameController = new(coinLabel);
 
             if (File.Exists(TimeControlFile.WhiteAppLocation))
                 whiteProcessBox.Text = File.ReadAllText(TimeControlFile.WhiteAppLocation);
@@ -67,7 +65,6 @@ namespace TimeControl
             }).Wait();
             Dllimport.SwitchDesktop(nowDesktop);
             Dllimport.CloseDesktop(newDesktop);
-            gameController.AddCoin(Convert.ToInt32(timeBox.Value) / 60);
         }
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)//打开界面
         {

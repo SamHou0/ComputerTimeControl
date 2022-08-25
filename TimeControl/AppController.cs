@@ -25,7 +25,10 @@ namespace TimeControl
                 apps = TimeControlFile.ReadFromXML();
             }
             else
+            {
                 Directory.CreateDirectory(TimeControlFile.TimeFileDirectory);
+                Save();
+            }
             Refresh();
         }
 

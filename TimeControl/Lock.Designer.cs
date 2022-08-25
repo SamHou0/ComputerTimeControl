@@ -117,7 +117,7 @@ namespace TimeControl
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(124, 50);
             this.timeLabel.TabIndex = 6;
-            this.timeLabel.Text = "00:00:00/00:00:00";
+            this.timeLabel.Text = "0:0:0/0:0:0";
             this.timeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.timeLabel.UseWaitCursor = true;
             // 

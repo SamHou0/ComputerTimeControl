@@ -43,7 +43,7 @@ namespace TimeControl
 
             Init(unlockPasswordHash, processLocation);
         }
-        private void Init(string unlockPasswordHash,string processLocation)
+        private void Init(string unlockPasswordHash, string processLocation)
         {
             if (string.IsNullOrEmpty(unlockPasswordHash))
             { usePassword = false; }
@@ -55,16 +55,15 @@ namespace TimeControl
         private void Timer_Tick(object sender, EventArgs e)
         {
             TimeSpan timeSpan = DateTime.Now - startTime;
-            timeLabel.Text = 
+            timeLabel.Text =
                 @$"{timeSpan.Hours}:{timeSpan.Minutes}:{timeSpan.Seconds}/{targetTimeSpan.Hours}:{targetTimeSpan.Minutes}:{targetTimeSpan.Seconds}";
-            if(timeSpan>=targetTimeSpan)
+            if (timeSpan >= targetTimeSpan)
             {
-                timer.Stop();
                 unlockLabel.Visible = true;
                 progressBar.Value = progressBar.Maximum;
-                return;
             }
-            progressBar.Value = (int)timeSpan.TotalSeconds;
+            else
+                progressBar.Value = (int)timeSpan.TotalSeconds;
             Process[] processes = Process.GetProcessesByName("Taskmgr");
             foreach (Process process in processes)
             {
