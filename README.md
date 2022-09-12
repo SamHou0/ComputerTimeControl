@@ -9,7 +9,6 @@
 ## 开发环境
 - Micosoft Visual Studio 2022
 - .net 6.0 (C#) 桌面程序
-- Micosoft Visual Studio Installer Projects 2022插件
 
 ## 仓库镜像
 - gitee:https://gitee.com/Sam-Hou/ComputerTimeControl
