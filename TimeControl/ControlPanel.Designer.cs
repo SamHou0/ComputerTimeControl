@@ -86,7 +86,7 @@ namespace TimeControl
             // 
             // timeBox
             // 
-            this.timeBox.Location = new System.Drawing.Point(252, 139);
+            this.timeBox.Location = new System.Drawing.Point(255, 189);
             this.timeBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.timeBox.Maximum = new decimal(new int[] {
             180,
@@ -139,18 +139,21 @@ namespace TimeControl
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(266, 90);
+            this.label5.Location = new System.Drawing.Point(230, 29);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 17);
+            this.label5.Size = new System.Drawing.Size(164, 17);
             this.label5.TabIndex = 3;
-            this.label5.Text = "白名单应用路径";
+            this.label5.Text = "白名单应用路径（一行一个）";
             // 
             // whiteProcessBox
             // 
-            this.whiteProcessBox.Location = new System.Drawing.Point(161, 110);
+            this.whiteProcessBox.Location = new System.Drawing.Point(161, 49);
+            this.whiteProcessBox.Multiline = true;
             this.whiteProcessBox.Name = "whiteProcessBox";
-            this.whiteProcessBox.Size = new System.Drawing.Size(304, 23);
+            this.whiteProcessBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.whiteProcessBox.Size = new System.Drawing.Size(298, 134);
             this.whiteProcessBox.TabIndex = 2;
+            this.whiteProcessBox.TextChanged += new System.EventHandler(this.whiteProcessBox_TextChanged);
             // 
             // processMonitor
             // 

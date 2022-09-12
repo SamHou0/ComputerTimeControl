@@ -16,6 +16,7 @@ namespace TimeControl
         [STAThread]
         static void Main(string[] args)
         {
+            IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
             try
             {
                 bool hide = false;
@@ -51,6 +52,7 @@ namespace TimeControl
             }
             catch(Exception ex)
             {
+                Dllimport.SwitchDesktop(nowDesktop);
                 File.Delete(TimeControlFile.TempTimeFile);
                 File.AppendAllText(TimeControlFile.LogFile, DateTime.Now.ToString() + Environment.NewLine + "===Error==="
                     + Environment.NewLine);

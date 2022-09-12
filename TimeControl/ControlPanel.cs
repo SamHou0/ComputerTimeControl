@@ -40,15 +40,17 @@ namespace TimeControl
             if (File.Exists(TimeControlFile.WhiteAppLocation))
                 whiteProcessBox.Text = File.ReadAllText(TimeControlFile.WhiteAppLocation);
             if (File.Exists(TimeControlFile.TempTimeFile))
-                StartLock(unlockPasswordHash, whiteProcessBox.Text);
-
+            {
+                MessageBox.Show("恢复屏保");
+                StartLock(unlockPasswordHash);
+            }
         }
 
         private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
         {
-            StartLock(unlockPasswordHash, whiteProcessBox.Text, (int)timeBox.Value);
+            StartLock(unlockPasswordHash, (int)timeBox.Value);
         }
-        private void StartLock(string unlockPasswordHash, string processLocation, int minutes = 0)
+        private void StartLock(string unlockPasswordHash, int minutes = 0)
         {
             IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
             IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
@@ -58,9 +60,9 @@ namespace TimeControl
                 Dllimport.SetThreadDesktop(newDesktop);
                 Lock _lock;
                 if (minutes != 0)
-                    _lock = new(minutes, unlockPasswordHash, processLocation);
+                    _lock = new(minutes, unlockPasswordHash);
                 else
-                    _lock = new(unlockPasswordHash, processLocation);
+                    _lock = new(unlockPasswordHash);
                 Application.Run(_lock);
             }).Wait();
             Dllimport.SwitchDesktop(nowDesktop);
@@ -231,6 +233,11 @@ namespace TimeControl
         {
             Process.Start("explorer.exe",
                 "https://gitee.com/Sam-Hou/ComputerTimeControl/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E");
+        }
+
+        private void whiteProcessBox_TextChanged(object sender, EventArgs e)
+        {
+            File.WriteAllText(TimeControlFile.WhiteAppLocation, whiteProcessBox.Text);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace TimeControl
             this.unlockLabel = new System.Windows.Forms.Label();
             this.unlockPasswordBox = new System.Windows.Forms.TextBox();
             this.unlockButton = new System.Windows.Forms.Button();
-            this.startProcessButton = new System.Windows.Forms.Button();
+            this.toolBoxButton = new System.Windows.Forms.Button();
             this.timeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -100,16 +100,16 @@ namespace TimeControl
             this.unlockButton.UseWaitCursor = true;
             this.unlockButton.Click += new System.EventHandler(this.UnlockButton_Click);
             // 
-            // startProcessButton
+            // toolBoxButton
             // 
-            this.startProcessButton.Location = new System.Drawing.Point(458, 10);
-            this.startProcessButton.Name = "startProcessButton";
-            this.startProcessButton.Size = new System.Drawing.Size(140, 80);
-            this.startProcessButton.TabIndex = 5;
-            this.startProcessButton.Text = "打开白名单";
-            this.startProcessButton.UseVisualStyleBackColor = true;
-            this.startProcessButton.UseWaitCursor = true;
-            this.startProcessButton.Click += new System.EventHandler(this.startProcessButton_Click);
+            this.toolBoxButton.Location = new System.Drawing.Point(458, 10);
+            this.toolBoxButton.Name = "toolBoxButton";
+            this.toolBoxButton.Size = new System.Drawing.Size(140, 80);
+            this.toolBoxButton.TabIndex = 5;
+            this.toolBoxButton.Text = "打开百宝箱";
+            this.toolBoxButton.UseVisualStyleBackColor = true;
+            this.toolBoxButton.UseWaitCursor = true;
+            this.toolBoxButton.Click += new System.EventHandler(this.ToolBoxButton_Click);
             // 
             // timeLabel
             // 
@@ -127,7 +127,7 @@ namespace TimeControl
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 349);
             this.Controls.Add(this.timeLabel);
-            this.Controls.Add(this.startProcessButton);
+            this.Controls.Add(this.toolBoxButton);
             this.Controls.Add(this.unlockButton);
             this.Controls.Add(this.unlockPasswordBox);
             this.Controls.Add(this.unlockLabel);
@@ -156,7 +156,7 @@ namespace TimeControl
         private System.Windows.Forms.Label unlockLabel;
         private System.Windows.Forms.TextBox unlockPasswordBox;
         private System.Windows.Forms.Button unlockButton;
-        private System.Windows.Forms.Button startProcessButton;
+        private System.Windows.Forms.Button toolBoxButton;
         private System.Windows.Forms.Label timeLabel;
     }
 }

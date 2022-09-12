@@ -16,24 +16,22 @@ namespace TimeControl
     {
         private bool usePassword = true;
         private string unlockPasswordHash;
-        private string processLocation;
+        private string[] processLocation;
         private readonly DateTime startTime;
         private readonly TimeSpan targetTimeSpan;
 
-        public Lock(int minutes, string unlockPasswordHash, string processLocation)
+        public Lock(int minutes, string unlockPasswordHash)
         {
             InitializeComponent();
 
             targetTimeSpan = new TimeSpan(0, 0, minutes, 0);
             startTime = DateTime.Now;
-
-            File.WriteAllText(TimeControlFile.WhiteAppLocation, processLocation);
             File.AppendAllText(TimeControlFile.TempTimeFile, startTime.ToString() + Environment.NewLine);
             File.AppendAllText(TimeControlFile.TempTimeFile, targetTimeSpan.ToString());
 
-            Init(unlockPasswordHash, processLocation);
+            Init(unlockPasswordHash);
         }
-        public Lock(string unlockPasswordHash, string processLocation)
+        public Lock(string unlockPasswordHash)
         {
             InitializeComponent();
 
@@ -41,14 +39,14 @@ namespace TimeControl
             startTime = DateTime.Parse(strings[0]);
             targetTimeSpan = TimeSpan.Parse(strings[1]);
 
-            Init(unlockPasswordHash, processLocation);
+            Init(unlockPasswordHash);
         }
-        private void Init(string unlockPasswordHash, string processLocation)
+        private void Init(string unlockPasswordHash)
         {
+            processLocation = File.ReadAllLines(TimeControlFile.WhiteAppLocation);
             if (string.IsNullOrEmpty(unlockPasswordHash))
             { usePassword = false; }
             this.unlockPasswordHash = unlockPasswordHash;
-            this.processLocation = processLocation;
             progressBar.Maximum = (int)targetTimeSpan.TotalSeconds;
         }
 
@@ -98,13 +96,10 @@ namespace TimeControl
                 MessageBox.Show("你没有设置管理码！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void startProcessButton_Click(object sender, EventArgs e)
+        private void ToolBoxButton_Click(object sender, EventArgs e)
         {
-            Dllimport.STARTUPINFO sTARTUPINFO = new();
-            sTARTUPINFO.lpDesktop = "Lock";
-            Dllimport.PROCESS_INFORMATION pROCESS_INFORMATION = new();
-            Dllimport.CreateProcess(processLocation, null, IntPtr.Zero, IntPtr.Zero, true, 0, IntPtr.Zero, null, ref sTARTUPINFO,
-                ref pROCESS_INFORMATION);
+            ToolBox toolBox=new(processLocation);
+            toolBox.ShowDialog();
         }
     }
 }
