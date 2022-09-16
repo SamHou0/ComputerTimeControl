@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TimeControl
+namespace TimeControl.Tools
 {
     public static class Command
     {
@@ -14,7 +14,7 @@ namespace TimeControl
         {
             ProcessStartInfo info = new();
             info.FileName = "cmd.exe";
-            info.CreateNoWindow=true;
+            info.CreateNoWindow = true;
             info.RedirectStandardInput = true;
             Process process = Process.Start(info);
             process.StandardInput.WriteLine(command);

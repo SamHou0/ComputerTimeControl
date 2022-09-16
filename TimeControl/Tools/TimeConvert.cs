@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TimeControl
+namespace TimeControl.Tools
 {
     static class TimeConvert
     {
@@ -16,11 +16,11 @@ namespace TimeControl
         /// <summary>
         /// 舍去剩余的秒数，返回整时间分钟数
         /// </summary>
-        public static int ToIntMinutes(int seconds)=>Convert.ToInt32(seconds / 60);
+        public static int ToIntMinutes(int seconds) => Convert.ToInt32(seconds / 60);
         /// <summary>
         /// 获取除去整数分后剩余的秒数
         /// </summary>
-        public static int GetExtraSeconds(int seconds)=> Convert.ToInt32(seconds %60);
+        public static int GetExtraSeconds(int seconds) => Convert.ToInt32(seconds % 60);
         /// <summary>
         /// 分钟转秒
         /// </summary>

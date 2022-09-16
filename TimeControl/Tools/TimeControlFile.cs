@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
+using TimeControl.AppControl;
 
-namespace TimeControl
+namespace TimeControl.Tools
 {
     public static class TimeControlFile
     {
@@ -22,12 +23,12 @@ namespace TimeControl
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(TimeFileDirectory);
             FileInfo[] files = directoryInfo.GetFiles();
-            if(files.Length>=10)
+            if (files.Length >= 10)
             {
                 foreach (FileInfo file in files)
                     File.Delete(file.FullName);
             }
-            using (StreamWriter sw = new StreamWriter(TimeFileDirectory + 
+            using (StreamWriter sw = new StreamWriter(TimeFileDirectory +
                 $"\\{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.xml"))
             {
                 XmlSerializer xmlSerializer = new(typeof(List<AppInformation>));

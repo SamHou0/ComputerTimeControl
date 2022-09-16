@@ -11,8 +11,10 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Threading;
 using System.IO;
+using TimeControl.AppControl;
+using TimeControl.Tools;
 
-namespace TimeControl
+namespace TimeControl.Windows
 {
     public partial class ControlPanel : Form
     {

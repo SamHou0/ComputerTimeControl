@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using TimeControl.Tools;
 
-namespace TimeControl
+namespace TimeControl.Windows
 {
     public partial class Lock : Form
     {

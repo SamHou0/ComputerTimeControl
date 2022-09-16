@@ -1,5 +1,5 @@
 ﻿
-namespace TimeControl
+namespace TimeControl.Windows
 {
     partial class Lock
     {

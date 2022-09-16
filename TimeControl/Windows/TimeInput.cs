@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using TimeControl.AppControl;
+using TimeControl.Tools;
 
-namespace TimeControl
+namespace TimeControl.Windows
 {
     public partial class TimeInput : Form
     {

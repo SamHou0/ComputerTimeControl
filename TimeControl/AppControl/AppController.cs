@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using TimeControl.Tools;
 
-namespace TimeControl
+namespace TimeControl.AppControl
 {
     public class AppController
     {

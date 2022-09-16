@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeControl.Tools;
 
-namespace TimeControl
+namespace TimeControl.Windows
 {
     public partial class ToolBox : Form
     {

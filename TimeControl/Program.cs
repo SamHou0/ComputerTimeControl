@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using TimeControl.Tools;
+using TimeControl.Windows;
 
 namespace TimeControl
 {

@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Security.Cryptography;
+using TimeControl.Tools;
 
-namespace TimeControl
+namespace TimeControl.Windows
 {
     public partial class PasswordInput : Form
     {
