@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeControl.Tools;
 
@@ -33,6 +26,11 @@ namespace TimeControl.Windows
                 Dllimport.CreateProcess(whiteListBox.SelectedItem.ToString(), null, IntPtr.Zero, IntPtr.Zero, true, 0, IntPtr.Zero, null, ref sTARTUPINFO,
                     ref pROCESS_INFORMATION);
             }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            timeLabel.Text = "当前时间：" + DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }

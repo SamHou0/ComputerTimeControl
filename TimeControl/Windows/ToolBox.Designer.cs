@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.whiteListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // whiteListBox
@@ -52,11 +55,27 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "左侧双击打开白名单";
             // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Location = new System.Drawing.Point(656, 9);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(116, 17);
+            this.timeLabel.TabIndex = 2;
+            this.timeLabel.Text = "当前时间：00:00:00";
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // ToolBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.whiteListBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -71,5 +90,7 @@
 
         private System.Windows.Forms.ListBox whiteListBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Timer timer;
     }
 }

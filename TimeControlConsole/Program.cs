@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
+
 while (true)
 {
-    if (Process.GetProcessesByName("TimeControl").Length==0)
+    if (Process.GetProcessesByName("TimeControl").Length == 0)
     {
         ProcessStartInfo process = new();
         process.FileName = "TimeControl.exe";

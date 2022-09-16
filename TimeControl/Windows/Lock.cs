@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using TimeControl.Tools;
 
 namespace TimeControl.Windows
@@ -32,6 +25,7 @@ namespace TimeControl.Windows
 
             Init(unlockPasswordHash);
         }
+
         public Lock(string unlockPasswordHash)
         {
             InitializeComponent();
@@ -42,6 +36,7 @@ namespace TimeControl.Windows
 
             Init(unlockPasswordHash);
         }
+
         private void Init(string unlockPasswordHash)
         {
             processLocation = File.ReadAllLines(TimeControlFile.WhiteAppLocation);
@@ -99,7 +94,7 @@ namespace TimeControl.Windows
 
         private void ToolBoxButton_Click(object sender, EventArgs e)
         {
-            ToolBox toolBox=new(processLocation);
+            ToolBox toolBox = new(processLocation);
             toolBox.ShowDialog();
         }
     }

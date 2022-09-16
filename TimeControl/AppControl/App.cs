@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Windows.Forms;
 using TimeControl.Tools;
 
@@ -14,6 +8,7 @@ namespace TimeControl.AppControl
     {
         public AppInformation appInformation = new();
         internal int tempTime = 0;
+
         /// <summary>
         /// 返回进程的简要概述
         /// </summary>
@@ -22,12 +17,14 @@ namespace TimeControl.AppControl
         {
             return appInformation.name + " 已使用：" + TimeConvert.DescribeTime(appInformation.time);
         }
+
         public App(string name, int time, int restInterval)
         {
             appInformation.time = time;
             appInformation.name = name;
             appInformation.restInterval = restInterval;
         }
+
         public App(AppInformation appInformation)
         {
             this.appInformation = appInformation;
@@ -41,6 +38,7 @@ namespace TimeControl.AppControl
             appInformation.time++;
             CheckRest();
         }
+
         internal void CheckRest()
         {
             tempTime++;
@@ -51,6 +49,7 @@ namespace TimeControl.AppControl
                     MessageBoxIcon.Warning);
             }
         }
+
         /// <summary>
         /// 重设时间
         /// </summary>
@@ -58,6 +57,7 @@ namespace TimeControl.AppControl
         {
             appInformation.time = 0;
         }
+
         public bool IsRunning()
         {
             Process[] processes = Process.GetProcessesByName(appInformation.name);

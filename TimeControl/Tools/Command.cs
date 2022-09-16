@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace TimeControl.Tools
 {
@@ -20,6 +14,7 @@ namespace TimeControl.Tools
             process.StandardInput.WriteLine(command);
             process.StandardInput.WriteLine("exit");
         }
+
         public static void RunCommand(string[] commands)
         {
             foreach (string command in commands)

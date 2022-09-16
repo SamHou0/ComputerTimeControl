@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.IO;
+﻿using System.Diagnostics;
 using TimeControl.Tools;
 using TimeControl.Windows;
 
@@ -13,14 +6,15 @@ namespace TimeControl.AppControl
 {
     public class LimitedApp : App
     {
-
         public LimitedApp(string name, int time, int timeLimit, int restInterval) :
             base(name, time, restInterval)
         {
             appInformation.timeLimit = timeLimit;
         }
+
         public LimitedApp(AppInformation appInformation) : base(appInformation)
         { }
+
         /// <summary>
         /// 运行一次（一秒），并根据情况显示警告或关闭进程，然后保存到文件
         /// </summary>
@@ -38,6 +32,7 @@ namespace TimeControl.AppControl
             }
             CheckRest();
         }
+
         /// <summary>
         /// 返回时间受限进程的简要概述
         /// </summary>
@@ -46,6 +41,7 @@ namespace TimeControl.AppControl
         {
             return base.ToString() + " 进程时间限制为：" + TimeConvert.DescribeTime(appInformation.timeLimit);
         }
+
         /// <summary>
         /// 禁用掉该程序
         /// </summary>

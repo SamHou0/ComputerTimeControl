@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using System.IO;
+using System.Xml.Serialization;
 using TimeControl.AppControl;
 
 namespace TimeControl.Tools
@@ -13,12 +10,16 @@ namespace TimeControl.Tools
     {
         public static readonly string BaseLocation = Environment.GetFolderPath
             (Environment.SpecialFolder.ApplicationData) + "\\TimeControl";
+
         public static readonly string PassLocation = BaseLocation + "\\TCPass.txt";//获取密码位置
         public static readonly string WhiteAppLocation = BaseLocation + "\\WhiteApp.txt";//应用白名单保存
+
         public static readonly string TimeFileDirectory = BaseLocation
             + "\\TCTimeData";
+
         public static readonly string LogFile = BaseLocation + "\\Log.txt";
         public static readonly string TempTimeFile = BaseLocation + "\\Temp.txt";
+
         public static void SaveToXML(List<App> apps)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(TimeFileDirectory);
@@ -40,6 +41,7 @@ namespace TimeControl.Tools
                 xmlSerializer.Serialize(sw, list);
             }
         }
+
         public static List<App> ReadFromXML()
         {
             List<App> apps = new();

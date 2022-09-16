@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
 using TimeControl.Tools;
 
 namespace TimeControl.AppControl
@@ -46,6 +42,7 @@ namespace TimeControl.AppControl
             }
             processMonitorTimer.Start();
         }
+
         /// <summary>
         /// 根据名称添加进程
         /// </summary>
@@ -57,6 +54,7 @@ namespace TimeControl.AppControl
             Save();
             Refresh();
         }
+
         /// <summary>
         /// 根据名称添加时间受限的进程
         /// </summary>
@@ -69,6 +67,7 @@ namespace TimeControl.AppControl
             Save();
             Refresh();
         }
+
         /// <summary>
         /// 跟踪所有进程，增加一秒
         /// </summary>
@@ -88,6 +87,7 @@ namespace TimeControl.AppControl
                 }
             }
         }
+
         /// <summary>
         /// 移除所列表所选的进程
         /// </summary>
@@ -99,6 +99,7 @@ namespace TimeControl.AppControl
             Save();
             Refresh();
         }
+
         /// <summary>
         /// 删除所有监控
         /// </summary>
@@ -109,6 +110,7 @@ namespace TimeControl.AppControl
             TimeControlFile.SaveToXML(apps);
             Refresh();
         }
+
         /// <summary>
         /// 重设全部累计时间
         /// </summary>
@@ -123,6 +125,7 @@ namespace TimeControl.AppControl
             Save();
             processMonitorTimer.Start();
         }
+
         public void Save()
         {
             TimeControlFile.SaveToXML(apps);

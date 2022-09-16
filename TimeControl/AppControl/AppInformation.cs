@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TimeControl.AppControl
+﻿namespace TimeControl.AppControl
 {
     public class AppInformation
     {

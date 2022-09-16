@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace TimeControl.Tools
 {
-    static class Dllimport
+    internal static class Dllimport
     {
-
         [Flags]
         public enum ACCESS_MASK : uint
         {
@@ -97,12 +92,12 @@ namespace TimeControl.Tools
         [DllImport("user32.dll")]
         public static extern bool SwitchDesktop(IntPtr hDesktop);
 
-
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool SetThreadDesktop(IntPtr hDesktop);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern IntPtr GetThreadDesktop(uint dwThreadId);
+
         [DllImport("kernel32.dll")]
         internal static extern bool CreateProcess(
             string lpApplicationName,
@@ -116,6 +111,7 @@ namespace TimeControl.Tools
             ref STARTUPINFO lpStartupInfo,
             ref PROCESS_INFORMATION lpProcessInformation
             );
+
         [StructLayout(LayoutKind.Sequential)]
         internal struct PROCESS_INFORMATION
         {

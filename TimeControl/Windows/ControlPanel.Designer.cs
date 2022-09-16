@@ -64,6 +64,7 @@ namespace TimeControl.Windows
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
+            this.unlockPasswordRemoveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -153,7 +154,7 @@ namespace TimeControl.Windows
             this.whiteProcessBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.whiteProcessBox.Size = new System.Drawing.Size(298, 134);
             this.whiteProcessBox.TabIndex = 2;
-            this.whiteProcessBox.TextChanged += new System.EventHandler(this.whiteProcessBox_TextChanged);
+            this.whiteProcessBox.TextChanged += new System.EventHandler(this.WhiteProcessBox_TextChanged);
             // 
             // processMonitor
             // 
@@ -182,7 +183,7 @@ namespace TimeControl.Windows
             this.resetButton.TabIndex = 8;
             this.resetButton.Text = "重置进程时间";
             this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // clearButton
             // 
@@ -275,7 +276,7 @@ namespace TimeControl.Windows
             this.helpLinkLabel.TabIndex = 7;
             this.helpLinkLabel.TabStop = true;
             this.helpLinkLabel.Text = "帮助";
-            this.helpLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.helpLinkLabel_LinkClicked);
+            this.helpLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpLinkLabel_LinkClicked);
             // 
             // giteeLinkLabel
             // 
@@ -286,7 +287,7 @@ namespace TimeControl.Windows
             this.giteeLinkLabel.TabIndex = 6;
             this.giteeLinkLabel.TabStop = true;
             this.giteeLinkLabel.Text = "gitee";
-            this.giteeLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.giteeLinkLabel_LinkClicked);
+            this.giteeLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GiteeLinkLabel_LinkClicked);
             // 
             // githubLinkLabel
             // 
@@ -297,7 +298,7 @@ namespace TimeControl.Windows
             this.githubLinkLabel.TabIndex = 5;
             this.githubLinkLabel.TabStop = true;
             this.githubLinkLabel.Text = "github";
-            this.githubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.githubLinkLabel_LinkClicked);
+            this.githubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GithubLinkLabel_LinkClicked);
             // 
             // authorButton
             // 
@@ -308,7 +309,7 @@ namespace TimeControl.Windows
             this.authorButton.TabIndex = 4;
             this.authorButton.Text = "作者的话";
             this.authorButton.UseVisualStyleBackColor = true;
-            this.authorButton.Click += new System.EventHandler(this.authorButton_Click);
+            this.authorButton.Click += new System.EventHandler(this.AuthorButton_Click);
             // 
             // linkLabel1
             // 
@@ -334,6 +335,7 @@ namespace TimeControl.Windows
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.unlockPasswordRemoveButton);
             this.tabPage1.Controls.Add(this.removeBootButton);
             this.tabPage1.Controls.Add(this.addBootButton);
             this.tabPage1.Controls.Add(this.unlockPasswordSetButton);
@@ -357,7 +359,7 @@ namespace TimeControl.Windows
             this.removeBootButton.TabIndex = 9;
             this.removeBootButton.Text = "移除开机启动";
             this.removeBootButton.UseVisualStyleBackColor = true;
-            this.removeBootButton.Click += new System.EventHandler(this.removeBootButton_Click);
+            this.removeBootButton.Click += new System.EventHandler(this.RemoveBootButton_Click);
             // 
             // addBootButton
             // 
@@ -367,7 +369,7 @@ namespace TimeControl.Windows
             this.addBootButton.TabIndex = 8;
             this.addBootButton.Text = "添加开机启动";
             this.addBootButton.UseVisualStyleBackColor = true;
-            this.addBootButton.Click += new System.EventHandler(this.addBootButton_Click);
+            this.addBootButton.Click += new System.EventHandler(this.AddBootButton_Click);
             // 
             // unlockPasswordSetButton
             // 
@@ -441,7 +443,18 @@ namespace TimeControl.Windows
             // fileSaveTimer
             // 
             this.fileSaveTimer.Interval = 300000;
-            this.fileSaveTimer.Tick += new System.EventHandler(this.fileSaveTimer_Tick);
+            this.fileSaveTimer.Tick += new System.EventHandler(this.FileSaveTimer_Tick);
+            // 
+            // unlockPasswordRemoveButton
+            // 
+            this.unlockPasswordRemoveButton.Location = new System.Drawing.Point(102, 34);
+            this.unlockPasswordRemoveButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.unlockPasswordRemoveButton.Name = "unlockPasswordRemoveButton";
+            this.unlockPasswordRemoveButton.Size = new System.Drawing.Size(93, 37);
+            this.unlockPasswordRemoveButton.TabIndex = 10;
+            this.unlockPasswordRemoveButton.Text = "移除";
+            this.unlockPasswordRemoveButton.UseVisualStyleBackColor = true;
+            this.unlockPasswordRemoveButton.Click += new System.EventHandler(this.UnlockPasswordRemoveButton_Click);
             // 
             // ControlPanel
             // 
@@ -508,5 +521,6 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button addBootButton;
         private System.Windows.Forms.Button removeBootButton;
         private System.Windows.Forms.LinkLabel helpLinkLabel;
+        private System.Windows.Forms.Button unlockPasswordRemoveButton;
     }
 }
