@@ -28,6 +28,8 @@ namespace TimeControl.Windows
                 unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
                 PasswordSet();
             }
+            else
+                unlockPasswordRemoveButton.Enabled = false;
 
             appController = new(usageBox, processMonitorTimer);
             fileSaveTimer.Start();
@@ -40,39 +42,6 @@ namespace TimeControl.Windows
                 StartLock(unlockPasswordHash);
             }
         }
-
-        #region LockPage
-
-        private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
-        {
-            StartLock(unlockPasswordHash, (int)timeBox.Value);
-        }
-
-        private static void StartLock(string unlockPasswordHash, int minutes = 0)
-        {
-            IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
-            IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
-            Dllimport.SwitchDesktop(newDesktop);
-            Task.Factory.StartNew(() =>
-            {
-                Dllimport.SetThreadDesktop(newDesktop);
-                Lock _lock;
-                if (minutes != 0)
-                    _lock = new(minutes, unlockPasswordHash);
-                else
-                    _lock = new(unlockPasswordHash);
-                Application.Run(_lock);
-            }).Wait();
-            Dllimport.SwitchDesktop(nowDesktop);
-            Dllimport.CloseDesktop(newDesktop);
-        }
-
-        private void WhiteProcessBox_TextChanged(object sender, EventArgs e)
-        {
-            File.WriteAllText(TimeControlFile.WhiteAppLocation, whiteProcessBox.Text);
-        }
-
-        #endregion LockPage
 
         #region Form
 
@@ -129,6 +98,39 @@ namespace TimeControl.Windows
         }
 
         #endregion Form
+
+        #region LockPage
+
+        private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
+        {
+            StartLock(unlockPasswordHash, (int)timeBox.Value);
+        }
+
+        private static void StartLock(string unlockPasswordHash, int minutes = 0)
+        {
+            IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
+            IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
+            Dllimport.SwitchDesktop(newDesktop);
+            Task.Factory.StartNew(() =>
+            {
+                Dllimport.SetThreadDesktop(newDesktop);
+                Lock _lock;
+                if (minutes != 0)
+                    _lock = new(minutes, unlockPasswordHash);
+                else
+                    _lock = new(unlockPasswordHash);
+                Application.Run(_lock);
+            }).Wait();
+            Dllimport.SwitchDesktop(nowDesktop);
+            Dllimport.CloseDesktop(newDesktop);
+        }
+
+        private void WhiteProcessBox_TextChanged(object sender, EventArgs e)
+        {
+            File.WriteAllText(TimeControlFile.WhiteAppLocation, whiteProcessBox.Text);
+        }
+
+        #endregion LockPage
 
         #region ProcessPage
 
