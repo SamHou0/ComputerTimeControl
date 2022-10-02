@@ -14,6 +14,7 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <Platforms>AnyCPU;x64;x86</Platforms>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -27,6 +28,18 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
+
+  <ItemGroup>
+    <COMReference Include="TaskScheduler">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>e34cb9f1-c7f7-424c-be29-027dcc09363a</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="icons8_sand_watch.ico" />

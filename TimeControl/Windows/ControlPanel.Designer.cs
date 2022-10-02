@@ -52,25 +52,44 @@ namespace TimeControl.Windows
             this.authorButton = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.appProtect = new System.Windows.Forms.TabPage();
+            this.unlockPasswordRemoveButton = new System.Windows.Forms.Button();
             this.removeBootButton = new System.Windows.Forms.Button();
             this.addBootButton = new System.Windows.Forms.Button();
             this.unlockPasswordSetButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.unlockPasswordBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.shutdownTab = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.shutdownRemoveButton = new System.Windows.Forms.Button();
+            this.shutdownSetButton = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.endShutdownMinute = new System.Windows.Forms.NumericUpDown();
+            this.endShutdownHour = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.startShutdownMinute = new System.Windows.Forms.NumericUpDown();
+            this.startShutdownHour = new System.Windows.Forms.NumericUpDown();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
-            this.unlockPasswordRemoveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
             this.processMonitor.SuspendLayout();
             this.about.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.appProtect.SuspendLayout();
+            this.shutdownTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.endShutdownMinute)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.endShutdownHour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startShutdownMinute)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startShutdownHour)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,7 +132,8 @@ namespace TimeControl.Windows
             this.controlTab.Controls.Add(this.startNow);
             this.controlTab.Controls.Add(this.processMonitor);
             this.controlTab.Controls.Add(this.about);
-            this.controlTab.Controls.Add(this.tabPage1);
+            this.controlTab.Controls.Add(this.appProtect);
+            this.controlTab.Controls.Add(this.shutdownTab);
             this.controlTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.controlTab.Location = new System.Drawing.Point(0, 0);
             this.controlTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -333,23 +353,34 @@ namespace TimeControl.Windows
             this.label3.TabIndex = 0;
             this.label3.Text = "图标来自icon8!";
             // 
-            // tabPage1
+            // appProtect
             // 
-            this.tabPage1.Controls.Add(this.unlockPasswordRemoveButton);
-            this.tabPage1.Controls.Add(this.removeBootButton);
-            this.tabPage1.Controls.Add(this.addBootButton);
-            this.tabPage1.Controls.Add(this.unlockPasswordSetButton);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.unlockPasswordBox);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage1.Size = new System.Drawing.Size(614, 352);
-            this.tabPage1.TabIndex = 3;
-            this.tabPage1.Text = "程序保护";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.appProtect.Controls.Add(this.unlockPasswordRemoveButton);
+            this.appProtect.Controls.Add(this.removeBootButton);
+            this.appProtect.Controls.Add(this.addBootButton);
+            this.appProtect.Controls.Add(this.unlockPasswordSetButton);
+            this.appProtect.Controls.Add(this.label2);
+            this.appProtect.Controls.Add(this.unlockPasswordBox);
+            this.appProtect.Controls.Add(this.label1);
+            this.appProtect.Location = new System.Drawing.Point(4, 26);
+            this.appProtect.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.appProtect.Name = "appProtect";
+            this.appProtect.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.appProtect.Size = new System.Drawing.Size(614, 352);
+            this.appProtect.TabIndex = 3;
+            this.appProtect.Text = "程序保护";
+            this.appProtect.UseVisualStyleBackColor = true;
+            // 
+            // unlockPasswordRemoveButton
+            // 
+            this.unlockPasswordRemoveButton.Location = new System.Drawing.Point(102, 34);
+            this.unlockPasswordRemoveButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.unlockPasswordRemoveButton.Name = "unlockPasswordRemoveButton";
+            this.unlockPasswordRemoveButton.Size = new System.Drawing.Size(93, 37);
+            this.unlockPasswordRemoveButton.TabIndex = 10;
+            this.unlockPasswordRemoveButton.Text = "移除";
+            this.unlockPasswordRemoveButton.UseVisualStyleBackColor = true;
+            this.unlockPasswordRemoveButton.Click += new System.EventHandler(this.UnlockPasswordRemoveButton_Click);
             // 
             // removeBootButton
             // 
@@ -412,6 +443,161 @@ namespace TimeControl.Windows
             this.label1.TabIndex = 4;
             this.label1.Text = "管理码";
             // 
+            // shutdownTab
+            // 
+            this.shutdownTab.Controls.Add(this.label8);
+            this.shutdownTab.Controls.Add(this.shutdownRemoveButton);
+            this.shutdownTab.Controls.Add(this.shutdownSetButton);
+            this.shutdownTab.Controls.Add(this.label12);
+            this.shutdownTab.Controls.Add(this.label10);
+            this.shutdownTab.Controls.Add(this.label11);
+            this.shutdownTab.Controls.Add(this.label7);
+            this.shutdownTab.Controls.Add(this.label6);
+            this.shutdownTab.Controls.Add(this.endShutdownMinute);
+            this.shutdownTab.Controls.Add(this.endShutdownHour);
+            this.shutdownTab.Controls.Add(this.label4);
+            this.shutdownTab.Controls.Add(this.startShutdownMinute);
+            this.shutdownTab.Controls.Add(this.startShutdownHour);
+            this.shutdownTab.Location = new System.Drawing.Point(4, 26);
+            this.shutdownTab.Name = "shutdownTab";
+            this.shutdownTab.Padding = new System.Windows.Forms.Padding(3);
+            this.shutdownTab.Size = new System.Drawing.Size(614, 352);
+            this.shutdownTab.TabIndex = 4;
+            this.shutdownTab.Text = "自动关机";
+            this.shutdownTab.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(44, 330);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(523, 17);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "开机启动通过windows计划任务实现！若电脑被误完全锁定，请关闭TimeControlShutDown任务";
+            // 
+            // shutdownRemoveButton
+            // 
+            this.shutdownRemoveButton.Location = new System.Drawing.Point(416, 118);
+            this.shutdownRemoveButton.Name = "shutdownRemoveButton";
+            this.shutdownRemoveButton.Size = new System.Drawing.Size(190, 81);
+            this.shutdownRemoveButton.TabIndex = 15;
+            this.shutdownRemoveButton.Text = "移除";
+            this.shutdownRemoveButton.UseVisualStyleBackColor = true;
+            this.shutdownRemoveButton.Click += new System.EventHandler(this.shutdownRemoveButton_Click);
+            // 
+            // shutdownSetButton
+            // 
+            this.shutdownSetButton.Location = new System.Drawing.Point(416, 31);
+            this.shutdownSetButton.Name = "shutdownSetButton";
+            this.shutdownSetButton.Size = new System.Drawing.Size(190, 81);
+            this.shutdownSetButton.TabIndex = 14;
+            this.shutdownSetButton.Text = "设置";
+            this.shutdownSetButton.UseVisualStyleBackColor = true;
+            this.shutdownSetButton.Click += new System.EventHandler(this.shutdownSetButton_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(183, 51);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(20, 17);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "到";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(371, 62);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(20, 17);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "分";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(371, 33);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(20, 17);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "时";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(134, 62);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(20, 17);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "分";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(134, 33);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(20, 17);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "时";
+            // 
+            // endShutdownMinute
+            // 
+            this.endShutdownMinute.Location = new System.Drawing.Point(245, 60);
+            this.endShutdownMinute.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.endShutdownMinute.Name = "endShutdownMinute";
+            this.endShutdownMinute.Size = new System.Drawing.Size(120, 23);
+            this.endShutdownMinute.TabIndex = 5;
+            // 
+            // endShutdownHour
+            // 
+            this.endShutdownHour.Location = new System.Drawing.Point(245, 31);
+            this.endShutdownHour.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.endShutdownHour.Name = "endShutdownHour";
+            this.endShutdownHour.Size = new System.Drawing.Size(120, 23);
+            this.endShutdownHour.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Tomato;
+            this.label4.Location = new System.Drawing.Point(8, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(332, 17);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "在此时段内开机后自动关闭电脑（必须设为开机启动才生效）";
+            // 
+            // startShutdownMinute
+            // 
+            this.startShutdownMinute.Location = new System.Drawing.Point(8, 60);
+            this.startShutdownMinute.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.startShutdownMinute.Name = "startShutdownMinute";
+            this.startShutdownMinute.Size = new System.Drawing.Size(120, 23);
+            this.startShutdownMinute.TabIndex = 1;
+            // 
+            // startShutdownHour
+            // 
+            this.startShutdownHour.Location = new System.Drawing.Point(8, 31);
+            this.startShutdownHour.Maximum = new decimal(new int[] {
+            24,
+            0,
+            0,
+            0});
+            this.startShutdownHour.Name = "startShutdownHour";
+            this.startShutdownHour.Size = new System.Drawing.Size(120, 23);
+            this.startShutdownHour.TabIndex = 0;
+            // 
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
@@ -445,17 +631,6 @@ namespace TimeControl.Windows
             this.fileSaveTimer.Interval = 300000;
             this.fileSaveTimer.Tick += new System.EventHandler(this.FileSaveTimer_Tick);
             // 
-            // unlockPasswordRemoveButton
-            // 
-            this.unlockPasswordRemoveButton.Location = new System.Drawing.Point(102, 34);
-            this.unlockPasswordRemoveButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.unlockPasswordRemoveButton.Name = "unlockPasswordRemoveButton";
-            this.unlockPasswordRemoveButton.Size = new System.Drawing.Size(93, 37);
-            this.unlockPasswordRemoveButton.TabIndex = 10;
-            this.unlockPasswordRemoveButton.Text = "移除";
-            this.unlockPasswordRemoveButton.UseVisualStyleBackColor = true;
-            this.unlockPasswordRemoveButton.Click += new System.EventHandler(this.UnlockPasswordRemoveButton_Click);
-            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -479,8 +654,14 @@ namespace TimeControl.Windows
             this.processMonitor.PerformLayout();
             this.about.ResumeLayout(false);
             this.about.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.appProtect.ResumeLayout(false);
+            this.appProtect.PerformLayout();
+            this.shutdownTab.ResumeLayout(false);
+            this.shutdownTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.endShutdownMinute)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.endShutdownHour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startShutdownMinute)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.startShutdownHour)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -503,7 +684,7 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button appAddButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Timer processMonitorTimer;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage appProtect;
         private System.Windows.Forms.Button unlockPasswordSetButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox unlockPasswordBox;
@@ -522,5 +703,19 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button removeBootButton;
         private System.Windows.Forms.LinkLabel helpLinkLabel;
         private System.Windows.Forms.Button unlockPasswordRemoveButton;
+        private System.Windows.Forms.TabPage shutdownTab;
+        private System.Windows.Forms.Button shutdownSetButton;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown endShutdownMinute;
+        private System.Windows.Forms.NumericUpDown endShutdownHour;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown startShutdownMinute;
+        private System.Windows.Forms.NumericUpDown startShutdownHour;
+        private System.Windows.Forms.Button shutdownRemoveButton;
+        private System.Windows.Forms.Label label8;
     }
 }

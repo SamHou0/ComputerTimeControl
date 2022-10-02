@@ -10,15 +10,18 @@ namespace TimeControl.Tools
     {
         public static readonly string BaseLocation = Environment.GetFolderPath
             (Environment.SpecialFolder.ApplicationData) + "\\TimeControl";
-
+        //密码
         public static readonly string PassLocation = BaseLocation + "\\TCPass.txt";//获取密码位置
-        public static readonly string WhiteAppLocation = BaseLocation + "\\WhiteApp.txt";//应用白名单保存
-
+        //计时
         public static readonly string TimeFileDirectory = BaseLocation
             + "\\TCTimeData";
-
+        //日志
         public static readonly string LogFile = BaseLocation + "\\Log.txt";
+        //屏保
+        public static readonly string WhiteAppLocation = BaseLocation + "\\WhiteApp.txt";//应用白名单保存
         public static readonly string TempTimeFile = BaseLocation + "\\Temp.txt";
+        //自动关机
+        public static readonly string ShutdownSpan = BaseLocation + "\\Shutdown.txt";
 
         public static void SaveToXML(List<App> apps)
         {

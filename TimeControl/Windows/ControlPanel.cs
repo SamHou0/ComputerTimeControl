@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeControl.AppControl;
 using TimeControl.Tools;
+using Windows.ApplicationModel.Contacts;
 
 namespace TimeControl.Windows
 {
@@ -19,6 +20,20 @@ namespace TimeControl.Windows
         {
             InitializeComponent();
             this.hide = hide;
+            //自动关机
+            if (File.Exists(TimeControlFile.ShutdownSpan))
+            {
+                    string[] shutdownTimeLines = File.ReadAllLines(TimeControlFile.ShutdownSpan);
+                    TimeOnly startTime = TimeOnly.Parse(shutdownTimeLines[0]);
+                    TimeOnly endTime = TimeOnly.Parse(shutdownTimeLines[1]);
+                    TimeOnly now = TimeOnly.FromDateTime(DateTime.Now);
+                    if(now>=startTime&&now<=endTime)
+                    {
+                        SystemControl.Shutdown();
+                    }
+                    Application.Exit();
+            }
+
             if (!Directory.Exists(TimeControlFile.BaseLocation))
             {
                 Directory.CreateDirectory(TimeControlFile.BaseLocation);
@@ -246,13 +261,12 @@ namespace TimeControl.Windows
 
         private void AddBootButton_Click(object sender, EventArgs e)
         {
-            Command.RunCommand(
-            Directory.GetCurrentDirectory() + "\\BootHelper.exe");
+            TaskSchedulerControl.AddBoot();
         }
 
         private void RemoveBootButton_Click(object sender, EventArgs e)
         {
-            Command.RunCommand(Directory.GetCurrentDirectory() + "\\BootHelper.exe remove");
+            TaskSchedulerControl.RemoveBoot();
         }
 
         #endregion SettingPage
@@ -281,5 +295,27 @@ namespace TimeControl.Windows
         }
 
         #endregion AboutPage
+
+        #region ShutdownPage
+        private void shutdownSetButton_Click(object sender, EventArgs e)
+        {
+            TimeOnly startTime = new((int)startShutdownHour.Value,
+                (int)startShutdownMinute.Value, 0);
+            TimeOnly endTime = new((int)endShutdownHour.Value,
+                (int)endShutdownMinute.Value, 0);
+            if (startTime < endTime)
+                File.WriteAllText(TimeControlFile.ShutdownSpan,
+                    startTime + Environment.NewLine + endTime);
+            else
+                MessageBox.Show("时间输入非法。", "错误"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private void shutdownRemoveButton_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(TimeControlFile.ShutdownSpan))
+                File.Delete(TimeControlFile.ShutdownSpan);
+        }
+        #endregion
+
     }
 }
