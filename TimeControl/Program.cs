@@ -74,9 +74,6 @@ namespace TimeControl
             File.AppendAllText(TimeControlFile.LogFile, DateTime.Now.ToString() + Environment.NewLine + "===Error==="
                 + Environment.NewLine);
             File.AppendAllText(TimeControlFile.LogFile, ex.ToString() + Environment.NewLine);
-            if (ex is InvalidOperationException)
-            {
-            }
             MessageBox.Show(ex.Message + Environment.NewLine + "以上为错误消息，已保存到" + TimeControlFile.LogFile
                 + "，请反馈此问题到项目主页Issue。保护程序已暂时关闭。", "TimeControl发生错误",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
