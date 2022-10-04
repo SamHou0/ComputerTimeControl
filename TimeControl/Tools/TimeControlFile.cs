@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml.Serialization;
 using TimeControl.AppControl;
 
@@ -48,6 +50,39 @@ namespace TimeControl.Tools
         public static List<App> ReadFromXML()
         {
             List<App> apps = new();
+            FileInfo latestFile = GetLatestXMLFile();
+            using (StreamReader sr = new StreamReader(latestFile.FullName))
+            {
+                XmlSerializer xmlSerializer = new(typeof(List<AppInformation>));
+                List<AppInformation> infos=null;
+                try
+                {
+                    infos = (List<AppInformation>)xmlSerializer.Deserialize(sr);
+                }
+                catch
+                {
+                    if (MessageBox.Show("可能发生了无效文件错误，是否尝试删除最新的一份配置文件并重启？", "错误",
+                        MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
+                    {
+                        sr.Close();
+                        File.Delete(GetLatestXMLFile().FullName);
+                        Process.Start(Environment.CurrentDirectory + "\\TimeControl.exe");
+                        Environment.Exit(2);
+                    }
+                }
+                foreach (AppInformation information in infos)
+                {
+                    if (information.timeLimit != 0)
+                        apps.Add(new LimitedApp(information));
+                    else
+                        apps.Add(new App(information));
+                }
+            }
+            return apps;
+        }
+
+        public static FileInfo GetLatestXMLFile()
+        {
             DirectoryInfo directory = new DirectoryInfo(TimeFileDirectory);
             FileInfo latestFile = directory.GetFiles("*.xml")[0];
             //获取最新文件
@@ -58,19 +93,7 @@ namespace TimeControl.Tools
                     latestFile = file;
                 }
             }
-            using (StreamReader sr = new StreamReader(latestFile.FullName))
-            {
-                XmlSerializer xmlSerializer = new(typeof(List<AppInformation>));
-                List<AppInformation> infos = (List<AppInformation>)xmlSerializer.Deserialize(sr);
-                foreach (AppInformation information in infos)
-                {
-                    if (information.timeLimit != 0)
-                        apps.Add(new LimitedApp(information));
-                    else
-                        apps.Add(new App(information));
-                }
-            }
-            return apps;
+            return latestFile;
         }
     }
 }

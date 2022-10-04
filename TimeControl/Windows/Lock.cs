@@ -11,6 +11,7 @@ namespace TimeControl.Windows
         private bool usePassword = true;
         private string unlockPasswordHash;
         private string[] processLocation;
+        private bool isClosable = false;
         private readonly DateTime startTime;
         private readonly TimeSpan targetTimeSpan;
 
@@ -55,6 +56,7 @@ namespace TimeControl.Windows
             {
                 unlockLabel.Visible = true;
                 progressBar.Value = progressBar.Maximum;
+                ForceClose();
             }
             else
                 progressBar.Value = (int)timeSpan.TotalSeconds;
@@ -68,28 +70,38 @@ namespace TimeControl.Windows
 
         private void Lock_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (progressBar.Value != progressBar.Maximum)
+            if (!isClosable)
             {
                 e.Cancel = true;
                 MessageBox.Show("时间还没到呢！再等等吧。（点击继续）", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
             }
-            File.Delete(TimeControlFile.TempTimeFile);
+            else
+                File.Delete(TimeControlFile.TempTimeFile);
         }
 
         private void UnlockButton_Click(object sender, EventArgs e)
         {
+            if (Debugger.IsAttached)
+            {
+                ForceClose();
+            }
             if (usePassword == true)
             {
                 if (Password.ComputeHash(unlockPasswordBox.Text) == unlockPasswordHash)
                 {
-                    progressBar.Value = progressBar.Maximum;
-                    Close();
+                    ForceClose();
                 }
                 else
                     MessageBox.Show("管理码错误！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
                 MessageBox.Show("你没有设置管理码！", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void ForceClose()
+        {
+            isClosable = true;
+            Close();
         }
 
         private void ToolBoxButton_Click(object sender, EventArgs e)
