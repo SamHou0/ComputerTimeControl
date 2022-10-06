@@ -19,7 +19,7 @@ namespace TimeControl.AppControl
             processMonitorTimer = timer;
             if (Directory.Exists(TimeControlFile.TimeFileDirectory))
             {
-                apps = TimeControlFile.ReadFromXML();
+                apps = TimeControlFile.ReadApps();
             }
             else
             {
@@ -107,7 +107,7 @@ namespace TimeControl.AppControl
         {
             processMonitorTimer.Stop();
             apps.Clear();
-            TimeControlFile.SaveToXML(apps);
+            TimeControlFile.SaveApps(apps);
             Refresh();
         }
 
@@ -128,7 +128,7 @@ namespace TimeControl.AppControl
 
         public void Save()
         {
-            TimeControlFile.SaveToXML(apps);
+            TimeControlFile.SaveApps(apps);
         }
     }
 }

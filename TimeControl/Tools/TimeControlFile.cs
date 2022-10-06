@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using TimeControl.AppControl;
+using TimeControl.Data;
 
 namespace TimeControl.Tools
 {
@@ -24,8 +25,10 @@ namespace TimeControl.Tools
         public static readonly string TempTimeFile = BaseLocation + "\\Temp.txt";
         //自动关机
         public static readonly string ShutdownSpan = BaseLocation + "\\Shutdown.txt";
+        //数据显示
+        public static readonly string SavedData = BaseLocation + "\\SavedData.xml";
 
-        public static void SaveToXML(List<App> apps)
+        public static void SaveApps(List<App> apps)
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(TimeFileDirectory);
             FileInfo[] files = directoryInfo.GetFiles();
@@ -47,10 +50,10 @@ namespace TimeControl.Tools
             }
         }
 
-        public static List<App> ReadFromXML()
+        public static List<App> ReadApps()
         {
             List<App> apps = new();
-            FileInfo latestFile = GetLatestXMLFile();
+            FileInfo latestFile = GetLatestAppsFile();
             using (StreamReader sr = new StreamReader(latestFile.FullName))
             {
                 XmlSerializer xmlSerializer = new(typeof(List<AppInformation>));
@@ -65,8 +68,8 @@ namespace TimeControl.Tools
                         MessageBoxButtons.OKCancel, MessageBoxIcon.Error) == DialogResult.OK)
                     {
                         sr.Close();
-                        File.Delete(GetLatestXMLFile().FullName);
-                        Process.Start(Environment.CurrentDirectory + "\\TimeControl.exe");
+                        File.Delete(GetLatestAppsFile().FullName);
+                        Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\TimeControl.exe");
                         Environment.Exit(2);
                     }
                 }
@@ -81,7 +84,7 @@ namespace TimeControl.Tools
             return apps;
         }
 
-        public static FileInfo GetLatestXMLFile()
+        public static FileInfo GetLatestAppsFile()
         {
             DirectoryInfo directory = new DirectoryInfo(TimeFileDirectory);
             FileInfo latestFile = directory.GetFiles("*.xml")[0];
@@ -94,6 +97,23 @@ namespace TimeControl.Tools
                 }
             }
             return latestFile;
+        }
+
+        public static void SaveTimeData(TimeData time)
+        {
+            using (StreamWriter sw=new(SavedData))
+            {
+                XmlSerializer xmlSerializer = new(typeof(TimeData));
+                xmlSerializer.Serialize(sw, time);
+            }
+        }
+        public static TimeData ReadTimeData()
+        {
+            using (StreamReader sr=new(SavedData))
+            {
+                XmlSerializer xmlSerializer = new(typeof(TimeData));
+                return (TimeData)xmlSerializer.Deserialize(sr);
+            }
         }
     }
 }

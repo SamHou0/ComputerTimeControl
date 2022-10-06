@@ -1,4 +1,4 @@
-﻿namespace TimeControl.AppControl
+﻿namespace TimeControl.Data
 {
     public class AppInformation
     {

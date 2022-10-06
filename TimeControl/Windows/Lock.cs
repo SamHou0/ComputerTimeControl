@@ -8,6 +8,7 @@ namespace TimeControl.Windows
 {
     public partial class Lock : Form
     {
+        public static TimeSpan TempTimeSpan;
         private bool usePassword = true;
         private string unlockPasswordHash;
         private string[] processLocation;
@@ -56,7 +57,7 @@ namespace TimeControl.Windows
             {
                 unlockLabel.Visible = true;
                 progressBar.Value = progressBar.Maximum;
-                ForceClose();
+                isClosable = true;
             }
             else
                 progressBar.Value = (int)timeSpan.TotalSeconds;
@@ -76,7 +77,10 @@ namespace TimeControl.Windows
                 MessageBox.Show("时间还没到呢！再等等吧。（点击继续）", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information); ;
             }
             else
+            {
                 File.Delete(TimeControlFile.TempTimeFile);
+                TempTimeSpan = DateTime.Now - startTime;
+            }
         }
 
         private void UnlockButton_Click(object sender, EventArgs e)

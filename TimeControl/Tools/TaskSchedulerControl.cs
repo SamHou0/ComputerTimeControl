@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using TaskScheduler;
 using System;
 using Windows.Graphics.Printing3D;
+using System.Runtime.CompilerServices;
 
 namespace TimeControl.Tools
 {
@@ -24,7 +25,7 @@ namespace TimeControl.Tools
                 IExecAction action=
                     (IExecAction)taskDefinition.Actions.Create
                     (_TASK_ACTION_TYPE.TASK_ACTION_EXEC);
-                action.Path=Environment.CurrentDirectory + "\\TimeControlConsole.exe";
+                action.Path=AppDomain.CurrentDomain.BaseDirectory + "\\TimeControlConsole.exe";
                 //设置
                 taskDefinition.Settings.ExecutionTimeLimit = "PT0S";
                 taskDefinition.Settings.DisallowStartIfOnBatteries = false;

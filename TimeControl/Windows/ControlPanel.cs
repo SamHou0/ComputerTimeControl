@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeControl.AppControl;
+using TimeControl.Data;
 using TimeControl.Tools;
 using Windows.ApplicationModel.Contacts;
 
@@ -15,40 +18,12 @@ namespace TimeControl.Windows
         private bool isClosable = false;//指示当前是否可以关闭
         private string unlockPasswordHash = "";//密码哈希值，用作比对
         private AppController appController;//列表、计时控制器
-
+        private TimeData timeData;//数据
         public ControlPanel(bool hide)
         {
             InitializeComponent();
             this.hide = hide;
-            //自动关机
-            if (File.Exists(TimeControlFile.ShutdownSpan))
-            {
-                    string[] shutdownTimeLines = File.ReadAllLines(TimeControlFile.ShutdownSpan);
-                    TimeOnly startTime = TimeOnly.Parse(shutdownTimeLines[0]);
-                    TimeOnly endTime = TimeOnly.Parse(shutdownTimeLines[1]);
-                    TimeOnly now = TimeOnly.FromDateTime(DateTime.Now);
-                    if(now>=startTime&&now<=endTime)
-                    {
-                        SystemControl.Shutdown();
-                    }
-                    Application.Exit();
-            }
-
-            if (!Directory.Exists(TimeControlFile.BaseLocation))
-            {
-                Directory.CreateDirectory(TimeControlFile.BaseLocation);
-            }
-            if (File.Exists(TimeControlFile.PassLocation))//加载密码哈希值
-            {
-                unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
-                PasswordSet();
-            }
-            else
-                unlockPasswordRemoveButton.Enabled = false;
-
-            appController = new(usageBox, processMonitorTimer);
-            fileSaveTimer.Start();
-
+            //屏保
             if (File.Exists(TimeControlFile.WhiteAppLocation))
                 whiteProcessBox.Text = File.ReadAllText(TimeControlFile.WhiteAppLocation);
             if (File.Exists(TimeControlFile.TempTimeFile))
@@ -56,6 +31,45 @@ namespace TimeControl.Windows
                 MessageBox.Show("恢复屏保");
                 StartLock(unlockPasswordHash);
             }
+            //程序计时
+            if (!Directory.Exists(TimeControlFile.BaseLocation))
+            {
+                Directory.CreateDirectory(TimeControlFile.BaseLocation);
+            }
+            appController = new(usageBox, processMonitorTimer);
+            fileSaveTimer.Start();
+            //自动关机
+            if (File.Exists(TimeControlFile.ShutdownSpan))
+            {
+                string[] shutdownTimeLines = File.ReadAllLines(TimeControlFile.ShutdownSpan);
+                TimeOnly startTime = TimeOnly.Parse(shutdownTimeLines[0]);
+                TimeOnly endTime = TimeOnly.Parse(shutdownTimeLines[1]);
+                TimeOnly now = TimeOnly.FromDateTime(DateTime.Now);
+                if (now >= startTime && now <= endTime)
+                {
+                    SystemControl.Shutdown();
+                }
+                Application.Exit();
+            }
+            //数据记录
+            if(File.Exists(TimeControlFile.SavedData))
+            {
+                timeData = TimeControlFile.ReadTimeData();
+                RefreshAndSaveData();
+            }
+            else
+            {
+                timeData = new();
+                RefreshAndSaveData();
+            }
+            //密码
+            if (File.Exists(TimeControlFile.PassLocation))//加载密码哈希值
+            {
+                unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
+                PasswordSet();
+            }
+            else
+                unlockPasswordRemoveButton.Enabled = false;
         }
 
         #region Form
@@ -121,7 +135,7 @@ namespace TimeControl.Windows
             StartLock(unlockPasswordHash, (int)timeBox.Value);
         }
 
-        private static void StartLock(string unlockPasswordHash, int minutes = 0)
+        private void StartLock(string unlockPasswordHash, int minutes = 0)
         {
             IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
             IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
@@ -138,6 +152,9 @@ namespace TimeControl.Windows
             }).Wait();
             Dllimport.SwitchDesktop(nowDesktop);
             Dllimport.CloseDesktop(newDesktop);
+            int index = dataGridView.Rows.Add();
+            timeData.AddTime(Lock.TempTimeSpan);
+            RefreshAndSaveData();
         }
 
         private void WhiteProcessBox_TextChanged(object sender, EventArgs e)
@@ -145,7 +162,7 @@ namespace TimeControl.Windows
             File.WriteAllText(TimeControlFile.WhiteAppLocation, whiteProcessBox.Text);
         }
 
-        #endregion LockPage
+        #endregion
 
         #region ProcessPage
 
@@ -207,9 +224,30 @@ namespace TimeControl.Windows
             appController.Reset();
         }
 
-        #endregion ProcessPage
+        #endregion
 
-        #region SettingPage
+        #region ShutdownPage
+        private void shutdownSetButton_Click(object sender, EventArgs e)
+        {
+            TimeOnly startTime = new((int)startShutdownHour.Value,
+                (int)startShutdownMinute.Value, 0);
+            TimeOnly endTime = new((int)endShutdownHour.Value,
+                (int)endShutdownMinute.Value, 0);
+            if (startTime < endTime)
+                File.WriteAllText(TimeControlFile.ShutdownSpan,
+                    startTime + Environment.NewLine + endTime);
+            else
+                MessageBox.Show("时间输入非法。", "错误"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        private void shutdownRemoveButton_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(TimeControlFile.ShutdownSpan))
+                File.Delete(TimeControlFile.ShutdownSpan);
+        }
+        #endregion
+
+        #region ProtectPage
 
         #region Password
 
@@ -257,7 +295,7 @@ namespace TimeControl.Windows
                 return true;
         }
 
-        #endregion Password
+        #endregion
 
         private void AddBootButton_Click(object sender, EventArgs e)
         {
@@ -269,10 +307,9 @@ namespace TimeControl.Windows
             TaskSchedulerControl.RemoveBoot();
         }
 
-        #endregion SettingPage
+        #endregion
 
         #region AboutPage
-
         private void AuthorButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Properties.Resources.words);
@@ -293,28 +330,23 @@ namespace TimeControl.Windows
             Process.Start("explorer.exe",
                 "https://gitee.com/Sam-Hou/ComputerTimeControl/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E");
         }
+        #endregion
 
-        #endregion AboutPage
+        #region DataPage
+        private void RefreshAndSaveData()
+        {
+            //刷新列表
+            //屏保合计
+            dataGridView.Rows.Clear();
+            dataGridView.Rows.Add();
+            dataGridView.Rows[0].Cells[0].Value = timeData.Time.Hours;
+            dataGridView.Rows[0].Cells[1].Value = timeData.Time.Minutes;
+            dataGridView.Rows[0].Cells[2].Value = timeData.Time.Seconds;
+            dataGridView.Rows[0].Cells[3].Value = "屏保合计";
+            //保存
+            TimeControlFile.SaveTimeData(timeData);
+        }
 
-        #region ShutdownPage
-        private void shutdownSetButton_Click(object sender, EventArgs e)
-        {
-            TimeOnly startTime = new((int)startShutdownHour.Value,
-                (int)startShutdownMinute.Value, 0);
-            TimeOnly endTime = new((int)endShutdownHour.Value,
-                (int)endShutdownMinute.Value, 0);
-            if (startTime < endTime)
-                File.WriteAllText(TimeControlFile.ShutdownSpan,
-                    startTime + Environment.NewLine + endTime);
-            else
-                MessageBox.Show("时间输入非法。", "错误"
-                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-        private void shutdownRemoveButton_Click(object sender, EventArgs e)
-        {
-            if (File.Exists(TimeControlFile.ShutdownSpan))
-                File.Delete(TimeControlFile.ShutdownSpan);
-        }
         #endregion
 
     }
