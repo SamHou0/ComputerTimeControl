@@ -307,9 +307,9 @@ namespace TimeControl.Windows
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(44, 330);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(523, 17);
+            this.label8.Size = new System.Drawing.Size(493, 17);
             this.label8.TabIndex = 16;
-            this.label8.Text = "开机启动通过windows计划任务实现！若电脑被误完全锁定，请关闭TimeControlShutDown任务";
+            this.label8.Text = "开机启动通过windows计划任务实现！若电脑被误完全锁定，请关闭TimeControlBoot任务";
             // 
             // shutdownRemoveButton
             // 
