@@ -140,7 +140,7 @@ namespace TimeControl.Windows
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(626, 388);
             this.Name = "Lock";
-            this.Text = "Lock";
+            this.Text = "屏保";
             this.UseWaitCursor = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Lock_FormClosing);
             this.ResumeLayout(false);

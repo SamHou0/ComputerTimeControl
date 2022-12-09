@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using TimeControl.Tools;
+using System.IO;
 
 namespace TimeControl.Windows
 {
@@ -14,6 +15,9 @@ namespace TimeControl.Windows
             {
                 whiteListBox.Items.Add(whiteProcess);
             }
+            noteLocationLabel.Text="文件位置："+TimeControlFile.NoteFile;
+            if (File.Exists(TimeControlFile.NoteFile))
+                noteTextBox.Text = File.ReadAllText(TimeControlFile.NoteFile);
         }
 
         private void whiteListBox_DoubleClick(object sender, EventArgs e)
@@ -31,6 +35,11 @@ namespace TimeControl.Windows
         private void timer_Tick(object sender, EventArgs e)
         {
             timeLabel.Text = "当前时间：" + DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void noteTextBox_TextChanged(object sender, EventArgs e)
+        {
+            File.WriteAllText(TimeControlFile.NoteFile, noteTextBox.Text);
         }
     }
 }

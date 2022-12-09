@@ -237,7 +237,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "TimeInput";
-            this.Text = "TimeInput";
+            this.Text = "进程选取器";
             ((System.ComponentModel.ISupportInitialize)(this.timeSecondBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.timeMinuteBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.restMinuteBox)).EndInit();

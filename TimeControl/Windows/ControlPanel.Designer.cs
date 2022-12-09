@@ -73,11 +73,10 @@ namespace TimeControl.Windows
             this.minuteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.secondColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.about = new System.Windows.Forms.TabPage();
+            this.settingPage = new System.Windows.Forms.TabPage();
             this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
             this.giteeLinkLabel = new System.Windows.Forms.LinkLabel();
             this.githubLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.authorButton = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -97,7 +96,7 @@ namespace TimeControl.Windows
             this.appProtect.SuspendLayout();
             this.dataPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.about.SuspendLayout();
+            this.settingPage.SuspendLayout();
             this.iconContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,7 +141,7 @@ namespace TimeControl.Windows
             this.controlTab.Controls.Add(this.shutdownTab);
             this.controlTab.Controls.Add(this.appProtect);
             this.controlTab.Controls.Add(this.dataPage);
-            this.controlTab.Controls.Add(this.about);
+            this.controlTab.Controls.Add(this.settingPage);
             this.controlTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.controlTab.Location = new System.Drawing.Point(0, 0);
             this.controlTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -579,22 +578,21 @@ namespace TimeControl.Windows
             this.nameColumn.ReadOnly = true;
             this.nameColumn.Width = 153;
             // 
-            // about
+            // settingPage
             // 
-            this.about.Controls.Add(this.helpLinkLabel);
-            this.about.Controls.Add(this.giteeLinkLabel);
-            this.about.Controls.Add(this.githubLinkLabel);
-            this.about.Controls.Add(this.authorButton);
-            this.about.Controls.Add(this.linkLabel1);
-            this.about.Controls.Add(this.label3);
-            this.about.Location = new System.Drawing.Point(4, 26);
-            this.about.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.about.Name = "about";
-            this.about.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.about.Size = new System.Drawing.Size(614, 352);
-            this.about.TabIndex = 2;
-            this.about.Text = "关于";
-            this.about.UseVisualStyleBackColor = true;
+            this.settingPage.Controls.Add(this.helpLinkLabel);
+            this.settingPage.Controls.Add(this.giteeLinkLabel);
+            this.settingPage.Controls.Add(this.githubLinkLabel);
+            this.settingPage.Controls.Add(this.linkLabel1);
+            this.settingPage.Controls.Add(this.label3);
+            this.settingPage.Location = new System.Drawing.Point(4, 26);
+            this.settingPage.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.settingPage.Name = "settingPage";
+            this.settingPage.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.settingPage.Size = new System.Drawing.Size(614, 352);
+            this.settingPage.TabIndex = 2;
+            this.settingPage.Text = "设置";
+            this.settingPage.UseVisualStyleBackColor = true;
             // 
             // helpLinkLabel
             // 
@@ -610,7 +608,7 @@ namespace TimeControl.Windows
             // giteeLinkLabel
             // 
             this.giteeLinkLabel.AutoSize = true;
-            this.giteeLinkLabel.Location = new System.Drawing.Point(102, 330);
+            this.giteeLinkLabel.Location = new System.Drawing.Point(5, 330);
             this.giteeLinkLabel.Name = "giteeLinkLabel";
             this.giteeLinkLabel.Size = new System.Drawing.Size(37, 17);
             this.giteeLinkLabel.TabIndex = 6;
@@ -621,24 +619,13 @@ namespace TimeControl.Windows
             // githubLinkLabel
             // 
             this.githubLinkLabel.AutoSize = true;
-            this.githubLinkLabel.Location = new System.Drawing.Point(102, 305);
+            this.githubLinkLabel.Location = new System.Drawing.Point(5, 305);
             this.githubLinkLabel.Name = "githubLinkLabel";
             this.githubLinkLabel.Size = new System.Drawing.Size(45, 17);
             this.githubLinkLabel.TabIndex = 5;
             this.githubLinkLabel.TabStop = true;
             this.githubLinkLabel.Text = "github";
             this.githubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GithubLinkLabel_LinkClicked);
-            // 
-            // authorButton
-            // 
-            this.authorButton.Location = new System.Drawing.Point(5, 305);
-            this.authorButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.authorButton.Name = "authorButton";
-            this.authorButton.Size = new System.Drawing.Size(92, 46);
-            this.authorButton.TabIndex = 4;
-            this.authorButton.Text = "作者的话";
-            this.authorButton.UseVisualStyleBackColor = true;
-            this.authorButton.Click += new System.EventHandler(this.AuthorButton_Click);
             // 
             // linkLabel1
             // 
@@ -707,7 +694,7 @@ namespace TimeControl.Windows
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ControlPanel";
-            this.Text = "ControlPanel";
+            this.Text = "时间管理";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControlPanel_FormClosing);
             this.Shown += new System.EventHandler(this.ControlPanel_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).EndInit();
@@ -726,8 +713,8 @@ namespace TimeControl.Windows
             this.appProtect.PerformLayout();
             this.dataPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.about.ResumeLayout(false);
-            this.about.PerformLayout();
+            this.settingPage.ResumeLayout(false);
+            this.settingPage.PerformLayout();
             this.iconContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -743,7 +730,7 @@ namespace TimeControl.Windows
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip iconContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
-        private System.Windows.Forms.TabPage about;
+        private System.Windows.Forms.TabPage settingPage;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox usageBox;
@@ -759,7 +746,6 @@ namespace TimeControl.Windows
         private System.Windows.Forms.CheckBox autoRefreshBox;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Button authorButton;
         private System.Windows.Forms.Timer fileSaveTimer;
         private System.Windows.Forms.LinkLabel giteeLinkLabel;
         private System.Windows.Forms.LinkLabel githubLinkLabel;

@@ -44,8 +44,11 @@ namespace TimeControl
                 else
                     return;
             }
-            Application.ThreadException += ExceptionHandler;
-            AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
+            if (!Debugger.IsAttached)
+            {
+                Application.ThreadException += ExceptionHandler;
+                AppDomain.CurrentDomain.UnhandledException += ExceptionHandler;
+            }
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -59,14 +59,5 @@ namespace TimeControl.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   查找类似 这个软件是由SamHou开发的。希望可以帮你养成良好的电脑使用习惯~如果觉得好用的话，请去github和gitee点个star~ 的本地化字符串。
-        /// </summary>
-        internal static string words {
-            get {
-                return ResourceManager.GetString("words", resourceCulture);
-            }
-        }
     }
 }

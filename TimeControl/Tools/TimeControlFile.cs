@@ -23,6 +23,7 @@ namespace TimeControl.Tools
         //屏保
         public static readonly string WhiteAppLocation = BaseLocation + "\\WhiteApp.txt";//应用白名单保存
         public static readonly string TempTimeFile = BaseLocation + "\\Temp.txt";
+        public static readonly string NoteFile = BaseLocation + "\\Notes.txt";
         //自动关机
         public static readonly string ShutdownSpan = BaseLocation + "\\Shutdown.txt";
         //数据显示

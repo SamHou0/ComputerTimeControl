@@ -309,7 +309,24 @@ namespace TimeControl.Windows
 
         #endregion
 
-        #region AboutPage
+        #region DataPage
+        private void RefreshAndSaveData()
+        {
+            //刷新列表
+            //屏保合计
+            dataGridView.Rows.Clear();
+            dataGridView.Rows.Add();
+            dataGridView.Rows[0].Cells[0].Value = timeData.Time.Hours;
+            dataGridView.Rows[0].Cells[1].Value = timeData.Time.Minutes;
+            dataGridView.Rows[0].Cells[2].Value = timeData.Time.Seconds;
+            dataGridView.Rows[0].Cells[3].Value = "屏保合计";
+            //保存
+            TimeControlFile.SaveTimeData(timeData);
+        }
+
+        #endregion
+
+        #region SettingPage
         private void AuthorButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show(Properties.Resources.words);
@@ -330,23 +347,6 @@ namespace TimeControl.Windows
             Process.Start("explorer.exe",
                 "https://gitee.com/Sam-Hou/ComputerTimeControl/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E");
         }
-        #endregion
-
-        #region DataPage
-        private void RefreshAndSaveData()
-        {
-            //刷新列表
-            //屏保合计
-            dataGridView.Rows.Clear();
-            dataGridView.Rows.Add();
-            dataGridView.Rows[0].Cells[0].Value = timeData.Time.Hours;
-            dataGridView.Rows[0].Cells[1].Value = timeData.Time.Minutes;
-            dataGridView.Rows[0].Cells[2].Value = timeData.Time.Seconds;
-            dataGridView.Rows[0].Cells[3].Value = "屏保合计";
-            //保存
-            TimeControlFile.SaveTimeData(timeData);
-        }
-
         #endregion
 
     }
