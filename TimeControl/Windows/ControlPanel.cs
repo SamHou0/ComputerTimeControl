@@ -327,10 +327,6 @@ namespace TimeControl.Windows
         #endregion
 
         #region SettingPage
-        private void AuthorButton_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(Properties.Resources.words);
-        }
 
         private void GithubLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
