@@ -43,12 +43,12 @@ steps:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\TimeControl\bin\Release'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\TimeControl.zip'
     replaceExistingArchive: true
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\TimeControl.zip'
     ArtifactName: 'AutoBuildOutputs'
     publishLocation: 'Container'
 
@@ -58,8 +58,7 @@ steps:
     repositoryName: 'SamHou0/ComputerTimeControl'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'userSpecifiedTag'
-    tag: 'test'
-    isDraft: true
+    tagSource: 'gitTag'
+    tagPattern: 'v'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
