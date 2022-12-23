@@ -36,15 +36,15 @@ steps:
   inputs:
     contents: '**\bin\**'
     targetFolder: $(Build.ArtifactStagingDirectory)
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: AutoBuildOutputs
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\TimeControl\bin\Release'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
     replaceExistingArchive: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
+    ArtifactName: 'AutoBuildOutputs'
+    publishLocation: 'Container'
