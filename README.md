@@ -8,7 +8,7 @@
 - 自动关机：在特定时间段开启电脑时自动关闭
 
 ## 开发环境
-- Micosoft Visual Studio 2022
+- Microsoft Visual Studio 2022
 - .net 6.0 (C#) 桌面程序
 
 ## 仓库镜像
