@@ -1,4 +1,5 @@
 # .NET Desktop
+
 # Build and run tests for .NET Desktop or Windows classic desktop solutions.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/apps/windows/dot-net
@@ -36,15 +37,28 @@ steps:
   inputs:
     contents: '**\bin\**'
     targetFolder: $(Build.ArtifactStagingDirectory)
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\TimeControl\bin\Release'
     includeRootFolder: false
     archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)\TimeControl.zip'
     replaceExistingArchive: true
+
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)\$(Build.BuildId).zip'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\TimeControl.zip'
     ArtifactName: 'AutoBuildOutputs'
     publishLocation: 'Container'
+
+- task: GitHubRelease@1
+  inputs:
+    gitHubConnection: 'github connection 1'
+    repositoryName: 'SamHou0/ComputerTimeControl'
+    action: 'create'
+    target: '$(Build.SourceVersion)'
+    tagSource: 'gitTag'
+    tagPattern: 'v*'
+    changeLogCompareToRelease: 'lastFullRelease'
+    changeLogType: 'commitBased'
