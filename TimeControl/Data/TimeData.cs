@@ -13,9 +13,14 @@ namespace TimeControl.Data
         public void AddTime(TimeSpan time)
         {
             LockTime += time;
-        }public void AddDeepTime(TimeSpan time)
+        }
+        public void AddDeepTime(TimeSpan time)
         {
             DeepLockTime += time;
+        }
+        public TimeSpan GetTimeSum()
+        {
+            return LockTime + DeepLockTime;
         }
     }
 }

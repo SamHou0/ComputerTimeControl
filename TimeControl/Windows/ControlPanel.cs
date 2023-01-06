@@ -9,6 +9,7 @@ using TimeControl.AppControl;
 using TimeControl.Data;
 using TimeControl.Tools;
 using Windows.ApplicationModel.Contacts;
+using Windows.UI;
 
 namespace TimeControl.Windows
 {
@@ -45,7 +46,7 @@ namespace TimeControl.Windows
             //深度专注
             if (File.Exists(TimeControlFile.DeepTempTimeFile))
             {
-                string[] deepTimeFileStr=File.ReadAllLines(TimeControlFile.DeepTempTimeFile);
+                string[] deepTimeFileStr = File.ReadAllLines(TimeControlFile.DeepTempTimeFile);
                 TimeSpan deepFocusTime = DateTime.Now -
                     DateTime.Parse(deepTimeFileStr[0]);
                 if (deepFocusTime < TimeSpan.Parse(deepTimeFileStr[1]))
@@ -185,7 +186,7 @@ namespace TimeControl.Windows
         #region DeepLockPage
         private void deepStartButton_Click(object sender, EventArgs e)
         {
-            TimeSpan deepTime =new(0, (int)deepTimeInput.Value,0);
+            TimeSpan deepTime = new(0, (int)deepTimeInput.Value, 0);
             File.WriteAllText(TimeControlFile.DeepTempTimeFile, DateTime.Now + Environment.NewLine + deepTime);
             SystemControl.Shutdown();
             Application.Exit();
@@ -346,10 +347,42 @@ namespace TimeControl.Windows
             dataGridView.Rows.Add(timeData.LockTime, "普通屏保");
             //深度专注屏保
             dataGridView.Rows.Add(timeData.DeepLockTime, "深度专注屏保");
+            //更新进度
+            ShowProgress(timeData);
             //保存
             TimeControlFile.SaveTimeData(timeData);
         }
 
+        #endregion
+
+        #region ProgressPage
+        private void ShowProgress(TimeData timeData)
+        {
+            TimeSpan timeSpan = timeData.GetTimeSum();
+            int level = 1;
+            TimeSpan targetTimeSpan = new(0, 0, 0);
+            while (level < 100)
+            {
+                targetTimeSpan = new TimeSpan(level, 0, 0);
+                if (timeSpan > targetTimeSpan)
+                {
+                    level++;
+                    timeSpan -= targetTimeSpan;
+                }
+                else
+                    break;
+            }
+
+            progressLabel.Text = $"进入下一级还需要专注{Math.Round((targetTimeSpan - timeSpan).TotalHours, 3)}小时";
+            levelLabel.Text = $"当前等级：{level}/100级";
+            progressBar.Value =Convert.ToInt32( (timeSpan / targetTimeSpan) *100);
+            if (level == 100)
+            {
+                encourageLabel.Text = "恭喜通关！你可以通过删除TimeControl文件夹里的SavedData.xml来重新开始！";
+                progressLabel.Visible= false;
+                progressBar.Value = 100;
+            }
+        }
         #endregion
 
         #region SettingPage

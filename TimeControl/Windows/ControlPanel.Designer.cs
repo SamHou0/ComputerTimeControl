@@ -37,6 +37,10 @@ namespace TimeControl.Windows
             this.startNow = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.whiteProcessBox = new System.Windows.Forms.TextBox();
+            this.deepFocusPage = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.deepTimeInput = new System.Windows.Forms.NumericUpDown();
+            this.deepStartButton = new System.Windows.Forms.Button();
             this.processMonitor = new System.Windows.Forms.TabPage();
             this.resetButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
@@ -71,10 +75,11 @@ namespace TimeControl.Windows
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deepFocusPage = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.deepTimeInput = new System.Windows.Forms.NumericUpDown();
-            this.deepStartButton = new System.Windows.Forms.Button();
+            this.progressPage = new System.Windows.Forms.TabPage();
+            this.encourageLabel = new System.Windows.Forms.Label();
+            this.progressLabel = new System.Windows.Forms.Label();
+            this.levelLabel = new System.Windows.Forms.Label();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.settingPage = new System.Windows.Forms.TabPage();
             this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
             this.giteeLinkLabel = new System.Windows.Forms.LinkLabel();
@@ -89,6 +94,8 @@ namespace TimeControl.Windows
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
+            this.deepFocusPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deepTimeInput)).BeginInit();
             this.processMonitor.SuspendLayout();
             this.shutdownTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.endShutdownMinute)).BeginInit();
@@ -98,8 +105,7 @@ namespace TimeControl.Windows
             this.appProtect.SuspendLayout();
             this.dataPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.deepFocusPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deepTimeInput)).BeginInit();
+            this.progressPage.SuspendLayout();
             this.settingPage.SuspendLayout();
             this.iconContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -146,6 +152,7 @@ namespace TimeControl.Windows
             this.controlTab.Controls.Add(this.shutdownTab);
             this.controlTab.Controls.Add(this.appProtect);
             this.controlTab.Controls.Add(this.dataPage);
+            this.controlTab.Controls.Add(this.progressPage);
             this.controlTab.Controls.Add(this.settingPage);
             this.controlTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.controlTab.Location = new System.Drawing.Point(0, 0);
@@ -188,6 +195,62 @@ namespace TimeControl.Windows
             this.whiteProcessBox.Size = new System.Drawing.Size(298, 134);
             this.whiteProcessBox.TabIndex = 2;
             this.whiteProcessBox.TextChanged += new System.EventHandler(this.WhiteProcessBox_TextChanged);
+            // 
+            // deepFocusPage
+            // 
+            this.deepFocusPage.Controls.Add(this.label9);
+            this.deepFocusPage.Controls.Add(this.deepTimeInput);
+            this.deepFocusPage.Controls.Add(this.deepStartButton);
+            this.deepFocusPage.Location = new System.Drawing.Point(4, 26);
+            this.deepFocusPage.Name = "deepFocusPage";
+            this.deepFocusPage.Size = new System.Drawing.Size(614, 352);
+            this.deepFocusPage.TabIndex = 6;
+            this.deepFocusPage.Text = "深度专注";
+            this.deepFocusPage.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(64, 126);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(488, 17);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "启动屏保后，计算机将立刻关机，并在持续时间内开机时自动关闭。（必须设置开机启动）";
+            // 
+            // deepTimeInput
+            // 
+            this.deepTimeInput.Location = new System.Drawing.Point(246, 176);
+            this.deepTimeInput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.deepTimeInput.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.deepTimeInput.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.deepTimeInput.Name = "deepTimeInput";
+            this.deepTimeInput.Size = new System.Drawing.Size(117, 23);
+            this.deepTimeInput.TabIndex = 2;
+            this.deepTimeInput.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // deepStartButton
+            // 
+            this.deepStartButton.Location = new System.Drawing.Point(229, 218);
+            this.deepStartButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.deepStartButton.Name = "deepStartButton";
+            this.deepStartButton.Size = new System.Drawing.Size(145, 82);
+            this.deepStartButton.TabIndex = 1;
+            this.deepStartButton.Text = "启动屏保（分）";
+            this.deepStartButton.UseVisualStyleBackColor = true;
+            this.deepStartButton.Click += new System.EventHandler(this.deepStartButton_Click);
             // 
             // processMonitor
             // 
@@ -568,61 +631,53 @@ namespace TimeControl.Windows
             this.nameColumn.ReadOnly = true;
             this.nameColumn.Width = 153;
             // 
-            // deepFocusPage
+            // progressPage
             // 
-            this.deepFocusPage.Controls.Add(this.label9);
-            this.deepFocusPage.Controls.Add(this.deepTimeInput);
-            this.deepFocusPage.Controls.Add(this.deepStartButton);
-            this.deepFocusPage.Location = new System.Drawing.Point(4, 26);
-            this.deepFocusPage.Name = "deepFocusPage";
-            this.deepFocusPage.Size = new System.Drawing.Size(614, 352);
-            this.deepFocusPage.TabIndex = 6;
-            this.deepFocusPage.Text = "深度专注";
-            this.deepFocusPage.UseVisualStyleBackColor = true;
+            this.progressPage.Controls.Add(this.encourageLabel);
+            this.progressPage.Controls.Add(this.progressLabel);
+            this.progressPage.Controls.Add(this.levelLabel);
+            this.progressPage.Controls.Add(this.progressBar);
+            this.progressPage.Location = new System.Drawing.Point(4, 26);
+            this.progressPage.Name = "progressPage";
+            this.progressPage.Size = new System.Drawing.Size(614, 352);
+            this.progressPage.TabIndex = 7;
+            this.progressPage.Text = "我的进度";
+            this.progressPage.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // encourageLabel
             // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(64, 126);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(488, 17);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "启动屏保后，计算机将立刻关机，并在持续时间内开机时自动关闭。（必须设置开机启动）";
+            this.encourageLabel.ForeColor = System.Drawing.Color.Red;
+            this.encourageLabel.Location = new System.Drawing.Point(155, 94);
+            this.encourageLabel.Name = "encourageLabel";
+            this.encourageLabel.Size = new System.Drawing.Size(305, 119);
+            this.encourageLabel.TabIndex = 4;
+            this.encourageLabel.Text = "听说只要专注等级达到100级，能力就会有巨大的成长！";
+            this.encourageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // deepTimeInput
+            // progressLabel
             // 
-            this.deepTimeInput.Location = new System.Drawing.Point(246, 176);
-            this.deepTimeInput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.deepTimeInput.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.deepTimeInput.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.deepTimeInput.Name = "deepTimeInput";
-            this.deepTimeInput.Size = new System.Drawing.Size(117, 23);
-            this.deepTimeInput.TabIndex = 2;
-            this.deepTimeInput.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.progressLabel.AutoSize = true;
+            this.progressLabel.Location = new System.Drawing.Point(210, 270);
+            this.progressLabel.Name = "progressLabel";
+            this.progressLabel.Size = new System.Drawing.Size(183, 17);
+            this.progressLabel.TabIndex = 3;
+            this.progressLabel.Text = "进入下一级还需要专注0.000小时";
             // 
-            // deepStartButton
+            // levelLabel
             // 
-            this.deepStartButton.Location = new System.Drawing.Point(229, 218);
-            this.deepStartButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.deepStartButton.Name = "deepStartButton";
-            this.deepStartButton.Size = new System.Drawing.Size(145, 82);
-            this.deepStartButton.TabIndex = 1;
-            this.deepStartButton.Text = "启动屏保（分）";
-            this.deepStartButton.UseVisualStyleBackColor = true;
-            this.deepStartButton.Click += new System.EventHandler(this.deepStartButton_Click);
+            this.levelLabel.AutoSize = true;
+            this.levelLabel.Location = new System.Drawing.Point(253, 213);
+            this.levelLabel.Name = "levelLabel";
+            this.levelLabel.Size = new System.Drawing.Size(113, 17);
+            this.levelLabel.TabIndex = 2;
+            this.levelLabel.Text = "当前等级：0/100级";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(124, 233);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(358, 34);
+            this.progressBar.TabIndex = 0;
             // 
             // settingPage
             // 
@@ -747,6 +802,9 @@ namespace TimeControl.Windows
             this.controlTab.ResumeLayout(false);
             this.startNow.ResumeLayout(false);
             this.startNow.PerformLayout();
+            this.deepFocusPage.ResumeLayout(false);
+            this.deepFocusPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deepTimeInput)).EndInit();
             this.processMonitor.ResumeLayout(false);
             this.processMonitor.PerformLayout();
             this.shutdownTab.ResumeLayout(false);
@@ -759,9 +817,8 @@ namespace TimeControl.Windows
             this.appProtect.PerformLayout();
             this.dataPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.deepFocusPage.ResumeLayout(false);
-            this.deepFocusPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deepTimeInput)).EndInit();
+            this.progressPage.ResumeLayout(false);
+            this.progressPage.PerformLayout();
             this.settingPage.ResumeLayout(false);
             this.settingPage.PerformLayout();
             this.iconContextMenuStrip.ResumeLayout(false);
@@ -826,5 +883,10 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button deepStartButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
+        private System.Windows.Forms.TabPage progressPage;
+        private System.Windows.Forms.Label levelLabel;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label progressLabel;
+        private System.Windows.Forms.Label encourageLabel;
     }
 }
