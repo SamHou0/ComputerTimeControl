@@ -69,10 +69,12 @@ namespace TimeControl.Windows
             this.label1 = new System.Windows.Forms.Label();
             this.dataPage = new System.Windows.Forms.TabPage();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.hourColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minuteColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.secondColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deepFocusPage = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.deepTimeInput = new System.Windows.Forms.NumericUpDown();
+            this.deepStartButton = new System.Windows.Forms.Button();
             this.settingPage = new System.Windows.Forms.TabPage();
             this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
             this.giteeLinkLabel = new System.Windows.Forms.LinkLabel();
@@ -96,6 +98,8 @@ namespace TimeControl.Windows
             this.appProtect.SuspendLayout();
             this.dataPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.deepFocusPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deepTimeInput)).BeginInit();
             this.settingPage.SuspendLayout();
             this.iconContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -137,6 +141,7 @@ namespace TimeControl.Windows
             // controlTab
             // 
             this.controlTab.Controls.Add(this.startNow);
+            this.controlTab.Controls.Add(this.deepFocusPage);
             this.controlTab.Controls.Add(this.processMonitor);
             this.controlTab.Controls.Add(this.shutdownTab);
             this.controlTab.Controls.Add(this.appProtect);
@@ -539,9 +544,7 @@ namespace TimeControl.Windows
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.hourColumn,
-            this.minuteColumn,
-            this.secondColumn,
+            this.timeColumn,
             this.nameColumn});
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
@@ -551,25 +554,12 @@ namespace TimeControl.Windows
             this.dataGridView.Size = new System.Drawing.Size(614, 352);
             this.dataGridView.TabIndex = 0;
             // 
-            // hourColumn
+            // timeColumn
             // 
-            this.hourColumn.HeaderText = "小时";
-            this.hourColumn.Name = "hourColumn";
-            this.hourColumn.ReadOnly = true;
-            this.hourColumn.Width = 167;
-            // 
-            // minuteColumn
-            // 
-            this.minuteColumn.HeaderText = "分钟";
-            this.minuteColumn.Name = "minuteColumn";
-            this.minuteColumn.ReadOnly = true;
-            this.minuteColumn.Width = 150;
-            // 
-            // secondColumn
-            // 
-            this.secondColumn.HeaderText = "秒";
-            this.secondColumn.Name = "secondColumn";
-            this.secondColumn.ReadOnly = true;
+            this.timeColumn.HeaderText = "时间";
+            this.timeColumn.Name = "timeColumn";
+            this.timeColumn.ReadOnly = true;
+            this.timeColumn.Width = 415;
             // 
             // nameColumn
             // 
@@ -577,6 +567,62 @@ namespace TimeControl.Windows
             this.nameColumn.Name = "nameColumn";
             this.nameColumn.ReadOnly = true;
             this.nameColumn.Width = 153;
+            // 
+            // deepFocusPage
+            // 
+            this.deepFocusPage.Controls.Add(this.label9);
+            this.deepFocusPage.Controls.Add(this.deepTimeInput);
+            this.deepFocusPage.Controls.Add(this.deepStartButton);
+            this.deepFocusPage.Location = new System.Drawing.Point(4, 26);
+            this.deepFocusPage.Name = "deepFocusPage";
+            this.deepFocusPage.Size = new System.Drawing.Size(614, 352);
+            this.deepFocusPage.TabIndex = 6;
+            this.deepFocusPage.Text = "深度专注";
+            this.deepFocusPage.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(64, 126);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(488, 17);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "启动屏保后，计算机将立刻关机，并在持续时间内开机时自动关闭。（必须设置开机启动）";
+            // 
+            // deepTimeInput
+            // 
+            this.deepTimeInput.Location = new System.Drawing.Point(246, 176);
+            this.deepTimeInput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.deepTimeInput.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.deepTimeInput.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.deepTimeInput.Name = "deepTimeInput";
+            this.deepTimeInput.Size = new System.Drawing.Size(117, 23);
+            this.deepTimeInput.TabIndex = 2;
+            this.deepTimeInput.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // deepStartButton
+            // 
+            this.deepStartButton.Location = new System.Drawing.Point(229, 218);
+            this.deepStartButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.deepStartButton.Name = "deepStartButton";
+            this.deepStartButton.Size = new System.Drawing.Size(145, 82);
+            this.deepStartButton.TabIndex = 1;
+            this.deepStartButton.Text = "启动屏保（分）";
+            this.deepStartButton.UseVisualStyleBackColor = true;
+            this.deepStartButton.Click += new System.EventHandler(this.deepStartButton_Click);
             // 
             // settingPage
             // 
@@ -713,6 +759,9 @@ namespace TimeControl.Windows
             this.appProtect.PerformLayout();
             this.dataPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.deepFocusPage.ResumeLayout(false);
+            this.deepFocusPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deepTimeInput)).EndInit();
             this.settingPage.ResumeLayout(false);
             this.settingPage.PerformLayout();
             this.iconContextMenuStrip.ResumeLayout(false);
@@ -771,9 +820,11 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage dataPage;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hourColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn minuteColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn secondColumn;
+        private System.Windows.Forms.TabPage deepFocusPage;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown deepTimeInput;
+        private System.Windows.Forms.Button deepStartButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn timeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
     }
 }

@@ -23,6 +23,17 @@ namespace TimeControl.Windows
         {
             InitializeComponent();
             this.hide = hide;
+            //数据记录
+            if (File.Exists(TimeControlFile.SavedData))
+            {
+                timeData = TimeControlFile.ReadTimeData();
+                RefreshAndSaveData();
+            }
+            else
+            {
+                timeData = new();
+                RefreshAndSaveData();
+            }
             //屏保
             if (File.Exists(TimeControlFile.WhiteAppLocation))
                 whiteProcessBox.Text = File.ReadAllText(TimeControlFile.WhiteAppLocation);
@@ -30,6 +41,24 @@ namespace TimeControl.Windows
             {
                 MessageBox.Show("恢复屏保");
                 StartLock(unlockPasswordHash);
+            }
+            //深度专注
+            if (File.Exists(TimeControlFile.DeepTempTimeFile))
+            {
+                string[] deepTimeFileStr=File.ReadAllLines(TimeControlFile.DeepTempTimeFile);
+                TimeSpan deepFocusTime = DateTime.Now -
+                    DateTime.Parse(deepTimeFileStr[0]);
+                if (deepFocusTime < TimeSpan.Parse(deepTimeFileStr[1]))
+                {
+                    SystemControl.Shutdown();
+                    Application.Exit();
+                }
+                else
+                {
+                    File.Delete(TimeControlFile.DeepTempTimeFile);
+                    timeData.AddDeepTime(deepFocusTime);
+                    RefreshAndSaveData();
+                }
             }
             //程序计时
             if (!Directory.Exists(TimeControlFile.BaseLocation))
@@ -50,17 +79,6 @@ namespace TimeControl.Windows
                     SystemControl.Shutdown();
                 }
                 Application.Exit();
-            }
-            //数据记录
-            if(File.Exists(TimeControlFile.SavedData))
-            {
-                timeData = TimeControlFile.ReadTimeData();
-                RefreshAndSaveData();
-            }
-            else
-            {
-                timeData = new();
-                RefreshAndSaveData();
             }
             //密码
             if (File.Exists(TimeControlFile.PassLocation))//加载密码哈希值
@@ -162,6 +180,16 @@ namespace TimeControl.Windows
             File.WriteAllText(TimeControlFile.WhiteAppLocation, whiteProcessBox.Text);
         }
 
+        #endregion
+
+        #region DeepLockPage
+        private void deepStartButton_Click(object sender, EventArgs e)
+        {
+            TimeSpan deepTime =new(0, (int)deepTimeInput.Value,0);
+            File.WriteAllText(TimeControlFile.DeepTempTimeFile, DateTime.Now + Environment.NewLine + deepTime);
+            SystemControl.Shutdown();
+            Application.Exit();
+        }
         #endregion
 
         #region ProcessPage
@@ -313,13 +341,11 @@ namespace TimeControl.Windows
         private void RefreshAndSaveData()
         {
             //刷新列表
-            //屏保合计
+            //普通屏保
             dataGridView.Rows.Clear();
-            dataGridView.Rows.Add();
-            dataGridView.Rows[0].Cells[0].Value = timeData.Time.Hours;
-            dataGridView.Rows[0].Cells[1].Value = timeData.Time.Minutes;
-            dataGridView.Rows[0].Cells[2].Value = timeData.Time.Seconds;
-            dataGridView.Rows[0].Cells[3].Value = "屏保合计";
+            dataGridView.Rows.Add(timeData.LockTime, "普通屏保");
+            //深度专注屏保
+            dataGridView.Rows.Add(timeData.DeepLockTime, "深度专注屏保");
             //保存
             TimeControlFile.SaveTimeData(timeData);
         }

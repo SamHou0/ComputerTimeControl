@@ -8,10 +8,14 @@ namespace TimeControl.Data
 {
     public class TimeData
     {
-        public TimeSpan Time { get; set; }=new TimeSpan();
+        public TimeSpan LockTime { get; set; }=new TimeSpan();
+        public TimeSpan DeepLockTime { get; set; } = new TimeSpan();
         public void AddTime(TimeSpan time)
         {
-            Time += time;
+            LockTime += time;
+        }public void AddDeepTime(TimeSpan time)
+        {
+            DeepLockTime += time;
         }
     }
 }
