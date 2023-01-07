@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeControl.AppControl;
 using TimeControl.Data;
+using TimeControl.Properties;
 using TimeControl.Tools;
 using Windows.ApplicationModel.Contacts;
 using Windows.UI;
@@ -20,8 +21,10 @@ namespace TimeControl.Windows
         private string unlockPasswordHash = "";//密码哈希值，用作比对
         private AppController appController;//列表、计时控制器
         private TimeData timeData;//数据
+        private bool isLoaded;//指示加载是否已经完成
         public ControlPanel(bool hide)
         {
+            isLoaded = false;
             Process[] processes = Process.GetProcessesByName("TimeControl");
             if (processes.Length > 1)
             {
@@ -41,6 +44,7 @@ namespace TimeControl.Windows
                     Environment.Exit(0);
             }
             InitializeComponent();
+            InitializeSettings();
             this.hide = hide;
             //数据记录
             if (File.Exists(TimeControlFile.SavedData))
@@ -87,6 +91,10 @@ namespace TimeControl.Windows
                 Directory.CreateDirectory(TimeControlFile.BaseLocation);
             }
             appController = new(usageBox, processMonitorTimer);
+            if ((Directory.GetLastWriteTime(TimeControlFile.TimeFileDirectory).ToString("yyyy-MM-dd")
+                != DateTime.Now.ToString("yyyy-MM-dd"))
+                && autoResetBox.Checked)
+                appController.Reset();
             fileSaveTimer.Start();
             //自动关机
             if (File.Exists(TimeControlFile.ShutdownSpan))
@@ -109,6 +117,7 @@ namespace TimeControl.Windows
             }
             else
                 unlockPasswordRemoveButton.Enabled = false;
+            isLoaded = true;
         }
 
         #region Form
@@ -193,7 +202,7 @@ namespace TimeControl.Windows
             Dllimport.CloseDesktop(newDesktop);
             int index = dataGridView.Rows.Add();
             timeData.AddTime(Lock.TempTimeSpan);
-            ResultWindow resultWindow=new(Lock.TempTimeSpan);
+            ResultWindow resultWindow = new(Lock.TempTimeSpan);
             resultWindow.Show();
             RefreshAndSaveData();
         }
@@ -397,11 +406,11 @@ namespace TimeControl.Windows
 
             progressLabel.Text = $"进入下一级还需要专注{Math.Round((targetTimeSpan - timeSpan).TotalHours, 3)}小时";
             levelLabel.Text = $"当前等级：{level}/100级";
-            progressBar.Value =Convert.ToInt32( (timeSpan / targetTimeSpan) *100);
+            progressBar.Value = Convert.ToInt32((timeSpan / targetTimeSpan) * 100);
             if (level == 100)
             {
                 encourageLabel.Text = "恭喜通关！你可以通过删除TimeControl文件夹里的SavedData.xml来重新开始！";
-                progressLabel.Visible= false;
+                progressLabel.Visible = false;
                 progressBar.Value = 100;
             }
         }
@@ -424,7 +433,20 @@ namespace TimeControl.Windows
             Process.Start("explorer.exe",
                 "https://gitee.com/Sam-Hou/ComputerTimeControl/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E");
         }
+        private void SettingsChanged(object sender, EventArgs e)
+        {
+            if (isLoaded)
+            {
+                Settings.Default.AutoReset = autoResetBox.Checked;
+                Settings.Default.AutoRefresh = autoRefreshBox.Checked;
+                Settings.Default.Save();
+            }
+        }
+        private void InitializeSettings()
+        {
+            autoResetBox.Checked = Settings.Default.AutoReset;
+            autoRefreshBox.Checked = Settings.Default.AutoRefresh;
+        }
         #endregion
-
     }
 }

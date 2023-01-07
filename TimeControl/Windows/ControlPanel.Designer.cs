@@ -81,6 +81,8 @@ namespace TimeControl.Windows
             this.levelLabel = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.settingPage = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
+            this.autoResetBox = new System.Windows.Forms.CheckBox();
             this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
             this.giteeLinkLabel = new System.Windows.Forms.LinkLabel();
             this.githubLinkLabel = new System.Windows.Forms.LinkLabel();
@@ -302,6 +304,7 @@ namespace TimeControl.Windows
             this.autoRefreshBox.TabIndex = 6;
             this.autoRefreshBox.Text = "自动刷新";
             this.autoRefreshBox.UseVisualStyleBackColor = true;
+            this.autoRefreshBox.CheckedChanged += new System.EventHandler(this.SettingsChanged);
             // 
             // refreshButton
             // 
@@ -681,6 +684,8 @@ namespace TimeControl.Windows
             // 
             // settingPage
             // 
+            this.settingPage.Controls.Add(this.label13);
+            this.settingPage.Controls.Add(this.autoResetBox);
             this.settingPage.Controls.Add(this.helpLinkLabel);
             this.settingPage.Controls.Add(this.giteeLinkLabel);
             this.settingPage.Controls.Add(this.githubLinkLabel);
@@ -694,6 +699,27 @@ namespace TimeControl.Windows
             this.settingPage.TabIndex = 2;
             this.settingPage.Text = "设置";
             this.settingPage.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.LightCoral;
+            this.label13.Location = new System.Drawing.Point(485, 29);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(116, 17);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "你的设置将自动保存";
+            // 
+            // autoResetBox
+            // 
+            this.autoResetBox.AutoSize = true;
+            this.autoResetBox.Location = new System.Drawing.Point(8, 6);
+            this.autoResetBox.Name = "autoResetBox";
+            this.autoResetBox.Size = new System.Drawing.Size(255, 21);
+            this.autoResetBox.TabIndex = 8;
+            this.autoResetBox.Text = "新的一天开始时，自动重置进程计时的时间";
+            this.autoResetBox.UseVisualStyleBackColor = true;
+            this.autoResetBox.CheckedChanged += new System.EventHandler(this.SettingsChanged);
             // 
             // helpLinkLabel
             // 
@@ -888,5 +914,7 @@ namespace TimeControl.Windows
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label progressLabel;
         private System.Windows.Forms.Label encourageLabel;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.CheckBox autoResetBox;
     }
 }
