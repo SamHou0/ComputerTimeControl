@@ -26,24 +26,6 @@ namespace TimeControl
                     hide = true;
                 }
             }
-            Process[] processes = Process.GetProcessesByName("TimeControl");
-            if (processes.Length > 1)
-            {
-                if (MessageBox.Show(
-                    "当前已经启动TimeControl，不能启动多个实例，是否要重新启动？",
-                "提示",
-                MessageBoxButtons.OKCancel,
-                MessageBoxIcon.Information) == DialogResult.OK)
-                {
-                    foreach (Process process in processes)
-                    {
-                        if (process.Id != Environment.ProcessId)
-                            process.Kill();
-                    }
-                }
-                else
-                    return;
-            }
             if (!Debugger.IsAttached)
             {
                 Application.ThreadException += ExceptionHandler;
