@@ -76,6 +76,8 @@ namespace TimeControl.Windows
                 {
                     File.Delete(TimeControlFile.DeepTempTimeFile);
                     timeData.AddDeepTime(deepFocusTime);
+                    ResultWindow resultWindow = new(deepFocusTime);
+                    resultWindow.Show();
                     RefreshAndSaveData();
                 }
             }
@@ -191,6 +193,8 @@ namespace TimeControl.Windows
             Dllimport.CloseDesktop(newDesktop);
             int index = dataGridView.Rows.Add();
             timeData.AddTime(Lock.TempTimeSpan);
+            ResultWindow resultWindow=new(Lock.TempTimeSpan);
+            resultWindow.Show();
             RefreshAndSaveData();
         }
 

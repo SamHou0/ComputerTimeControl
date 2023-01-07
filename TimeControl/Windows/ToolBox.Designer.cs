@@ -102,6 +102,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.whiteListBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ToolBox";
             this.Text = "工具箱";
             this.ResumeLayout(false);
