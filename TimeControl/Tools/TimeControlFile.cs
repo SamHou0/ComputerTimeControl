@@ -78,7 +78,7 @@ namespace TimeControl.Tools
                 }
                 foreach (AppInformation information in infos)
                 {
-                    if (information.timeLimit != 0)
+                    if (information.timeLimit != 1)
                         apps.Add(new LimitedApp(information));
                     else
                         apps.Add(new App(information));

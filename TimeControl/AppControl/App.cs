@@ -24,6 +24,7 @@ namespace TimeControl.AppControl
             appInformation.time = time;
             appInformation.name = name;
             appInformation.restInterval = restInterval;
+            appInformation.timeLimit = 1;//设为1表示无限制
         }
 
         public App(AppInformation appInformation)
