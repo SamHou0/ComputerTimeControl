@@ -38,6 +38,7 @@ namespace TimeControl.Windows
             this.unlockButton = new System.Windows.Forms.Button();
             this.toolBoxButton = new System.Windows.Forms.Button();
             this.timeLabel = new System.Windows.Forms.Label();
+            this.changeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -121,11 +122,23 @@ namespace TimeControl.Windows
             this.timeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.timeLabel.UseWaitCursor = true;
             // 
+            // changeButton
+            // 
+            this.changeButton.ForeColor = System.Drawing.Color.Red;
+            this.changeButton.Location = new System.Drawing.Point(9, 39);
+            this.changeButton.Name = "changeButton";
+            this.changeButton.Size = new System.Drawing.Size(223, 51);
+            this.changeButton.TabIndex = 7;
+            this.changeButton.Text = "切换为深度专注";
+            this.changeButton.UseVisualStyleBackColor = true;
+            this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
+            // 
             // Lock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 349);
+            this.Controls.Add(this.changeButton);
             this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.toolBoxButton);
             this.Controls.Add(this.unlockButton);
@@ -158,5 +171,6 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button unlockButton;
         private System.Windows.Forms.Button toolBoxButton;
         private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Button changeButton;
     }
 }
