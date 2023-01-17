@@ -447,6 +447,11 @@ namespace TimeControl.Windows
             autoResetBox.Checked = Settings.Default.AutoReset;
             autoRefreshBox.Checked = Settings.Default.AutoRefresh;
         }
+        private void dataDirButton_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe",TimeControlFile.BaseLocation);
+        }
         #endregion
+
     }
 }

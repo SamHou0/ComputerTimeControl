@@ -93,6 +93,7 @@ namespace TimeControl.Windows
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
+            this.dataDirButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -684,6 +685,7 @@ namespace TimeControl.Windows
             // 
             // settingPage
             // 
+            this.settingPage.Controls.Add(this.dataDirButton);
             this.settingPage.Controls.Add(this.label13);
             this.settingPage.Controls.Add(this.autoResetBox);
             this.settingPage.Controls.Add(this.helpLinkLabel);
@@ -809,6 +811,16 @@ namespace TimeControl.Windows
             this.fileSaveTimer.Interval = 300000;
             this.fileSaveTimer.Tick += new System.EventHandler(this.FileSaveTimer_Tick);
             // 
+            // dataDirButton
+            // 
+            this.dataDirButton.Location = new System.Drawing.Point(484, 49);
+            this.dataDirButton.Name = "dataDirButton";
+            this.dataDirButton.Size = new System.Drawing.Size(117, 54);
+            this.dataDirButton.TabIndex = 10;
+            this.dataDirButton.Text = "打开数据文件夹";
+            this.dataDirButton.UseVisualStyleBackColor = true;
+            this.dataDirButton.Click += new System.EventHandler(this.dataDirButton_Click);
+            // 
             // ControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -916,5 +928,6 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Label encourageLabel;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox autoResetBox;
+        private System.Windows.Forms.Button dataDirButton;
     }
 }
