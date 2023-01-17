@@ -79,9 +79,7 @@ namespace TimeControl.Windows
                 else
                 {
                     File.Delete(TimeControlFile.DeepTempTimeFile);
-                    timeData.AddDeepTime(deepFocusTime);
-                    ResultWindow resultWindow = new(deepFocusTime);
-                    resultWindow.Show();
+                    ShowAndSave(deepFocusTime);
                     RefreshAndSaveData();
                 }
             }
@@ -201,9 +199,15 @@ namespace TimeControl.Windows
             Dllimport.SwitchDesktop(nowDesktop);
             Dllimport.CloseDesktop(newDesktop);
             int index = dataGridView.Rows.Add();
-            timeData.AddTime(Lock.TempTimeSpan);
-            ResultWindow resultWindow = new(Lock.TempTimeSpan);
+            ShowAndSave(Lock.TempTimeSpan);
+        }
+
+        private void ShowAndSave(TimeSpan timeSpan)
+        {
+            ResultWindow resultWindow = new(timeSpan);
             resultWindow.Show();
+            if (ResultWindow.IsSave == true)
+                timeData.AddTime(timeSpan);
             RefreshAndSaveData();
         }
 
