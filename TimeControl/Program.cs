@@ -55,11 +55,11 @@ namespace TimeControl
             else
                 ex = new Exception("未知错误，无法处理！");
             Dllimport.SwitchDesktop(nowDesktop);
-            File.Delete(TimeControlFile.TempTimeFile);
-            File.AppendAllText(TimeControlFile.LogFile, DateTime.Now.ToString() + Environment.NewLine + "===Error==="
+            File.Delete(TCFile.TempTimeFile);
+            File.AppendAllText(TCFile.LogFile, DateTime.Now.ToString() + Environment.NewLine + "===Error==="
                 + Environment.NewLine);
-            File.AppendAllText(TimeControlFile.LogFile, ex.ToString() + Environment.NewLine);
-            MessageBox.Show(ex.Message + Environment.NewLine + "以上为错误消息，已保存到" + TimeControlFile.LogFile
+            File.AppendAllText(TCFile.LogFile, ex.ToString() + Environment.NewLine);
+            MessageBox.Show(ex.Message + Environment.NewLine + "以上为错误消息，已保存到" + TCFile.LogFile
                 + "，请反馈此问题到项目主页Issue。保护程序已暂时关闭。", "TimeControl发生错误",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start("explorer.exe", "https://gitee.com/Sam-Hou/ComputerTimeControl/issues");

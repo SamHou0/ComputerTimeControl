@@ -81,6 +81,8 @@ namespace TimeControl.Windows
             this.levelLabel = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.settingPage = new System.Windows.Forms.TabPage();
+            this.goalChangeButton = new System.Windows.Forms.Button();
+            this.dataDirButton = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.autoResetBox = new System.Windows.Forms.CheckBox();
             this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
@@ -93,7 +95,7 @@ namespace TimeControl.Windows
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
-            this.dataDirButton = new System.Windows.Forms.Button();
+            this.goalLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -637,6 +639,7 @@ namespace TimeControl.Windows
             // 
             // progressPage
             // 
+            this.progressPage.Controls.Add(this.goalLabel);
             this.progressPage.Controls.Add(this.encourageLabel);
             this.progressPage.Controls.Add(this.progressLabel);
             this.progressPage.Controls.Add(this.levelLabel);
@@ -685,6 +688,7 @@ namespace TimeControl.Windows
             // 
             // settingPage
             // 
+            this.settingPage.Controls.Add(this.goalChangeButton);
             this.settingPage.Controls.Add(this.dataDirButton);
             this.settingPage.Controls.Add(this.label13);
             this.settingPage.Controls.Add(this.autoResetBox);
@@ -701,6 +705,26 @@ namespace TimeControl.Windows
             this.settingPage.TabIndex = 2;
             this.settingPage.Text = "设置";
             this.settingPage.UseVisualStyleBackColor = true;
+            // 
+            // goalChangeButton
+            // 
+            this.goalChangeButton.Location = new System.Drawing.Point(484, 109);
+            this.goalChangeButton.Name = "goalChangeButton";
+            this.goalChangeButton.Size = new System.Drawing.Size(117, 53);
+            this.goalChangeButton.TabIndex = 11;
+            this.goalChangeButton.Text = "设置/切换目标";
+            this.goalChangeButton.UseVisualStyleBackColor = true;
+            this.goalChangeButton.Click += new System.EventHandler(this.goalChangeButton_Click);
+            // 
+            // dataDirButton
+            // 
+            this.dataDirButton.Location = new System.Drawing.Point(484, 49);
+            this.dataDirButton.Name = "dataDirButton";
+            this.dataDirButton.Size = new System.Drawing.Size(117, 54);
+            this.dataDirButton.TabIndex = 10;
+            this.dataDirButton.Text = "打开数据文件夹";
+            this.dataDirButton.UseVisualStyleBackColor = true;
+            this.dataDirButton.Click += new System.EventHandler(this.dataDirButton_Click);
             // 
             // label13
             // 
@@ -811,15 +835,16 @@ namespace TimeControl.Windows
             this.fileSaveTimer.Interval = 300000;
             this.fileSaveTimer.Tick += new System.EventHandler(this.FileSaveTimer_Tick);
             // 
-            // dataDirButton
+            // goalLabel
             // 
-            this.dataDirButton.Location = new System.Drawing.Point(484, 49);
-            this.dataDirButton.Name = "dataDirButton";
-            this.dataDirButton.Size = new System.Drawing.Size(117, 54);
-            this.dataDirButton.TabIndex = 10;
-            this.dataDirButton.Text = "打开数据文件夹";
-            this.dataDirButton.UseVisualStyleBackColor = true;
-            this.dataDirButton.Click += new System.EventHandler(this.dataDirButton_Click);
+            this.goalLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.goalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.goalLabel.Location = new System.Drawing.Point(155, 0);
+            this.goalLabel.Name = "goalLabel";
+            this.goalLabel.Size = new System.Drawing.Size(305, 139);
+            this.goalLabel.TabIndex = 5;
+            this.goalLabel.Text = "目标文本";
+            this.goalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ControlPanel
             // 
@@ -929,5 +954,7 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.CheckBox autoResetBox;
         private System.Windows.Forms.Button dataDirButton;
+        private System.Windows.Forms.Button goalChangeButton;
+        private System.Windows.Forms.Label goalLabel;
     }
 }

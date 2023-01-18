@@ -47,28 +47,29 @@ namespace TimeControl.Windows
             InitializeSettings();
             this.hide = hide;
             //数据记录
-            if (File.Exists(TimeControlFile.SavedData))
+            if (File.Exists(TCFile.SavedData))
             {
-                timeData = TimeControlFile.ReadTimeData();
+                timeData = TCFile.ReadTimeData();
                 RefreshAndSaveData();
             }
             else
             {
-                timeData = new();
+                Directory.CreateDirectory(TCFile.SavedDataDir);
+                timeData = new() { GoalName="FirstGoal"};
                 RefreshAndSaveData();
             }
             //屏保
-            if (File.Exists(TimeControlFile.WhiteAppLocation))
-                whiteProcessBox.Text = File.ReadAllText(TimeControlFile.WhiteAppLocation);
-            if (File.Exists(TimeControlFile.TempTimeFile))
+            if (File.Exists(TCFile.WhiteAppLocation))
+                whiteProcessBox.Text = File.ReadAllText(TCFile.WhiteAppLocation);
+            if (File.Exists(TCFile.TempTimeFile))
             {
                 MessageBox.Show("恢复屏保");
                 StartLock(unlockPasswordHash);
             }
             //深度专注
-            if (File.Exists(TimeControlFile.DeepTempTimeFile))
+            if (File.Exists(TCFile.DeepTempTimeFile))
             {
-                string[] deepTimeFileStr = File.ReadAllLines(TimeControlFile.DeepTempTimeFile);
+                string[] deepTimeFileStr = File.ReadAllLines(TCFile.DeepTempTimeFile);
                 TimeSpan deepFocusTime = DateTime.Now -
                     DateTime.Parse(deepTimeFileStr[0]);
                 if (deepFocusTime < TimeSpan.Parse(deepTimeFileStr[1]))
@@ -78,26 +79,26 @@ namespace TimeControl.Windows
                 }
                 else
                 {
-                    File.Delete(TimeControlFile.DeepTempTimeFile);
+                    File.Delete(TCFile.DeepTempTimeFile);
                     ShowAndSave(deepFocusTime);
                     RefreshAndSaveData();
                 }
             }
             //程序计时
-            if (!Directory.Exists(TimeControlFile.BaseLocation))
+            if (!Directory.Exists(TCFile.BaseLocation))
             {
-                Directory.CreateDirectory(TimeControlFile.BaseLocation);
+                Directory.CreateDirectory(TCFile.BaseLocation);
             }
             appController = new(usageBox, processMonitorTimer);
-            if ((Directory.GetLastWriteTime(TimeControlFile.TimeFileDirectory).ToString("yyyy-MM-dd")
+            if ((Directory.GetLastWriteTime(TCFile.TimeFileDirectory).ToString("yyyy-MM-dd")
                 != DateTime.Now.ToString("yyyy-MM-dd"))
                 && autoResetBox.Checked)
                 appController.Reset();
             fileSaveTimer.Start();
             //自动关机
-            if (File.Exists(TimeControlFile.ShutdownSpan))
+            if (File.Exists(TCFile.ShutdownSpan))
             {
-                string[] shutdownTimeLines = File.ReadAllLines(TimeControlFile.ShutdownSpan);
+                string[] shutdownTimeLines = File.ReadAllLines(TCFile.ShutdownSpan);
                 TimeOnly startTime = TimeOnly.Parse(shutdownTimeLines[0]);
                 TimeOnly endTime = TimeOnly.Parse(shutdownTimeLines[1]);
                 TimeOnly now = TimeOnly.FromDateTime(DateTime.Now);
@@ -108,9 +109,9 @@ namespace TimeControl.Windows
                 Application.Exit();
             }
             //密码
-            if (File.Exists(TimeControlFile.PassLocation))//加载密码哈希值
+            if (File.Exists(TCFile.PassLocation))//加载密码哈希值
             {
-                unlockPasswordHash = File.ReadAllText(TimeControlFile.PassLocation);
+                unlockPasswordHash = File.ReadAllText(TCFile.PassLocation);
                 PasswordSet();
             }
             else
@@ -213,7 +214,7 @@ namespace TimeControl.Windows
 
         private void WhiteProcessBox_TextChanged(object sender, EventArgs e)
         {
-            File.WriteAllText(TimeControlFile.WhiteAppLocation, whiteProcessBox.Text);
+            File.WriteAllText(TCFile.WhiteAppLocation, whiteProcessBox.Text);
         }
 
         #endregion
@@ -222,7 +223,7 @@ namespace TimeControl.Windows
         private void deepStartButton_Click(object sender, EventArgs e)
         {
             TimeSpan deepTime = new(0, (int)deepTimeInput.Value, 0);
-            File.WriteAllText(TimeControlFile.DeepTempTimeFile, DateTime.Now + Environment.NewLine + deepTime);
+            File.WriteAllText(TCFile.DeepTempTimeFile, DateTime.Now + Environment.NewLine + deepTime);
             SystemControl.Shutdown();
             Application.Exit();
         }
@@ -298,7 +299,7 @@ namespace TimeControl.Windows
             TimeOnly endTime = new((int)endShutdownHour.Value,
                 (int)endShutdownMinute.Value, 0);
             if (startTime < endTime)
-                File.WriteAllText(TimeControlFile.ShutdownSpan,
+                File.WriteAllText(TCFile.ShutdownSpan,
                     startTime + Environment.NewLine + endTime);
             else
                 MessageBox.Show("时间输入非法。", "错误"
@@ -306,8 +307,8 @@ namespace TimeControl.Windows
         }
         private void shutdownRemoveButton_Click(object sender, EventArgs e)
         {
-            if (File.Exists(TimeControlFile.ShutdownSpan))
-                File.Delete(TimeControlFile.ShutdownSpan);
+            if (File.Exists(TCFile.ShutdownSpan))
+                File.Delete(TCFile.ShutdownSpan);
         }
         #endregion
 
@@ -318,7 +319,7 @@ namespace TimeControl.Windows
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
         {
             unlockPasswordHash = Password.ComputeHash(unlockPasswordBox.Text);//保存哈希值
-            File.WriteAllText(TimeControlFile.PassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
+            File.WriteAllText(TCFile.PassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
             PasswordSet();
         }
 
@@ -326,7 +327,7 @@ namespace TimeControl.Windows
         {
             if (PasswordCheck())
             {
-                File.Delete(TimeControlFile.PassLocation);
+                File.Delete(TCFile.PassLocation);
                 unlockPasswordHash = "";
                 unlockPasswordBox.Text = "";
                 unlockPasswordBox.Enabled = true;
@@ -385,7 +386,7 @@ namespace TimeControl.Windows
             //更新进度
             ShowProgress(timeData);
             //保存
-            TimeControlFile.SaveTimeData(timeData);
+            TCFile.SaveTimeData(timeData);
         }
 
         #endregion
@@ -393,6 +394,7 @@ namespace TimeControl.Windows
         #region ProgressPage
         private void ShowProgress(TimeData timeData)
         {
+            goalLabel.Text = timeData.GoalName;
             TimeSpan timeSpan = timeData.GetTimeSum();
             int level = 1;
             TimeSpan targetTimeSpan = new(0, 0, 0);
@@ -453,7 +455,12 @@ namespace TimeControl.Windows
         }
         private void dataDirButton_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe",TimeControlFile.BaseLocation);
+            Process.Start("explorer.exe",TCFile.BaseLocation);
+        }
+        private void goalChangeButton_Click(object sender, EventArgs e)
+        {
+            GoalChangeWindow goalChangeWindow = new();
+            goalChangeWindow.ShowDialog();
         }
         #endregion
 

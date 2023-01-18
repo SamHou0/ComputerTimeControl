@@ -8,6 +8,7 @@ namespace TimeControl.Data
 {
     public class TimeData
     {
+        public string GoalName { get; set; } ="";
         public TimeSpan LockTime { get; set; }=new TimeSpan();
         public TimeSpan DeepLockTime { get; set; } = new TimeSpan();
         public void AddTime(TimeSpan time)

@@ -6,10 +6,11 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using TimeControl.AppControl;
 using TimeControl.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace TimeControl.Tools
 {
-    public static class TimeControlFile
+    public static class TCFile
     {
         public static readonly string BaseLocation = Environment.GetFolderPath
             (Environment.SpecialFolder.ApplicationData) + "\\TimeControl";
@@ -30,6 +31,14 @@ namespace TimeControl.Tools
         public static readonly string ShutdownSpan = BaseLocation + "\\Shutdown.txt";
         //数据显示
         public static readonly string SavedData = BaseLocation + "\\SavedData.xml";
+        public static readonly string SavedDataDir = BaseLocation + "\\SavedData";
+        public static string[] SavedDataFiles
+        {
+            get
+            {
+                return Directory.GetFiles(SavedDataDir);
+            }
+        }
 
         public static void SaveApps(List<App> apps)
         {
@@ -60,7 +69,7 @@ namespace TimeControl.Tools
             using (StreamReader sr = new StreamReader(latestFile.FullName))
             {
                 XmlSerializer xmlSerializer = new(typeof(List<AppInformation>));
-                List<AppInformation> infos=null;
+                List<AppInformation> infos = null;
                 try
                 {
                     infos = (List<AppInformation>)xmlSerializer.Deserialize(sr);
@@ -104,7 +113,7 @@ namespace TimeControl.Tools
 
         public static void SaveTimeData(TimeData time)
         {
-            using (StreamWriter sw=new(SavedData))
+            using (StreamWriter sw = new(SavedData))
             {
                 XmlSerializer xmlSerializer = new(typeof(TimeData));
                 xmlSerializer.Serialize(sw, time);
@@ -112,11 +121,36 @@ namespace TimeControl.Tools
         }
         public static TimeData ReadTimeData()
         {
-            using (StreamReader sr=new(SavedData))
+            using (StreamReader sr = new(SavedData))
             {
                 XmlSerializer xmlSerializer = new(typeof(TimeData));
                 return (TimeData)xmlSerializer.Deserialize(sr);
             }
+        }
+        public static void ChangeGoal(string name)
+        {
+            foreach (string file in SavedDataFiles)
+            {
+                if (Path.GetFileNameWithoutExtension(file) == name)
+                {
+                    string currentName = ReadTimeData().GoalName;
+                    File.Move(SavedData, SavedDataDir + "\\" + currentName+".xml");
+                    File.Move(file, SavedData);
+                    return;
+                }
+            }
+        }
+        public static void AddGoal(TimeData timeData)
+        {
+            using (StreamWriter sw = new(SavedDataDir+"\\"+timeData.GoalName+".xml"))
+            {
+                XmlSerializer xmlSerializer = new(typeof(TimeData));
+                xmlSerializer.Serialize(sw, timeData);
+            }
+        }
+        public static void RemoveGoal(string name)
+        {
+            File.Delete(SavedDataDir+"\\"+name+".xml");
         }
     }
 }

@@ -17,13 +17,13 @@ namespace TimeControl.AppControl
             this.listBox = listBox;
             apps = new List<App>();
             processMonitorTimer = timer;
-            if (Directory.Exists(TimeControlFile.TimeFileDirectory))
+            if (Directory.Exists(TCFile.TimeFileDirectory))
             {
-                apps = TimeControlFile.ReadApps();
+                apps = TCFile.ReadApps();
             }
             else
             {
-                Directory.CreateDirectory(TimeControlFile.TimeFileDirectory);
+                Directory.CreateDirectory(TCFile.TimeFileDirectory);
                 Save();
             }
             Refresh();
@@ -107,7 +107,7 @@ namespace TimeControl.AppControl
         {
             processMonitorTimer.Stop();
             apps.Clear();
-            TimeControlFile.SaveApps(apps);
+            TCFile.SaveApps(apps);
             Refresh();
         }
 
@@ -128,7 +128,7 @@ namespace TimeControl.AppControl
 
         public void Save()
         {
-            TimeControlFile.SaveApps(apps);
+            TCFile.SaveApps(apps);
         }
     }
 }

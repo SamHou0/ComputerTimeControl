@@ -22,8 +22,8 @@ namespace TimeControl.Windows
 
             targetTimeSpan = new TimeSpan(0, 0, minutes, 0);
             startTime = DateTime.Now;
-            File.AppendAllText(TimeControlFile.TempTimeFile, startTime.ToString() + Environment.NewLine);
-            File.AppendAllText(TimeControlFile.TempTimeFile, targetTimeSpan.ToString());
+            File.AppendAllText(TCFile.TempTimeFile, startTime.ToString() + Environment.NewLine);
+            File.AppendAllText(TCFile.TempTimeFile, targetTimeSpan.ToString());
 
             Init(unlockPasswordHash);
         }
@@ -32,7 +32,7 @@ namespace TimeControl.Windows
         {
             InitializeComponent();
 
-            string[] strings = File.ReadAllLines(TimeControlFile.TempTimeFile);
+            string[] strings = File.ReadAllLines(TCFile.TempTimeFile);
             startTime = DateTime.Parse(strings[0]);
             targetTimeSpan = TimeSpan.Parse(strings[1]);
 
@@ -41,7 +41,7 @@ namespace TimeControl.Windows
 
         private void Init(string unlockPasswordHash)
         {
-            processLocation = File.ReadAllLines(TimeControlFile.WhiteAppLocation);
+            processLocation = File.ReadAllLines(TCFile.WhiteAppLocation);
             if (string.IsNullOrEmpty(unlockPasswordHash))
             { usePassword = false; }
             this.unlockPasswordHash = unlockPasswordHash;
@@ -79,7 +79,7 @@ namespace TimeControl.Windows
             }
             else
             {
-                File.Delete(TimeControlFile.TempTimeFile);
+                File.Delete(TCFile.TempTimeFile);
                 TempTimeSpan = DateTime.Now - startTime;
                 SystemControl.Shutdown();
             }
@@ -122,7 +122,7 @@ namespace TimeControl.Windows
                 "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                 == DialogResult.OK)
             {
-                File.Move(TimeControlFile.TempTimeFile, TimeControlFile.DeepTempTimeFile);
+                File.Move(TCFile.TempTimeFile, TCFile.DeepTempTimeFile);
             }
         }
     }

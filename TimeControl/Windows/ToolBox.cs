@@ -15,9 +15,9 @@ namespace TimeControl.Windows
             {
                 whiteListBox.Items.Add(whiteProcess);
             }
-            noteLocationLabel.Text="文件位置："+TimeControlFile.NoteFile;
-            if (File.Exists(TimeControlFile.NoteFile))
-                noteTextBox.Text = File.ReadAllText(TimeControlFile.NoteFile);
+            noteLocationLabel.Text="文件位置："+TCFile.NoteFile;
+            if (File.Exists(TCFile.NoteFile))
+                noteTextBox.Text = File.ReadAllText(TCFile.NoteFile);
         }
 
         private void whiteListBox_DoubleClick(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace TimeControl.Windows
 
         private void noteTextBox_TextChanged(object sender, EventArgs e)
         {
-            File.WriteAllText(TimeControlFile.NoteFile, noteTextBox.Text);
+            File.WriteAllText(TCFile.NoteFile, noteTextBox.Text);
         }
     }
 }
