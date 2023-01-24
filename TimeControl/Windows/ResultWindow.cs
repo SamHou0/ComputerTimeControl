@@ -23,6 +23,7 @@ namespace TimeControl.Windows
         private void deleteButton_Click(object sender, EventArgs e)
         {
             IsSave=false;
+            Close();
         }
     }
 }

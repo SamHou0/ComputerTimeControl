@@ -206,7 +206,7 @@ namespace TimeControl.Windows
         private void ShowAndSave(TimeSpan timeSpan)
         {
             ResultWindow resultWindow = new(timeSpan);
-            resultWindow.Show();
+            resultWindow.ShowDialog();
             if (ResultWindow.IsSave == true)
                 timeData.AddTime(timeSpan);
             RefreshAndSaveData();

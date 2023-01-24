@@ -8,13 +8,7 @@
       "nativeDebugging": false,
       "remoteDebugEnabled": true,
       "authenticationMode": "Windows",
-      "remoteDebugMachine": "192.168.31.90:6666"
-    },
-    "RedMiRemote": {
-      "commandName": "Project",
-      "remoteDebugEnabled": true,
-      "remoteDebugMachine": "192.168.31.134:6666",
-      "authenticationMode": "Windows"
+      "remoteDebugMachine": "VMWIN10:4026"
     }
   }
 }

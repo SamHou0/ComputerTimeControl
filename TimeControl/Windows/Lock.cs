@@ -81,7 +81,6 @@ namespace TimeControl.Windows
             {
                 File.Delete(TCFile.TempTimeFile);
                 TempTimeSpan = DateTime.Now - startTime;
-                SystemControl.Shutdown();
             }
         }
 
@@ -123,6 +122,8 @@ namespace TimeControl.Windows
                 == DialogResult.OK)
             {
                 File.Move(TCFile.TempTimeFile, TCFile.DeepTempTimeFile);
+                SystemControl.Shutdown();
+                Environment.Exit(0);
             }
         }
     }
