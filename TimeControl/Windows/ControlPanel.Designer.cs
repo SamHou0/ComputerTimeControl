@@ -76,6 +76,7 @@ namespace TimeControl.Windows
             this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.progressPage = new System.Windows.Forms.TabPage();
+            this.goalLabel = new System.Windows.Forms.Label();
             this.encourageLabel = new System.Windows.Forms.Label();
             this.progressLabel = new System.Windows.Forms.Label();
             this.levelLabel = new System.Windows.Forms.Label();
@@ -95,7 +96,7 @@ namespace TimeControl.Windows
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
             this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
-            this.goalLabel = new System.Windows.Forms.Label();
+            this.versionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
             this.controlTab.SuspendLayout();
             this.startNow.SuspendLayout();
@@ -651,6 +652,17 @@ namespace TimeControl.Windows
             this.progressPage.Text = "我的进度";
             this.progressPage.UseVisualStyleBackColor = true;
             // 
+            // goalLabel
+            // 
+            this.goalLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.goalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.goalLabel.Location = new System.Drawing.Point(155, 0);
+            this.goalLabel.Name = "goalLabel";
+            this.goalLabel.Size = new System.Drawing.Size(305, 139);
+            this.goalLabel.TabIndex = 5;
+            this.goalLabel.Text = "目标文本";
+            this.goalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // encourageLabel
             // 
             this.encourageLabel.ForeColor = System.Drawing.Color.Red;
@@ -688,6 +700,7 @@ namespace TimeControl.Windows
             // 
             // settingPage
             // 
+            this.settingPage.Controls.Add(this.versionLabel);
             this.settingPage.Controls.Add(this.goalChangeButton);
             this.settingPage.Controls.Add(this.dataDirButton);
             this.settingPage.Controls.Add(this.label13);
@@ -835,16 +848,14 @@ namespace TimeControl.Windows
             this.fileSaveTimer.Interval = 300000;
             this.fileSaveTimer.Tick += new System.EventHandler(this.FileSaveTimer_Tick);
             // 
-            // goalLabel
+            // versionLabel
             // 
-            this.goalLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.goalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.goalLabel.Location = new System.Drawing.Point(155, 0);
-            this.goalLabel.Name = "goalLabel";
-            this.goalLabel.Size = new System.Drawing.Size(305, 139);
-            this.goalLabel.TabIndex = 5;
-            this.goalLabel.Text = "目标文本";
-            this.goalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(49, 329);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(71, 17);
+            this.versionLabel.TabIndex = 12;
+            this.versionLabel.Text = "版本：0.0.0";
             // 
             // ControlPanel
             // 
@@ -956,5 +967,6 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button dataDirButton;
         private System.Windows.Forms.Button goalChangeButton;
         private System.Windows.Forms.Label goalLabel;
+        private System.Windows.Forms.Label versionLabel;
     }
 }

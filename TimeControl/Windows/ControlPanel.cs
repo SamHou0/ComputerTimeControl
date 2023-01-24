@@ -44,6 +44,7 @@ namespace TimeControl.Windows
                     Environment.Exit(0);
             }
             InitializeComponent();
+            versionLabel.Text = $"版本：{Assembly.GetExecutingAssembly().GetName().Version}";
             InitializeSettings();
             this.hide = hide;
             //数据记录
