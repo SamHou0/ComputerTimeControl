@@ -56,7 +56,7 @@ namespace TimeControl.Windows
             else
             {
                 Directory.CreateDirectory(TCFile.SavedDataDir);
-                timeData = new() { GoalName="FirstGoal"};
+                timeData = new() { GoalName = "FirstGoal" };
                 RefreshAndSaveData();
             }
             //屏保
@@ -287,7 +287,10 @@ namespace TimeControl.Windows
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            appController.Reset();
+            if (PasswordCheck())
+            {
+                appController.Reset();
+            }
         }
 
         #endregion
@@ -456,7 +459,7 @@ namespace TimeControl.Windows
         }
         private void dataDirButton_Click(object sender, EventArgs e)
         {
-            Process.Start("explorer.exe",TCFile.BaseLocation);
+            Process.Start("explorer.exe", TCFile.BaseLocation);
         }
         private void goalChangeButton_Click(object sender, EventArgs e)
         {

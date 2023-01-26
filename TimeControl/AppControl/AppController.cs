@@ -11,9 +11,11 @@ namespace TimeControl.AppControl
         private ListBox listBox;
         private List<App> apps;
         private Timer processMonitorTimer;
+        private bool refreshable;
 
         public AppController(ListBox listBox, Timer timer)
         {
+            refreshable = true;
             this.listBox = listBox;
             apps = new List<App>();
             processMonitorTimer = timer;
@@ -34,6 +36,11 @@ namespace TimeControl.AppControl
         /// </summary>
         public void Refresh()
         {
+            if (!refreshable)
+            {
+                processMonitorTimer.Start();
+                return;
+            }
             processMonitorTimer.Stop();
             listBox.Items.Clear();
             foreach (App app in apps)
@@ -41,6 +48,7 @@ namespace TimeControl.AppControl
                 listBox.Items.Add(app.ToString());
             }
             processMonitorTimer.Start();
+            refreshable = false;
         }
 
         /// <summary>
@@ -86,6 +94,7 @@ namespace TimeControl.AppControl
                         app.Run();
                 }
             }
+            refreshable = true;
         }
 
         /// <summary>
@@ -93,9 +102,11 @@ namespace TimeControl.AppControl
         /// </summary>
         public void Remove()
         {
-            processMonitorTimer.Stop();
             if (listBox.SelectedIndex >= 0)
+            {
+                processMonitorTimer.Stop();
                 apps.RemoveAt(listBox.SelectedIndex);
+            }
             Save();
             Refresh();
         }
