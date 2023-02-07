@@ -1,7 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using TimeControl.Tools;
-using System.IO;
 
 namespace TimeControl.Windows
 {
@@ -15,7 +15,7 @@ namespace TimeControl.Windows
             {
                 whiteListBox.Items.Add(whiteProcess);
             }
-            noteLocationLabel.Text="文件位置："+TCFile.NoteFile;
+            noteLocationLabel.Text = "文件位置：" + TCFile.NoteFile;
             if (File.Exists(TCFile.NoteFile))
                 noteTextBox.Text = File.ReadAllText(TCFile.NoteFile);
         }

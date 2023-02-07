@@ -1,9 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
 using System.Windows.Forms;
 using TaskScheduler;
-using System;
-using Windows.Graphics.Printing3D;
-using System.Runtime.CompilerServices;
 
 namespace TimeControl.Tools
 {
@@ -14,7 +11,7 @@ namespace TimeControl.Tools
             try
             {
                 TaskSchedulerClass taskScheduler = new();
-                taskScheduler.Connect(null,null,null,null);
+                taskScheduler.Connect(null, null, null, null);
                 //基本设置
                 ITaskDefinition taskDefinition = taskScheduler.NewTask(0);
                 taskDefinition.RegistrationInfo.Description = "TimeControlBoot";
@@ -22,16 +19,16 @@ namespace TimeControl.Tools
                 //触发器
                 taskDefinition.Triggers.Create(_TASK_TRIGGER_TYPE2.TASK_TRIGGER_LOGON);
                 //运行内容
-                IExecAction action=
+                IExecAction action =
                     (IExecAction)taskDefinition.Actions.Create
                     (_TASK_ACTION_TYPE.TASK_ACTION_EXEC);
-                action.Path=AppDomain.CurrentDomain.BaseDirectory + "\\TimeControlConsole.exe";
+                action.Path = AppDomain.CurrentDomain.BaseDirectory + "\\TimeControlConsole.exe";
                 //设置
                 taskDefinition.Settings.ExecutionTimeLimit = "PT0S";
                 taskDefinition.Settings.DisallowStartIfOnBatteries = false;
                 taskDefinition.Settings.RunOnlyIfIdle = false;
                 //管理员运行
-                taskDefinition.Principal.RunLevel=_TASK_RUNLEVEL.TASK_RUNLEVEL_HIGHEST;
+                taskDefinition.Principal.RunLevel = _TASK_RUNLEVEL.TASK_RUNLEVEL_HIGHEST;
                 //注册
                 ITaskFolder taskFolder = taskScheduler.GetFolder("\\");
                 taskFolder.RegisterTaskDefinition("TimeControlBoot", taskDefinition,
@@ -47,6 +44,7 @@ namespace TimeControl.Tools
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         public static void RemoveBoot()
         {
             TaskSchedulerClass taskScheduler = new();
@@ -54,7 +52,7 @@ namespace TimeControl.Tools
             ITaskFolder taskFolder = taskScheduler.GetFolder("\\");
             try
             {
-                taskFolder.DeleteTask("TimeControlBoot",0);
+                taskFolder.DeleteTask("TimeControlBoot", 0);
                 MessageBox.Show("移除完毕。");
             }
             catch

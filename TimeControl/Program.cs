@@ -10,7 +10,8 @@ namespace TimeControl
 {
     internal static class Program
     {
-        static IntPtr nowDesktop;
+        private static IntPtr nowDesktop;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>

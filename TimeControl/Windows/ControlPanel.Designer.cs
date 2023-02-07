@@ -256,7 +256,7 @@ namespace TimeControl.Windows
             this.deepStartButton.TabIndex = 1;
             this.deepStartButton.Text = "启动屏保（分）";
             this.deepStartButton.UseVisualStyleBackColor = true;
-            this.deepStartButton.Click += new System.EventHandler(this.deepStartButton_Click);
+            this.deepStartButton.Click += new System.EventHandler(this.DeepStartButton_Click);
             // 
             // processMonitor
             // 
@@ -393,7 +393,7 @@ namespace TimeControl.Windows
             this.shutdownRemoveButton.TabIndex = 15;
             this.shutdownRemoveButton.Text = "移除";
             this.shutdownRemoveButton.UseVisualStyleBackColor = true;
-            this.shutdownRemoveButton.Click += new System.EventHandler(this.shutdownRemoveButton_Click);
+            this.shutdownRemoveButton.Click += new System.EventHandler(this.ShutdownRemoveButton_Click);
             // 
             // shutdownSetButton
             // 
@@ -403,7 +403,7 @@ namespace TimeControl.Windows
             this.shutdownSetButton.TabIndex = 14;
             this.shutdownSetButton.Text = "设置";
             this.shutdownSetButton.UseVisualStyleBackColor = true;
-            this.shutdownSetButton.Click += new System.EventHandler(this.shutdownSetButton_Click);
+            this.shutdownSetButton.Click += new System.EventHandler(this.ShutdownSetButton_Click);
             // 
             // label12
             // 
@@ -727,7 +727,7 @@ namespace TimeControl.Windows
             this.goalChangeButton.TabIndex = 11;
             this.goalChangeButton.Text = "设置/切换目标";
             this.goalChangeButton.UseVisualStyleBackColor = true;
-            this.goalChangeButton.Click += new System.EventHandler(this.goalChangeButton_Click);
+            this.goalChangeButton.Click += new System.EventHandler(this.GoalChangeButton_Click);
             // 
             // dataDirButton
             // 
@@ -737,7 +737,7 @@ namespace TimeControl.Windows
             this.dataDirButton.TabIndex = 10;
             this.dataDirButton.Text = "打开数据文件夹";
             this.dataDirButton.UseVisualStyleBackColor = true;
-            this.dataDirButton.Click += new System.EventHandler(this.dataDirButton_Click);
+            this.dataDirButton.Click += new System.EventHandler(this.DataDirButton_Click);
             // 
             // label13
             // 

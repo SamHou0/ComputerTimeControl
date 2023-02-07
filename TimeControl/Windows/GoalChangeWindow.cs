@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Diagnostics;
-using TimeControl.Tools;
 using System.IO;
+using System.Windows.Forms;
 using TimeControl.Data;
+using TimeControl.Tools;
 
 namespace TimeControl.Windows
 {
@@ -55,7 +48,7 @@ namespace TimeControl.Windows
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            if(TCFile.ReadTimeData().GoalName==goalTextBox.Text)
+            if (TCFile.ReadTimeData().GoalName == goalTextBox.Text)
             {
                 MessageBox.Show("无法添加重复目标！", "错误"
                     , MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -65,8 +58,8 @@ namespace TimeControl.Windows
             {
                 if (goalTextBox.Text == str)
                 {
-                    MessageBox.Show("无法添加重复目标！","错误"
-                        ,MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("无法添加重复目标！", "错误"
+                        , MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }

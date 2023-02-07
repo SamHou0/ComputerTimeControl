@@ -117,7 +117,7 @@ namespace TimeControl.Windows
 
         private void changeButton_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("切换为深度专注后，整个专注将被标记为深度专注。这将不可撤销！确实要这么做吗？", 
+            if (MessageBox.Show("切换为深度专注后，整个专注将被标记为深度专注。这将不可撤销！确实要这么做吗？",
                 "警告", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
                 == DialogResult.OK)
             {

@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using TimeControl.AppControl;
 using TimeControl.Data;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace TimeControl.Tools
 {
@@ -14,24 +13,34 @@ namespace TimeControl.Tools
     {
         public static readonly string BaseLocation = Environment.GetFolderPath
             (Environment.SpecialFolder.ApplicationData) + "\\TimeControl";
+
         //密码
         public static readonly string PassLocation = BaseLocation + "\\TCPass.txt";//获取密码位置
+
         //计时
         public static readonly string TimeFileDirectory = BaseLocation
             + "\\TCTimeData";
+
         //日志
         public static readonly string LogFile = BaseLocation + "\\Log.txt";
+
         //屏保
         public static readonly string WhiteAppLocation = BaseLocation + "\\WhiteApp.txt";//应用白名单保存
+
         public static readonly string TempTimeFile = BaseLocation + "\\Temp.txt";
         public static readonly string NoteFile = BaseLocation + "\\Notes.txt";
+
         //深度屏保
         public static readonly string DeepTempTimeFile = BaseLocation + "DeepTemp.txt";
+
         //自动关机
         public static readonly string ShutdownSpan = BaseLocation + "\\Shutdown.txt";
+
         //数据显示
         public static readonly string SavedData = BaseLocation + "\\SavedData.xml";
+
         public static readonly string SavedDataDir = BaseLocation + "\\SavedData";
+
         public static string[] SavedDataFiles
         {
             get
@@ -119,6 +128,7 @@ namespace TimeControl.Tools
                 xmlSerializer.Serialize(sw, time);
             }
         }
+
         public static TimeData ReadTimeData()
         {
             using (StreamReader sr = new(SavedData))
@@ -127,6 +137,7 @@ namespace TimeControl.Tools
                 return (TimeData)xmlSerializer.Deserialize(sr);
             }
         }
+
         public static void ChangeGoal(string name)
         {
             foreach (string file in SavedDataFiles)
@@ -134,23 +145,25 @@ namespace TimeControl.Tools
                 if (Path.GetFileNameWithoutExtension(file) == name)
                 {
                     string currentName = ReadTimeData().GoalName;
-                    File.Move(SavedData, SavedDataDir + "\\" + currentName+".xml");
+                    File.Move(SavedData, SavedDataDir + "\\" + currentName + ".xml");
                     File.Move(file, SavedData);
                     return;
                 }
             }
         }
+
         public static void AddGoal(TimeData timeData)
         {
-            using (StreamWriter sw = new(SavedDataDir+"\\"+timeData.GoalName+".xml"))
+            using (StreamWriter sw = new(SavedDataDir + "\\" + timeData.GoalName + ".xml"))
             {
                 XmlSerializer xmlSerializer = new(typeof(TimeData));
                 xmlSerializer.Serialize(sw, timeData);
             }
         }
+
         public static void RemoveGoal(string name)
         {
-            File.Delete(SavedDataDir+"\\"+name+".xml");
+            File.Delete(SavedDataDir + "\\" + name + ".xml");
         }
     }
 }

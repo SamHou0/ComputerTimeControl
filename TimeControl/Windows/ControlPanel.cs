@@ -2,15 +2,12 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeControl.AppControl;
 using TimeControl.Data;
 using TimeControl.Properties;
 using TimeControl.Tools;
-using Windows.ApplicationModel.Contacts;
-using Windows.UI;
 
 namespace TimeControl.Windows
 {
@@ -22,9 +19,33 @@ namespace TimeControl.Windows
         private AppController appController;//列表、计时控制器
         private TimeData timeData;//数据
         private bool isLoaded;//指示加载是否已经完成
+
         public ControlPanel(bool hide)
         {
             isLoaded = false;
+            CheckCurrentProcess();
+            InitializeComponent();
+            versionLabel.Text = $"版本：{Assembly.GetExecutingAssembly().GetName().Version}";
+            InitializeSettings();
+            this.hide = hide;
+            //数据记录
+            InitializeData();
+            //屏保
+            IniticalizeFocus();
+            //深度专注
+            InitializeDeepFocus();
+            //程序计时
+            StartMonitor();
+            //自动关机
+            CheckShutdown();
+            //密码
+            InitializePassword();
+        }
+
+        #region Form
+
+        private static void CheckCurrentProcess()
+        {
             Process[] processes = Process.GetProcessesByName("TimeControl");
             if (processes.Length > 1)
             {
@@ -43,84 +64,7 @@ namespace TimeControl.Windows
                 else
                     Environment.Exit(0);
             }
-            InitializeComponent();
-            versionLabel.Text = $"版本：{Assembly.GetExecutingAssembly().GetName().Version}";
-            InitializeSettings();
-            this.hide = hide;
-            //数据记录
-            if (File.Exists(TCFile.SavedData))
-            {
-                timeData = TCFile.ReadTimeData();
-                RefreshAndSaveData();
-            }
-            else
-            {
-                Directory.CreateDirectory(TCFile.SavedDataDir);
-                timeData = new() { GoalName = "FirstGoal" };
-                RefreshAndSaveData();
-            }
-            //屏保
-            if (File.Exists(TCFile.WhiteAppLocation))
-                whiteProcessBox.Text = File.ReadAllText(TCFile.WhiteAppLocation);
-            if (File.Exists(TCFile.TempTimeFile))
-            {
-                MessageBox.Show("恢复屏保");
-                StartLock(unlockPasswordHash);
-            }
-            //深度专注
-            if (File.Exists(TCFile.DeepTempTimeFile))
-            {
-                string[] deepTimeFileStr = File.ReadAllLines(TCFile.DeepTempTimeFile);
-                TimeSpan deepFocusTime = DateTime.Now -
-                    DateTime.Parse(deepTimeFileStr[0]);
-                if (deepFocusTime < TimeSpan.Parse(deepTimeFileStr[1]))
-                {
-                    SystemControl.Shutdown();
-                    Application.Exit();
-                }
-                else
-                {
-                    File.Delete(TCFile.DeepTempTimeFile);
-                    ShowAndSave(deepFocusTime);
-                    RefreshAndSaveData();
-                }
-            }
-            //程序计时
-            if (!Directory.Exists(TCFile.BaseLocation))
-            {
-                Directory.CreateDirectory(TCFile.BaseLocation);
-            }
-            appController = new(usageBox, processMonitorTimer);
-            if ((Directory.GetLastWriteTime(TCFile.TimeFileDirectory).ToString("yyyy-MM-dd")
-                != DateTime.Now.ToString("yyyy-MM-dd"))
-                && autoResetBox.Checked)
-                appController.Reset();
-            fileSaveTimer.Start();
-            //自动关机
-            if (File.Exists(TCFile.ShutdownSpan))
-            {
-                string[] shutdownTimeLines = File.ReadAllLines(TCFile.ShutdownSpan);
-                TimeOnly startTime = TimeOnly.Parse(shutdownTimeLines[0]);
-                TimeOnly endTime = TimeOnly.Parse(shutdownTimeLines[1]);
-                TimeOnly now = TimeOnly.FromDateTime(DateTime.Now);
-                if (now >= startTime && now <= endTime)
-                {
-                    SystemControl.Shutdown();
-                }
-                Application.Exit();
-            }
-            //密码
-            if (File.Exists(TCFile.PassLocation))//加载密码哈希值
-            {
-                unlockPasswordHash = File.ReadAllText(TCFile.PassLocation);
-                PasswordSet();
-            }
-            else
-                unlockPasswordRemoveButton.Enabled = false;
-            isLoaded = true;
         }
-
-        #region Form
 
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)//打开界面
         {
@@ -178,6 +122,17 @@ namespace TimeControl.Windows
 
         #region LockPage
 
+        private void IniticalizeFocus()
+        {
+            if (File.Exists(TCFile.WhiteAppLocation))
+                whiteProcessBox.Text = File.ReadAllText(TCFile.WhiteAppLocation);
+            if (File.Exists(TCFile.TempTimeFile))
+            {
+                MessageBox.Show("恢复屏保");
+                StartLock(unlockPasswordHash);
+            }
+        }
+
         private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
         {
             StartLock(unlockPasswordHash, (int)timeBox.Value);
@@ -218,19 +173,56 @@ namespace TimeControl.Windows
             File.WriteAllText(TCFile.WhiteAppLocation, whiteProcessBox.Text);
         }
 
-        #endregion
+        #endregion LockPage
 
         #region DeepLockPage
-        private void deepStartButton_Click(object sender, EventArgs e)
+
+        private void InitializeDeepFocus()
+        {
+            if (File.Exists(TCFile.DeepTempTimeFile))
+            {
+                string[] deepTimeFileStr = File.ReadAllLines(TCFile.DeepTempTimeFile);
+                TimeSpan deepFocusTime = DateTime.Now -
+                    DateTime.Parse(deepTimeFileStr[0]);
+                if (deepFocusTime < TimeSpan.Parse(deepTimeFileStr[1]))
+                {
+                    SystemControl.Shutdown();
+                    Application.Exit();
+                }
+                else
+                {
+                    File.Delete(TCFile.DeepTempTimeFile);
+                    ShowAndSave(deepFocusTime);
+                    RefreshAndSaveData();
+                }
+            }
+        }
+
+        private void DeepStartButton_Click(object sender, EventArgs e)
         {
             TimeSpan deepTime = new(0, (int)deepTimeInput.Value, 0);
             File.WriteAllText(TCFile.DeepTempTimeFile, DateTime.Now + Environment.NewLine + deepTime);
             SystemControl.Shutdown();
             Application.Exit();
         }
-        #endregion
+
+        #endregion DeepLockPage
 
         #region ProcessPage
+
+        private void StartMonitor()
+        {
+            if (!Directory.Exists(TCFile.BaseLocation))
+            {
+                Directory.CreateDirectory(TCFile.BaseLocation);
+            }
+            appController = new(usageBox, processMonitorTimer);
+            if ((Directory.GetLastWriteTime(TCFile.TimeFileDirectory).ToString("yyyy-MM-dd")
+                != DateTime.Now.ToString("yyyy-MM-dd"))
+                && autoResetBox.Checked)
+                appController.Reset();
+            fileSaveTimer.Start();
+        }
 
         private void FileSaveTimer_Tick(object sender, EventArgs e)
         {
@@ -279,8 +271,10 @@ namespace TimeControl.Windows
                 appController.Refresh();
             if (Process.GetProcessesByName("TimeControlConsole").Length == 0)//检查保护程序状态
             {
-                ProcessStartInfo process = new();
-                process.FileName = "TimeControlConsole.exe";
+                ProcessStartInfo process = new()
+                {
+                    FileName = "TimeControlConsole.exe"
+                };
                 Process.Start(process);
             }
         }
@@ -293,10 +287,11 @@ namespace TimeControl.Windows
             }
         }
 
-        #endregion
+        #endregion ProcessPage
 
         #region ShutdownPage
-        private void shutdownSetButton_Click(object sender, EventArgs e)
+
+        private void ShutdownSetButton_Click(object sender, EventArgs e)
         {
             TimeOnly startTime = new((int)startShutdownHour.Value,
                 (int)startShutdownMinute.Value, 0);
@@ -309,16 +304,46 @@ namespace TimeControl.Windows
                 MessageBox.Show("时间输入非法。", "错误"
                     , MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        private void shutdownRemoveButton_Click(object sender, EventArgs e)
+
+        private void ShutdownRemoveButton_Click(object sender, EventArgs e)
         {
             if (File.Exists(TCFile.ShutdownSpan))
                 File.Delete(TCFile.ShutdownSpan);
         }
-        #endregion
+
+        private static void CheckShutdown()
+        {
+            if (File.Exists(TCFile.ShutdownSpan))
+            {
+                string[] shutdownTimeLines = File.ReadAllLines(TCFile.ShutdownSpan);
+                TimeOnly startTime = TimeOnly.Parse(shutdownTimeLines[0]);
+                TimeOnly endTime = TimeOnly.Parse(shutdownTimeLines[1]);
+                TimeOnly now = TimeOnly.FromDateTime(DateTime.Now);
+                if (now >= startTime && now <= endTime)
+                {
+                    SystemControl.Shutdown();
+                }
+                Application.Exit();
+            }
+        }
+
+        #endregion ShutdownPage
 
         #region ProtectPage
 
         #region Password
+
+        private void InitializePassword()
+        {
+            if (File.Exists(TCFile.PassLocation))//加载密码哈希值
+            {
+                unlockPasswordHash = File.ReadAllText(TCFile.PassLocation);
+                PasswordSet();
+            }
+            else
+                unlockPasswordRemoveButton.Enabled = false;
+            isLoaded = true;
+        }
 
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
         {
@@ -364,7 +389,7 @@ namespace TimeControl.Windows
                 return true;
         }
 
-        #endregion
+        #endregion Password
 
         private void AddBootButton_Click(object sender, EventArgs e)
         {
@@ -376,9 +401,25 @@ namespace TimeControl.Windows
             TaskSchedulerControl.RemoveBoot();
         }
 
-        #endregion
+        #endregion ProtectPage
 
         #region DataPage
+
+        private void InitializeData()
+        {
+            if (File.Exists(TCFile.SavedData))
+            {
+                timeData = TCFile.ReadTimeData();
+                RefreshAndSaveData();
+            }
+            else
+            {
+                Directory.CreateDirectory(TCFile.SavedDataDir);
+                timeData = new() { GoalName = "FirstGoal" };
+                RefreshAndSaveData();
+            }
+        }
+
         private void RefreshAndSaveData()
         {
             //刷新列表
@@ -393,9 +434,10 @@ namespace TimeControl.Windows
             TCFile.SaveTimeData(timeData);
         }
 
-        #endregion
+        #endregion DataPage
 
         #region ProgressPage
+
         private void ShowProgress(TimeData timeData)
         {
             goalLabel.Text = timeData.GoalName;
@@ -424,7 +466,8 @@ namespace TimeControl.Windows
                 progressBar.Value = 100;
             }
         }
-        #endregion
+
+        #endregion ProgressPage
 
         #region SettingPage
 
@@ -443,6 +486,7 @@ namespace TimeControl.Windows
             Process.Start("explorer.exe",
                 "https://gitee.com/Sam-Hou/ComputerTimeControl/wikis/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98&%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E");
         }
+
         private void SettingsChanged(object sender, EventArgs e)
         {
             if (isLoaded)
@@ -452,21 +496,24 @@ namespace TimeControl.Windows
                 Settings.Default.Save();
             }
         }
+
         private void InitializeSettings()
         {
             autoResetBox.Checked = Settings.Default.AutoReset;
             autoRefreshBox.Checked = Settings.Default.AutoRefresh;
         }
-        private void dataDirButton_Click(object sender, EventArgs e)
+
+        private void DataDirButton_Click(object sender, EventArgs e)
         {
             Process.Start("explorer.exe", TCFile.BaseLocation);
         }
-        private void goalChangeButton_Click(object sender, EventArgs e)
+
+        private void GoalChangeButton_Click(object sender, EventArgs e)
         {
             GoalChangeWindow goalChangeWindow = new();
             goalChangeWindow.ShowDialog();
         }
-        #endregion
 
+        #endregion SettingPage
     }
 }
