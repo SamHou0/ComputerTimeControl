@@ -17,7 +17,7 @@ namespace TimeControl.AppControl
         { }
 
         /// <summary>
-        /// 运行一次（一秒），并根据情况显示警告或关闭进程，然后保存到文件
+        /// Add 1 second, show warning window if necessary and check rest.
         /// </summary>
         public override void Run()
         {
@@ -35,16 +35,16 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 返回时间受限进程的简要概述
+        /// Return a simple description of the limited app.
         /// </summary>
-        /// <returns>时间受限进程的简要概述</returns>
+        /// <returns>The description</returns>
         public override string ToString()
         {
             return base.ToString() + " 进程时间限制为：" + TimeConvert.DescribeTime(appInformation.timeLimit);
         }
 
         /// <summary>
-        /// 禁用掉该程序
+        /// Set the app's time to limited time. This will also kill the process.
         /// </summary>
         public void Ban()
         {

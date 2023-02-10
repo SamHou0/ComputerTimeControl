@@ -13,12 +13,12 @@ namespace TimeControl.Windows
 {
     public partial class ControlPanel : Form
     {
-        private bool hide = false;//指示启动后是否需要隐藏
-        private bool isClosable = false;//指示当前是否可以关闭
-        private string unlockPasswordHash = "";//密码哈希值，用作比对
-        private AppController appController;//列表、计时控制器
-        private TimeData timeData;//数据
-        private bool isLoaded;//指示加载是否已经完成
+        private bool hide = false;
+        private bool isClosable = false;
+        private string unlockPasswordHash = "";//The hash of the password
+        private AppController appController;//Controller for list and apps.
+        private TimeData timeData;//The data of current aim.
+        private bool isLoaded;//Show the state of initialization.
 
         public ControlPanel(bool hide)
         {
@@ -28,17 +28,17 @@ namespace TimeControl.Windows
             versionLabel.Text = $"版本：{Assembly.GetExecutingAssembly().GetName().Version}";
             InitializeSettings();
             this.hide = hide;
-            //数据记录
+            //Data recording
             InitializeData();
-            //屏保
+            //Lock
             IniticalizeFocus();
-            //深度专注
+            //DeepFocus
             InitializeDeepFocus();
-            //程序计时
+            //Process monitor
             StartMonitor();
-            //自动关机
+            //Auto shutdown
             CheckShutdown();
-            //密码
+            //Password
             InitializePassword();
         }
 
@@ -231,12 +231,12 @@ namespace TimeControl.Windows
             processMonitorTimer.Start();
         }
 
-        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)//添加链接
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("explorer.exe", "https://icons8.com/icon/19614/icon");
         }
 
-        private void ClearButton_Click(object sender, EventArgs e)//移除所有的已添加窗口
+        private void ClearButton_Click(object sender, EventArgs e)
         {
             if (PasswordCheck())
             {
@@ -244,13 +244,13 @@ namespace TimeControl.Windows
             }
         }
 
-        private void AppAddButton_Click(object sender, EventArgs e)//添加进程
+        private void AppAddButton_Click(object sender, EventArgs e)
         {
             TimeInput timeInput = new(appController);//打开进程限时控制窗口
             timeInput.ShowDialog();
         }
 
-        private void RemoveButton_Click(object sender, EventArgs e)//移除窗口
+        private void RemoveButton_Click(object sender, EventArgs e)
         {
             //检测密码设置
             if (PasswordCheck())
@@ -259,7 +259,7 @@ namespace TimeControl.Windows
             }
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)//重新获取所有软件所用时间
+        private void RefreshButton_Click(object sender, EventArgs e)
         {
             appController.Refresh();
         }

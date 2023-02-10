@@ -32,7 +32,7 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 刷新列表显示
+        /// Refresh the display of the list on the form.
         /// </summary>
         public void Refresh()
         {
@@ -52,9 +52,9 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 根据名称添加进程
+        /// Add process by name.
         /// </summary>
-        /// <param name="name">要添加的进程名称</param>
+        /// <param name="name">The name of the process</param>
         public void AddByName(string name, int restInterval)
         {
             processMonitorTimer.Stop();
@@ -64,10 +64,10 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 根据名称添加时间受限的进程
+        /// Add a limited process by name.
         /// </summary>
-        /// <param name="name">进程名称</param>
-        /// <param name="timeLimit">限制时长（秒）</param>
+        /// <param name="name">The name of the process</param>
+        /// <param name="timeLimit">The time limit of the process</param>
         public void AddByName(string name, int timeLimit, int restInterval)
         {
             processMonitorTimer.Stop();
@@ -77,7 +77,7 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 跟踪所有进程，增加一秒
+        /// Track all the processes and add 1 second to each running process.
         /// </summary>
         public void Run()
         {
@@ -98,7 +98,7 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 移除所列表所选的进程
+        /// Remove the process selected in the listbox
         /// </summary>
         public void Remove()
         {
@@ -112,7 +112,7 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 删除所有监控
+        /// Delete all the monitors.
         /// </summary>
         public void RemoveAll()
         {
@@ -123,7 +123,7 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 重设全部累计时间
+        /// Reset all the apps' time.
         /// </summary>
         public void Reset()
         {

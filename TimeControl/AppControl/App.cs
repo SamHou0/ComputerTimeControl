@@ -11,9 +11,9 @@ namespace TimeControl.AppControl
         internal int tempTime = 0;
 
         /// <summary>
-        /// 返回进程的简要概述
+        /// Returns a simple description of the app
         /// </summary>
-        /// <returns>进程的简要概述</returns>
+        /// <returns>description</returns>
         public override string ToString()
         {
             return appInformation.name + " 已使用：" + TimeConvert.DescribeTime(appInformation.time);
@@ -24,7 +24,7 @@ namespace TimeControl.AppControl
             appInformation.time = time;
             appInformation.name = name;
             appInformation.restInterval = restInterval;
-            appInformation.timeLimit = 1;//设为1表示无限制
+            appInformation.timeLimit = 1;//Set to 1 if unlimited
         }
 
         public App(AppInformation appInformation)
@@ -33,7 +33,7 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 运行一次（一秒），并保存
+        /// Add 1 second to the app's time and check rest.
         /// </summary>
         public virtual void Run()
         {
@@ -53,7 +53,7 @@ namespace TimeControl.AppControl
         }
 
         /// <summary>
-        /// 重设时间
+        /// Rest app's time.
         /// </summary>
         public void Reset()
         {
