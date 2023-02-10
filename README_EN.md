@@ -1,9 +1,15 @@
 # ComputerTimeControl
+
 [简体中文](README.md)|English
+
+Note: This app is now ONLY available in Chinese. The comments in the code will soon be translated into English.
+
+If you know how to add English to the UI, please create a Pull Request.
 
 An app to lock your computer for a period of time.
 
 ## Features
+
 - Secure Desktop: Use the windows secure desktop to create a workspace without distraction.
 - Deep foucs: Turn off the computer for some time. It will automatically shutdown when your boot.
 - Time restriction: Prevent you from using one app for too long.
@@ -12,12 +18,15 @@ An app to lock your computer for a period of time.
 - Auto shutdown: During a certain period of a day,your computer will automatically shutdown.
 
 ## Environments
+
 - Microsoft Visual Studio 2022
 - .net 6.0 (C#) Desktop
 
 ## Mirrors of the repository
-- gitee(ONLY available in China):https://gitee.com/Sam-Hou/ComputerTimeControl
-- github:https://github.com/SamHou0/ComputerTimeControl
+
+- gitee(ONLY available in China):<https://gitee.com/Sam-Hou/ComputerTimeControl>
+- github:<https://github.com/SamHou0/ComputerTimeControl>
 
 ## Thanks
+
 - Testing：SamHou's good friend
