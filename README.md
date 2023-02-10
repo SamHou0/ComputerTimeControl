@@ -1,4 +1,6 @@
 # ComputerTimeControl
+简体中文|[English](README_EN.md)
+
 将电脑锁定一段时间，专注于你要做的事情！
 
 ## 功能
