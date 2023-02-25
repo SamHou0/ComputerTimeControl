@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -34,6 +35,8 @@ namespace TimeControl.Windows
             IniticalizeFocus();
             //DeepFocus
             InitializeDeepFocus();
+            //Titles Monitor
+            InitTitles();
             //Process monitor
             StartMonitor();
             //Auto shutdown
@@ -208,6 +211,44 @@ namespace TimeControl.Windows
 
         #endregion DeepLockPage
 
+        #region TitlePage
+        private void AddTitleButton_Click(object sender, EventArgs e)
+        {
+            titleListBox.Items.Add(titleTextBox.Text);
+            SaveTitles();
+        }
+
+
+        private void RemoveTitleButton_Click(object sender, EventArgs e)
+        {
+            if (titleListBox.SelectedIndex >= 0)
+            {
+                titleListBox.Items.RemoveAt(titleListBox.SelectedIndex);
+            }
+            SaveTitles();
+        }
+        private void SaveTitles()
+        {
+            List<string> titleList = new();
+            foreach (string s in titleListBox.Items)
+            {
+                titleList.Add(s);
+            }
+            File.WriteAllLines(TCFile.TitleFile, titleList);
+        }
+        private void InitTitles()
+        {
+            if (File.Exists(TCFile.TitleFile))
+            {
+                string[] strings = File.ReadAllLines(TCFile.TitleFile);
+                foreach (string s in strings)
+                {
+                    titleListBox.Items.Add(s);
+                }
+            }
+        }
+        #endregion
+
         #region ProcessPage
 
         private void StartMonitor()
@@ -276,6 +317,17 @@ namespace TimeControl.Windows
                     FileName = "TimeControlConsole.exe"
                 };
                 Process.Start(process);
+            }
+            Process[] processes=Process.GetProcesses();
+            foreach (Process process in processes)
+            {
+                if(!string.IsNullOrWhiteSpace(process.MainWindowTitle))
+                {
+                    foreach (string str in titleListBox.Items)
+                    {
+                        if (process.MainWindowTitle.Contains(str)) process.Kill();
+                    }
+                }
             }
         }
 
@@ -362,6 +414,7 @@ namespace TimeControl.Windows
                 unlockPasswordBox.Enabled = true;
                 unlockPasswordSetButton.Enabled = true;
                 unlockPasswordRemoveButton.Enabled = false;
+                removeTitleButton.Enabled = true;
                 removeBootButton.Enabled = true;
             }
         }
@@ -372,6 +425,7 @@ namespace TimeControl.Windows
             unlockPasswordBox.Enabled = false;
             unlockPasswordSetButton.Enabled = false;
             unlockPasswordRemoveButton.Enabled = true;
+            removeTitleButton.Enabled = false;
             removeBootButton.Enabled = false;
         }
 
@@ -515,5 +569,6 @@ namespace TimeControl.Windows
         }
 
         #endregion SettingPage
+
     }
 }

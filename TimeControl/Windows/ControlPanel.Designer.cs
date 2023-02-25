@@ -29,875 +29,890 @@ namespace TimeControl.Windows
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ControlPanel));
-            this.startButton = new System.Windows.Forms.Button();
-            this.timeBox = new System.Windows.Forms.NumericUpDown();
-            this.controlTab = new System.Windows.Forms.TabControl();
-            this.startNow = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.whiteProcessBox = new System.Windows.Forms.TextBox();
-            this.deepFocusPage = new System.Windows.Forms.TabPage();
-            this.label9 = new System.Windows.Forms.Label();
-            this.deepTimeInput = new System.Windows.Forms.NumericUpDown();
-            this.deepStartButton = new System.Windows.Forms.Button();
-            this.processMonitor = new System.Windows.Forms.TabPage();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.autoRefreshBox = new System.Windows.Forms.CheckBox();
-            this.refreshButton = new System.Windows.Forms.Button();
-            this.removeButton = new System.Windows.Forms.Button();
-            this.appAddButton = new System.Windows.Forms.Button();
-            this.usageBox = new System.Windows.Forms.ListBox();
-            this.shutdownTab = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.shutdownRemoveButton = new System.Windows.Forms.Button();
-            this.shutdownSetButton = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.endShutdownMinute = new System.Windows.Forms.NumericUpDown();
-            this.endShutdownHour = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.startShutdownMinute = new System.Windows.Forms.NumericUpDown();
-            this.startShutdownHour = new System.Windows.Forms.NumericUpDown();
-            this.appProtect = new System.Windows.Forms.TabPage();
-            this.unlockPasswordRemoveButton = new System.Windows.Forms.Button();
-            this.removeBootButton = new System.Windows.Forms.Button();
-            this.addBootButton = new System.Windows.Forms.Button();
-            this.unlockPasswordSetButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.unlockPasswordBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dataPage = new System.Windows.Forms.TabPage();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.progressPage = new System.Windows.Forms.TabPage();
-            this.goalLabel = new System.Windows.Forms.Label();
-            this.encourageLabel = new System.Windows.Forms.Label();
-            this.progressLabel = new System.Windows.Forms.Label();
-            this.levelLabel = new System.Windows.Forms.Label();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.settingPage = new System.Windows.Forms.TabPage();
-            this.goalChangeButton = new System.Windows.Forms.Button();
-            this.dataDirButton = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
-            this.autoResetBox = new System.Windows.Forms.CheckBox();
-            this.helpLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.giteeLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.githubLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.iconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.processMonitorTimer = new System.Windows.Forms.Timer(this.components);
-            this.fileSaveTimer = new System.Windows.Forms.Timer(this.components);
-            this.versionLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.timeBox)).BeginInit();
-            this.controlTab.SuspendLayout();
-            this.startNow.SuspendLayout();
-            this.deepFocusPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deepTimeInput)).BeginInit();
-            this.processMonitor.SuspendLayout();
-            this.shutdownTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.endShutdownMinute)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.endShutdownHour)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startShutdownMinute)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startShutdownHour)).BeginInit();
-            this.appProtect.SuspendLayout();
-            this.dataPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.progressPage.SuspendLayout();
-            this.settingPage.SuspendLayout();
-            this.iconContextMenuStrip.SuspendLayout();
-            this.SuspendLayout();
+            startButton = new System.Windows.Forms.Button();
+            timeBox = new System.Windows.Forms.NumericUpDown();
+            controlTab = new System.Windows.Forms.TabControl();
+            startNow = new System.Windows.Forms.TabPage();
+            label5 = new System.Windows.Forms.Label();
+            whiteProcessBox = new System.Windows.Forms.TextBox();
+            deepFocusPage = new System.Windows.Forms.TabPage();
+            label9 = new System.Windows.Forms.Label();
+            deepTimeInput = new System.Windows.Forms.NumericUpDown();
+            deepStartButton = new System.Windows.Forms.Button();
+            titlePage = new System.Windows.Forms.TabPage();
+            titleTextBox = new System.Windows.Forms.TextBox();
+            removeTitleButton = new System.Windows.Forms.Button();
+            addTitleButton = new System.Windows.Forms.Button();
+            titleListBox = new System.Windows.Forms.ListBox();
+            processMonitor = new System.Windows.Forms.TabPage();
+            resetButton = new System.Windows.Forms.Button();
+            clearButton = new System.Windows.Forms.Button();
+            autoRefreshBox = new System.Windows.Forms.CheckBox();
+            refreshButton = new System.Windows.Forms.Button();
+            removeButton = new System.Windows.Forms.Button();
+            appAddButton = new System.Windows.Forms.Button();
+            usageBox = new System.Windows.Forms.ListBox();
+            shutdownTab = new System.Windows.Forms.TabPage();
+            label8 = new System.Windows.Forms.Label();
+            shutdownRemoveButton = new System.Windows.Forms.Button();
+            shutdownSetButton = new System.Windows.Forms.Button();
+            label12 = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
+            label11 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            endShutdownMinute = new System.Windows.Forms.NumericUpDown();
+            endShutdownHour = new System.Windows.Forms.NumericUpDown();
+            label4 = new System.Windows.Forms.Label();
+            startShutdownMinute = new System.Windows.Forms.NumericUpDown();
+            startShutdownHour = new System.Windows.Forms.NumericUpDown();
+            appProtect = new System.Windows.Forms.TabPage();
+            unlockPasswordRemoveButton = new System.Windows.Forms.Button();
+            removeBootButton = new System.Windows.Forms.Button();
+            addBootButton = new System.Windows.Forms.Button();
+            unlockPasswordSetButton = new System.Windows.Forms.Button();
+            label2 = new System.Windows.Forms.Label();
+            unlockPasswordBox = new System.Windows.Forms.TextBox();
+            label1 = new System.Windows.Forms.Label();
+            dataPage = new System.Windows.Forms.TabPage();
+            dataGridView = new System.Windows.Forms.DataGridView();
+            timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            progressPage = new System.Windows.Forms.TabPage();
+            goalLabel = new System.Windows.Forms.Label();
+            encourageLabel = new System.Windows.Forms.Label();
+            progressLabel = new System.Windows.Forms.Label();
+            levelLabel = new System.Windows.Forms.Label();
+            progressBar = new System.Windows.Forms.ProgressBar();
+            settingPage = new System.Windows.Forms.TabPage();
+            versionLabel = new System.Windows.Forms.Label();
+            goalChangeButton = new System.Windows.Forms.Button();
+            dataDirButton = new System.Windows.Forms.Button();
+            label13 = new System.Windows.Forms.Label();
+            autoResetBox = new System.Windows.Forms.CheckBox();
+            helpLinkLabel = new System.Windows.Forms.LinkLabel();
+            giteeLinkLabel = new System.Windows.Forms.LinkLabel();
+            githubLinkLabel = new System.Windows.Forms.LinkLabel();
+            linkLabel1 = new System.Windows.Forms.LinkLabel();
+            label3 = new System.Windows.Forms.Label();
+            notifyIcon = new System.Windows.Forms.NotifyIcon(components);
+            iconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(components);
+            ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            processMonitorTimer = new System.Windows.Forms.Timer(components);
+            fileSaveTimer = new System.Windows.Forms.Timer(components);
+            ((System.ComponentModel.ISupportInitialize)timeBox).BeginInit();
+            controlTab.SuspendLayout();
+            startNow.SuspendLayout();
+            deepFocusPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)deepTimeInput).BeginInit();
+            titlePage.SuspendLayout();
+            processMonitor.SuspendLayout();
+            shutdownTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)endShutdownMinute).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)endShutdownHour).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)startShutdownMinute).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)startShutdownHour).BeginInit();
+            appProtect.SuspendLayout();
+            dataPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            progressPage.SuspendLayout();
+            settingPage.SuspendLayout();
+            iconContextMenuStrip.SuspendLayout();
+            SuspendLayout();
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(239, 218);
-            this.startButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(145, 82);
-            this.startButton.TabIndex = 0;
-            this.startButton.Text = "启动屏保（分）";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
+            startButton.Location = new System.Drawing.Point(239, 218);
+            startButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            startButton.Name = "startButton";
+            startButton.Size = new System.Drawing.Size(145, 82);
+            startButton.TabIndex = 0;
+            startButton.Text = "启动屏保（分）";
+            startButton.UseVisualStyleBackColor = true;
+            startButton.Click += StartButton_Click;
             // 
             // timeBox
             // 
-            this.timeBox.Location = new System.Drawing.Point(255, 189);
-            this.timeBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.timeBox.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.timeBox.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.timeBox.Name = "timeBox";
-            this.timeBox.Size = new System.Drawing.Size(117, 23);
-            this.timeBox.TabIndex = 1;
-            this.timeBox.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            timeBox.Location = new System.Drawing.Point(255, 189);
+            timeBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            timeBox.Maximum = new decimal(new int[] { 180, 0, 0, 0 });
+            timeBox.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            timeBox.Name = "timeBox";
+            timeBox.Size = new System.Drawing.Size(117, 23);
+            timeBox.TabIndex = 1;
+            timeBox.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // controlTab
             // 
-            this.controlTab.Controls.Add(this.startNow);
-            this.controlTab.Controls.Add(this.deepFocusPage);
-            this.controlTab.Controls.Add(this.processMonitor);
-            this.controlTab.Controls.Add(this.shutdownTab);
-            this.controlTab.Controls.Add(this.appProtect);
-            this.controlTab.Controls.Add(this.dataPage);
-            this.controlTab.Controls.Add(this.progressPage);
-            this.controlTab.Controls.Add(this.settingPage);
-            this.controlTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.controlTab.Location = new System.Drawing.Point(0, 0);
-            this.controlTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.controlTab.Name = "controlTab";
-            this.controlTab.SelectedIndex = 0;
-            this.controlTab.Size = new System.Drawing.Size(622, 382);
-            this.controlTab.TabIndex = 2;
+            controlTab.Controls.Add(startNow);
+            controlTab.Controls.Add(deepFocusPage);
+            controlTab.Controls.Add(titlePage);
+            controlTab.Controls.Add(processMonitor);
+            controlTab.Controls.Add(shutdownTab);
+            controlTab.Controls.Add(appProtect);
+            controlTab.Controls.Add(dataPage);
+            controlTab.Controls.Add(progressPage);
+            controlTab.Controls.Add(settingPage);
+            controlTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            controlTab.Location = new System.Drawing.Point(0, 0);
+            controlTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            controlTab.Name = "controlTab";
+            controlTab.SelectedIndex = 0;
+            controlTab.Size = new System.Drawing.Size(622, 382);
+            controlTab.TabIndex = 2;
             // 
             // startNow
             // 
-            this.startNow.Controls.Add(this.label5);
-            this.startNow.Controls.Add(this.whiteProcessBox);
-            this.startNow.Controls.Add(this.startButton);
-            this.startNow.Controls.Add(this.timeBox);
-            this.startNow.Location = new System.Drawing.Point(4, 26);
-            this.startNow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.startNow.Name = "startNow";
-            this.startNow.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.startNow.Size = new System.Drawing.Size(614, 352);
-            this.startNow.TabIndex = 0;
-            this.startNow.Text = "专注屏保";
-            this.startNow.UseVisualStyleBackColor = true;
+            startNow.Controls.Add(label5);
+            startNow.Controls.Add(whiteProcessBox);
+            startNow.Controls.Add(startButton);
+            startNow.Controls.Add(timeBox);
+            startNow.Location = new System.Drawing.Point(4, 26);
+            startNow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            startNow.Name = "startNow";
+            startNow.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            startNow.Size = new System.Drawing.Size(614, 352);
+            startNow.TabIndex = 0;
+            startNow.Text = "专注屏保";
+            startNow.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(230, 29);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(164, 17);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "白名单应用路径（一行一个）";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(230, 29);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(164, 17);
+            label5.TabIndex = 3;
+            label5.Text = "白名单应用路径（一行一个）";
             // 
             // whiteProcessBox
             // 
-            this.whiteProcessBox.Location = new System.Drawing.Point(161, 49);
-            this.whiteProcessBox.Multiline = true;
-            this.whiteProcessBox.Name = "whiteProcessBox";
-            this.whiteProcessBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.whiteProcessBox.Size = new System.Drawing.Size(298, 134);
-            this.whiteProcessBox.TabIndex = 2;
-            this.whiteProcessBox.TextChanged += new System.EventHandler(this.WhiteProcessBox_TextChanged);
+            whiteProcessBox.Location = new System.Drawing.Point(161, 49);
+            whiteProcessBox.Multiline = true;
+            whiteProcessBox.Name = "whiteProcessBox";
+            whiteProcessBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            whiteProcessBox.Size = new System.Drawing.Size(298, 134);
+            whiteProcessBox.TabIndex = 2;
+            whiteProcessBox.TextChanged += WhiteProcessBox_TextChanged;
             // 
             // deepFocusPage
             // 
-            this.deepFocusPage.Controls.Add(this.label9);
-            this.deepFocusPage.Controls.Add(this.deepTimeInput);
-            this.deepFocusPage.Controls.Add(this.deepStartButton);
-            this.deepFocusPage.Location = new System.Drawing.Point(4, 26);
-            this.deepFocusPage.Name = "deepFocusPage";
-            this.deepFocusPage.Size = new System.Drawing.Size(614, 352);
-            this.deepFocusPage.TabIndex = 6;
-            this.deepFocusPage.Text = "深度专注";
-            this.deepFocusPage.UseVisualStyleBackColor = true;
+            deepFocusPage.Controls.Add(label9);
+            deepFocusPage.Controls.Add(deepTimeInput);
+            deepFocusPage.Controls.Add(deepStartButton);
+            deepFocusPage.Location = new System.Drawing.Point(4, 26);
+            deepFocusPage.Name = "deepFocusPage";
+            deepFocusPage.Size = new System.Drawing.Size(614, 352);
+            deepFocusPage.TabIndex = 6;
+            deepFocusPage.Text = "深度专注";
+            deepFocusPage.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(64, 126);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(488, 17);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "启动屏保后，计算机将立刻关机，并在持续时间内开机时自动关闭。（必须设置开机启动）";
+            label9.AutoSize = true;
+            label9.ForeColor = System.Drawing.Color.Red;
+            label9.Location = new System.Drawing.Point(64, 126);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(488, 17);
+            label9.TabIndex = 3;
+            label9.Text = "启动屏保后，计算机将立刻关机，并在持续时间内开机时自动关闭。（必须设置开机启动）";
             // 
             // deepTimeInput
             // 
-            this.deepTimeInput.Location = new System.Drawing.Point(246, 176);
-            this.deepTimeInput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.deepTimeInput.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.deepTimeInput.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.deepTimeInput.Name = "deepTimeInput";
-            this.deepTimeInput.Size = new System.Drawing.Size(117, 23);
-            this.deepTimeInput.TabIndex = 2;
-            this.deepTimeInput.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            deepTimeInput.Location = new System.Drawing.Point(246, 176);
+            deepTimeInput.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            deepTimeInput.Maximum = new decimal(new int[] { 180, 0, 0, 0 });
+            deepTimeInput.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            deepTimeInput.Name = "deepTimeInput";
+            deepTimeInput.Size = new System.Drawing.Size(117, 23);
+            deepTimeInput.TabIndex = 2;
+            deepTimeInput.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // deepStartButton
             // 
-            this.deepStartButton.Location = new System.Drawing.Point(229, 218);
-            this.deepStartButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.deepStartButton.Name = "deepStartButton";
-            this.deepStartButton.Size = new System.Drawing.Size(145, 82);
-            this.deepStartButton.TabIndex = 1;
-            this.deepStartButton.Text = "启动屏保（分）";
-            this.deepStartButton.UseVisualStyleBackColor = true;
-            this.deepStartButton.Click += new System.EventHandler(this.DeepStartButton_Click);
+            deepStartButton.Location = new System.Drawing.Point(229, 218);
+            deepStartButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            deepStartButton.Name = "deepStartButton";
+            deepStartButton.Size = new System.Drawing.Size(145, 82);
+            deepStartButton.TabIndex = 1;
+            deepStartButton.Text = "启动屏保（分）";
+            deepStartButton.UseVisualStyleBackColor = true;
+            deepStartButton.Click += DeepStartButton_Click;
+            // 
+            // titlePage
+            // 
+            titlePage.Controls.Add(titleTextBox);
+            titlePage.Controls.Add(removeTitleButton);
+            titlePage.Controls.Add(addTitleButton);
+            titlePage.Controls.Add(titleListBox);
+            titlePage.Location = new System.Drawing.Point(4, 26);
+            titlePage.Name = "titlePage";
+            titlePage.Padding = new System.Windows.Forms.Padding(3);
+            titlePage.Size = new System.Drawing.Size(614, 352);
+            titlePage.TabIndex = 8;
+            titlePage.Text = "标题检测";
+            titlePage.UseVisualStyleBackColor = true;
+            // 
+            // titleTextBox
+            // 
+            titleTextBox.Location = new System.Drawing.Point(389, 86);
+            titleTextBox.Name = "titleTextBox";
+            titleTextBox.Size = new System.Drawing.Size(187, 23);
+            titleTextBox.TabIndex = 3;
+            // 
+            // removeTitleButton
+            // 
+            removeTitleButton.Location = new System.Drawing.Point(389, 223);
+            removeTitleButton.Name = "removeTitleButton";
+            removeTitleButton.Size = new System.Drawing.Size(187, 79);
+            removeTitleButton.TabIndex = 2;
+            removeTitleButton.Text = "移除此标题关键词";
+            removeTitleButton.UseVisualStyleBackColor = true;
+            removeTitleButton.Click += RemoveTitleButton_Click;
+            // 
+            // addTitleButton
+            // 
+            addTitleButton.Location = new System.Drawing.Point(389, 115);
+            addTitleButton.Name = "addTitleButton";
+            addTitleButton.Size = new System.Drawing.Size(187, 79);
+            addTitleButton.TabIndex = 1;
+            addTitleButton.Text = "添加此标题关键词";
+            addTitleButton.UseVisualStyleBackColor = true;
+            addTitleButton.Click += AddTitleButton_Click;
+            // 
+            // titleListBox
+            // 
+            titleListBox.FormattingEnabled = true;
+            titleListBox.ItemHeight = 17;
+            titleListBox.Location = new System.Drawing.Point(8, 6);
+            titleListBox.Name = "titleListBox";
+            titleListBox.Size = new System.Drawing.Size(343, 344);
+            titleListBox.TabIndex = 0;
             // 
             // processMonitor
             // 
-            this.processMonitor.Controls.Add(this.resetButton);
-            this.processMonitor.Controls.Add(this.clearButton);
-            this.processMonitor.Controls.Add(this.autoRefreshBox);
-            this.processMonitor.Controls.Add(this.refreshButton);
-            this.processMonitor.Controls.Add(this.removeButton);
-            this.processMonitor.Controls.Add(this.appAddButton);
-            this.processMonitor.Controls.Add(this.usageBox);
-            this.processMonitor.Location = new System.Drawing.Point(4, 26);
-            this.processMonitor.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.processMonitor.Name = "processMonitor";
-            this.processMonitor.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.processMonitor.Size = new System.Drawing.Size(614, 352);
-            this.processMonitor.TabIndex = 1;
-            this.processMonitor.Text = "进程计时";
-            this.processMonitor.UseVisualStyleBackColor = true;
+            processMonitor.Controls.Add(resetButton);
+            processMonitor.Controls.Add(clearButton);
+            processMonitor.Controls.Add(autoRefreshBox);
+            processMonitor.Controls.Add(refreshButton);
+            processMonitor.Controls.Add(removeButton);
+            processMonitor.Controls.Add(appAddButton);
+            processMonitor.Controls.Add(usageBox);
+            processMonitor.Location = new System.Drawing.Point(4, 26);
+            processMonitor.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            processMonitor.Name = "processMonitor";
+            processMonitor.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            processMonitor.Size = new System.Drawing.Size(614, 352);
+            processMonitor.TabIndex = 1;
+            processMonitor.Text = "进程计时";
+            processMonitor.UseVisualStyleBackColor = true;
             // 
             // resetButton
             // 
-            this.resetButton.Location = new System.Drawing.Point(411, 134);
-            this.resetButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(111, 39);
-            this.resetButton.TabIndex = 8;
-            this.resetButton.Text = "重置进程时间";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.ResetButton_Click);
+            resetButton.Location = new System.Drawing.Point(411, 134);
+            resetButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new System.Drawing.Size(111, 39);
+            resetButton.TabIndex = 8;
+            resetButton.Text = "重置进程时间";
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Click += ResetButton_Click;
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(411, 270);
-            this.clearButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(111, 38);
-            this.clearButton.TabIndex = 7;
-            this.clearButton.Text = "删除所有监控";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            clearButton.Location = new System.Drawing.Point(411, 270);
+            clearButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            clearButton.Name = "clearButton";
+            clearButton.Size = new System.Drawing.Size(111, 38);
+            clearButton.TabIndex = 7;
+            clearButton.Text = "删除所有监控";
+            clearButton.UseVisualStyleBackColor = true;
+            clearButton.Click += ClearButton_Click;
             // 
             // autoRefreshBox
             // 
-            this.autoRefreshBox.AutoSize = true;
-            this.autoRefreshBox.Location = new System.Drawing.Point(433, 50);
-            this.autoRefreshBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.autoRefreshBox.Name = "autoRefreshBox";
-            this.autoRefreshBox.Size = new System.Drawing.Size(75, 21);
-            this.autoRefreshBox.TabIndex = 6;
-            this.autoRefreshBox.Text = "自动刷新";
-            this.autoRefreshBox.UseVisualStyleBackColor = true;
-            this.autoRefreshBox.CheckedChanged += new System.EventHandler(this.SettingsChanged);
+            autoRefreshBox.AutoSize = true;
+            autoRefreshBox.Location = new System.Drawing.Point(433, 50);
+            autoRefreshBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            autoRefreshBox.Name = "autoRefreshBox";
+            autoRefreshBox.Size = new System.Drawing.Size(75, 21);
+            autoRefreshBox.TabIndex = 6;
+            autoRefreshBox.Text = "自动刷新";
+            autoRefreshBox.UseVisualStyleBackColor = true;
+            autoRefreshBox.CheckedChanged += SettingsChanged;
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(411, 179);
-            this.refreshButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(111, 43);
-            this.refreshButton.TabIndex = 5;
-            this.refreshButton.Text = "刷新";
-            this.refreshButton.UseVisualStyleBackColor = true;
-            this.refreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            refreshButton.Location = new System.Drawing.Point(411, 179);
+            refreshButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            refreshButton.Name = "refreshButton";
+            refreshButton.Size = new System.Drawing.Size(111, 43);
+            refreshButton.TabIndex = 5;
+            refreshButton.Text = "刷新";
+            refreshButton.UseVisualStyleBackColor = true;
+            refreshButton.Click += RefreshButton_Click;
             // 
             // removeButton
             // 
-            this.removeButton.Location = new System.Drawing.Point(411, 228);
-            this.removeButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(111, 36);
-            this.removeButton.TabIndex = 2;
-            this.removeButton.Text = "删除所选监控";
-            this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            removeButton.Location = new System.Drawing.Point(411, 228);
+            removeButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            removeButton.Name = "removeButton";
+            removeButton.Size = new System.Drawing.Size(111, 36);
+            removeButton.TabIndex = 2;
+            removeButton.Text = "删除所选监控";
+            removeButton.UseVisualStyleBackColor = true;
+            removeButton.Click += RemoveButton_Click;
             // 
             // appAddButton
             // 
-            this.appAddButton.Location = new System.Drawing.Point(411, 77);
-            this.appAddButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.appAddButton.Name = "appAddButton";
-            this.appAddButton.Size = new System.Drawing.Size(111, 51);
-            this.appAddButton.TabIndex = 1;
-            this.appAddButton.Text = "添加监控";
-            this.appAddButton.UseVisualStyleBackColor = true;
-            this.appAddButton.Click += new System.EventHandler(this.AppAddButton_Click);
+            appAddButton.Location = new System.Drawing.Point(411, 77);
+            appAddButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            appAddButton.Name = "appAddButton";
+            appAddButton.Size = new System.Drawing.Size(111, 51);
+            appAddButton.TabIndex = 1;
+            appAddButton.Text = "添加监控";
+            appAddButton.UseVisualStyleBackColor = true;
+            appAddButton.Click += AppAddButton_Click;
             // 
             // usageBox
             // 
-            this.usageBox.FormattingEnabled = true;
-            this.usageBox.ItemHeight = 17;
-            this.usageBox.Location = new System.Drawing.Point(5, 5);
-            this.usageBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.usageBox.Name = "usageBox";
-            this.usageBox.Size = new System.Drawing.Size(331, 344);
-            this.usageBox.TabIndex = 0;
+            usageBox.FormattingEnabled = true;
+            usageBox.ItemHeight = 17;
+            usageBox.Location = new System.Drawing.Point(5, 5);
+            usageBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            usageBox.Name = "usageBox";
+            usageBox.Size = new System.Drawing.Size(331, 344);
+            usageBox.TabIndex = 0;
             // 
             // shutdownTab
             // 
-            this.shutdownTab.Controls.Add(this.label8);
-            this.shutdownTab.Controls.Add(this.shutdownRemoveButton);
-            this.shutdownTab.Controls.Add(this.shutdownSetButton);
-            this.shutdownTab.Controls.Add(this.label12);
-            this.shutdownTab.Controls.Add(this.label10);
-            this.shutdownTab.Controls.Add(this.label11);
-            this.shutdownTab.Controls.Add(this.label7);
-            this.shutdownTab.Controls.Add(this.label6);
-            this.shutdownTab.Controls.Add(this.endShutdownMinute);
-            this.shutdownTab.Controls.Add(this.endShutdownHour);
-            this.shutdownTab.Controls.Add(this.label4);
-            this.shutdownTab.Controls.Add(this.startShutdownMinute);
-            this.shutdownTab.Controls.Add(this.startShutdownHour);
-            this.shutdownTab.Location = new System.Drawing.Point(4, 26);
-            this.shutdownTab.Name = "shutdownTab";
-            this.shutdownTab.Padding = new System.Windows.Forms.Padding(3);
-            this.shutdownTab.Size = new System.Drawing.Size(614, 352);
-            this.shutdownTab.TabIndex = 4;
-            this.shutdownTab.Text = "自动关机";
-            this.shutdownTab.UseVisualStyleBackColor = true;
+            shutdownTab.Controls.Add(label8);
+            shutdownTab.Controls.Add(shutdownRemoveButton);
+            shutdownTab.Controls.Add(shutdownSetButton);
+            shutdownTab.Controls.Add(label12);
+            shutdownTab.Controls.Add(label10);
+            shutdownTab.Controls.Add(label11);
+            shutdownTab.Controls.Add(label7);
+            shutdownTab.Controls.Add(label6);
+            shutdownTab.Controls.Add(endShutdownMinute);
+            shutdownTab.Controls.Add(endShutdownHour);
+            shutdownTab.Controls.Add(label4);
+            shutdownTab.Controls.Add(startShutdownMinute);
+            shutdownTab.Controls.Add(startShutdownHour);
+            shutdownTab.Location = new System.Drawing.Point(4, 26);
+            shutdownTab.Name = "shutdownTab";
+            shutdownTab.Padding = new System.Windows.Forms.Padding(3);
+            shutdownTab.Size = new System.Drawing.Size(614, 352);
+            shutdownTab.TabIndex = 4;
+            shutdownTab.Text = "自动关机";
+            shutdownTab.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(44, 330);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(493, 17);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "开机启动通过windows计划任务实现！若电脑被误完全锁定，请关闭TimeControlBoot任务";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(44, 330);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(493, 17);
+            label8.TabIndex = 16;
+            label8.Text = "开机启动通过windows计划任务实现！若电脑被误完全锁定，请关闭TimeControlBoot任务";
             // 
             // shutdownRemoveButton
             // 
-            this.shutdownRemoveButton.Location = new System.Drawing.Point(416, 118);
-            this.shutdownRemoveButton.Name = "shutdownRemoveButton";
-            this.shutdownRemoveButton.Size = new System.Drawing.Size(190, 81);
-            this.shutdownRemoveButton.TabIndex = 15;
-            this.shutdownRemoveButton.Text = "移除";
-            this.shutdownRemoveButton.UseVisualStyleBackColor = true;
-            this.shutdownRemoveButton.Click += new System.EventHandler(this.ShutdownRemoveButton_Click);
+            shutdownRemoveButton.Location = new System.Drawing.Point(416, 118);
+            shutdownRemoveButton.Name = "shutdownRemoveButton";
+            shutdownRemoveButton.Size = new System.Drawing.Size(190, 81);
+            shutdownRemoveButton.TabIndex = 15;
+            shutdownRemoveButton.Text = "移除";
+            shutdownRemoveButton.UseVisualStyleBackColor = true;
+            shutdownRemoveButton.Click += ShutdownRemoveButton_Click;
             // 
             // shutdownSetButton
             // 
-            this.shutdownSetButton.Location = new System.Drawing.Point(416, 31);
-            this.shutdownSetButton.Name = "shutdownSetButton";
-            this.shutdownSetButton.Size = new System.Drawing.Size(190, 81);
-            this.shutdownSetButton.TabIndex = 14;
-            this.shutdownSetButton.Text = "设置";
-            this.shutdownSetButton.UseVisualStyleBackColor = true;
-            this.shutdownSetButton.Click += new System.EventHandler(this.ShutdownSetButton_Click);
+            shutdownSetButton.Location = new System.Drawing.Point(416, 31);
+            shutdownSetButton.Name = "shutdownSetButton";
+            shutdownSetButton.Size = new System.Drawing.Size(190, 81);
+            shutdownSetButton.TabIndex = 14;
+            shutdownSetButton.Text = "设置";
+            shutdownSetButton.UseVisualStyleBackColor = true;
+            shutdownSetButton.Click += ShutdownSetButton_Click;
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(183, 51);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(20, 17);
-            this.label12.TabIndex = 13;
-            this.label12.Text = "到";
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(183, 51);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(20, 17);
+            label12.TabIndex = 13;
+            label12.Text = "到";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(371, 62);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(20, 17);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "分";
+            label10.AutoSize = true;
+            label10.Location = new System.Drawing.Point(371, 62);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(20, 17);
+            label10.TabIndex = 11;
+            label10.Text = "分";
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(371, 33);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(20, 17);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "时";
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(371, 33);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(20, 17);
+            label11.TabIndex = 10;
+            label11.Text = "时";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(134, 62);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(20, 17);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "分";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(134, 62);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(20, 17);
+            label7.TabIndex = 8;
+            label7.Text = "分";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(134, 33);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(20, 17);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "时";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(134, 33);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(20, 17);
+            label6.TabIndex = 7;
+            label6.Text = "时";
             // 
             // endShutdownMinute
             // 
-            this.endShutdownMinute.Location = new System.Drawing.Point(245, 60);
-            this.endShutdownMinute.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.endShutdownMinute.Name = "endShutdownMinute";
-            this.endShutdownMinute.Size = new System.Drawing.Size(120, 23);
-            this.endShutdownMinute.TabIndex = 5;
+            endShutdownMinute.Location = new System.Drawing.Point(245, 60);
+            endShutdownMinute.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
+            endShutdownMinute.Name = "endShutdownMinute";
+            endShutdownMinute.Size = new System.Drawing.Size(120, 23);
+            endShutdownMinute.TabIndex = 5;
             // 
             // endShutdownHour
             // 
-            this.endShutdownHour.Location = new System.Drawing.Point(245, 31);
-            this.endShutdownHour.Maximum = new decimal(new int[] {
-            24,
-            0,
-            0,
-            0});
-            this.endShutdownHour.Name = "endShutdownHour";
-            this.endShutdownHour.Size = new System.Drawing.Size(120, 23);
-            this.endShutdownHour.TabIndex = 4;
+            endShutdownHour.Location = new System.Drawing.Point(245, 31);
+            endShutdownHour.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
+            endShutdownHour.Name = "endShutdownHour";
+            endShutdownHour.Size = new System.Drawing.Size(120, 23);
+            endShutdownHour.TabIndex = 4;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Tomato;
-            this.label4.Location = new System.Drawing.Point(8, 7);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(332, 17);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "在此时段内开机后自动关闭电脑（必须设为开机启动才生效）";
+            label4.AutoSize = true;
+            label4.ForeColor = System.Drawing.Color.Tomato;
+            label4.Location = new System.Drawing.Point(8, 7);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(332, 17);
+            label4.TabIndex = 3;
+            label4.Text = "在此时段内开机后自动关闭电脑（必须设为开机启动才生效）";
             // 
             // startShutdownMinute
             // 
-            this.startShutdownMinute.Location = new System.Drawing.Point(8, 60);
-            this.startShutdownMinute.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.startShutdownMinute.Name = "startShutdownMinute";
-            this.startShutdownMinute.Size = new System.Drawing.Size(120, 23);
-            this.startShutdownMinute.TabIndex = 1;
+            startShutdownMinute.Location = new System.Drawing.Point(8, 60);
+            startShutdownMinute.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
+            startShutdownMinute.Name = "startShutdownMinute";
+            startShutdownMinute.Size = new System.Drawing.Size(120, 23);
+            startShutdownMinute.TabIndex = 1;
             // 
             // startShutdownHour
             // 
-            this.startShutdownHour.Location = new System.Drawing.Point(8, 31);
-            this.startShutdownHour.Maximum = new decimal(new int[] {
-            24,
-            0,
-            0,
-            0});
-            this.startShutdownHour.Name = "startShutdownHour";
-            this.startShutdownHour.Size = new System.Drawing.Size(120, 23);
-            this.startShutdownHour.TabIndex = 0;
+            startShutdownHour.Location = new System.Drawing.Point(8, 31);
+            startShutdownHour.Maximum = new decimal(new int[] { 24, 0, 0, 0 });
+            startShutdownHour.Name = "startShutdownHour";
+            startShutdownHour.Size = new System.Drawing.Size(120, 23);
+            startShutdownHour.TabIndex = 0;
             // 
             // appProtect
             // 
-            this.appProtect.Controls.Add(this.unlockPasswordRemoveButton);
-            this.appProtect.Controls.Add(this.removeBootButton);
-            this.appProtect.Controls.Add(this.addBootButton);
-            this.appProtect.Controls.Add(this.unlockPasswordSetButton);
-            this.appProtect.Controls.Add(this.label2);
-            this.appProtect.Controls.Add(this.unlockPasswordBox);
-            this.appProtect.Controls.Add(this.label1);
-            this.appProtect.Location = new System.Drawing.Point(4, 26);
-            this.appProtect.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.appProtect.Name = "appProtect";
-            this.appProtect.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.appProtect.Size = new System.Drawing.Size(614, 352);
-            this.appProtect.TabIndex = 3;
-            this.appProtect.Text = "程序保护";
-            this.appProtect.UseVisualStyleBackColor = true;
+            appProtect.Controls.Add(unlockPasswordRemoveButton);
+            appProtect.Controls.Add(removeBootButton);
+            appProtect.Controls.Add(addBootButton);
+            appProtect.Controls.Add(unlockPasswordSetButton);
+            appProtect.Controls.Add(label2);
+            appProtect.Controls.Add(unlockPasswordBox);
+            appProtect.Controls.Add(label1);
+            appProtect.Location = new System.Drawing.Point(4, 26);
+            appProtect.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            appProtect.Name = "appProtect";
+            appProtect.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            appProtect.Size = new System.Drawing.Size(614, 352);
+            appProtect.TabIndex = 3;
+            appProtect.Text = "程序保护";
+            appProtect.UseVisualStyleBackColor = true;
             // 
             // unlockPasswordRemoveButton
             // 
-            this.unlockPasswordRemoveButton.Location = new System.Drawing.Point(102, 34);
-            this.unlockPasswordRemoveButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.unlockPasswordRemoveButton.Name = "unlockPasswordRemoveButton";
-            this.unlockPasswordRemoveButton.Size = new System.Drawing.Size(93, 37);
-            this.unlockPasswordRemoveButton.TabIndex = 10;
-            this.unlockPasswordRemoveButton.Text = "移除";
-            this.unlockPasswordRemoveButton.UseVisualStyleBackColor = true;
-            this.unlockPasswordRemoveButton.Click += new System.EventHandler(this.UnlockPasswordRemoveButton_Click);
+            unlockPasswordRemoveButton.Location = new System.Drawing.Point(102, 34);
+            unlockPasswordRemoveButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            unlockPasswordRemoveButton.Name = "unlockPasswordRemoveButton";
+            unlockPasswordRemoveButton.Size = new System.Drawing.Size(93, 37);
+            unlockPasswordRemoveButton.TabIndex = 10;
+            unlockPasswordRemoveButton.Text = "移除";
+            unlockPasswordRemoveButton.UseVisualStyleBackColor = true;
+            unlockPasswordRemoveButton.Click += UnlockPasswordRemoveButton_Click;
             // 
             // removeBootButton
             // 
-            this.removeBootButton.Location = new System.Drawing.Point(177, 283);
-            this.removeBootButton.Name = "removeBootButton";
-            this.removeBootButton.Size = new System.Drawing.Size(163, 61);
-            this.removeBootButton.TabIndex = 9;
-            this.removeBootButton.Text = "移除开机启动";
-            this.removeBootButton.UseVisualStyleBackColor = true;
-            this.removeBootButton.Click += new System.EventHandler(this.RemoveBootButton_Click);
+            removeBootButton.Location = new System.Drawing.Point(177, 283);
+            removeBootButton.Name = "removeBootButton";
+            removeBootButton.Size = new System.Drawing.Size(163, 61);
+            removeBootButton.TabIndex = 9;
+            removeBootButton.Text = "移除开机启动";
+            removeBootButton.UseVisualStyleBackColor = true;
+            removeBootButton.Click += RemoveBootButton_Click;
             // 
             // addBootButton
             // 
-            this.addBootButton.Location = new System.Drawing.Point(8, 283);
-            this.addBootButton.Name = "addBootButton";
-            this.addBootButton.Size = new System.Drawing.Size(163, 61);
-            this.addBootButton.TabIndex = 8;
-            this.addBootButton.Text = "添加开机启动";
-            this.addBootButton.UseVisualStyleBackColor = true;
-            this.addBootButton.Click += new System.EventHandler(this.AddBootButton_Click);
+            addBootButton.Location = new System.Drawing.Point(8, 283);
+            addBootButton.Name = "addBootButton";
+            addBootButton.Size = new System.Drawing.Size(163, 61);
+            addBootButton.TabIndex = 8;
+            addBootButton.Text = "添加开机启动";
+            addBootButton.UseVisualStyleBackColor = true;
+            addBootButton.Click += AddBootButton_Click;
             // 
             // unlockPasswordSetButton
             // 
-            this.unlockPasswordSetButton.Location = new System.Drawing.Point(5, 33);
-            this.unlockPasswordSetButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.unlockPasswordSetButton.Name = "unlockPasswordSetButton";
-            this.unlockPasswordSetButton.Size = new System.Drawing.Size(93, 37);
-            this.unlockPasswordSetButton.TabIndex = 7;
-            this.unlockPasswordSetButton.Text = "设置";
-            this.unlockPasswordSetButton.UseVisualStyleBackColor = true;
-            this.unlockPasswordSetButton.Click += new System.EventHandler(this.UnloackPasswordSetButton_Click);
+            unlockPasswordSetButton.Location = new System.Drawing.Point(5, 33);
+            unlockPasswordSetButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            unlockPasswordSetButton.Name = "unlockPasswordSetButton";
+            unlockPasswordSetButton.Size = new System.Drawing.Size(93, 37);
+            unlockPasswordSetButton.TabIndex = 7;
+            unlockPasswordSetButton.Text = "设置";
+            unlockPasswordSetButton.UseVisualStyleBackColor = true;
+            unlockPasswordSetButton.Click += UnloackPasswordSetButton_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(153, 8);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(404, 17);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "设置管理码后，在屏保时可以凭管理码解锁。且退出程序需要输入管理码。";
+            label2.AutoSize = true;
+            label2.ForeColor = System.Drawing.Color.Red;
+            label2.Location = new System.Drawing.Point(153, 8);
+            label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(404, 17);
+            label2.TabIndex = 6;
+            label2.Text = "设置管理码后，在屏保时可以凭管理码解锁。且退出程序需要输入管理码。";
             // 
             // unlockPasswordBox
             // 
-            this.unlockPasswordBox.Location = new System.Drawing.Point(51, 5);
-            this.unlockPasswordBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.unlockPasswordBox.Name = "unlockPasswordBox";
-            this.unlockPasswordBox.Size = new System.Drawing.Size(98, 23);
-            this.unlockPasswordBox.TabIndex = 5;
-            this.unlockPasswordBox.UseSystemPasswordChar = true;
+            unlockPasswordBox.Location = new System.Drawing.Point(51, 5);
+            unlockPasswordBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            unlockPasswordBox.Name = "unlockPasswordBox";
+            unlockPasswordBox.Size = new System.Drawing.Size(98, 23);
+            unlockPasswordBox.TabIndex = 5;
+            unlockPasswordBox.UseSystemPasswordChar = true;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 8);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 17);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "管理码";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(5, 8);
+            label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(44, 17);
+            label1.TabIndex = 4;
+            label1.Text = "管理码";
             // 
             // dataPage
             // 
-            this.dataPage.Controls.Add(this.dataGridView);
-            this.dataPage.Location = new System.Drawing.Point(4, 26);
-            this.dataPage.Name = "dataPage";
-            this.dataPage.Size = new System.Drawing.Size(614, 352);
-            this.dataPage.TabIndex = 5;
-            this.dataPage.Text = "数据分析";
-            this.dataPage.UseVisualStyleBackColor = true;
+            dataPage.Controls.Add(dataGridView);
+            dataPage.Location = new System.Drawing.Point(4, 26);
+            dataPage.Name = "dataPage";
+            dataPage.Size = new System.Drawing.Size(614, 352);
+            dataPage.TabIndex = 5;
+            dataPage.Text = "数据分析";
+            dataPage.UseVisualStyleBackColor = true;
             // 
             // dataGridView
             // 
-            this.dataGridView.AllowUserToAddRows = false;
-            this.dataGridView.AllowUserToDeleteRows = false;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.timeColumn,
-            this.nameColumn});
-            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.ReadOnly = true;
-            this.dataGridView.RowTemplate.Height = 25;
-            this.dataGridView.Size = new System.Drawing.Size(614, 352);
-            this.dataGridView.TabIndex = 0;
+            dataGridView.AllowUserToAddRows = false;
+            dataGridView.AllowUserToDeleteRows = false;
+            dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { timeColumn, nameColumn });
+            dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataGridView.Location = new System.Drawing.Point(0, 0);
+            dataGridView.Name = "dataGridView";
+            dataGridView.ReadOnly = true;
+            dataGridView.RowTemplate.Height = 25;
+            dataGridView.Size = new System.Drawing.Size(614, 352);
+            dataGridView.TabIndex = 0;
             // 
             // timeColumn
             // 
-            this.timeColumn.HeaderText = "时间";
-            this.timeColumn.Name = "timeColumn";
-            this.timeColumn.ReadOnly = true;
-            this.timeColumn.Width = 415;
+            timeColumn.HeaderText = "时间";
+            timeColumn.Name = "timeColumn";
+            timeColumn.ReadOnly = true;
+            timeColumn.Width = 415;
             // 
             // nameColumn
             // 
-            this.nameColumn.HeaderText = "名称";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            this.nameColumn.Width = 153;
+            nameColumn.HeaderText = "名称";
+            nameColumn.Name = "nameColumn";
+            nameColumn.ReadOnly = true;
+            nameColumn.Width = 153;
             // 
             // progressPage
             // 
-            this.progressPage.Controls.Add(this.goalLabel);
-            this.progressPage.Controls.Add(this.encourageLabel);
-            this.progressPage.Controls.Add(this.progressLabel);
-            this.progressPage.Controls.Add(this.levelLabel);
-            this.progressPage.Controls.Add(this.progressBar);
-            this.progressPage.Location = new System.Drawing.Point(4, 26);
-            this.progressPage.Name = "progressPage";
-            this.progressPage.Size = new System.Drawing.Size(614, 352);
-            this.progressPage.TabIndex = 7;
-            this.progressPage.Text = "我的进度";
-            this.progressPage.UseVisualStyleBackColor = true;
+            progressPage.Controls.Add(goalLabel);
+            progressPage.Controls.Add(encourageLabel);
+            progressPage.Controls.Add(progressLabel);
+            progressPage.Controls.Add(levelLabel);
+            progressPage.Controls.Add(progressBar);
+            progressPage.Location = new System.Drawing.Point(4, 26);
+            progressPage.Name = "progressPage";
+            progressPage.Size = new System.Drawing.Size(614, 352);
+            progressPage.TabIndex = 7;
+            progressPage.Text = "我的进度";
+            progressPage.UseVisualStyleBackColor = true;
             // 
             // goalLabel
             // 
-            this.goalLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.goalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.goalLabel.Location = new System.Drawing.Point(155, 0);
-            this.goalLabel.Name = "goalLabel";
-            this.goalLabel.Size = new System.Drawing.Size(305, 139);
-            this.goalLabel.TabIndex = 5;
-            this.goalLabel.Text = "目标文本";
-            this.goalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            goalLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            goalLabel.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            goalLabel.Location = new System.Drawing.Point(155, 0);
+            goalLabel.Name = "goalLabel";
+            goalLabel.Size = new System.Drawing.Size(305, 139);
+            goalLabel.TabIndex = 5;
+            goalLabel.Text = "目标文本";
+            goalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // encourageLabel
             // 
-            this.encourageLabel.ForeColor = System.Drawing.Color.Red;
-            this.encourageLabel.Location = new System.Drawing.Point(155, 94);
-            this.encourageLabel.Name = "encourageLabel";
-            this.encourageLabel.Size = new System.Drawing.Size(305, 119);
-            this.encourageLabel.TabIndex = 4;
-            this.encourageLabel.Text = "听说只要专注等级达到100级，能力就会有巨大的成长！";
-            this.encourageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            encourageLabel.ForeColor = System.Drawing.Color.Red;
+            encourageLabel.Location = new System.Drawing.Point(155, 94);
+            encourageLabel.Name = "encourageLabel";
+            encourageLabel.Size = new System.Drawing.Size(305, 119);
+            encourageLabel.TabIndex = 4;
+            encourageLabel.Text = "听说只要专注等级达到100级，能力就会有巨大的成长！";
+            encourageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressLabel
             // 
-            this.progressLabel.AutoSize = true;
-            this.progressLabel.Location = new System.Drawing.Point(210, 270);
-            this.progressLabel.Name = "progressLabel";
-            this.progressLabel.Size = new System.Drawing.Size(183, 17);
-            this.progressLabel.TabIndex = 3;
-            this.progressLabel.Text = "进入下一级还需要专注0.000小时";
+            progressLabel.AutoSize = true;
+            progressLabel.Location = new System.Drawing.Point(210, 270);
+            progressLabel.Name = "progressLabel";
+            progressLabel.Size = new System.Drawing.Size(183, 17);
+            progressLabel.TabIndex = 3;
+            progressLabel.Text = "进入下一级还需要专注0.000小时";
             // 
             // levelLabel
             // 
-            this.levelLabel.AutoSize = true;
-            this.levelLabel.Location = new System.Drawing.Point(253, 213);
-            this.levelLabel.Name = "levelLabel";
-            this.levelLabel.Size = new System.Drawing.Size(113, 17);
-            this.levelLabel.TabIndex = 2;
-            this.levelLabel.Text = "当前等级：0/100级";
+            levelLabel.AutoSize = true;
+            levelLabel.Location = new System.Drawing.Point(253, 213);
+            levelLabel.Name = "levelLabel";
+            levelLabel.Size = new System.Drawing.Size(113, 17);
+            levelLabel.TabIndex = 2;
+            levelLabel.Text = "当前等级：0/100级";
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(124, 233);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(358, 34);
-            this.progressBar.TabIndex = 0;
+            progressBar.Location = new System.Drawing.Point(124, 233);
+            progressBar.Name = "progressBar";
+            progressBar.Size = new System.Drawing.Size(358, 34);
+            progressBar.TabIndex = 0;
             // 
             // settingPage
             // 
-            this.settingPage.Controls.Add(this.versionLabel);
-            this.settingPage.Controls.Add(this.goalChangeButton);
-            this.settingPage.Controls.Add(this.dataDirButton);
-            this.settingPage.Controls.Add(this.label13);
-            this.settingPage.Controls.Add(this.autoResetBox);
-            this.settingPage.Controls.Add(this.helpLinkLabel);
-            this.settingPage.Controls.Add(this.giteeLinkLabel);
-            this.settingPage.Controls.Add(this.githubLinkLabel);
-            this.settingPage.Controls.Add(this.linkLabel1);
-            this.settingPage.Controls.Add(this.label3);
-            this.settingPage.Location = new System.Drawing.Point(4, 26);
-            this.settingPage.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.settingPage.Name = "settingPage";
-            this.settingPage.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.settingPage.Size = new System.Drawing.Size(614, 352);
-            this.settingPage.TabIndex = 2;
-            this.settingPage.Text = "设置";
-            this.settingPage.UseVisualStyleBackColor = true;
-            // 
-            // goalChangeButton
-            // 
-            this.goalChangeButton.Location = new System.Drawing.Point(484, 109);
-            this.goalChangeButton.Name = "goalChangeButton";
-            this.goalChangeButton.Size = new System.Drawing.Size(117, 53);
-            this.goalChangeButton.TabIndex = 11;
-            this.goalChangeButton.Text = "设置/切换目标";
-            this.goalChangeButton.UseVisualStyleBackColor = true;
-            this.goalChangeButton.Click += new System.EventHandler(this.GoalChangeButton_Click);
-            // 
-            // dataDirButton
-            // 
-            this.dataDirButton.Location = new System.Drawing.Point(484, 49);
-            this.dataDirButton.Name = "dataDirButton";
-            this.dataDirButton.Size = new System.Drawing.Size(117, 54);
-            this.dataDirButton.TabIndex = 10;
-            this.dataDirButton.Text = "打开数据文件夹";
-            this.dataDirButton.UseVisualStyleBackColor = true;
-            this.dataDirButton.Click += new System.EventHandler(this.DataDirButton_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.ForeColor = System.Drawing.Color.LightCoral;
-            this.label13.Location = new System.Drawing.Point(485, 29);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(116, 17);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "你的设置将自动保存";
-            // 
-            // autoResetBox
-            // 
-            this.autoResetBox.AutoSize = true;
-            this.autoResetBox.Location = new System.Drawing.Point(8, 6);
-            this.autoResetBox.Name = "autoResetBox";
-            this.autoResetBox.Size = new System.Drawing.Size(255, 21);
-            this.autoResetBox.TabIndex = 8;
-            this.autoResetBox.Text = "新的一天开始时，自动重置进程计时的时间";
-            this.autoResetBox.UseVisualStyleBackColor = true;
-            this.autoResetBox.CheckedChanged += new System.EventHandler(this.SettingsChanged);
-            // 
-            // helpLinkLabel
-            // 
-            this.helpLinkLabel.AutoSize = true;
-            this.helpLinkLabel.Location = new System.Drawing.Point(577, 332);
-            this.helpLinkLabel.Name = "helpLinkLabel";
-            this.helpLinkLabel.Size = new System.Drawing.Size(32, 17);
-            this.helpLinkLabel.TabIndex = 7;
-            this.helpLinkLabel.TabStop = true;
-            this.helpLinkLabel.Text = "帮助";
-            this.helpLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.HelpLinkLabel_LinkClicked);
-            // 
-            // giteeLinkLabel
-            // 
-            this.giteeLinkLabel.AutoSize = true;
-            this.giteeLinkLabel.Location = new System.Drawing.Point(5, 330);
-            this.giteeLinkLabel.Name = "giteeLinkLabel";
-            this.giteeLinkLabel.Size = new System.Drawing.Size(37, 17);
-            this.giteeLinkLabel.TabIndex = 6;
-            this.giteeLinkLabel.TabStop = true;
-            this.giteeLinkLabel.Text = "gitee";
-            this.giteeLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GiteeLinkLabel_LinkClicked);
-            // 
-            // githubLinkLabel
-            // 
-            this.githubLinkLabel.AutoSize = true;
-            this.githubLinkLabel.Location = new System.Drawing.Point(5, 305);
-            this.githubLinkLabel.Name = "githubLinkLabel";
-            this.githubLinkLabel.Size = new System.Drawing.Size(45, 17);
-            this.githubLinkLabel.TabIndex = 5;
-            this.githubLinkLabel.TabStop = true;
-            this.githubLinkLabel.Text = "github";
-            this.githubLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GithubLinkLabel_LinkClicked);
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(578, 3);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(32, 17);
-            this.linkLabel1.TabIndex = 1;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "链接";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(485, 3);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 17);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "图标来自icon8!";
-            // 
-            // notifyIcon
-            // 
-            this.notifyIcon.ContextMenuStrip = this.iconContextMenuStrip;
-            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "Computer Time Control";
-            this.notifyIcon.Visible = true;
-            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
-            // 
-            // iconContextMenuStrip
-            // 
-            this.iconContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.iconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ExitToolStripMenuItem});
-            this.iconContextMenuStrip.Name = "contextMenuStrip";
-            this.iconContextMenuStrip.Size = new System.Drawing.Size(101, 26);
-            // 
-            // ExitToolStripMenuItem
-            // 
-            this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.ExitToolStripMenuItem.Text = "退出";
-            this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
-            // 
-            // processMonitorTimer
-            // 
-            this.processMonitorTimer.Interval = 1000;
-            this.processMonitorTimer.Tick += new System.EventHandler(this.ProcessMonitorTimer_Tick);
-            // 
-            // fileSaveTimer
-            // 
-            this.fileSaveTimer.Interval = 300000;
-            this.fileSaveTimer.Tick += new System.EventHandler(this.FileSaveTimer_Tick);
+            settingPage.Controls.Add(versionLabel);
+            settingPage.Controls.Add(goalChangeButton);
+            settingPage.Controls.Add(dataDirButton);
+            settingPage.Controls.Add(label13);
+            settingPage.Controls.Add(autoResetBox);
+            settingPage.Controls.Add(helpLinkLabel);
+            settingPage.Controls.Add(giteeLinkLabel);
+            settingPage.Controls.Add(githubLinkLabel);
+            settingPage.Controls.Add(linkLabel1);
+            settingPage.Controls.Add(label3);
+            settingPage.Location = new System.Drawing.Point(4, 26);
+            settingPage.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            settingPage.Name = "settingPage";
+            settingPage.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            settingPage.Size = new System.Drawing.Size(614, 352);
+            settingPage.TabIndex = 2;
+            settingPage.Text = "设置";
+            settingPage.UseVisualStyleBackColor = true;
             // 
             // versionLabel
             // 
-            this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(49, 329);
-            this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(71, 17);
-            this.versionLabel.TabIndex = 12;
-            this.versionLabel.Text = "版本：0.0.0";
+            versionLabel.AutoSize = true;
+            versionLabel.Location = new System.Drawing.Point(49, 329);
+            versionLabel.Name = "versionLabel";
+            versionLabel.Size = new System.Drawing.Size(71, 17);
+            versionLabel.TabIndex = 12;
+            versionLabel.Text = "版本：0.0.0";
+            // 
+            // goalChangeButton
+            // 
+            goalChangeButton.Location = new System.Drawing.Point(484, 109);
+            goalChangeButton.Name = "goalChangeButton";
+            goalChangeButton.Size = new System.Drawing.Size(117, 53);
+            goalChangeButton.TabIndex = 11;
+            goalChangeButton.Text = "设置/切换目标";
+            goalChangeButton.UseVisualStyleBackColor = true;
+            goalChangeButton.Click += GoalChangeButton_Click;
+            // 
+            // dataDirButton
+            // 
+            dataDirButton.Location = new System.Drawing.Point(484, 49);
+            dataDirButton.Name = "dataDirButton";
+            dataDirButton.Size = new System.Drawing.Size(117, 54);
+            dataDirButton.TabIndex = 10;
+            dataDirButton.Text = "打开数据文件夹";
+            dataDirButton.UseVisualStyleBackColor = true;
+            dataDirButton.Click += DataDirButton_Click;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.ForeColor = System.Drawing.Color.LightCoral;
+            label13.Location = new System.Drawing.Point(485, 29);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(116, 17);
+            label13.TabIndex = 9;
+            label13.Text = "你的设置将自动保存";
+            // 
+            // autoResetBox
+            // 
+            autoResetBox.AutoSize = true;
+            autoResetBox.Location = new System.Drawing.Point(8, 6);
+            autoResetBox.Name = "autoResetBox";
+            autoResetBox.Size = new System.Drawing.Size(255, 21);
+            autoResetBox.TabIndex = 8;
+            autoResetBox.Text = "新的一天开始时，自动重置进程计时的时间";
+            autoResetBox.UseVisualStyleBackColor = true;
+            autoResetBox.CheckedChanged += SettingsChanged;
+            // 
+            // helpLinkLabel
+            // 
+            helpLinkLabel.AutoSize = true;
+            helpLinkLabel.Location = new System.Drawing.Point(577, 332);
+            helpLinkLabel.Name = "helpLinkLabel";
+            helpLinkLabel.Size = new System.Drawing.Size(32, 17);
+            helpLinkLabel.TabIndex = 7;
+            helpLinkLabel.TabStop = true;
+            helpLinkLabel.Text = "帮助";
+            helpLinkLabel.LinkClicked += HelpLinkLabel_LinkClicked;
+            // 
+            // giteeLinkLabel
+            // 
+            giteeLinkLabel.AutoSize = true;
+            giteeLinkLabel.Location = new System.Drawing.Point(5, 330);
+            giteeLinkLabel.Name = "giteeLinkLabel";
+            giteeLinkLabel.Size = new System.Drawing.Size(37, 17);
+            giteeLinkLabel.TabIndex = 6;
+            giteeLinkLabel.TabStop = true;
+            giteeLinkLabel.Text = "gitee";
+            giteeLinkLabel.LinkClicked += GiteeLinkLabel_LinkClicked;
+            // 
+            // githubLinkLabel
+            // 
+            githubLinkLabel.AutoSize = true;
+            githubLinkLabel.Location = new System.Drawing.Point(5, 305);
+            githubLinkLabel.Name = "githubLinkLabel";
+            githubLinkLabel.Size = new System.Drawing.Size(45, 17);
+            githubLinkLabel.TabIndex = 5;
+            githubLinkLabel.TabStop = true;
+            githubLinkLabel.Text = "github";
+            githubLinkLabel.LinkClicked += GithubLinkLabel_LinkClicked;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new System.Drawing.Point(578, 3);
+            linkLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new System.Drawing.Size(32, 17);
+            linkLabel1.TabIndex = 1;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "链接";
+            linkLabel1.LinkClicked += LinkLabel1_LinkClicked;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(485, 3);
+            label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(91, 17);
+            label3.TabIndex = 0;
+            label3.Text = "图标来自icon8!";
+            // 
+            // notifyIcon
+            // 
+            notifyIcon.ContextMenuStrip = iconContextMenuStrip;
+            notifyIcon.Icon = (System.Drawing.Icon)resources.GetObject("notifyIcon.Icon");
+            notifyIcon.Text = "Computer Time Control";
+            notifyIcon.Visible = true;
+            notifyIcon.MouseDoubleClick += NotifyIcon_MouseDoubleClick;
+            // 
+            // iconContextMenuStrip
+            // 
+            iconContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            iconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { ExitToolStripMenuItem });
+            iconContextMenuStrip.Name = "contextMenuStrip";
+            iconContextMenuStrip.Size = new System.Drawing.Size(101, 26);
+            // 
+            // ExitToolStripMenuItem
+            // 
+            ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            ExitToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            ExitToolStripMenuItem.Text = "退出";
+            ExitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
+            // 
+            // processMonitorTimer
+            // 
+            processMonitorTimer.Interval = 1000;
+            processMonitorTimer.Tick += ProcessMonitorTimer_Tick;
+            // 
+            // fileSaveTimer
+            // 
+            fileSaveTimer.Interval = 300000;
+            fileSaveTimer.Tick += FileSaveTimer_Tick;
             // 
             // ControlPanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 382);
-            this.Controls.Add(this.controlTab);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "ControlPanel";
-            this.Text = "时间管理";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControlPanel_FormClosing);
-            this.Shown += new System.EventHandler(this.ControlPanel_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.timeBox)).EndInit();
-            this.controlTab.ResumeLayout(false);
-            this.startNow.ResumeLayout(false);
-            this.startNow.PerformLayout();
-            this.deepFocusPage.ResumeLayout(false);
-            this.deepFocusPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deepTimeInput)).EndInit();
-            this.processMonitor.ResumeLayout(false);
-            this.processMonitor.PerformLayout();
-            this.shutdownTab.ResumeLayout(false);
-            this.shutdownTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.endShutdownMinute)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.endShutdownHour)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startShutdownMinute)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.startShutdownHour)).EndInit();
-            this.appProtect.ResumeLayout(false);
-            this.appProtect.PerformLayout();
-            this.dataPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.progressPage.ResumeLayout(false);
-            this.progressPage.PerformLayout();
-            this.settingPage.ResumeLayout(false);
-            this.settingPage.PerformLayout();
-            this.iconContextMenuStrip.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(622, 382);
+            Controls.Add(controlTab);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "ControlPanel";
+            Text = "时间管理";
+            FormClosing += ControlPanel_FormClosing;
+            Shown += ControlPanel_Shown;
+            ((System.ComponentModel.ISupportInitialize)timeBox).EndInit();
+            controlTab.ResumeLayout(false);
+            startNow.ResumeLayout(false);
+            startNow.PerformLayout();
+            deepFocusPage.ResumeLayout(false);
+            deepFocusPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)deepTimeInput).EndInit();
+            titlePage.ResumeLayout(false);
+            titlePage.PerformLayout();
+            processMonitor.ResumeLayout(false);
+            processMonitor.PerformLayout();
+            shutdownTab.ResumeLayout(false);
+            shutdownTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)endShutdownMinute).EndInit();
+            ((System.ComponentModel.ISupportInitialize)endShutdownHour).EndInit();
+            ((System.ComponentModel.ISupportInitialize)startShutdownMinute).EndInit();
+            ((System.ComponentModel.ISupportInitialize)startShutdownHour).EndInit();
+            appProtect.ResumeLayout(false);
+            appProtect.PerformLayout();
+            dataPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
+            progressPage.ResumeLayout(false);
+            progressPage.PerformLayout();
+            settingPage.ResumeLayout(false);
+            settingPage.PerformLayout();
+            iconContextMenuStrip.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -968,5 +983,10 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button goalChangeButton;
         private System.Windows.Forms.Label goalLabel;
         private System.Windows.Forms.Label versionLabel;
+        private System.Windows.Forms.TabPage titlePage;
+        private System.Windows.Forms.ListBox titleListBox;
+        private System.Windows.Forms.TextBox titleTextBox;
+        private System.Windows.Forms.Button removeTitleButton;
+        private System.Windows.Forms.Button addTitleButton;
     }
 }

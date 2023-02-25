@@ -33,6 +33,8 @@ namespace TimeControl.Tools
         //深度屏保
         public static readonly string DeepTempTimeFile = BaseLocation + "DeepTemp.txt";
 
+        //Title management
+        public static readonly string TitleFile = BaseLocation + "Title.txt";
         //自动关机
         public static readonly string ShutdownSpan = BaseLocation + "\\Shutdown.txt";
 
