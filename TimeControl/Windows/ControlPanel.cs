@@ -229,23 +229,11 @@ namespace TimeControl.Windows
         }
         private void SaveTitles()
         {
-            List<string> titleList = new();
-            foreach (string s in titleListBox.Items)
-            {
-                titleList.Add(s);
-            }
-            File.WriteAllLines(TCFile.TitleFile, titleList);
+            TCFile.SaveTitle(titleListBox);
         }
         private void InitTitles()
         {
-            if (File.Exists(TCFile.TitleFile))
-            {
-                string[] strings = File.ReadAllLines(TCFile.TitleFile);
-                foreach (string s in strings)
-                {
-                    titleListBox.Items.Add(s);
-                }
-            }
+            TCFile.ReadTitle(titleListBox);
         }
         #endregion
 
@@ -319,6 +307,7 @@ namespace TimeControl.Windows
                 Process.Start(process);
             }
             Process[] processes=Process.GetProcesses();
+            //Title Management
             foreach (Process process in processes)
             {
                 if(!string.IsNullOrWhiteSpace(process.MainWindowTitle))

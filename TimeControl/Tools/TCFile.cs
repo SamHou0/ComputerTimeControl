@@ -35,21 +35,35 @@ namespace TimeControl.Tools
 
         //Title management
         public static readonly string TitleFile = BaseLocation + "Title.txt";
-        //自动关机
+        //Auto shutdown
         public static readonly string ShutdownSpan = BaseLocation + "\\Shutdown.txt";
 
-        //数据显示
+        //TimeData dir
         public static readonly string SavedData = BaseLocation + "\\SavedData.xml";
 
         public static readonly string SavedDataDir = BaseLocation + "\\SavedData";
-
-        public static string[] SavedDataFiles
+        //Title management
+        public static void SaveTitle(ListBox titleListBox)
         {
-            get
+            List<string> titleList = new();
+            foreach (string s in titleListBox.Items)
             {
-                return Directory.GetFiles(SavedDataDir);
+                titleList.Add(s);
+            }
+            File.WriteAllLines(TCFile.TitleFile, titleList);
+        }
+        public static void ReadTitle(ListBox titleListBox)
+        {
+            if (File.Exists(TitleFile))
+            {
+                string[] strings = File.ReadAllLines(TitleFile);
+                foreach (string s in strings)
+                {
+                    titleListBox.Items.Add(s);
+                }
             }
         }
+        //Apps
 
         public static void SaveApps(List<App> apps)
         {
@@ -122,6 +136,15 @@ namespace TimeControl.Tools
             return latestFile;
         }
 
+        //TimeData and Goals
+
+        public static string[] SavedDataFiles
+        {
+            get
+            {
+                return Directory.GetFiles(SavedDataDir);
+            }
+        }
         public static void SaveTimeData(TimeData time)
         {
             using (StreamWriter sw = new(SavedData))

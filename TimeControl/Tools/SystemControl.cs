@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace TimeControl.Tools
 {
@@ -14,6 +15,11 @@ namespace TimeControl.Tools
             };
             Process process = Process.Start(processStartInfo);
             process.StandardInput.WriteLine("shutdown -s -f -t 0");
+        }
+        public static void ProgramRestart()
+        {
+            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "TimeControl.exe");
+            Environment.Exit(0);
         }
     }
 }

@@ -28,8 +28,7 @@ namespace TimeControl.Windows
 
         private void GoalChangeWindow_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Process.Start(AppDomain.CurrentDomain.BaseDirectory + "TimeControl.exe");
-            Environment.Exit(0);
+            SystemControl.ProgramRestart();
         }
 
         private void GoalChangeWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -87,6 +86,14 @@ namespace TimeControl.Windows
                 TCFile.RemoveGoal(goalListBox.Items[goalListBox.SelectedIndex].ToString());
                 RefreshForm();
             }
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            TimeData timeData = TCFile.ReadTimeData();
+            timeData.GoalName = goalTextBox.Text;
+            TCFile.SaveTimeData(timeData);
+            RefreshForm();
         }
     }
 }
