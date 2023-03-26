@@ -69,6 +69,7 @@ namespace TimeControl.Windows
             startShutdownMinute = new System.Windows.Forms.NumericUpDown();
             startShutdownHour = new System.Windows.Forms.NumericUpDown();
             appProtect = new System.Windows.Forms.TabPage();
+            stopCheckBox = new System.Windows.Forms.CheckBox();
             unlockPasswordRemoveButton = new System.Windows.Forms.Button();
             removeBootButton = new System.Windows.Forms.Button();
             addBootButton = new System.Windows.Forms.Button();
@@ -102,6 +103,7 @@ namespace TimeControl.Windows
             ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             processMonitorTimer = new System.Windows.Forms.Timer(components);
             fileSaveTimer = new System.Windows.Forms.Timer(components);
+            enableButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)timeBox).BeginInit();
             controlTab.SuspendLayout();
             startNow.SuspendLayout();
@@ -527,6 +529,8 @@ namespace TimeControl.Windows
             // 
             // appProtect
             // 
+            appProtect.Controls.Add(enableButton);
+            appProtect.Controls.Add(stopCheckBox);
             appProtect.Controls.Add(unlockPasswordRemoveButton);
             appProtect.Controls.Add(removeBootButton);
             appProtect.Controls.Add(addBootButton);
@@ -542,6 +546,17 @@ namespace TimeControl.Windows
             appProtect.TabIndex = 3;
             appProtect.Text = "程序保护";
             appProtect.UseVisualStyleBackColor = true;
+            // 
+            // stopCheckBox
+            // 
+            stopCheckBox.AutoSize = true;
+            stopCheckBox.Location = new System.Drawing.Point(5, 76);
+            stopCheckBox.Name = "stopCheckBox";
+            stopCheckBox.Size = new System.Drawing.Size(274, 21);
+            stopCheckBox.TabIndex = 11;
+            stopCheckBox.Text = "修改设置前，要求等待1分钟（与管理码并存）";
+            stopCheckBox.UseVisualStyleBackColor = true;
+            stopCheckBox.CheckedChanged += StopCheckBox_CheckedChanged;
             // 
             // unlockPasswordRemoveButton
             // 
@@ -871,6 +886,16 @@ namespace TimeControl.Windows
             fileSaveTimer.Interval = 300000;
             fileSaveTimer.Tick += FileSaveTimer_Tick;
             // 
+            // enableButton
+            // 
+            enableButton.Location = new System.Drawing.Point(346, 283);
+            enableButton.Name = "enableButton";
+            enableButton.Size = new System.Drawing.Size(260, 61);
+            enableButton.TabIndex = 12;
+            enableButton.Text = "修改不可用设置";
+            enableButton.UseVisualStyleBackColor = true;
+            enableButton.Click += EnableButton_Click;
+            // 
             // ControlPanel
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -988,5 +1013,7 @@ namespace TimeControl.Windows
         private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Button removeTitleButton;
         private System.Windows.Forms.Button addTitleButton;
+        private System.Windows.Forms.CheckBox stopCheckBox;
+        private System.Windows.Forms.Button enableButton;
     }
 }

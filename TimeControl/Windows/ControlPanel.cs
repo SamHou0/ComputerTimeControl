@@ -20,6 +20,7 @@ namespace TimeControl.Windows
         private AppController appController;//Controller for list and apps.
         private TimeData timeData;//The data of current aim.
         private bool isLoaded;//Show the state of initialization.
+        private bool isChangeable = true;
 
         public ControlPanel(bool hide)
         {
@@ -80,6 +81,7 @@ namespace TimeControl.Windows
             if (!isClosable)//隐藏窗口
             {
                 e.Cancel = true;
+                DisableSet();
                 Hide();
             }
             else//退出前关闭保护进程
@@ -221,11 +223,15 @@ namespace TimeControl.Windows
 
         private void RemoveTitleButton_Click(object sender, EventArgs e)
         {
-            if (titleListBox.SelectedIndex >= 0)
+
+            if (CheckPassword() && CheckStop())
             {
-                titleListBox.Items.RemoveAt(titleListBox.SelectedIndex);
+                if (titleListBox.SelectedIndex >= 0)
+                {
+                    titleListBox.Items.RemoveAt(titleListBox.SelectedIndex);
+                }
+                SaveTitles();
             }
-            SaveTitles();
         }
         private void SaveTitles()
         {
@@ -267,7 +273,7 @@ namespace TimeControl.Windows
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
-            if (PasswordCheck())
+            if (CheckPassword() && CheckStop())
             {
                 appController.RemoveAll();
             }
@@ -282,7 +288,7 @@ namespace TimeControl.Windows
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             //检测密码设置
-            if (PasswordCheck())
+            if (CheckPassword() && CheckStop())
             {
                 appController.Remove();
             }
@@ -306,11 +312,11 @@ namespace TimeControl.Windows
                 };
                 Process.Start(process);
             }
-            Process[] processes=Process.GetProcesses();
+            Process[] processes = Process.GetProcesses();
             //Title Management
             foreach (Process process in processes)
             {
-                if(!string.IsNullOrWhiteSpace(process.MainWindowTitle))
+                if (!string.IsNullOrWhiteSpace(process.MainWindowTitle))
                 {
                     foreach (string str in titleListBox.Items)
                     {
@@ -322,7 +328,7 @@ namespace TimeControl.Windows
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            if (PasswordCheck())
+            if (CheckPassword())
             {
                 appController.Reset();
             }
@@ -395,7 +401,7 @@ namespace TimeControl.Windows
 
         private void UnlockPasswordRemoveButton_Click(object sender, EventArgs e)
         {
-            if (PasswordCheck())
+            if (CheckPassword())
             {
                 File.Delete(TCFile.PassLocation);
                 unlockPasswordHash = "";
@@ -403,7 +409,6 @@ namespace TimeControl.Windows
                 unlockPasswordBox.Enabled = true;
                 unlockPasswordSetButton.Enabled = true;
                 unlockPasswordRemoveButton.Enabled = false;
-                removeTitleButton.Enabled = true;
                 removeBootButton.Enabled = true;
             }
         }
@@ -414,11 +419,10 @@ namespace TimeControl.Windows
             unlockPasswordBox.Enabled = false;
             unlockPasswordSetButton.Enabled = false;
             unlockPasswordRemoveButton.Enabled = true;
-            removeTitleButton.Enabled = false;
             removeBootButton.Enabled = false;
         }
 
-        private bool PasswordCheck()//检测密码是否正确
+        private bool CheckPassword()//检测密码是否正确
         {
             if (!string.IsNullOrEmpty(unlockPasswordHash))
             {
@@ -443,7 +447,58 @@ namespace TimeControl.Windows
         {
             TaskSchedulerControl.RemoveBoot();
         }
+        private bool CheckStop()
+        {
+            if (!isChangeable)
+            {
+                IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
+                IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
+                Dllimport.SwitchDesktop(newDesktop);
+                Task.Factory.StartNew(() =>
+                {
+                    Dllimport.SetThreadDesktop(newDesktop);
+                    InterruptWindow interruptWindow = new InterruptWindow();
+                    Application.Run(interruptWindow);
+                }).Wait();
+                Dllimport.SwitchDesktop(nowDesktop);
+                Dllimport.CloseDesktop(newDesktop);
+                if (InterruptWindow.result == DialogResult.OK)
+                {
+                    return true;
+                }
+                else return false;
+            }
+            else return true;
+        }
+        private void StopCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (stopCheckBox.Checked)
+            {
+                stopCheckBox.Enabled = false;
+            }
+            SettingsChanged(sender, e);
+        }
+        private void EnableButton_Click(object sender, EventArgs e)
+        {
+            if (CheckPassword() && CheckStop())
+            {
+                removeBootButton.Enabled = true;
+                stopCheckBox.Enabled = true;
+            }
+        }
+        private void DisableSet()
+        {
+            if (!string.IsNullOrWhiteSpace(unlockPasswordHash))
+            {
+                removeBootButton.Enabled = false;
 
+            }
+            if (stopCheckBox.Checked)
+            {
+                stopCheckBox.Enabled = false;
+                isChangeable = false;
+            }
+        }
         #endregion ProtectPage
 
         #region DataPage
@@ -536,6 +591,7 @@ namespace TimeControl.Windows
             {
                 Settings.Default.AutoReset = autoResetBox.Checked;
                 Settings.Default.AutoRefresh = autoRefreshBox.Checked;
+                Settings.Default.StopBeforeSetting = stopCheckBox.Checked;
                 Settings.Default.Save();
             }
         }
@@ -544,6 +600,11 @@ namespace TimeControl.Windows
         {
             autoResetBox.Checked = Settings.Default.AutoReset;
             autoRefreshBox.Checked = Settings.Default.AutoRefresh;
+            stopCheckBox.Checked = Settings.Default.StopBeforeSetting;
+            if (stopCheckBox.Checked)
+            {
+                isChangeable = false;
+            }
         }
 
         private void DataDirButton_Click(object sender, EventArgs e)
