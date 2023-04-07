@@ -34,14 +34,14 @@ namespace TimeControl.Windows
             startButton = new System.Windows.Forms.Button();
             timeBox = new System.Windows.Forms.NumericUpDown();
             controlTab = new System.Windows.Forms.TabControl();
-            startNow = new System.Windows.Forms.TabPage();
+            focus = new System.Windows.Forms.TabPage();
             label5 = new System.Windows.Forms.Label();
             whiteProcessBox = new System.Windows.Forms.TextBox();
-            deepFocusPage = new System.Windows.Forms.TabPage();
+            deepFocus = new System.Windows.Forms.TabPage();
             label9 = new System.Windows.Forms.Label();
             deepTimeInput = new System.Windows.Forms.NumericUpDown();
             deepStartButton = new System.Windows.Forms.Button();
-            titlePage = new System.Windows.Forms.TabPage();
+            title = new System.Windows.Forms.TabPage();
             titleTextBox = new System.Windows.Forms.TextBox();
             removeTitleButton = new System.Windows.Forms.Button();
             addTitleButton = new System.Windows.Forms.Button();
@@ -54,7 +54,7 @@ namespace TimeControl.Windows
             removeButton = new System.Windows.Forms.Button();
             appAddButton = new System.Windows.Forms.Button();
             usageBox = new System.Windows.Forms.ListBox();
-            shutdownTab = new System.Windows.Forms.TabPage();
+            shutdown = new System.Windows.Forms.TabPage();
             label8 = new System.Windows.Forms.Label();
             shutdownRemoveButton = new System.Windows.Forms.Button();
             shutdownSetButton = new System.Windows.Forms.Button();
@@ -69,6 +69,7 @@ namespace TimeControl.Windows
             startShutdownMinute = new System.Windows.Forms.NumericUpDown();
             startShutdownHour = new System.Windows.Forms.NumericUpDown();
             appProtect = new System.Windows.Forms.TabPage();
+            enableButton = new System.Windows.Forms.Button();
             stopCheckBox = new System.Windows.Forms.CheckBox();
             unlockPasswordRemoveButton = new System.Windows.Forms.Button();
             removeBootButton = new System.Windows.Forms.Button();
@@ -77,17 +78,17 @@ namespace TimeControl.Windows
             label2 = new System.Windows.Forms.Label();
             unlockPasswordBox = new System.Windows.Forms.TextBox();
             label1 = new System.Windows.Forms.Label();
-            dataPage = new System.Windows.Forms.TabPage();
+            data = new System.Windows.Forms.TabPage();
             dataGridView = new System.Windows.Forms.DataGridView();
             timeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            progressPage = new System.Windows.Forms.TabPage();
+            progress = new System.Windows.Forms.TabPage();
             goalLabel = new System.Windows.Forms.Label();
             encourageLabel = new System.Windows.Forms.Label();
             progressLabel = new System.Windows.Forms.Label();
             levelLabel = new System.Windows.Forms.Label();
             progressBar = new System.Windows.Forms.ProgressBar();
-            settingPage = new System.Windows.Forms.TabPage();
+            setting = new System.Windows.Forms.TabPage();
             versionLabel = new System.Windows.Forms.Label();
             goalChangeButton = new System.Windows.Forms.Button();
             dataDirButton = new System.Windows.Forms.Button();
@@ -103,24 +104,23 @@ namespace TimeControl.Windows
             ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             processMonitorTimer = new System.Windows.Forms.Timer(components);
             fileSaveTimer = new System.Windows.Forms.Timer(components);
-            enableButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)timeBox).BeginInit();
             controlTab.SuspendLayout();
-            startNow.SuspendLayout();
-            deepFocusPage.SuspendLayout();
+            focus.SuspendLayout();
+            deepFocus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)deepTimeInput).BeginInit();
-            titlePage.SuspendLayout();
+            title.SuspendLayout();
             processMonitor.SuspendLayout();
-            shutdownTab.SuspendLayout();
+            shutdown.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)endShutdownMinute).BeginInit();
             ((System.ComponentModel.ISupportInitialize)endShutdownHour).BeginInit();
             ((System.ComponentModel.ISupportInitialize)startShutdownMinute).BeginInit();
             ((System.ComponentModel.ISupportInitialize)startShutdownHour).BeginInit();
             appProtect.SuspendLayout();
-            dataPage.SuspendLayout();
+            data.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
-            progressPage.SuspendLayout();
-            settingPage.SuspendLayout();
+            progress.SuspendLayout();
+            setting.SuspendLayout();
             iconContextMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -148,15 +148,15 @@ namespace TimeControl.Windows
             // 
             // controlTab
             // 
-            controlTab.Controls.Add(startNow);
-            controlTab.Controls.Add(deepFocusPage);
-            controlTab.Controls.Add(titlePage);
+            controlTab.Controls.Add(focus);
+            controlTab.Controls.Add(deepFocus);
+            controlTab.Controls.Add(title);
             controlTab.Controls.Add(processMonitor);
-            controlTab.Controls.Add(shutdownTab);
+            controlTab.Controls.Add(shutdown);
             controlTab.Controls.Add(appProtect);
-            controlTab.Controls.Add(dataPage);
-            controlTab.Controls.Add(progressPage);
-            controlTab.Controls.Add(settingPage);
+            controlTab.Controls.Add(data);
+            controlTab.Controls.Add(progress);
+            controlTab.Controls.Add(setting);
             controlTab.Dock = System.Windows.Forms.DockStyle.Fill;
             controlTab.Location = new System.Drawing.Point(0, 0);
             controlTab.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -165,20 +165,20 @@ namespace TimeControl.Windows
             controlTab.Size = new System.Drawing.Size(622, 382);
             controlTab.TabIndex = 2;
             // 
-            // startNow
+            // focus
             // 
-            startNow.Controls.Add(label5);
-            startNow.Controls.Add(whiteProcessBox);
-            startNow.Controls.Add(startButton);
-            startNow.Controls.Add(timeBox);
-            startNow.Location = new System.Drawing.Point(4, 26);
-            startNow.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            startNow.Name = "startNow";
-            startNow.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            startNow.Size = new System.Drawing.Size(614, 352);
-            startNow.TabIndex = 0;
-            startNow.Text = "专注屏保";
-            startNow.UseVisualStyleBackColor = true;
+            focus.Controls.Add(label5);
+            focus.Controls.Add(whiteProcessBox);
+            focus.Controls.Add(startButton);
+            focus.Controls.Add(timeBox);
+            focus.Location = new System.Drawing.Point(4, 26);
+            focus.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            focus.Name = "focus";
+            focus.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            focus.Size = new System.Drawing.Size(614, 352);
+            focus.TabIndex = 0;
+            focus.Text = "专注屏保";
+            focus.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -199,17 +199,17 @@ namespace TimeControl.Windows
             whiteProcessBox.TabIndex = 2;
             whiteProcessBox.TextChanged += WhiteProcessBox_TextChanged;
             // 
-            // deepFocusPage
+            // deepFocus
             // 
-            deepFocusPage.Controls.Add(label9);
-            deepFocusPage.Controls.Add(deepTimeInput);
-            deepFocusPage.Controls.Add(deepStartButton);
-            deepFocusPage.Location = new System.Drawing.Point(4, 26);
-            deepFocusPage.Name = "deepFocusPage";
-            deepFocusPage.Size = new System.Drawing.Size(614, 352);
-            deepFocusPage.TabIndex = 6;
-            deepFocusPage.Text = "深度专注";
-            deepFocusPage.UseVisualStyleBackColor = true;
+            deepFocus.Controls.Add(label9);
+            deepFocus.Controls.Add(deepTimeInput);
+            deepFocus.Controls.Add(deepStartButton);
+            deepFocus.Location = new System.Drawing.Point(4, 26);
+            deepFocus.Name = "deepFocus";
+            deepFocus.Size = new System.Drawing.Size(614, 352);
+            deepFocus.TabIndex = 6;
+            deepFocus.Text = "深度专注";
+            deepFocus.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
@@ -243,19 +243,19 @@ namespace TimeControl.Windows
             deepStartButton.UseVisualStyleBackColor = true;
             deepStartButton.Click += DeepStartButton_Click;
             // 
-            // titlePage
+            // title
             // 
-            titlePage.Controls.Add(titleTextBox);
-            titlePage.Controls.Add(removeTitleButton);
-            titlePage.Controls.Add(addTitleButton);
-            titlePage.Controls.Add(titleListBox);
-            titlePage.Location = new System.Drawing.Point(4, 26);
-            titlePage.Name = "titlePage";
-            titlePage.Padding = new System.Windows.Forms.Padding(3);
-            titlePage.Size = new System.Drawing.Size(614, 352);
-            titlePage.TabIndex = 8;
-            titlePage.Text = "标题检测";
-            titlePage.UseVisualStyleBackColor = true;
+            title.Controls.Add(titleTextBox);
+            title.Controls.Add(removeTitleButton);
+            title.Controls.Add(addTitleButton);
+            title.Controls.Add(titleListBox);
+            title.Location = new System.Drawing.Point(4, 26);
+            title.Name = "title";
+            title.Padding = new System.Windows.Forms.Padding(3);
+            title.Size = new System.Drawing.Size(614, 352);
+            title.TabIndex = 8;
+            title.Text = "标题检测";
+            title.UseVisualStyleBackColor = true;
             // 
             // titleTextBox
             // 
@@ -388,28 +388,28 @@ namespace TimeControl.Windows
             usageBox.Size = new System.Drawing.Size(331, 344);
             usageBox.TabIndex = 0;
             // 
-            // shutdownTab
+            // shutdown
             // 
-            shutdownTab.Controls.Add(label8);
-            shutdownTab.Controls.Add(shutdownRemoveButton);
-            shutdownTab.Controls.Add(shutdownSetButton);
-            shutdownTab.Controls.Add(label12);
-            shutdownTab.Controls.Add(label10);
-            shutdownTab.Controls.Add(label11);
-            shutdownTab.Controls.Add(label7);
-            shutdownTab.Controls.Add(label6);
-            shutdownTab.Controls.Add(endShutdownMinute);
-            shutdownTab.Controls.Add(endShutdownHour);
-            shutdownTab.Controls.Add(label4);
-            shutdownTab.Controls.Add(startShutdownMinute);
-            shutdownTab.Controls.Add(startShutdownHour);
-            shutdownTab.Location = new System.Drawing.Point(4, 26);
-            shutdownTab.Name = "shutdownTab";
-            shutdownTab.Padding = new System.Windows.Forms.Padding(3);
-            shutdownTab.Size = new System.Drawing.Size(614, 352);
-            shutdownTab.TabIndex = 4;
-            shutdownTab.Text = "自动关机";
-            shutdownTab.UseVisualStyleBackColor = true;
+            shutdown.Controls.Add(label8);
+            shutdown.Controls.Add(shutdownRemoveButton);
+            shutdown.Controls.Add(shutdownSetButton);
+            shutdown.Controls.Add(label12);
+            shutdown.Controls.Add(label10);
+            shutdown.Controls.Add(label11);
+            shutdown.Controls.Add(label7);
+            shutdown.Controls.Add(label6);
+            shutdown.Controls.Add(endShutdownMinute);
+            shutdown.Controls.Add(endShutdownHour);
+            shutdown.Controls.Add(label4);
+            shutdown.Controls.Add(startShutdownMinute);
+            shutdown.Controls.Add(startShutdownHour);
+            shutdown.Location = new System.Drawing.Point(4, 26);
+            shutdown.Name = "shutdown";
+            shutdown.Padding = new System.Windows.Forms.Padding(3);
+            shutdown.Size = new System.Drawing.Size(614, 352);
+            shutdown.TabIndex = 4;
+            shutdown.Text = "自动关机";
+            shutdown.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -547,6 +547,16 @@ namespace TimeControl.Windows
             appProtect.Text = "程序保护";
             appProtect.UseVisualStyleBackColor = true;
             // 
+            // enableButton
+            // 
+            enableButton.Location = new System.Drawing.Point(346, 283);
+            enableButton.Name = "enableButton";
+            enableButton.Size = new System.Drawing.Size(260, 61);
+            enableButton.TabIndex = 12;
+            enableButton.Text = "修改不可用设置";
+            enableButton.UseVisualStyleBackColor = true;
+            enableButton.Click += EnableButton_Click;
+            // 
             // stopCheckBox
             // 
             stopCheckBox.AutoSize = true;
@@ -630,15 +640,15 @@ namespace TimeControl.Windows
             label1.TabIndex = 4;
             label1.Text = "管理码";
             // 
-            // dataPage
+            // data
             // 
-            dataPage.Controls.Add(dataGridView);
-            dataPage.Location = new System.Drawing.Point(4, 26);
-            dataPage.Name = "dataPage";
-            dataPage.Size = new System.Drawing.Size(614, 352);
-            dataPage.TabIndex = 5;
-            dataPage.Text = "数据分析";
-            dataPage.UseVisualStyleBackColor = true;
+            data.Controls.Add(dataGridView);
+            data.Location = new System.Drawing.Point(4, 26);
+            data.Name = "data";
+            data.Size = new System.Drawing.Size(614, 352);
+            data.TabIndex = 5;
+            data.Text = "数据分析";
+            data.UseVisualStyleBackColor = true;
             // 
             // dataGridView
             // 
@@ -668,19 +678,19 @@ namespace TimeControl.Windows
             nameColumn.ReadOnly = true;
             nameColumn.Width = 153;
             // 
-            // progressPage
+            // progress
             // 
-            progressPage.Controls.Add(goalLabel);
-            progressPage.Controls.Add(encourageLabel);
-            progressPage.Controls.Add(progressLabel);
-            progressPage.Controls.Add(levelLabel);
-            progressPage.Controls.Add(progressBar);
-            progressPage.Location = new System.Drawing.Point(4, 26);
-            progressPage.Name = "progressPage";
-            progressPage.Size = new System.Drawing.Size(614, 352);
-            progressPage.TabIndex = 7;
-            progressPage.Text = "我的进度";
-            progressPage.UseVisualStyleBackColor = true;
+            progress.Controls.Add(goalLabel);
+            progress.Controls.Add(encourageLabel);
+            progress.Controls.Add(progressLabel);
+            progress.Controls.Add(levelLabel);
+            progress.Controls.Add(progressBar);
+            progress.Location = new System.Drawing.Point(4, 26);
+            progress.Name = "progress";
+            progress.Size = new System.Drawing.Size(614, 352);
+            progress.TabIndex = 7;
+            progress.Text = "我的进度";
+            progress.UseVisualStyleBackColor = true;
             // 
             // goalLabel
             // 
@@ -728,26 +738,26 @@ namespace TimeControl.Windows
             progressBar.Size = new System.Drawing.Size(358, 34);
             progressBar.TabIndex = 0;
             // 
-            // settingPage
+            // setting
             // 
-            settingPage.Controls.Add(versionLabel);
-            settingPage.Controls.Add(goalChangeButton);
-            settingPage.Controls.Add(dataDirButton);
-            settingPage.Controls.Add(label13);
-            settingPage.Controls.Add(autoResetBox);
-            settingPage.Controls.Add(helpLinkLabel);
-            settingPage.Controls.Add(giteeLinkLabel);
-            settingPage.Controls.Add(githubLinkLabel);
-            settingPage.Controls.Add(linkLabel1);
-            settingPage.Controls.Add(label3);
-            settingPage.Location = new System.Drawing.Point(4, 26);
-            settingPage.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            settingPage.Name = "settingPage";
-            settingPage.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            settingPage.Size = new System.Drawing.Size(614, 352);
-            settingPage.TabIndex = 2;
-            settingPage.Text = "设置";
-            settingPage.UseVisualStyleBackColor = true;
+            setting.Controls.Add(versionLabel);
+            setting.Controls.Add(goalChangeButton);
+            setting.Controls.Add(dataDirButton);
+            setting.Controls.Add(label13);
+            setting.Controls.Add(autoResetBox);
+            setting.Controls.Add(helpLinkLabel);
+            setting.Controls.Add(giteeLinkLabel);
+            setting.Controls.Add(githubLinkLabel);
+            setting.Controls.Add(linkLabel1);
+            setting.Controls.Add(label3);
+            setting.Location = new System.Drawing.Point(4, 26);
+            setting.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            setting.Name = "setting";
+            setting.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            setting.Size = new System.Drawing.Size(614, 352);
+            setting.TabIndex = 2;
+            setting.Text = "设置";
+            setting.UseVisualStyleBackColor = true;
             // 
             // versionLabel
             // 
@@ -886,16 +896,6 @@ namespace TimeControl.Windows
             fileSaveTimer.Interval = 300000;
             fileSaveTimer.Tick += FileSaveTimer_Tick;
             // 
-            // enableButton
-            // 
-            enableButton.Location = new System.Drawing.Point(346, 283);
-            enableButton.Name = "enableButton";
-            enableButton.Size = new System.Drawing.Size(260, 61);
-            enableButton.TabIndex = 12;
-            enableButton.Text = "修改不可用设置";
-            enableButton.UseVisualStyleBackColor = true;
-            enableButton.Click += EnableButton_Click;
-            // 
             // ControlPanel
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -913,29 +913,29 @@ namespace TimeControl.Windows
             Shown += ControlPanel_Shown;
             ((System.ComponentModel.ISupportInitialize)timeBox).EndInit();
             controlTab.ResumeLayout(false);
-            startNow.ResumeLayout(false);
-            startNow.PerformLayout();
-            deepFocusPage.ResumeLayout(false);
-            deepFocusPage.PerformLayout();
+            focus.ResumeLayout(false);
+            focus.PerformLayout();
+            deepFocus.ResumeLayout(false);
+            deepFocus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)deepTimeInput).EndInit();
-            titlePage.ResumeLayout(false);
-            titlePage.PerformLayout();
+            title.ResumeLayout(false);
+            title.PerformLayout();
             processMonitor.ResumeLayout(false);
             processMonitor.PerformLayout();
-            shutdownTab.ResumeLayout(false);
-            shutdownTab.PerformLayout();
+            shutdown.ResumeLayout(false);
+            shutdown.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)endShutdownMinute).EndInit();
             ((System.ComponentModel.ISupportInitialize)endShutdownHour).EndInit();
             ((System.ComponentModel.ISupportInitialize)startShutdownMinute).EndInit();
             ((System.ComponentModel.ISupportInitialize)startShutdownHour).EndInit();
             appProtect.ResumeLayout(false);
             appProtect.PerformLayout();
-            dataPage.ResumeLayout(false);
+            data.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
-            progressPage.ResumeLayout(false);
-            progressPage.PerformLayout();
-            settingPage.ResumeLayout(false);
-            settingPage.PerformLayout();
+            progress.ResumeLayout(false);
+            progress.PerformLayout();
+            setting.ResumeLayout(false);
+            setting.PerformLayout();
             iconContextMenuStrip.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -945,12 +945,12 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.NumericUpDown timeBox;
         private System.Windows.Forms.TabControl controlTab;
-        private System.Windows.Forms.TabPage startNow;
+        private System.Windows.Forms.TabPage focus;
         private System.Windows.Forms.TabPage processMonitor;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip iconContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
-        private System.Windows.Forms.TabPage settingPage;
+        private System.Windows.Forms.TabPage setting;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox usageBox;
@@ -975,7 +975,7 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button removeBootButton;
         private System.Windows.Forms.LinkLabel helpLinkLabel;
         private System.Windows.Forms.Button unlockPasswordRemoveButton;
-        private System.Windows.Forms.TabPage shutdownTab;
+        private System.Windows.Forms.TabPage shutdown;
         private System.Windows.Forms.Button shutdownSetButton;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
@@ -989,15 +989,15 @@ namespace TimeControl.Windows
         private System.Windows.Forms.NumericUpDown startShutdownHour;
         private System.Windows.Forms.Button shutdownRemoveButton;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TabPage dataPage;
+        private System.Windows.Forms.TabPage data;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.TabPage deepFocusPage;
+        private System.Windows.Forms.TabPage deepFocus;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown deepTimeInput;
         private System.Windows.Forms.Button deepStartButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn timeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
-        private System.Windows.Forms.TabPage progressPage;
+        private System.Windows.Forms.TabPage progress;
         private System.Windows.Forms.Label levelLabel;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label progressLabel;
@@ -1008,7 +1008,7 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button goalChangeButton;
         private System.Windows.Forms.Label goalLabel;
         private System.Windows.Forms.Label versionLabel;
-        private System.Windows.Forms.TabPage titlePage;
+        private System.Windows.Forms.TabPage title;
         private System.Windows.Forms.ListBox titleListBox;
         private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.Button removeTitleButton;
