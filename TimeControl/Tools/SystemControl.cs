@@ -16,6 +16,7 @@ namespace TimeControl.Tools
             Process process = Process.Start(processStartInfo);
             process.StandardInput.WriteLine("shutdown -s -f -t 0");
         }
+
         public static void ProgramRestart()
         {
             Process.Start(AppDomain.CurrentDomain.BaseDirectory + "TimeControl.exe");

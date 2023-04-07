@@ -17,6 +17,9 @@ namespace TimeControl.Tools
         //密码
         public static readonly string PassLocation = BaseLocation + "\\TCPass.txt";//获取密码位置
 
+        //Task Planner
+        public static readonly string TaskLocation = BaseLocation + "\\Tasks.xml";
+
         //计时
         public static readonly string TimeFileDirectory = BaseLocation
             + "\\TCTimeData";
@@ -35,6 +38,7 @@ namespace TimeControl.Tools
 
         //Title management
         public static readonly string TitleFile = BaseLocation + "Title.txt";
+
         //Auto shutdown
         public static readonly string ShutdownSpan = BaseLocation + "\\Shutdown.txt";
 
@@ -42,6 +46,28 @@ namespace TimeControl.Tools
         public static readonly string SavedData = BaseLocation + "\\SavedData.xml";
 
         public static readonly string SavedDataDir = BaseLocation + "\\SavedData";
+
+        //Task Planner
+        public static void SaveTasks(List<Data.Task> tasks)
+        {
+            using (StreamWriter sw = new StreamWriter(TaskLocation))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Task>));
+                xmlSerializer.Serialize(sw, tasks);
+            }
+        }
+
+        public static List<Task> ReadTasks()
+        {
+            List<Task> tasks = new List<Task>();
+            using (StreamReader sr = new StreamReader(TaskLocation))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Task>));
+                tasks = (List<Task>)xmlSerializer.Deserialize(sr);
+            }
+            return tasks;
+        }
+
         //Title management
         public static void SaveTitle(ListBox titleListBox)
         {
@@ -52,6 +78,7 @@ namespace TimeControl.Tools
             }
             File.WriteAllLines(TCFile.TitleFile, titleList);
         }
+
         public static void ReadTitle(ListBox titleListBox)
         {
             if (File.Exists(TitleFile))
@@ -63,6 +90,7 @@ namespace TimeControl.Tools
                 }
             }
         }
+
         //Apps
 
         public static void SaveApps(List<App> apps)
@@ -145,6 +173,7 @@ namespace TimeControl.Tools
                 return Directory.GetFiles(SavedDataDir);
             }
         }
+
         public static void SaveTimeData(TimeData time)
         {
             using (StreamWriter sw = new(SavedData))

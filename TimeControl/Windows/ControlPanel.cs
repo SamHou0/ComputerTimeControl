@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeControl.AppControl;
 using TimeControl.Data;
@@ -16,11 +15,12 @@ namespace TimeControl.Windows
     {
         private bool hide = false;
         private bool isClosable = false;
-        private string unlockPasswordHash = "";//The hash of the password
+
         private AppController appController;//Controller for list and apps.
         private TimeData timeData;//The data of current aim.
         private bool isLoaded;//Show the state of initialization.
         private bool isChangeable = true;
+        private List<Data.Task> tasks;
 
         public ControlPanel(bool hide)
         {
@@ -30,10 +30,12 @@ namespace TimeControl.Windows
             versionLabel.Text = $"版本：{Assembly.GetExecutingAssembly().GetName().Version}";
             InitializeSettings();
             this.hide = hide;
+            //Tasks
+            ReadTasks();
             //Data recording
             InitializeData();
             //Lock
-            IniticalizeFocus();
+            InitializeFocus();
             //DeepFocus
             InitializeDeepFocus();
             //Titles Monitor
@@ -96,8 +98,8 @@ namespace TimeControl.Windows
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)//正常退出程序
         {
-            PasswordInput passwordInput = new(unlockPasswordHash);
-            if (!string.IsNullOrEmpty(unlockPasswordHash))//检测是否设置了管理码
+            PasswordInput passwordInput = new();
+            if (!string.IsNullOrEmpty(Password.unlockPasswordHash))//检测是否设置了管理码
             {
                 if (passwordInput.ShowDialog() == DialogResult.OK)
                     ForceClose();
@@ -125,41 +127,80 @@ namespace TimeControl.Windows
 
         #endregion Form
 
+        #region PlanPage
+
+        private void PlannerButton_Click(object sender, EventArgs e)
+        {
+            Planner planner = new Planner();
+            planner.ShowDialog();
+            ReadTasks();
+        }
+
+        private void ReadTasks()
+        {
+            if (File.Exists(TCFile.TaskLocation))
+            {
+                tasks = TCFile.ReadTasks();
+            }
+            else { tasks = null; }
+            RefreshTasks();
+        }
+
+        private void RefreshTasks()
+        {
+            taskListBox.Items.Clear();
+            if (tasks != null)
+            {
+                foreach (Data.Task task in tasks)
+                {
+                    taskListBox.Items.Add(task);
+                }
+            }
+            TCFile.SaveTasks(tasks);
+        }
+
+        private void EndTaskButton_Click(object sender, EventArgs e)
+        {
+            if (taskListBox.SelectedIndex >= 0)
+            {
+                MessageBox.Show(tasks[taskListBox.SelectedIndex].EndTask(),
+                    "任务结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tasks.RemoveAt(taskListBox.SelectedIndex);
+            }
+            RefreshTasks();
+        }
+
+        private void TaskStartButton_Click(object sender, EventArgs e)
+        {
+            if (taskListBox.SelectedIndex >= 0)
+            {
+                tasks[taskListBox.SelectedIndex].RunTask();
+            }
+        }
+
+        #endregion PlanPage
+
         #region LockPage
 
-        private void IniticalizeFocus()
+        private void InitializeFocus()
         {
             if (File.Exists(TCFile.WhiteAppLocation))
                 whiteProcessBox.Text = File.ReadAllText(TCFile.WhiteAppLocation);
             if (File.Exists(TCFile.TempTimeFile))
             {
                 MessageBox.Show("恢复屏保");
-                StartLock(unlockPasswordHash);
+                StartLock(Password.unlockPasswordHash);
             }
         }
 
         private void StartButton_Click(object sender, EventArgs e)//启动屏保程序
         {
-            StartLock(unlockPasswordHash, (int)timeBox.Value);
+            StartLock(Password.unlockPasswordHash, (int)timeBox.Value);
         }
 
         private void StartLock(string unlockPasswordHash, int minutes = 0)
         {
-            IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
-            IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
-            Dllimport.SwitchDesktop(newDesktop);
-            Task.Factory.StartNew(() =>
-            {
-                Dllimport.SetThreadDesktop(newDesktop);
-                Lock _lock;
-                if (minutes != 0)
-                    _lock = new(minutes, unlockPasswordHash);
-                else
-                    _lock = new(unlockPasswordHash);
-                Application.Run(_lock);
-            }).Wait();
-            Dllimport.SwitchDesktop(nowDesktop);
-            Dllimport.CloseDesktop(newDesktop);
+            LockHelper.StartLock(unlockPasswordHash, minutes);
             int index = dataGridView.Rows.Add();
             ShowAndSave(Lock.TempTimeSpan);
         }
@@ -205,25 +246,21 @@ namespace TimeControl.Windows
 
         private void DeepStartButton_Click(object sender, EventArgs e)
         {
-            TimeSpan deepTime = new(0, (int)deepTimeInput.Value, 0);
-            File.WriteAllText(TCFile.DeepTempTimeFile, DateTime.Now + Environment.NewLine + deepTime);
-            SystemControl.Shutdown();
-            Application.Exit();
+            LockHelper.StartDeepLock((int)deepTimeInput.Value);
         }
 
         #endregion DeepLockPage
 
         #region TitlePage
+
         private void AddTitleButton_Click(object sender, EventArgs e)
         {
             titleListBox.Items.Add(titleTextBox.Text);
             SaveTitles();
         }
 
-
         private void RemoveTitleButton_Click(object sender, EventArgs e)
         {
-
             if (CheckPassword() && CheckStop())
             {
                 if (titleListBox.SelectedIndex >= 0)
@@ -233,15 +270,18 @@ namespace TimeControl.Windows
                 SaveTitles();
             }
         }
+
         private void SaveTitles()
         {
             TCFile.SaveTitle(titleListBox);
         }
+
         private void InitTitles()
         {
             TCFile.ReadTitle(titleListBox);
         }
-        #endregion
+
+        #endregion TitlePage
 
         #region ProcessPage
 
@@ -384,7 +424,7 @@ namespace TimeControl.Windows
         {
             if (File.Exists(TCFile.PassLocation))//加载密码哈希值
             {
-                unlockPasswordHash = File.ReadAllText(TCFile.PassLocation);
+                Password.unlockPasswordHash = File.ReadAllText(TCFile.PassLocation);
                 PasswordSet();
             }
             else
@@ -394,8 +434,8 @@ namespace TimeControl.Windows
 
         private void UnloackPasswordSetButton_Click(object sender, EventArgs e)//保存密码
         {
-            unlockPasswordHash = Password.ComputeHash(unlockPasswordBox.Text);//保存哈希值
-            File.WriteAllText(TCFile.PassLocation, unlockPasswordHash.ToString());//保存哈希值到文件
+            Password.unlockPasswordHash = Password.ComputeHash(unlockPasswordBox.Text);//保存哈希值
+            File.WriteAllText(TCFile.PassLocation, Password.unlockPasswordHash.ToString());//保存哈希值到文件
             PasswordSet();
         }
 
@@ -404,7 +444,7 @@ namespace TimeControl.Windows
             if (CheckPassword())
             {
                 File.Delete(TCFile.PassLocation);
-                unlockPasswordHash = "";
+                Password.unlockPasswordHash = "";
                 unlockPasswordBox.Text = "";
                 unlockPasswordBox.Enabled = true;
                 unlockPasswordSetButton.Enabled = true;
@@ -424,9 +464,9 @@ namespace TimeControl.Windows
 
         private bool CheckPassword()//检测密码是否正确
         {
-            if (!string.IsNullOrEmpty(unlockPasswordHash))
+            if (!string.IsNullOrEmpty(Password.unlockPasswordHash))
             {
-                PasswordInput passwordInput = new(unlockPasswordHash);
+                PasswordInput passwordInput = new();
                 if (passwordInput.ShowDialog() == DialogResult.OK)
                     return true;
                 else
@@ -447,21 +487,12 @@ namespace TimeControl.Windows
         {
             TaskSchedulerControl.RemoveBoot();
         }
+
         private bool CheckStop()
         {
             if (!isChangeable)
             {
-                IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
-                IntPtr newDesktop = Dllimport.CreateDesktop("Lock", null, null, 0, Dllimport.ACCESS_MASK.GENERIC_ALL, IntPtr.Zero);
-                Dllimport.SwitchDesktop(newDesktop);
-                Task.Factory.StartNew(() =>
-                {
-                    Dllimport.SetThreadDesktop(newDesktop);
-                    InterruptWindow interruptWindow = new InterruptWindow();
-                    Application.Run(interruptWindow);
-                }).Wait();
-                Dllimport.SwitchDesktop(nowDesktop);
-                Dllimport.CloseDesktop(newDesktop);
+                LockHelper.Interrupt();
                 if (InterruptWindow.result == DialogResult.OK)
                 {
                     return true;
@@ -470,6 +501,7 @@ namespace TimeControl.Windows
             }
             else return true;
         }
+
         private void StopCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (stopCheckBox.Checked)
@@ -478,6 +510,7 @@ namespace TimeControl.Windows
             }
             SettingsChanged(sender, e);
         }
+
         private void EnableButton_Click(object sender, EventArgs e)
         {
             if (CheckPassword() && CheckStop())
@@ -486,12 +519,12 @@ namespace TimeControl.Windows
                 stopCheckBox.Enabled = true;
             }
         }
+
         private void DisableSet()
         {
-            if (!string.IsNullOrWhiteSpace(unlockPasswordHash))
+            if (!string.IsNullOrWhiteSpace(Password.unlockPasswordHash))
             {
                 removeBootButton.Enabled = false;
-
             }
             if (stopCheckBox.Checked)
             {
@@ -499,6 +532,7 @@ namespace TimeControl.Windows
                 isChangeable = false;
             }
         }
+
         #endregion ProtectPage
 
         #region DataPage
@@ -619,6 +653,5 @@ namespace TimeControl.Windows
         }
 
         #endregion SettingPage
-
     }
 }

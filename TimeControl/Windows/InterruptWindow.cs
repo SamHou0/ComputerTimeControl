@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace TimeControl.Windows
 {
     public partial class InterruptWindow : Form
     {
-        int time = 0;
+        private int time = 0;
         public static DialogResult result = DialogResult.Cancel;
+
         public InterruptWindow()
         {
             InitializeComponent();

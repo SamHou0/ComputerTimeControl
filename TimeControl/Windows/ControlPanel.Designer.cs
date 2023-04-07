@@ -34,6 +34,10 @@ namespace TimeControl.Windows
             startButton = new System.Windows.Forms.Button();
             timeBox = new System.Windows.Forms.NumericUpDown();
             controlTab = new System.Windows.Forms.TabControl();
+            plan = new System.Windows.Forms.TabPage();
+            endTaskButton = new System.Windows.Forms.Button();
+            plannerButton = new System.Windows.Forms.Button();
+            taskListBox = new System.Windows.Forms.ListBox();
             focus = new System.Windows.Forms.TabPage();
             label5 = new System.Windows.Forms.Label();
             whiteProcessBox = new System.Windows.Forms.TextBox();
@@ -104,8 +108,10 @@ namespace TimeControl.Windows
             ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             processMonitorTimer = new System.Windows.Forms.Timer(components);
             fileSaveTimer = new System.Windows.Forms.Timer(components);
+            taskStartButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)timeBox).BeginInit();
             controlTab.SuspendLayout();
+            plan.SuspendLayout();
             focus.SuspendLayout();
             deepFocus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)deepTimeInput).BeginInit();
@@ -148,6 +154,7 @@ namespace TimeControl.Windows
             // 
             // controlTab
             // 
+            controlTab.Controls.Add(plan);
             controlTab.Controls.Add(focus);
             controlTab.Controls.Add(deepFocus);
             controlTab.Controls.Add(title);
@@ -164,6 +171,48 @@ namespace TimeControl.Windows
             controlTab.SelectedIndex = 0;
             controlTab.Size = new System.Drawing.Size(622, 382);
             controlTab.TabIndex = 2;
+            // 
+            // plan
+            // 
+            plan.Controls.Add(taskStartButton);
+            plan.Controls.Add(endTaskButton);
+            plan.Controls.Add(plannerButton);
+            plan.Controls.Add(taskListBox);
+            plan.Location = new System.Drawing.Point(4, 26);
+            plan.Name = "plan";
+            plan.Size = new System.Drawing.Size(614, 352);
+            plan.TabIndex = 9;
+            plan.Text = "日程计划";
+            plan.UseVisualStyleBackColor = true;
+            // 
+            // endTaskButton
+            // 
+            endTaskButton.Location = new System.Drawing.Point(411, 269);
+            endTaskButton.Name = "endTaskButton";
+            endTaskButton.Size = new System.Drawing.Size(172, 75);
+            endTaskButton.TabIndex = 2;
+            endTaskButton.Text = "标记完成日程";
+            endTaskButton.UseVisualStyleBackColor = true;
+            endTaskButton.Click += EndTaskButton_Click;
+            // 
+            // plannerButton
+            // 
+            plannerButton.Location = new System.Drawing.Point(411, 3);
+            plannerButton.Name = "plannerButton";
+            plannerButton.Size = new System.Drawing.Size(172, 75);
+            plannerButton.TabIndex = 1;
+            plannerButton.Text = "打开日程编辑器";
+            plannerButton.UseVisualStyleBackColor = true;
+            plannerButton.Click += PlannerButton_Click;
+            // 
+            // taskListBox
+            // 
+            taskListBox.FormattingEnabled = true;
+            taskListBox.ItemHeight = 17;
+            taskListBox.Location = new System.Drawing.Point(3, 3);
+            taskListBox.Name = "taskListBox";
+            taskListBox.Size = new System.Drawing.Size(380, 344);
+            taskListBox.TabIndex = 0;
             // 
             // focus
             // 
@@ -896,6 +945,16 @@ namespace TimeControl.Windows
             fileSaveTimer.Interval = 300000;
             fileSaveTimer.Tick += FileSaveTimer_Tick;
             // 
+            // taskStartButton
+            // 
+            taskStartButton.Location = new System.Drawing.Point(411, 138);
+            taskStartButton.Name = "taskStartButton";
+            taskStartButton.Size = new System.Drawing.Size(172, 75);
+            taskStartButton.TabIndex = 3;
+            taskStartButton.Text = "开启日程";
+            taskStartButton.UseVisualStyleBackColor = true;
+            taskStartButton.Click += TaskStartButton_Click;
+            // 
             // ControlPanel
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -913,6 +972,7 @@ namespace TimeControl.Windows
             Shown += ControlPanel_Shown;
             ((System.ComponentModel.ISupportInitialize)timeBox).EndInit();
             controlTab.ResumeLayout(false);
+            plan.ResumeLayout(false);
             focus.ResumeLayout(false);
             focus.PerformLayout();
             deepFocus.ResumeLayout(false);
@@ -1015,5 +1075,10 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button addTitleButton;
         private System.Windows.Forms.CheckBox stopCheckBox;
         private System.Windows.Forms.Button enableButton;
+        private System.Windows.Forms.TabPage plan;
+        private System.Windows.Forms.ListBox taskListBox;
+        private System.Windows.Forms.Button endTaskButton;
+        private System.Windows.Forms.Button plannerButton;
+        private System.Windows.Forms.Button taskStartButton;
     }
 }

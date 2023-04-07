@@ -6,18 +6,15 @@ namespace TimeControl.Windows
 {
     public partial class PasswordInput : Form
     {
-        private string passwordHash;
-
-        public PasswordInput(string passwordHash)
+        public PasswordInput()
         {
             InitializeComponent();
-            this.passwordHash = passwordHash;
             DialogResult = DialogResult.Cancel;
         }
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            if (Password.ComputeHash(passwordTextBox.Text) == passwordHash)
+            if (Password.ComputeHash(passwordTextBox.Text) == Password.unlockPasswordHash)
             {
                 DialogResult = DialogResult.OK;
                 Close();

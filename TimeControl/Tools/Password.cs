@@ -5,6 +5,8 @@ namespace TimeControl.Tools
 {
     internal static class Password
     {
+        public static string unlockPasswordHash = "";//The hash of the password
+
         public static string ComputeHash(string str)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(str);
