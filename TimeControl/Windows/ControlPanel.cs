@@ -17,7 +17,6 @@ namespace TimeControl.Windows
         private bool isClosable = false;
 
         private AppController appController;//Controller for list and apps.
-        private TimeData timeData;//The data of current aim.
         private bool isLoaded;//Show the state of initialization.
         private bool isChangeable = true;
         private List<Data.Task> tasks;
@@ -163,8 +162,7 @@ namespace TimeControl.Windows
         {
             if (taskListBox.SelectedIndex >= 0)
             {
-                MessageBox.Show(tasks[taskListBox.SelectedIndex].EndTask(),
-                    "任务结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                tasks[taskListBox.SelectedIndex].EndTask();
                 tasks.RemoveAt(taskListBox.SelectedIndex);
             }
             RefreshTasks();
@@ -174,7 +172,11 @@ namespace TimeControl.Windows
         {
             if (taskListBox.SelectedIndex >= 0)
             {
-                tasks[taskListBox.SelectedIndex].RunTask();
+                if (tasks[taskListBox.SelectedIndex].RunTask())
+                {
+                    tasks.RemoveAt(taskListBox.SelectedIndex);
+                }
+                RefreshTasks();
             }
         }
 
@@ -202,17 +204,10 @@ namespace TimeControl.Windows
         {
             LockHelper.StartLock(unlockPasswordHash, minutes);
             int index = dataGridView.Rows.Add();
-            ShowAndSave(Lock.TempTimeSpan);
-        }
-
-        private void ShowAndSave(TimeSpan timeSpan)
-        {
-            ResultWindow resultWindow = new(timeSpan);
-            resultWindow.ShowDialog();
-            if (ResultWindow.IsSave == true)
-                timeData.AddTime(timeSpan);
             RefreshAndSaveData();
         }
+
+
 
         private void WhiteProcessBox_TextChanged(object sender, EventArgs e)
         {
@@ -238,7 +233,7 @@ namespace TimeControl.Windows
                 else
                 {
                     File.Delete(TCFile.DeepTempTimeFile);
-                    ShowAndSave(deepFocusTime);
+                    LockHelper.ShowAndSave(deepFocusTime);
                     RefreshAndSaveData();
                 }
             }
@@ -541,13 +536,13 @@ namespace TimeControl.Windows
         {
             if (File.Exists(TCFile.SavedData))
             {
-                timeData = TCFile.ReadTimeData();
+                LockHelper.TimeData = TCFile.ReadTimeData();
                 RefreshAndSaveData();
             }
             else
             {
                 Directory.CreateDirectory(TCFile.SavedDataDir);
-                timeData = new() { GoalName = "FirstGoal" };
+                LockHelper.TimeData = new() { GoalName = "FirstGoal" };
                 RefreshAndSaveData();
             }
         }
@@ -557,23 +552,23 @@ namespace TimeControl.Windows
             //刷新列表
             //普通屏保
             dataGridView.Rows.Clear();
-            dataGridView.Rows.Add(timeData.LockTime, "普通屏保");
+            dataGridView.Rows.Add(LockHelper.TimeData.LockTime, "普通屏保");
             //深度专注屏保
-            dataGridView.Rows.Add(timeData.DeepLockTime, "深度专注屏保");
+            dataGridView.Rows.Add(LockHelper.TimeData.DeepLockTime, "深度专注屏保");
             //更新进度
-            ShowProgress(timeData);
+            ShowProgress();
             //保存
-            TCFile.SaveTimeData(timeData);
+            TCFile.SaveTimeData(LockHelper.TimeData);
         }
 
         #endregion DataPage
 
         #region ProgressPage
 
-        private void ShowProgress(TimeData timeData)
+        private void ShowProgress()
         {
-            goalLabel.Text = timeData.GoalName;
-            TimeSpan timeSpan = timeData.GetTimeSum();
+            goalLabel.Text = LockHelper.TimeData.GoalName;
+            TimeSpan timeSpan = LockHelper.TimeData.GetTimeSum();
             int level = 1;
             TimeSpan targetTimeSpan = new(0, 0, 0);
             while (level < 100)
@@ -593,7 +588,7 @@ namespace TimeControl.Windows
             progressBar.Value = Convert.ToInt32((timeSpan / targetTimeSpan) * 100);
             if (level == 100)
             {
-                encourageLabel.Text = "恭喜通关！你可以通过删除TimeControl文件夹里的SavedData.xml来重新开始！";
+                encourageLabel.Text = "恭喜通关！你可以通过新建目标来重新开始！";
                 progressLabel.Visible = false;
                 progressBar.Value = 100;
             }

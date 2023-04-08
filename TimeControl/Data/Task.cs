@@ -30,13 +30,19 @@ namespace TimeControl.Data
         {
             return Name + " (" + Duration.Minutes + "min)";
         }
-
-        public void RunTask()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>If the task is ended</returns>
+        public bool RunTask()
         {
+            bool res = false;
             startTime = DateTime.Now;
             if (IsFocus)
             {
                 LockHelper.StartLock(Password.unlockPasswordHash, (int)Duration.TotalMinutes);
+                EndTask();
+                res = true;
             }
             else if (IsDeepFocus)
             {
@@ -45,11 +51,13 @@ namespace TimeControl.Data
             else
             {
                 MessageBox.Show(
-                    "任务已启动。该日程不需要启动任何计算机操作，请自行完成，预估时间" + Duration + "min");
+                    "任务已启动。该日程不需要启动任何计算机操作，请自行完成，预估时间", "提示"
+                    + Duration + "min", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            return res;
         }
 
-        public string EndTask()
+        private string EndTaskString()
         {
             if (startTime == new DateTime(0))
             {
@@ -57,6 +65,11 @@ namespace TimeControl.Data
             }
             endTime = DateTime.Now;
             return ToString() + "(实际" + (endTime - startTime) + ")";
+        }
+        public void EndTask()
+        {
+            MessageBox.Show(EndTaskString(),
+                "任务结束", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
