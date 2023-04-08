@@ -5,7 +5,6 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using TimeControl.AppControl;
-using TimeControl.Data;
 using TimeControl.Properties;
 using TimeControl.Tools;
 
@@ -206,8 +205,6 @@ namespace TimeControl.Windows
             int index = dataGridView.Rows.Add();
             RefreshAndSaveData();
         }
-
-
 
         private void WhiteProcessBox_TextChanged(object sender, EventArgs e)
         {

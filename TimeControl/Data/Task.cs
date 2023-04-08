@@ -23,22 +23,24 @@ namespace TimeControl.Data
         private bool isDeepFocus;
         private DateTime startTime = new DateTime(0);
         private DateTime endTime;
+
         public bool IsDeepFocus
         { get { return IsFocus && isDeepFocus; } }
 
         public override string ToString()
         {
-            return Name + " (" + Duration.Minutes + "min)";
+            return Name + " (" + Duration.TotalMinutes + "min)";
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns>If the task is ended</returns>
         public bool RunTask()
         {
             bool res = false;
             startTime = DateTime.Now;
-            if (IsFocus)
+            if (IsFocus&&(!isDeepFocus))
             {
                 LockHelper.StartLock(Password.unlockPasswordHash, (int)Duration.TotalMinutes);
                 EndTask();
@@ -66,6 +68,7 @@ namespace TimeControl.Data
             endTime = DateTime.Now;
             return ToString() + "(实际" + (endTime - startTime) + ")";
         }
+
         public void EndTask()
         {
             MessageBox.Show(EndTaskString(),

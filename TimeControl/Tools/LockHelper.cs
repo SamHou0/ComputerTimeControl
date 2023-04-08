@@ -9,6 +9,7 @@ namespace TimeControl.Tools
     internal class LockHelper
     {
         public static TimeData TimeData;
+
         public static void StartLock(string unlockPasswordHash, int minutes)
         {
             IntPtr nowDesktop = Dllimport.GetThreadDesktop(Dllimport.GetCurrentThreadId());
@@ -51,6 +52,7 @@ namespace TimeControl.Tools
             SystemControl.Shutdown();
             Application.Exit();
         }
+
         public static void ShowAndSave(TimeSpan timeSpan)
         {
             ResultWindow resultWindow = new(timeSpan);
