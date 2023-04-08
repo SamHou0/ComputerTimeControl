@@ -20,9 +20,9 @@ namespace TimeControl.Data
         public string Name;
         public TimeSpan Duration;
         public bool IsFocus;
-        private bool isDeepFocus;
-        private DateTime startTime = new DateTime(0);
-        private DateTime endTime;
+        public bool isDeepFocus;
+        public DateTime startTime = new DateTime(0);
+        public DateTime endTime;
 
         public bool IsDeepFocus
         { get { return IsFocus && isDeepFocus; } }

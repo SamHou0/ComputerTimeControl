@@ -7,11 +7,16 @@ namespace TimeControl.Windows
 {
     public partial class Planner : Form
     {
-        private List<Data.Task> tasks = new List<Data.Task>();
+        private List<Data.Task> tasks;
 
-        public Planner()
+        public Planner(List<Data.Task> tasks)
         {
             InitializeComponent();
+            this.tasks=tasks; 
+            foreach(Data.Task task in this.tasks)
+            {
+                taskListBox.Items.Add(task);
+            }
         }
 
         private void AddButton_Click(object sender, EventArgs e)

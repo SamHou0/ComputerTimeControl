@@ -129,7 +129,7 @@ namespace TimeControl.Windows
 
         private void PlannerButton_Click(object sender, EventArgs e)
         {
-            Planner planner = new Planner();
+            Planner planner = new Planner(tasks);
             planner.ShowDialog();
             ReadTasks();
         }
