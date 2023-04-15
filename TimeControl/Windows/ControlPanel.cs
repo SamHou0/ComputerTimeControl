@@ -144,7 +144,8 @@ namespace TimeControl.Windows
             {
                 tasks = TCFile.ReadTasks();
             }
-            else { tasks = null; }
+            else
+            { tasks = null; }
             RefreshTasks();
         }
 
@@ -352,7 +353,8 @@ namespace TimeControl.Windows
                 {
                     foreach (string str in titleListBox.Items)
                     {
-                        if (process.MainWindowTitle.Contains(str)) process.Kill();
+                        if (process.MainWindowTitle.Contains(str))
+                            process.Kill();
                     }
                 }
             }
@@ -489,9 +491,11 @@ namespace TimeControl.Windows
                 {
                     return true;
                 }
-                else return false;
+                else
+                    return false;
             }
-            else return true;
+            else
+                return true;
         }
 
         private void StopCheckBox_CheckedChanged(object sender, EventArgs e)

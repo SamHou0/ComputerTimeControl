@@ -35,6 +35,7 @@ namespace TimeControl.Windows
             timeBox = new System.Windows.Forms.NumericUpDown();
             controlTab = new System.Windows.Forms.TabControl();
             plan = new System.Windows.Forms.TabPage();
+            taskStartButton = new System.Windows.Forms.Button();
             endTaskButton = new System.Windows.Forms.Button();
             plannerButton = new System.Windows.Forms.Button();
             taskListBox = new System.Windows.Forms.ListBox();
@@ -108,7 +109,6 @@ namespace TimeControl.Windows
             ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             processMonitorTimer = new System.Windows.Forms.Timer(components);
             fileSaveTimer = new System.Windows.Forms.Timer(components);
-            taskStartButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)timeBox).BeginInit();
             controlTab.SuspendLayout();
             plan.SuspendLayout();
@@ -185,6 +185,16 @@ namespace TimeControl.Windows
             plan.Text = "日程计划";
             plan.UseVisualStyleBackColor = true;
             // 
+            // taskStartButton
+            // 
+            taskStartButton.Location = new System.Drawing.Point(411, 138);
+            taskStartButton.Name = "taskStartButton";
+            taskStartButton.Size = new System.Drawing.Size(172, 75);
+            taskStartButton.TabIndex = 3;
+            taskStartButton.Text = "开始日程";
+            taskStartButton.UseVisualStyleBackColor = true;
+            taskStartButton.Click += TaskStartButton_Click;
+            // 
             // endTaskButton
             // 
             endTaskButton.Location = new System.Drawing.Point(411, 269);
@@ -231,12 +241,13 @@ namespace TimeControl.Windows
             // 
             // label5
             // 
-            label5.AutoSize = true;
-            label5.Location = new System.Drawing.Point(230, 29);
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            label5.Location = new System.Drawing.Point(8, 16);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(164, 17);
+            label5.Size = new System.Drawing.Size(598, 30);
             label5.TabIndex = 3;
             label5.Text = "白名单应用路径（一行一个）";
+            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // whiteProcessBox
             // 
@@ -262,13 +273,14 @@ namespace TimeControl.Windows
             // 
             // label9
             // 
-            label9.AutoSize = true;
+            label9.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             label9.ForeColor = System.Drawing.Color.Red;
-            label9.Location = new System.Drawing.Point(64, 126);
+            label9.Location = new System.Drawing.Point(3, 108);
             label9.Name = "label9";
-            label9.Size = new System.Drawing.Size(488, 17);
+            label9.Size = new System.Drawing.Size(603, 35);
             label9.TabIndex = 3;
             label9.Text = "启动屏保后，计算机将立刻关机，并在持续时间内开机时自动关闭。（必须设置开机启动）";
+            label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // deepTimeInput
             // 
@@ -283,6 +295,7 @@ namespace TimeControl.Windows
             // 
             // deepStartButton
             // 
+            deepStartButton.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             deepStartButton.Location = new System.Drawing.Point(229, 218);
             deepStartButton.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             deepStartButton.Name = "deepStartButton";
@@ -945,16 +958,6 @@ namespace TimeControl.Windows
             fileSaveTimer.Interval = 300000;
             fileSaveTimer.Tick += FileSaveTimer_Tick;
             // 
-            // taskStartButton
-            // 
-            taskStartButton.Location = new System.Drawing.Point(411, 138);
-            taskStartButton.Name = "taskStartButton";
-            taskStartButton.Size = new System.Drawing.Size(172, 75);
-            taskStartButton.TabIndex = 3;
-            taskStartButton.Text = "开启日程";
-            taskStartButton.UseVisualStyleBackColor = true;
-            taskStartButton.Click += TaskStartButton_Click;
-            // 
             // ControlPanel
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -976,7 +979,6 @@ namespace TimeControl.Windows
             focus.ResumeLayout(false);
             focus.PerformLayout();
             deepFocus.ResumeLayout(false);
-            deepFocus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)deepTimeInput).EndInit();
             title.ResumeLayout(false);
             title.PerformLayout();
