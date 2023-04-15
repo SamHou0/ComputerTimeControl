@@ -28,6 +28,10 @@ namespace TimeControl.Windows
             versionLabel.Text = $"版本：{Assembly.GetExecutingAssembly().GetName().Version}";
             InitializeSettings();
             this.hide = hide;
+            if (!Directory.Exists(TCFile.BaseLocation))
+            {
+                Directory.CreateDirectory(TCFile.BaseLocation);
+            }
             //Tasks
             ReadTasks();
             //Data recording
@@ -279,10 +283,6 @@ namespace TimeControl.Windows
 
         private void StartMonitor()
         {
-            if (!Directory.Exists(TCFile.BaseLocation))
-            {
-                Directory.CreateDirectory(TCFile.BaseLocation);
-            }
             appController = new(usageBox, processMonitorTimer);
             if ((Directory.GetLastWriteTime(TCFile.TimeFileDirectory).ToString("yyyy-MM-dd")
                 != DateTime.Now.ToString("yyyy-MM-dd"))

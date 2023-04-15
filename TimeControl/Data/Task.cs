@@ -40,7 +40,7 @@ namespace TimeControl.Data
         {
             bool res = false;
             startTime = DateTime.Now;
-            if (IsFocus&&(!isDeepFocus))
+            if (IsFocus && (!isDeepFocus))
             {
                 LockHelper.StartLock(Password.unlockPasswordHash, (int)Duration.TotalMinutes);
                 EndTask();
