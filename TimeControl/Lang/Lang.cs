@@ -30,7 +30,7 @@ namespace TimeControl.Lang
                 startlock = "Unlock in minutes",
                 whitelistapps = "Path of the programs wished to use (Line by line)",
                 deepFocus = "Deep focus",
-                dfWarning = "ONCE you click the Unlock button, your device will IMMEDIATELY SHUTDOWN. And during the time you set, you computer will automatically shutdown if this program is included in Windows startup list."
+                dfWarning = "ONCE you click the Unlock button, your device will IMMEDIATELY SHUTDOWN. And during the time you set, you computer will automatically shutdown if this program is included in Windows scheduled tasks list."
             }
         };
 
