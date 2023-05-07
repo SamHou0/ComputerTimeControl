@@ -54,8 +54,8 @@ steps:
 
 - task: GitHubRelease@1
   inputs:
-    gitHubConnection: 'github connection 1'
-    repositoryName: 'SamHou0/ComputerTimeControl'
+    gitHubConnection: 'github.com_SamHou0'
+    repositoryName: 'ValidStudy/ComputerTimeControl'
     action: 'create'
     target: '$(Build.SourceVersion)'
     tagSource: 'gitTag'
