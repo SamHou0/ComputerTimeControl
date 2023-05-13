@@ -61,3 +61,12 @@ steps:
     tagSource: 'gitTag'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
+
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'appcenter'
+    appSlug: 'ValidStudy/ComputerTimeControl'
+    appFile: '$(Build.ArtifactStagingDirectory)\TimeControl.zip'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'A beta release'
+    destinationType: 'groups'
