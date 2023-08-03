@@ -333,6 +333,10 @@ namespace TimeControl.Windows
 
         private void ProcessMonitorTimer_Tick(object sender, EventArgs e)
         {
+            if(realTimeShutdowncheckBox.Checked)
+            {
+                CheckShutdown();
+            }
             appController.Run();
             if (autoRefreshBox.Checked)
                 appController.Refresh();
@@ -618,6 +622,7 @@ namespace TimeControl.Windows
                 Settings.Default.AutoReset = autoResetBox.Checked;
                 Settings.Default.AutoRefresh = autoRefreshBox.Checked;
                 Settings.Default.StopBeforeSetting = stopCheckBox.Checked;
+                Settings.Default.RealTimeShutdown=realTimeShutdowncheckBox.Checked;
                 Settings.Default.Save();
             }
         }
@@ -627,6 +632,7 @@ namespace TimeControl.Windows
             autoResetBox.Checked = Settings.Default.AutoReset;
             autoRefreshBox.Checked = Settings.Default.AutoRefresh;
             stopCheckBox.Checked = Settings.Default.StopBeforeSetting;
+            realTimeShutdowncheckBox.Checked = Settings.Default.RealTimeShutdown;
             if (stopCheckBox.Checked)
             {
                 isChangeable = false;

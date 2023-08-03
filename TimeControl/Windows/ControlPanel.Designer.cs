@@ -35,6 +35,7 @@ namespace TimeControl.Windows
             timeBox = new System.Windows.Forms.NumericUpDown();
             controlTab = new System.Windows.Forms.TabControl();
             plan = new System.Windows.Forms.TabPage();
+            taskStartButton = new System.Windows.Forms.Button();
             endTaskButton = new System.Windows.Forms.Button();
             plannerButton = new System.Windows.Forms.Button();
             taskListBox = new System.Windows.Forms.ListBox();
@@ -108,7 +109,7 @@ namespace TimeControl.Windows
             ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             processMonitorTimer = new System.Windows.Forms.Timer(components);
             fileSaveTimer = new System.Windows.Forms.Timer(components);
-            taskStartButton = new System.Windows.Forms.Button();
+            realTimeShutdowncheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)timeBox).BeginInit();
             controlTab.SuspendLayout();
             plan.SuspendLayout();
@@ -184,6 +185,16 @@ namespace TimeControl.Windows
             plan.TabIndex = 9;
             plan.Text = "日程计划";
             plan.UseVisualStyleBackColor = true;
+            // 
+            // taskStartButton
+            // 
+            taskStartButton.Location = new System.Drawing.Point(411, 138);
+            taskStartButton.Name = "taskStartButton";
+            taskStartButton.Size = new System.Drawing.Size(172, 75);
+            taskStartButton.TabIndex = 3;
+            taskStartButton.Text = "开启日程";
+            taskStartButton.UseVisualStyleBackColor = true;
+            taskStartButton.Click += TaskStartButton_Click;
             // 
             // endTaskButton
             // 
@@ -439,6 +450,7 @@ namespace TimeControl.Windows
             // 
             // shutdown
             // 
+            shutdown.Controls.Add(realTimeShutdowncheckBox);
             shutdown.Controls.Add(label8);
             shutdown.Controls.Add(shutdownRemoveButton);
             shutdown.Controls.Add(shutdownSetButton);
@@ -945,15 +957,17 @@ namespace TimeControl.Windows
             fileSaveTimer.Interval = 300000;
             fileSaveTimer.Tick += FileSaveTimer_Tick;
             // 
-            // taskStartButton
+            // realTimeShutdowncheckBox
             // 
-            taskStartButton.Location = new System.Drawing.Point(411, 138);
-            taskStartButton.Name = "taskStartButton";
-            taskStartButton.Size = new System.Drawing.Size(172, 75);
-            taskStartButton.TabIndex = 3;
-            taskStartButton.Text = "开启日程";
-            taskStartButton.UseVisualStyleBackColor = true;
-            taskStartButton.Click += TaskStartButton_Click;
+            realTimeShutdowncheckBox.AutoSize = true;
+            realTimeShutdowncheckBox.ForeColor = System.Drawing.Color.IndianRed;
+            realTimeShutdowncheckBox.Location = new System.Drawing.Point(8, 91);
+            realTimeShutdowncheckBox.Name = "realTimeShutdowncheckBox";
+            realTimeShutdowncheckBox.Size = new System.Drawing.Size(339, 21);
+            realTimeShutdowncheckBox.TabIndex = 17;
+            realTimeShutdowncheckBox.Text = "实时自动检测（到达时间后自动关机）（该项勾选即生效）";
+            realTimeShutdowncheckBox.UseVisualStyleBackColor = true;
+            realTimeShutdowncheckBox.CheckedChanged += SettingsChanged;
             // 
             // ControlPanel
             // 
@@ -1080,5 +1094,6 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button endTaskButton;
         private System.Windows.Forms.Button plannerButton;
         private System.Windows.Forms.Button taskStartButton;
+        private System.Windows.Forms.CheckBox realTimeShutdowncheckBox;
     }
 }
