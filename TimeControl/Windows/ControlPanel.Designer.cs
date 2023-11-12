@@ -60,6 +60,7 @@ namespace TimeControl.Windows
             appAddButton = new System.Windows.Forms.Button();
             usageBox = new System.Windows.Forms.ListBox();
             shutdown = new System.Windows.Forms.TabPage();
+            realTimeShutdowncheckBox = new System.Windows.Forms.CheckBox();
             label8 = new System.Windows.Forms.Label();
             shutdownRemoveButton = new System.Windows.Forms.Button();
             shutdownSetButton = new System.Windows.Forms.Button();
@@ -109,7 +110,7 @@ namespace TimeControl.Windows
             ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             processMonitorTimer = new System.Windows.Forms.Timer(components);
             fileSaveTimer = new System.Windows.Forms.Timer(components);
-            realTimeShutdowncheckBox = new System.Windows.Forms.CheckBox();
+            bootStopCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)timeBox).BeginInit();
             controlTab.SuspendLayout();
             plan.SuspendLayout();
@@ -450,6 +451,7 @@ namespace TimeControl.Windows
             // 
             // shutdown
             // 
+            shutdown.Controls.Add(bootStopCheckBox);
             shutdown.Controls.Add(realTimeShutdowncheckBox);
             shutdown.Controls.Add(label8);
             shutdown.Controls.Add(shutdownRemoveButton);
@@ -471,6 +473,18 @@ namespace TimeControl.Windows
             shutdown.TabIndex = 4;
             shutdown.Text = "自动关机";
             shutdown.UseVisualStyleBackColor = true;
+            // 
+            // realTimeShutdowncheckBox
+            // 
+            realTimeShutdowncheckBox.AutoSize = true;
+            realTimeShutdowncheckBox.ForeColor = System.Drawing.Color.IndianRed;
+            realTimeShutdowncheckBox.Location = new System.Drawing.Point(8, 91);
+            realTimeShutdowncheckBox.Name = "realTimeShutdowncheckBox";
+            realTimeShutdowncheckBox.Size = new System.Drawing.Size(339, 21);
+            realTimeShutdowncheckBox.TabIndex = 17;
+            realTimeShutdowncheckBox.Text = "实时自动检测（到达时间后自动关机）（该项勾选即生效）";
+            realTimeShutdowncheckBox.UseVisualStyleBackColor = true;
+            realTimeShutdowncheckBox.CheckedChanged += SettingsChanged;
             // 
             // label8
             // 
@@ -957,17 +971,16 @@ namespace TimeControl.Windows
             fileSaveTimer.Interval = 300000;
             fileSaveTimer.Tick += FileSaveTimer_Tick;
             // 
-            // realTimeShutdowncheckBox
+            // bootStopCheckBox
             // 
-            realTimeShutdowncheckBox.AutoSize = true;
-            realTimeShutdowncheckBox.ForeColor = System.Drawing.Color.IndianRed;
-            realTimeShutdowncheckBox.Location = new System.Drawing.Point(8, 91);
-            realTimeShutdowncheckBox.Name = "realTimeShutdowncheckBox";
-            realTimeShutdowncheckBox.Size = new System.Drawing.Size(339, 21);
-            realTimeShutdowncheckBox.TabIndex = 17;
-            realTimeShutdowncheckBox.Text = "实时自动检测（到达时间后自动关机）（该项勾选即生效）";
-            realTimeShutdowncheckBox.UseVisualStyleBackColor = true;
-            realTimeShutdowncheckBox.CheckedChanged += SettingsChanged;
+            bootStopCheckBox.AutoSize = true;
+            bootStopCheckBox.Location = new System.Drawing.Point(8, 118);
+            bootStopCheckBox.Name = "bootStopCheckBox";
+            bootStopCheckBox.Size = new System.Drawing.Size(209, 21);
+            bootStopCheckBox.TabIndex = 18;
+            bootStopCheckBox.Text = "开机后，要求延迟60秒使用计算机";
+            bootStopCheckBox.UseVisualStyleBackColor = true;
+            bootStopCheckBox.CheckedChanged += SettingsChanged;
             // 
             // ControlPanel
             // 
@@ -1095,5 +1108,6 @@ namespace TimeControl.Windows
         private System.Windows.Forms.Button plannerButton;
         private System.Windows.Forms.Button taskStartButton;
         private System.Windows.Forms.CheckBox realTimeShutdowncheckBox;
+        private System.Windows.Forms.CheckBox bootStopCheckBox;
     }
 }

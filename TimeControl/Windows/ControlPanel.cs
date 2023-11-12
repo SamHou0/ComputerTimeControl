@@ -48,7 +48,10 @@ namespace TimeControl.Windows
             CheckShutdown();
             //Password
             InitializePassword();
+            //Check stop
+            BootStopCheck();
         }
+
 
         #region Form
 
@@ -333,7 +336,7 @@ namespace TimeControl.Windows
 
         private void ProcessMonitorTimer_Tick(object sender, EventArgs e)
         {
-            if(realTimeShutdowncheckBox.Checked)
+            if (realTimeShutdowncheckBox.Checked)
             {
                 CheckShutdown();
             }
@@ -373,6 +376,18 @@ namespace TimeControl.Windows
         #endregion ProcessPage
 
         #region ShutdownPage
+        private void BootStopCheck()
+        {
+            if(bootStopCheckBox.Checked)
+            {
+                int screenNumbers = Screen.AllScreens.Length;
+                for (int i = 0; i < screenNumbers; i++)
+                {
+                    BootStopWindow bootStopWindow = new(i);
+                    bootStopWindow.Show();
+                }
+            }
+        }
 
         private void ShutdownSetButton_Click(object sender, EventArgs e)
         {
@@ -405,8 +420,8 @@ namespace TimeControl.Windows
                 if (now >= startTime && now <= endTime)
                 {
                     SystemControl.Shutdown();
+                    Application.Exit();
                 }
-                Application.Exit();
             }
         }
 
@@ -622,7 +637,8 @@ namespace TimeControl.Windows
                 Settings.Default.AutoReset = autoResetBox.Checked;
                 Settings.Default.AutoRefresh = autoRefreshBox.Checked;
                 Settings.Default.StopBeforeSetting = stopCheckBox.Checked;
-                Settings.Default.RealTimeShutdown=realTimeShutdowncheckBox.Checked;
+                Settings.Default.RealTimeShutdown = realTimeShutdowncheckBox.Checked;
+                Settings.Default.BootStop = bootStopCheckBox.Checked;
                 Settings.Default.Save();
             }
         }
@@ -637,6 +653,7 @@ namespace TimeControl.Windows
             {
                 isChangeable = false;
             }
+            bootStopCheckBox.Checked = Settings.Default.BootStop;
         }
 
         private void DataDirButton_Click(object sender, EventArgs e)
